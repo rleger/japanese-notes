@@ -1,5 +1,5 @@
 /* Offline support: network first (so updates show up), saved copy when offline. */
-const CACHE = "jp-notes-v1";
+const CACHE = "jp-notes-v2";
 const FILES = [
   "./",
   "index.html",
