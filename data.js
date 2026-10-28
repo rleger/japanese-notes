@@ -130,16 +130,26 @@ window.NOTES = {
         ["ええ", "", "ee", "Yes (softer, more conversational than はい).", "eh-eh"],
         ["おじょうずです", "Pimsleur shows: お上手です. お = polite: said about someone else, never about yourself", "ojōzu desu", "You’re very skilled (polite).", "oh-joh-zoo dess"]
       ],
-      dialogueTitle: "Speak Easy · Pimsleur dialogue",
-      dialogueNote: "The real Pimsleur dialogue of this lesson.",
-      dialogue: [
-        ["A", "すみません。にほんのかたですか。", "sumimasen. nihon no kata desu ka?", "Excuse me. Are you Japanese?"],
-        ["B", "はい、そうです。", "hai, sō desu", "Yes, I am."],
-        ["A", "わたしはアメリカじんです。", "watashi wa amerikajin desu", "I’m American."],
-        ["B", "でも、にほんごがよくわかりますね。", "demo, nihongo ga yoku wakarimasu ne", "But you understand Japanese well."],
-        ["A", "ええ、すこし。でも、まだまだです。", "ee, sukoshi. demo, mada mada desu", "Yes, a little. But I still have a long way to go."],
-        ["B", "いいえ、おじょうずです。", "iie, ojōzu desu", "No, you’re very good."],
-        ["A", "ありがとうございます。", "arigatō gozaimasu", "Thank you."]
+      dialogues: [
+        { title: "Speak Easy 1 · the compliment", note: "Pimsleur dialogue, lesson 3.", lines: [
+          ["A", "すみません。にほんのかたですか。", "sumimasen. nihon no kata desu ka?", "Excuse me. Are you Japanese?"],
+          ["B", "はい、そうです。", "hai, sō desu", "Yes, I am."],
+          ["A", "わたしはアメリカじんです。", "watashi wa amerikajin desu", "I’m American."],
+          ["B", "でも、にほんごがよくわかりますね。", "demo, nihongo ga yoku wakarimasu ne", "But you understand Japanese well."],
+          ["A", "ええ、すこし。でも、まだまだです。", "ee, sukoshi. demo, mada mada desu", "Yes, a little. But I still have a long way to go."],
+          ["B", "いいえ、おじょうずです。", "iie, ojōzu desu", "No, you’re very good."],
+          ["A", "ありがとうございます。", "arigatō gozaimasu", "Thank you."]
+        ]},
+        { title: "Speak Easy 2 · good morning", note: "Pimsleur dialogue, lesson 3.", lines: [
+          ["A", "おはようございます。", "ohayō gozaimasu", "Good morning."],
+          ["B", "おはようございます。", "ohayō gozaimasu", "Good morning."],
+          ["A", "いいおてんきですね。", "ii otenki desu ne", "Nice weather, isn’t it?"],
+          ["B", "あ、にほんごがわかりますか。", "a, nihongo ga wakarimasu ka?", "Oh, you understand Japanese?"],
+          ["A", "はい、すこし。でも、まだじょうずじゃありません。", "hai, sukoshi. demo, mada jōzu ja arimasen", "Yes, a little. But I’m not good yet."],
+          ["B", "アメリカのかたですか。", "amerika no kata desu ka?", "Are you American?"],
+          ["A", "はい。", "hai", "Yes."],
+          ["B", "でも、にほんごがよくわかりますね。", "demo, nihongo ga yoku wakarimasu ne", "But you understand Japanese well."]
+        ]}
       ]
     },
     { number: 4, jp: "第4課",
