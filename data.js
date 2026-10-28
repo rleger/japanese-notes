@@ -147,7 +147,8 @@ window.NOTES = {
         ["あそこ", "", "asoko", "Over there.", "ah-soh-koh"],
         ["なんですか", "Pimsleur shows: なんですか (何ですか)", "nan desu ka?", "What is it?", "nahn dess kah?"],
         ["うえのこうえん", "Pimsleur shows: 上野公園", "Ueno kōen", "Ueno Park (Tokyo).", "oo-eh-noh koh-en"],
-        ["はなします", "Pimsleur shows: 話します", "hanashimasu", "I / you speak.", "hah-nah-shee-mahss"]
+        ["はなします", "Pimsleur shows: 話します", "hanashimasu", "I / you speak.", "hah-nah-shee-mahss"],
+        ["うえのえきはどこですか。", "Pimsleur shows: 上野駅はどこですか？ (は is read wa)", "Ueno eki wa doko desu ka?", "Where is Ueno Station?", "oo-eh-noh eh-kee wah doh-koh dess kah?"]
       ],
       dialogue: [
         ["A", "すみません、あそこはなんですか。", "sumimasen, asoko wa nan desu ka?", "Excuse me, what is over there?"],
