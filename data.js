@@ -136,6 +136,27 @@ window.NOTES = {
         ["B", "にほんのかたですか。", "nihon no kata desu ka?", "Are you Japanese?"],
         ["A", "はい、にほんじんです。", "hai, nihonjin desu", "Yes, I’m Japanese."]
       ]
+    },
+    { number: 4, jp: "第4課",
+      words: [
+        ["どこ", "Example: えきはどこですか。 Where is the station?", "doko", "Where?", "doh-koh"],
+        ["じょうずに", "Pimsleur shows: 上手に. Example: にほんごをじょうずにはなしますね。 You speak Japanese well. (を is read o)", "jōzu ni", "Well, skillfully (how you do something).", "joh-zoo nee"],
+        ["ここ", "ここ here (near me) · あそこ over there (far from both of us)", "koko", "Here.", "koh-koh"],
+        ["えき", "Pimsleur shows: 駅", "eki", "Station.", "eh-kee"],
+        ["こうえん", "Pimsleur shows: 公園", "kōen", "Park.", "koh-en"],
+        ["あそこ", "", "asoko", "Over there.", "ah-soh-koh"],
+        ["なんですか", "Pimsleur shows: なんですか (何ですか)", "nan desu ka?", "What is it?", "nahn dess kah?"],
+        ["うえのこうえん", "Pimsleur shows: 上野公園", "Ueno kōen", "Ueno Park (Tokyo).", "oo-eh-noh koh-en"],
+        ["はなします", "Pimsleur shows: 話します", "hanashimasu", "I / you speak.", "hah-nah-shee-mahss"]
+      ],
+      dialogue: [
+        ["A", "すみません、あそこはなんですか。", "sumimasen, asoko wa nan desu ka?", "Excuse me, what is over there?"],
+        ["B", "うえのこうえんです。", "Ueno kōen desu", "It’s Ueno Park."],
+        ["A", "えきはどこですか。", "eki wa doko desu ka?", "Where is the station?"],
+        ["B", "ここです。", "koko desu", "It’s right here."],
+        ["B", "にほんごをじょうずにはなしますね。", "nihongo o jōzu ni hanashimasu ne", "You speak Japanese well."],
+        ["A", "いいえ、まだまだです。", "iie, mada mada desu", "No, I still have a long way to go."]
+      ]
     }
   ]
 };
