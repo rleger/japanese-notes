@@ -124,7 +124,8 @@ window.NOTES = {
         ["でも", "", "demo", "But / however.", "deh-moh"],
         ["よく", "", "yoku", "Well (yoku wakarimasu = you understand well).", "yoh-koo"],
         ["にほん", "Pimsleur shows: 日本", "nihon", "Japan.", "nee-hon"],
-        ["まだじょうずじゃありません。", "Pimsleur shows: まだ上手じゃありません。", "mada jōzu ja arimasen", "I’m not good yet.", "mah-dah joh-zoo jah ah-ree-mah-sen"]
+        ["まだじょうずじゃありません。", "Pimsleur shows: まだ上手じゃありません。", "mada jōzu ja arimasen", "I’m not good yet.", "mah-dah joh-zoo jah ah-ree-mah-sen"],
+        ["にほんじんじゃありません。", "Pimsleur shows: 日本人じゃありません。", "nihonjin ja arimasen", "I’m not Japanese.", "nee-hon-jeen jah ah-ree-mah-sen"]
       ],
       dialogue: [
         ["A", "こんにちは。", "konnichiwa", "Hello."],
