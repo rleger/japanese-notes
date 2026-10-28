@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-10-27",
+  updated: "2026-10-28",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -123,7 +123,8 @@ window.NOTES = {
         ["にほんじん", "Pimsleur shows: 日本人", "nihonjin", "Japanese (person).", "nee-hon-jeen"],
         ["でも", "", "demo", "But / however.", "deh-moh"],
         ["よく", "", "yoku", "Well (yoku wakarimasu = you understand well).", "yoh-koo"],
-        ["にほん", "Pimsleur shows: 日本", "nihon", "Japan.", "nee-hon"]
+        ["にほん", "Pimsleur shows: 日本", "nihon", "Japan.", "nee-hon"],
+        ["まだじょうずじゃありません。", "Pimsleur shows: まだ上手じゃありません。", "mada jōzu ja arimasen", "I’m not good yet.", "mah-dah joh-zoo jah ah-ree-mah-sen"]
       ],
       dialogue: [
         ["A", "こんにちは。", "konnichiwa", "Hello."],
