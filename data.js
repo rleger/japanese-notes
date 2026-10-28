@@ -125,16 +125,21 @@ window.NOTES = {
         ["よく", "", "yoku", "Well (yoku wakarimasu = you understand well).", "yoh-koo"],
         ["にほん", "Pimsleur shows: 日本", "nihon", "Japan.", "nee-hon"],
         ["まだじょうずじゃありません。", "Pimsleur shows: まだ上手じゃありません。", "mada jōzu ja arimasen", "I’m not good yet.", "mah-dah joh-zoo jah ah-ree-mah-sen"],
-        ["にほんじんじゃありません。", "Pimsleur shows: 日本人じゃありません。", "nihonjin ja arimasen", "I’m not Japanese.", "nee-hon-jeen jah ah-ree-mah-sen"]
+        ["にほんじんじゃありません。", "Pimsleur shows: 日本人じゃありません。", "nihonjin ja arimasen", "I’m not Japanese.", "nee-hon-jeen jah ah-ree-mah-sen"],
+        ["そうです", "Without ね: a plain “yes, that’s it” (そうですね = “indeed, isn’t it?”)", "sō desu", "That’s right / Yes, it is.", "soh dess"],
+        ["ええ", "", "ee", "Yes (softer, more conversational than はい).", "eh-eh"],
+        ["おじょうずです", "Pimsleur shows: お上手です. お = polite: said about someone else, never about yourself", "ojōzu desu", "You’re very skilled (polite).", "oh-joh-zoo dess"]
       ],
+      dialogueTitle: "Speak Easy · Pimsleur dialogue",
+      dialogueNote: "The real Pimsleur dialogue of this lesson.",
       dialogue: [
-        ["A", "こんにちは。", "konnichiwa", "Hello."],
-        ["B", "どうも、こんにちは。", "dōmo, konnichiwa", "Hi, hello."],
-        ["A", "にほんごがじょうずですね。", "nihongo ga jōzu desu ne", "Your Japanese is good."],
-        ["B", "いいえ、まだまだです。", "iie, mada mada desu", "No, I still have a long way to go."],
-        ["A", "でも、よくわかりますね。", "demo, yoku wakarimasu ne", "But you understand well."],
-        ["B", "にほんのかたですか。", "nihon no kata desu ka?", "Are you Japanese?"],
-        ["A", "はい、にほんじんです。", "hai, nihonjin desu", "Yes, I’m Japanese."]
+        ["A", "すみません。にほんのかたですか。", "sumimasen. nihon no kata desu ka?", "Excuse me. Are you Japanese?"],
+        ["B", "はい、そうです。", "hai, sō desu", "Yes, I am."],
+        ["A", "わたしはアメリカじんです。", "watashi wa amerikajin desu", "I’m American."],
+        ["B", "でも、にほんごがよくわかりますね。", "demo, nihongo ga yoku wakarimasu ne", "But you understand Japanese well."],
+        ["A", "ええ、すこし。でも、まだまだです。", "ee, sukoshi. demo, mada mada desu", "Yes, a little. But I still have a long way to go."],
+        ["B", "いいえ、おじょうずです。", "iie, ojōzu desu", "No, you’re very good."],
+        ["A", "ありがとうございます。", "arigatō gozaimasu", "Thank you."]
       ]
     },
     { number: 4, jp: "第4課",

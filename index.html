@@ -273,11 +273,11 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
       h += '<div class="lesson-head"><span class="badge">Lesson '+L.number+'</span><span class="jp">'+esc(L.jp||"")+'</span><span class="count">'+L.words.length+' words</span></div>';
       L.words.forEach(function(w,i){ h += card(w, pad(i)); });
       if (L.dialogue && L.dialogue.length){
-        h += '<details class="dlg"><summary>Put together · dialogue</summary>';
+        h += '<details class="dlg"><summary>'+esc(L.dialogueTitle || "Put together · dialogue")+'</summary>';
         L.dialogue.forEach(function(d){
           h += '<div class="line"><span class="who">'+esc(d[0])+'</span><div style="flex:1;min-width:0"><div class="ja">'+esc(d[1])+'</div><div class="ro">'+esc(d[2])+'</div><div class="en">'+esc(d[3])+'</div></div>'+speakBtn(d[1])+'</div>';
         });
-        h += '<p class="hint" style="margin:8px 0 12px">Example built from this lesson’s words.</p></details>';
+        h += '<p class="hint" style="margin:8px 0 12px">'+esc(L.dialogueNote || "Example built from this lesson’s words.")+'</p></details>';
       }
     });
     document.getElementById("panel-lessons").innerHTML = h;
