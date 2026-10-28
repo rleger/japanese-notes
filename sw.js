@@ -1,5 +1,6 @@
-/* Offline support: network first (so updates show up), saved copy when offline. */
-const CACHE = "jp-notes-v2";
+/* Offline support: always try the network first, bypassing the browser cache,
+   so updates show up immediately; fall back to the saved copy when offline. */
+const CACHE = "jp-notes-v3";
 const FILES = [
   "./",
   "index.html",
@@ -12,7 +13,11 @@ const FILES = [
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));
+  e.waitUntil(
+    caches.open(CACHE)
+      .then((c) => c.addAll(FILES.map((f) => new Request(f, { cache: "reload" }))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", (e) => {
@@ -23,18 +28,27 @@ self.addEventListener("activate", (e) => {
   );
 });
 
+self.addEventListener("message", (e) => {
+  if (e.data === "skipWaiting") self.skipWaiting();
+});
+
 self.addEventListener("fetch", (e) => {
   const req = e.request;
-  if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
+  const url = new URL(req.url);
+  if (req.method !== "GET" || url.origin !== self.location.origin) return;
+  // Same file whatever the cache-busting query (?r=…)
+  const key = url.origin + url.pathname;
   e.respondWith(
-    fetch(req)
+    fetch(key, { cache: "no-store", credentials: "same-origin" })
       .then((res) => {
         if (res && res.ok) {
           const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(req, copy));
+          caches.open(CACHE).then((c) => c.put(key, copy));
         }
         return res;
       })
-      .catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match("index.html")))
+      .catch(() =>
+        caches.match(key).then((hit) => hit || caches.match(url.origin + url.pathname.replace(/[^/]*$/, "") ))
+      )
   );
 });
