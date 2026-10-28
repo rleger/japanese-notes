@@ -154,7 +154,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     <button class="toggle" id="quizBtn" aria-pressed="false">Quiz mode</button>
     <div class="search" id="searchBox" hidden>
       <label for="q">Search phrases</label>
-      <input id="q" type="search" placeholder="Search: hello, desu, ありがとう…" autocomplete="off">
+      <input id="q" type="search" placeholder="Search: station, eki, えき…" autocomplete="off">
     </div>
   </div>
   <p class="hint" id="quizHint" hidden>Answers hidden. Tap a card to reveal it.</p>
@@ -245,9 +245,12 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   }
   function speakBtn(text){ return '<button class="speak" type="button" data-say="'+esc(text)+'" aria-label="Play '+esc(text)+'">'+SPK+'</button>'; }
 
+  /* search text: lower case, no macrons (kōen = koen) */
+  function norm(s){ s = String(s || "").toLowerCase(); try { s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch(e){} return s; }
+
   /* phrase card */
   function card(p, n){
-    return '<div class="card" data-search="'+esc((p[0]+" "+p[1]+" "+p[2]+" "+p[3]).toLowerCase())+'">'+
+    return '<div class="card" data-search="'+esc(norm(p[0]+" "+p[1]+" "+p[2]+" "+p[3]+" "+(p[4]||"")))+'">'+
       (n ? '<span class="num">'+n+'</span>' : '')+
       '<div class="body">'+
         '<div class="ja">'+esc(p[0])+'</div>'+
@@ -270,16 +273,19 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     var h = '';
     if (!ls.length) h = '<p class="empty-state">No lessons yet.</p>';
     ls.forEach(function(L){
+      h += '<div class="group">';
       h += '<div class="lesson-head"><span class="badge">Lesson '+L.number+'</span><span class="jp">'+esc(L.jp||"")+'</span><span class="count">'+L.words.length+' words</span></div>';
       L.words.forEach(function(w,i){ h += card(w, pad(i)); });
       if (L.dialogue && L.dialogue.length){
         h += '<details class="dlg"><summary>'+esc(L.dialogueTitle || "Put together · dialogue")+'</summary>';
         L.dialogue.forEach(function(d){
-          h += '<div class="line"><span class="who">'+esc(d[0])+'</span><div style="flex:1;min-width:0"><div class="ja">'+esc(d[1])+'</div><div class="ro">'+esc(d[2])+'</div><div class="en">'+esc(d[3])+'</div></div>'+speakBtn(d[1])+'</div>';
+          h += '<div class="line" data-search="'+esc(norm(d[1]+" "+d[2]+" "+d[3]))+'"><span class="who">'+esc(d[0])+'</span><div style="flex:1;min-width:0"><div class="ja">'+esc(d[1])+'</div><div class="ro">'+esc(d[2])+'</div><div class="en">'+esc(d[3])+'</div></div>'+speakBtn(d[1])+'</div>';
         });
         h += '<p class="hint" style="margin:8px 0 12px">'+esc(L.dialogueNote || "Example built from this lesson’s words.")+'</p></details>';
       }
+      h += '</div>';
     });
+    h += '<p class="empty-state no-results" hidden>Nothing matches in your lessons.</p>';
     document.getElementById("panel-lessons").innerHTML = h;
   }
 
@@ -292,7 +298,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
       g.items.forEach(function(p,i){ h += card(p, pad(i)); });
       h += '</div>';
     });
-    h += '<p class="empty-state" id="noResults" hidden>No phrase matches.</p>';
+    h += '<p class="empty-state no-results" hidden>No phrase matches.</p>';
     document.getElementById("panel-phrases").innerHTML = h;
   }
 
@@ -328,6 +334,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
 
   /* tabs */
   var tabs = Array.prototype.slice.call(document.querySelectorAll("[data-tab]"));
+  var currentTab = "lessons";
   function show(name){
     tabs.forEach(function(b){
       var on = b.getAttribute("data-tab") === name;
@@ -335,7 +342,9 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
       b.tabIndex = on ? 0 : -1;
       document.getElementById("panel-"+b.getAttribute("data-tab")).hidden = !on;
     });
-    document.getElementById("searchBox").hidden = name !== "phrases";
+    document.getElementById("searchBox").hidden = name === "kana";
+    currentTab = name;
+    runSearch();
     store.set("tab", name);
     window.scrollTo(0,0);
   }
@@ -365,18 +374,30 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   });
 
   /* search */
-  document.getElementById("q").addEventListener("input", function(){
-    var q = this.value.trim().toLowerCase(), any = false;
-    Array.prototype.forEach.call(document.querySelectorAll("#panel-phrases .group"), function(g){
+  var qEl = document.getElementById("q");
+  function runSearch(){
+    var panel = document.getElementById("panel-" + currentTab);
+    if (!panel || currentTab === "kana") return;
+    var q = norm(qEl.value.trim()), any = false;
+    Array.prototype.forEach.call(panel.querySelectorAll(".group"), function(g){
       var vis = 0;
-      Array.prototype.forEach.call(g.querySelectorAll(".card"), function(c){
+      Array.prototype.forEach.call(g.querySelectorAll(".card, .line"), function(c){
         var m = !q || c.getAttribute("data-search").indexOf(q) > -1;
         c.hidden = !m; if (m) vis++;
       });
+      var dlg = g.querySelector("details.dlg");
+      if (dlg){
+        var dlgHits = Array.prototype.filter.call(dlg.querySelectorAll(".line"), function(l){ return !l.hidden; }).length;
+        dlg.hidden = !!q && dlgHits === 0;
+        if (q && dlgHits){ dlg.open = true; dlg.setAttribute("data-auto", "1"); }
+        else if (!q && dlg.getAttribute("data-auto")){ dlg.open = false; dlg.removeAttribute("data-auto"); }
+      }
       g.hidden = vis === 0; if (vis) any = true;
     });
-    document.getElementById("noResults").hidden = any;
-  });
+    var none = panel.querySelector(".no-results");
+    if (none) none.hidden = any;
+  }
+  qEl.addEventListener("input", runSearch);
 
   renderLessons(); renderPhrases(); renderKana();
   document.getElementById("updated").textContent = "Updated " + N.updated;
