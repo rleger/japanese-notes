@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-10-28",
+  updated: "2026-10-29",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -165,13 +165,34 @@ window.NOTES = {
         ["はなします", "Pimsleur shows: 話します", "hanashimasu", "I / you speak.", "hah-nah-shee-mahss"],
         ["うえのえきはどこですか。", "Pimsleur shows: 上野駅はどこですか？ (は is read wa)", "Ueno eki wa doko desu ka?", "Where is Ueno Station?", "oo-eh-noh eh-kee wah doh-koh dess kah?"]
       ],
+      dialogues: [
+        { title: "Speak Easy · Ueno Park", note: "Pimsleur dialogue, lesson 4.", lines: [
+          ["A", "あのう、すみません。", "anō, sumimasen", "Um, excuse me. (あのう = polite hesitation)"],
+          ["B", "はい、なんですか。", "hai, nan desu ka?", "Yes, what is it?"],
+          ["A", "うえのこうえんはどこですか。", "Ueno kōen wa doko desu ka?", "Where is Ueno Park?"],
+          ["B", "あそこです。", "asoko desu", "It’s over there."],
+          ["A", "うえのえきは？", "Ueno eki wa?", "And Ueno Station?"],
+          ["B", "ここですよ。", "koko desu yo", "It’s right here. (よ = “I tell you”)"],
+          ["A", "どうもありがとうございます。", "dōmo arigatō gozaimasu", "Thank you very much."]
+        ]}
+      ]
+    },
+    { number: 5, jp: "第5課",
+      words: [
+        ["たべます", "Pimsleur shows: 食べます", "tabemasu", "I / you eat.", "tah-beh-mahss"],
+        ["たべませんか", "Pimsleur shows: 食べませんか. ～ませんか = “won’t you…?”, a polite invitation", "tabemasen ka?", "Would you like to eat?", "tah-beh-mah-sen kah?"],
+        ["なにか", "Pimsleur shows: 何か. Example: なにかたべませんか。 Would you like to eat something?", "nanika", "Something.", "nah-nee-kah"],
+        ["いえ", "A shorter, softer いいえ", "ie", "No (as in “No, thank you”).", "ee-eh (short)"],
+        ["たべません", "Pimsleur shows: 食べません. ～ます = do · ～ません = don’t", "tabemasen", "I / you don’t eat.", "tah-beh-mah-sen"],
+        ["のみます", "Pimsleur shows: 飲みます", "nomimasu", "I / you drink.", "noh-mee-mahss"],
+        ["いえ、けっこうです", "Pimsleur shows: いえ、結構です. Small っ = short pause: kek·kō", "ie, kekkō desu", "No, thank you. (polite refusal)", "ee-eh, keck-koh dess"],
+        ["のみませんか", "Pimsleur shows: 飲みませんか", "nomimasen ka?", "Would you like to drink (something)?", "noh-mee-mah-sen kah?"]
+      ],
       dialogue: [
-        ["A", "すみません、あそこはなんですか。", "sumimasen, asoko wa nan desu ka?", "Excuse me, what is over there?"],
-        ["B", "うえのこうえんです。", "Ueno kōen desu", "It’s Ueno Park."],
-        ["A", "えきはどこですか。", "eki wa doko desu ka?", "Where is the station?"],
-        ["B", "ここです。", "koko desu", "It’s right here."],
-        ["B", "にほんごをじょうずにはなしますね。", "nihongo o jōzu ni hanashimasu ne", "You speak Japanese well."],
-        ["A", "いいえ、まだまだです。", "iie, mada mada desu", "No, I still have a long way to go."]
+        ["A", "なにかたべませんか。", "nanika tabemasen ka?", "Would you like to eat something?"],
+        ["B", "いえ、けっこうです。", "ie, kekkō desu", "No, thank you."],
+        ["A", "なにかのみませんか。", "nanika nomimasen ka?", "Would you like something to drink?"],
+        ["B", "ええ、ありがとうございます。", "ee, arigatō gozaimasu", "Yes, thank you."]
       ]
     }
   ]
