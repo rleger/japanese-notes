@@ -182,6 +182,7 @@ window.NOTES = {
         ["たべます", "Pimsleur shows: 食べます", "tabemasu", "I / you eat.", "tah-beh-mahss"],
         ["たべませんか", "Pimsleur shows: 食べませんか. ～ませんか = “won’t you…?”, a polite invitation", "tabemasen ka?", "Would you like to eat?", "tah-beh-mah-sen kah?"],
         ["なにか", "Pimsleur shows: 何か. Example: なにかたべませんか。 Would you like to eat something?", "nanika", "Something.", "nah-nee-kah"],
+        ["そうですね", "Here: thinking before you answer. Also “that’s right, isn’t it?” (Phrases)", "sō desu ne", "Well… let me see.", "soh dess neh"],
         ["いえ", "A shorter, softer いいえ", "ie", "No (as in “No, thank you”).", "ee-eh (short)"],
         ["たべません", "Pimsleur shows: 食べません. ～ます = do · ～ません = don’t", "tabemasen", "I / you don’t eat.", "tah-beh-mah-sen"],
         ["のみます", "Pimsleur shows: 飲みます", "nomimasu", "I / you drink.", "noh-mee-mahss"],
@@ -192,7 +193,7 @@ window.NOTES = {
         ["A", "なにかたべませんか。", "nanika tabemasen ka?", "Would you like to eat something?"],
         ["B", "いえ、けっこうです。", "ie, kekkō desu", "No, thank you."],
         ["A", "なにかのみませんか。", "nanika nomimasen ka?", "Would you like something to drink?"],
-        ["B", "ええ、ありがとうございます。", "ee, arigatō gozaimasu", "Yes, thank you."]
+        ["B", "そうですね…ええ、ありがとうございます。", "sō desu ne… ee, arigatō gozaimasu", "Let me see… yes, thank you."]
       ]
     }
   ]
