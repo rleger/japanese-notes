@@ -201,6 +201,31 @@ window.NOTES = {
         ["A", "なにかのみませんか。", "nanika nomimasen ka?", "Would you like something to drink?"],
         ["B", "そうですね…ええ、ありがとうございます。", "sō desu ne… ee, arigatō gozaimasu", "Let me see… yes, thank you."]
       ]
+    },
+    { number: 6, jp: "第6課",
+      words: [
+        ["どこで", "Where an action happens. Example: どこでたべますか。 Where shall we eat?", "doko de", "Where (at which place)?", "doh-koh deh"],
+        ["わたしの", "Pimsleur shows: 私の. の = ’s / of. Example: わたしのおきにいりのレストラン my favorite restaurant", "watashi no", "My.", "wah-tah-shee noh"],
+        ["はなしません", "Pimsleur shows: 話しません. ～ます → ～ません (Lesson 5)", "hanashimasen", "I / you don’t speak.", "hah-nah-shee-mah-sen"],
+        ["いつ", "Example: いつたべますか。 When shall we eat?", "itsu", "When?", "ee-tsoo"],
+        ["レストラン", "Katakana (from English “restaurant”)", "resutoran", "Restaurant.", "reh-soo-toh-rahn"],
+        ["あとで", "Pimsleur shows: 後で. Example: あとでたべます。 I’ll eat later.", "atode", "Later.", "ah-toh-deh"],
+        ["おきにいりの", "Pimsleur shows: お気に入りの", "okiniiri no", "Favorite.", "oh-kee-nee-ee-ree noh"],
+        ["わたしも", "Pimsleur shows: 私も. も = too, also", "watashi mo", "Me too / I also.", "wah-tah-shee moh"],
+        ["いま", "Pimsleur shows: 今. Example: いまのみます。 I’ll drink now.", "ima", "Now.", "ee-mah"]
+      ],
+      dialogues: [
+        { title: "Speak Easy · coffee", note: "Pimsleur dialogue, lesson 6.", lines: [
+          ["A", "こんにちは。", "konnichiwa", "Hello."],
+          ["B", "こんにちは。いいおてんきですね。", "konnichiwa. ii otenki desu ne", "Hello. Nice weather, isn’t it?"],
+          ["A", "そうですね。", "sō desu ne", "It is."],
+          ["B", "なにかたべませんか。", "nanika tabemasen ka?", "Would you like to eat something?"],
+          ["A", "いえ、けっこうです。でも、なにかのみます。", "ie, kekkō desu. demo, nanika nomimasu", "No, thank you. But I’ll drink something."],
+          ["B", "なにをのみますか。", "nani o nomimasu ka?", "What will you drink? (なに = what · を, read o, marks the object)"],
+          ["A", "コーヒーをのみます。", "kōhī o nomimasu", "I’ll have coffee. (コーヒー is katakana)"],
+          ["B", "わたしもコーヒーをのみます。", "watashi mo kōhī o nomimasu", "I’ll have coffee too."]
+        ]}
+      ]
     }
   ]
 };
