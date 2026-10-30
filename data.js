@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-10-29",
+  updated: "2026-10-30",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -108,6 +108,12 @@ window.NOTES = {
       ["かんぱい", "", "kanpai", "Cheers!", "kahm-pie"],
       ["いくらですか", "", "ikura desu ka", "How much is it?", "ee-koo-rah dess kah"],
       ["トイレはどこですか", "トイレ is katakana (toire)", "toire wa doko desu ka", "Where is the toilet?", "toy-reh wah doh-koh dess kah"]
+    ]},
+    { title: "Getting around", jp: "旅の言葉", items: [
+      ["○○はどこですか。", "Pattern from Lesson 4. Example: トイレはどこですか。 Where is the toilet?", "○○ wa doko desu ka?", "Where is ○○?", "… wah doh-koh dess kah?"],
+      ["○○にいきたいです。", "Kanji form: ○○に行きたいです。 に = to (a place) · いきたい = want to go. Example: うえのえきにいきたいです。 I want to go to Ueno Station.", "○○ ni ikitai desu", "I want to go to ○○.", "… nee ee-kee-tye dess"],
+      ["にほんごがわかりません。", "Kanji form: 日本語がわかりません。 ～ます → ～ません = negative (Lesson 5)", "nihongo ga wakarimasen", "I don’t understand Japanese.", "nee-hon-go gah wah-kah-ree-mah-sen"],
+      ["えいごではなしてくれませんか。", "Kanji form: 英語で話してくれませんか。 で = in (a language) · はなして くれませんか = could you (speak) for me? (はなします, Lesson 4)", "eigo de hanashite kuremasen ka?", "Could you speak in English?", "ay-go deh hah-nahsh-teh koo-reh-mah-sen kah?"]
     ]}
   ],
 
