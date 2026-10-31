@@ -220,7 +220,7 @@ window.NOTES = {
         ["いまたべません。", "Pimsleur shows: 今食べません。", "ima tabemasen", "I’m not going to eat now.", "ee-mah tah-beh-mah-sen"],
         ["どこでたべますか。", "Pimsleur shows: どこで食べますか。", "doko de tabemasu ka?", "Where are you going to eat?", "doh-koh deh tah-beh-mahss kah?"],
         ["わたしもはなしません。", "Pimsleur shows: 私も話しません。", "watashi mo hanashimasen", "I don’t speak (it) either.", "wah-tah-shee moh hah-nah-shee-mah-sen"],
-        ["いい、でもあとで。", "Pimsleur shows: いい、でも後で。 いい = good, fine · でも = but · あとで = later. (If the card said “iie”, it is いいえ: No, but later.)", "ii, demo atode", "Sure, but later. / That’s fine, but later.", "ee-ee, deh-moh ah-toh-deh"],
+        ["いい、でもあとで。", "Pimsleur shows: いい、でも後で。 いい = good, fine (here: yes) · でも = but · あとで = later", "ii, demo atode", "Yes, but later.", "ee-ee, deh-moh ah-toh-deh"],
         ["カフェでなにかのみませんか。", "Pimsleur shows: カフェで何か飲みませんか。 で = at (where you do it)", "kafe de nanika nomimasen ka?", "Won’t you drink something at the café?", "kah-feh deh nah-nee-kah noh-mee-mah-sen kah?"]
       ],
       dialogues: [
