@@ -94,6 +94,7 @@ window.NOTES = {
       ["どうぞ", "", "dōzo", "Please, go ahead.", "doh-zoh"],
       ["だいじょうぶです", "", "daijōbu desu", "It’s OK / I’m fine.", "dye-joh-boo dess"],
       ["いいです。", "いい = good. Depending on the tone: “that’s fine” or a polite “no thanks”", "ii desu", "It’s fine.", "ee-ee dess"],
+      ["いいですか。", "Also “May I?” (e.g. pointing at a seat or a photo). Answer: はい、どうぞ。", "ii desu ka?", "Is it all right?", "ee-ee dess kah?"],
       ["わかりません", "", "wakarimasen", "I don’t understand.", "wah-kah-ree-mah-sen"]
     ]},
     { title: "Essentials: greetings", jp: "挨拶", items: [
