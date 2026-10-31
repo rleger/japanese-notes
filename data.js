@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-10-30",
+  updated: "2026-10-31",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -93,6 +93,7 @@ window.NOTES = {
       ["おねがいします", "", "onegai shimasu", "Please (asking for something).", "oh-neh-guy shee-mahss"],
       ["どうぞ", "", "dōzo", "Please, go ahead.", "doh-zoh"],
       ["だいじょうぶです", "", "daijōbu desu", "It’s OK / I’m fine.", "dye-joh-boo dess"],
+      ["いいです。", "いい = good. Depending on the tone: “that’s fine” or a polite “no thanks”", "ii desu", "It’s fine.", "ee-ee dess"],
       ["わかりません", "", "wakarimasen", "I don’t understand.", "wah-kah-ree-mah-sen"]
     ]},
     { title: "Essentials: greetings", jp: "挨拶", items: [
@@ -212,7 +213,14 @@ window.NOTES = {
         ["あとで", "Pimsleur shows: 後で. Example: あとでたべます。 I’ll eat later.", "atode", "Later.", "ah-toh-deh"],
         ["おきにいりの", "Pimsleur shows: お気に入りの", "okiniiri no", "Favorite.", "oh-kee-nee-ee-ree noh"],
         ["わたしも", "Pimsleur shows: 私も. も = too, also", "watashi mo", "Me too / I also.", "wah-tah-shee moh"],
-        ["いま", "Pimsleur shows: 今. Example: いまのみます。 I’ll drink now.", "ima", "Now.", "ee-mah"]
+        ["いま", "Pimsleur shows: 今. Example: いまのみます。 I’ll drink now.", "ima", "Now.", "ee-mah"],
+        ["カフェ", "Katakana (from French “café”)", "kafe", "Café.", "kah-feh"]
+      ],
+      sentences: [
+        ["いまたべません。", "Pimsleur shows: 今食べません。", "ima tabemasen", "I’m not going to eat now.", "ee-mah tah-beh-mah-sen"],
+        ["どこでたべますか。", "Pimsleur shows: どこで食べますか。", "doko de tabemasu ka?", "Where are you going to eat?", "doh-koh deh tah-beh-mahss kah?"],
+        ["わたしもはなしません。", "Pimsleur shows: 私も話しません。", "watashi mo hanashimasen", "I don’t speak (it) either.", "wah-tah-shee moh hah-nah-shee-mah-sen"],
+        ["カフェでなにかのみませんか。", "Pimsleur shows: カフェで何か飲みませんか。 で = at (where you do it)", "kafe de nanika nomimasen ka?", "Won’t you drink something at the café?", "kah-feh deh nah-nee-kah noh-mee-mah-sen kah?"]
       ],
       dialogues: [
         { title: "Speak Easy · coffee", note: "Pimsleur dialogue, lesson 6.", lines: [

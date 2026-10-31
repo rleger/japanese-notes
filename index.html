@@ -122,6 +122,7 @@ body.quiz-ej .kcell:not(.open) .k{visibility:hidden}
 .lesson-head{display:flex;align-items:center;gap:10px;margin:22px 0 4px}
 .lesson-head .badge{border:2px solid var(--indigo);color:var(--indigo);border-radius:6px;padding:2px 10px;font-family:var(--serif);font-weight:700;font-size:18px}
 .lesson-head .jp{font-family:var(--jp);color:var(--red);font-size:17px}
+.subsec{margin:16px 0 0;padding-bottom:4px;border-bottom:2px solid var(--indigo);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
 .lesson-head .count{margin-left:auto;font-size:12px;color:var(--muted);font-weight:600}
 details.dlg{margin:12px 0 4px;border:1px solid var(--line-strong);border-radius:8px;padding:0 14px;background:var(--card)}
 details.dlg summary{min-height:48px;display:flex;align-items:center;font-weight:700;font-family:var(--serif);color:var(--indigo);cursor:pointer;list-style:none}
@@ -388,8 +389,12 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     if (!ls.length) h = '<p class="empty-state">No lessons yet.</p>';
     ls.forEach(function(L){
       h += '<div class="group">';
-      h += '<div class="lesson-head"><span class="badge">Lesson '+L.number+'</span><span class="jp">'+esc(L.jp||"")+'</span><span class="count">'+L.words.length+' words</span></div>';
+      h += '<div class="lesson-head"><span class="badge">Lesson '+L.number+'</span><span class="jp">'+esc(L.jp||"")+'</span><span class="count">'+L.words.length+' words'+(L.sentences && L.sentences.length ? ' · '+L.sentences.length+' sentences' : '')+'</span></div>';
       L.words.forEach(function(w,i){ h += card(w, pad(i)); });
+      if (L.sentences && L.sentences.length){
+        h += '<h3 class="subsec">Sentences</h3>';
+        L.sentences.forEach(function(w,i){ h += card(w, pad(i)); });
+      }
       var dlgs = L.dialogues || (L.dialogue && L.dialogue.length ? [{ title: L.dialogueTitle, note: L.dialogueNote, lines: L.dialogue }] : []);
       dlgs.forEach(function(D){
         h += '<details class="dlg"><summary>'+esc(D.title || "Put together · dialogue")+'</summary>';
@@ -552,6 +557,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     N.lessons.slice().sort(function(a,b){ return a.number - b.number; }).forEach(function(L){
       var src = "L" + L.number;
       L.words.forEach(function(w){ add({ ja: w[0], note: w[1], ro: w[2], en: w[3], sl: w[4], kind: isSentence(w[0]) ? "sentences" : "words", src: src }); });
+      (L.sentences || []).forEach(function(w){ add({ ja: w[0], note: w[1], ro: w[2], en: w[3], sl: w[4], kind: "sentences", src: src }); });
       var dl = L.dialogues || (L.dialogue ? [{ lines: L.dialogue }] : []);
       dl.forEach(function(D){ D.lines.forEach(function(d){ add({ ja: d[1], ro: d[2], en: d[3], kind: "sentences", src: src }); }); });
     });
@@ -647,7 +653,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   })();
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "30 Oct 23:00";
+  var APP_VERSION = "31 Oct 09:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
