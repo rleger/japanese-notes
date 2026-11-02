@@ -51,28 +51,31 @@ nav.tabs .in{max-width:720px;margin:0 auto;display:flex;gap:4px;padding:0 12px}
 nav.tabs button{-webkit-tap-highlight-color:transparent;flex:1;min-height:48px;background:none;border:0;border-bottom:3px solid transparent;font-weight:600;font-size:15px;color:var(--muted);cursor:pointer}
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red)}
 
-.tools{display:flex;gap:8px;align-items:center;padding:12px 0 4px;flex-wrap:wrap}
+.tools{display:flex;gap:8px;align-items:center;padding:10px 0 2px;flex-wrap:nowrap}
 .toggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--line-strong);border-radius:22px;background:var(--card);font-size:14px;font-weight:600;cursor:pointer}
 .toggle[aria-pressed="true"]{background:var(--indigo);border-color:var(--indigo);color:var(--on-accent)}
-.quizsel{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 6px 0 14px;border:1px solid var(--line-strong);border-radius:22px;background:var(--card);font-size:14px;font-weight:600}
+.quizsel{order:2;flex-shrink:0;display:inline-flex;align-items:center;gap:4px;min-height:40px;padding:0 2px 0 10px;border:1px solid var(--line-strong);border-radius:22px;background:var(--card);font-size:14px;font-weight:600}
 .quizsel.on{background:var(--indigo);border-color:var(--indigo);color:var(--on-accent)}
-.quizsel select{font:inherit;font-weight:600;color:inherit;background:transparent;border:0;min-height:42px;padding:0 4px;cursor:pointer;-webkit-appearance:none;appearance:none}
+.quizsel select{font:inherit;font-weight:600;color:inherit;background:transparent;border:0;min-height:38px;padding:0 2px;cursor:pointer;-webkit-appearance:none;appearance:none}
 .quizsel select option{color:#1E1C19}
 .quizsel .chev{width:14px;height:14px;margin-right:8px}
-.search{flex:1;min-width:160px}
-.search input{width:100%;min-height:44px;border:1px solid var(--line-strong);border-radius:22px;padding:0 16px;font-size:16px;background:var(--card);color:var(--ink)}
+.quizsel .qicon{width:18px;height:18px;flex-shrink:0}
+.search{order:1;flex:1;min-width:0;position:relative}
+.search .sicon{position:absolute;left:12px;top:50%;width:17px;height:17px;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.search input{width:100%;min-height:40px;border:1px solid var(--line-strong);border-radius:20px;padding:0 12px 0 36px;-webkit-appearance:none;appearance:none;font-size:16px;background:var(--card);color:var(--ink)}
 .search label{position:absolute;left:-9999px}
 
 h2.sec{display:flex;align-items:baseline;gap:10px;margin:22px 0 8px;font-family:var(--serif);font-size:19px}
 h2.sec .dot{width:9px;height:9px;border-radius:50%;background:var(--red);align-self:center;flex-shrink:0}
-h2.sec .jp{font-family:var(--jp);font-weight:500;font-size:15px;color:var(--red)}
+h2.sec .jp{font-family:var(--jp);font-weight:400;font-size:15px;color:var(--red)}
 h2.sec .count{margin-left:auto;font-family:var(--ui);font-size:12px;font-weight:600;color:var(--muted)}
 p.hint{margin:0 0 10px;font-size:13px;color:var(--muted)}
+p.qhint{margin:6px 0 0;font-size:12px}
 
 /* phrase cards */
 .card{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
 .card .body{flex:1;min-width:0}
-.card .ja{font-family:var(--jp);font-size:22px;font-weight:500;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
+.card .ja{font-family:var(--jp);font-size:22px;font-weight:400;letter-spacing:.02em;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
 .card .ro{font-weight:700;font-size:15px;margin-top:2px}
 .card .en{font-size:15px;color:var(--soft)}
 .card .sl{font-size:14px;color:var(--red);font-weight:500;margin-top:2px}
@@ -101,7 +104,7 @@ body.quiz .card .body, body.quiz .line .txt{cursor:pointer;-webkit-tap-highlight
 .kgrid .h{font-size:12px;font-weight:700;color:var(--indigo);text-align:center;padding:2px 0}
 .kgrid .lab{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--indigo)}
 .kcell{min-height:62px;border:1px solid var(--line-strong);border-radius:6px;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;padding:4px 2px}
-.kcell .k{font-family:var(--jp);font-size:26px;line-height:1.1}
+.kcell .k{font-family:var(--jp);font-size:26px;line-height:1.1;font-weight:400}
 .kcell .r{font-size:12px;font-weight:700}
 .kcell .s{font-size:11px;color:var(--red);line-height:1.1;text-align:center}
 .kcell.empty{border-style:dashed;border-color:var(--line);cursor:default}
@@ -126,7 +129,7 @@ body.quiz-ej .kcell:not(.open) .k{visibility:hidden}
 /* lessons */
 .lesson-head{display:flex;align-items:center;gap:10px;margin:22px 0 4px}
 .lesson-head .badge{border:2px solid var(--indigo);color:var(--indigo);border-radius:6px;padding:2px 10px;font-family:var(--serif);font-weight:700;font-size:18px}
-.lesson-head .jp{font-family:var(--jp);color:var(--red);font-size:17px}
+.lesson-head .jp{font-family:var(--jp);color:var(--red);font-size:17px;font-weight:400}
 .subsec{margin:16px 0 0;padding-bottom:4px;border-bottom:2px solid var(--indigo);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
 .lesson-head .count{margin-left:auto;font-size:12px;color:var(--muted);font-weight:600}
 details.dlg{margin:12px 0 4px;border:1px solid var(--line-strong);border-radius:8px;padding:0 14px;background:var(--card)}
@@ -136,7 +139,7 @@ details.dlg summary::after{content:"＋";margin-left:auto;color:var(--muted)}
 details.dlg[open] summary::after{content:"－"}
 .line{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
 .line .who{font-weight:700;color:var(--indigo);width:18px;padding-top:4px;flex-shrink:0}
-.line .ja{font-family:var(--jp);font-size:19px}
+.line .ja{font-family:var(--jp);font-size:19px;font-weight:400}
 .line .ro{font-size:13px;font-weight:700}
 .line .en{font-size:13px;color:var(--soft)}
 body.quiz-je .line:not(.open) .en{display:none}
@@ -145,6 +148,57 @@ body.quiz-ej .line:not(.open) .speak{visibility:hidden}
 body.quiz .line:not(.open) .reveal-line{display:block}
 
 .empty-state{padding:24px 0;color:var(--muted);text-align:center}
+.jump{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.jump::-webkit-scrollbar{display:none}
+.jump button{flex-shrink:0;min-height:36px;padding:0 14px;border:1px solid var(--line-strong);border-radius:18px;background:var(--card);font-size:13px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lesson-head{scroll-margin-top:64px}
+.kblock{min-width:0}
+
+/* ---------- tablet & desktop ---------- */
+@media (min-width: 760px){
+  .wrap, header.top, nav.tabs .in{max-width:1180px}
+  .wrap{padding-left:32px;padding-right:32px}
+  header.top{padding-left:32px;padding-right:32px;padding-top:calc(22px + env(safe-area-inset-top))}
+  nav.tabs .in{padding:0 28px;justify-content:flex-start;gap:8px}
+  nav.tabs button{flex:0 0 auto;padding:0 18px}
+  .seal{width:46px;height:46px;font-size:28px}
+  .top h1{font-size:26px}
+  .tools{max-width:620px;padding-top:18px}
+  .jump{margin:0;padding:14px 0 4px}
+  h2.sec{font-size:22px;margin-top:30px}
+
+  /* words & phrases as cards */
+  .group{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;align-items:stretch}
+  .group > :not(.card){grid-column:1/-1}
+  .card{border:1px solid var(--line);border-radius:16px;padding:16px 14px 16px 16px;background:var(--card);transition:border-color .15s, box-shadow .15s}
+  .card:hover{border-color:var(--line-strong);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  .card .ja{font-size:23px;overflow-wrap:normal;word-break:normal;line-break:strict}
+  .cgrid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .card .num{padding-top:8px}
+  .lesson-head{margin:34px 0 6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .lesson-head .badge{font-size:20px}
+  .subsec{margin:14px 0 0}
+
+  /* dialogues as a chat */
+  details.dlg{margin:6px 0 4px;border-radius:16px;padding:0 20px}
+  details.dlg .line{border:1px solid var(--line);border-radius:16px;padding:10px 12px 10px 14px;margin:8px 0;max-width:68%}
+  details.dlg .line.who-B{margin-left:auto;background:var(--chip);border-color:transparent}
+  details.dlg .line .ja{font-size:20px}
+
+  /* kana */
+  .kcell .k{font-size:30px}
+  .kcell{min-height:70px}
+  .tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+  /* flash cards centred */
+  #fcSetup, #fcPlay, #fcDone{max-width:640px;margin-left:auto;margin-right:auto}
+  .fc-card{min-height:380px}
+  .fc-front.ja{font-size:40px}
+}
+@media (min-width: 1080px){
+  #panel-kana:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:48px;align-items:start}
+  #panel-kana .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 /* flash cards */
 body.on-cards .tools, body.on-cards #quizHint{display:none !important}
 .fc-opt{margin:14px 0}
@@ -166,10 +220,10 @@ body.on-cards .tools, body.on-cards #quizHint{display:none !important}
 .fc-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:320px;padding:28px 20px 40px;border:1px solid var(--line-strong);border-radius:18px;background:var(--card);text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .fc-tag{position:absolute;top:14px;left:16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .fc-front{font-size:24px;font-weight:600;line-height:1.35}
-.fc-front.ja{font-family:var(--jp);font-size:34px;font-weight:500}
+.fc-front.ja{font-family:var(--jp);font-size:34px;font-weight:400}
 .fc-front .ro{display:block;font-family:var(--ui);font-size:16px;font-weight:700;color:var(--soft);margin-top:6px}
 .fc-back{display:flex;flex-direction:column;gap:4px;padding-top:14px;border-top:1px solid var(--line);width:100%}
-.fc-back .ja{font-family:var(--jp);font-size:26px;font-weight:500}
+.fc-back .ja{font-family:var(--jp);font-size:26px;font-weight:400}
 .fc-back .ro{font-size:15px;font-weight:700}
 .fc-back .en{font-size:17px;font-weight:600}
 .fc-back .sl{font-size:14px;color:var(--red);font-weight:500}
@@ -212,20 +266,22 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
 
 <main class="wrap">
   <div class="tools">
-    <label class="quizsel" id="quizWrap">Quiz
+    <label class="quizsel" id="quizWrap">
+      <svg class="qicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
       <select id="quizSel" aria-label="Quiz mode">
-        <option value="off">Off</option>
-        <option value="je">Japanese → English</option>
-        <option value="ej">English → Japanese</option>
+        <option value="off">Quiz</option>
+        <option value="je">JP → EN</option>
+        <option value="ej">EN → JP</option>
       </select>
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </label>
     <div class="search" id="searchBox" hidden>
+      <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <label for="q">Search phrases</label>
-      <input id="q" type="search" placeholder="Search: station, eki, えき…" autocomplete="off">
+      <input id="q" type="search" placeholder="Search: park, eki, えき…" autocomplete="off">
     </div>
   </div>
-  <p class="hint" id="quizHint" hidden>English hidden: say what it means, then tap the card to check.</p>
+  <p class="hint qhint" id="quizHint" hidden>English hidden: say what it means, then tap the card to check.</p>
 
   <section id="panel-lessons" role="tabpanel" aria-labelledby="tab-lessons"></section>
   <section id="panel-phrases" role="tabpanel" aria-labelledby="tab-phrases" hidden></section>
@@ -393,9 +449,10 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     var ls = N.lessons.slice().sort(function(a,b){ return b.number - a.number; });
     var h = '';
     if (!ls.length) h = '<p class="empty-state">No lessons yet.</p>';
+    else h += '<div class="jump" role="navigation" aria-label="Jump to a lesson">' + ls.map(function(L){ return '<button type="button" data-jump="lesson-'+L.number+'">Lesson '+L.number+'</button>'; }).join("") + '</div>';
     ls.forEach(function(L){
       h += '<div class="group">';
-      h += '<div class="lesson-head"><span class="badge">Lesson '+L.number+'</span><span class="jp">'+esc(L.jp||"")+'</span><span class="count">'+L.words.length+' words'+(L.sentences && L.sentences.length ? ' · '+L.sentences.length+' sentences' : '')+'</span></div>';
+      h += '<div class="lesson-head" id="lesson-'+L.number+'"><span class="badge">Lesson '+L.number+'</span><span class="jp">'+esc(L.jp||"")+'</span><span class="count">'+L.words.length+' words'+(L.sentences && L.sentences.length ? ' · '+L.sentences.length+' sentences' : '')+'</span></div>';
       L.words.forEach(function(w,i){ h += card(w, pad(i)); });
       if (L.sentences && L.sentences.length){
         h += '<h3 class="subsec">Sentences</h3>';
@@ -405,7 +462,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
       dlgs.forEach(function(D){
         h += '<details class="dlg"><summary>'+esc(D.title || "Put together · dialogue")+'</summary>';
         D.lines.forEach(function(d){
-          h += '<div class="line" data-search="'+esc(norm(d[1]+" "+d[2]+" "+d[3]))+'"><span class="who">'+esc(d[0])+'</span><div class="txt" style="flex:1;min-width:0"><div class="ja">'+esc(d[1])+'</div><div class="ro">'+esc(d[2])+'</div><div class="en">'+esc(d[3])+'</div><div class="reveal reveal-line">Tap to check</div></div>'+speakBtn(d[1])+'</div>';
+          h += '<div class="line who-'+esc(d[0])+'" data-search="'+esc(norm(d[1]+" "+d[2]+" "+d[3]))+'"><span class="who">'+esc(d[0])+'</span><div class="txt" style="flex:1;min-width:0"><div class="ja">'+esc(d[1])+'</div><div class="ro">'+esc(d[2])+'</div><div class="en">'+esc(d[3])+'</div><div class="reveal reveal-line">Tap to check</div></div>'+speakBtn(d[1])+'</div>';
         });
         h += '<p class="hint" style="margin:8px 0 12px">'+esc(D.note || "Example built from this lesson’s words.")+'</p></details>';
       });
@@ -440,8 +497,8 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     return h + '</div>';
   }
   function renderKana(){
-    var h = secHead("Hiragana", "ひらがな", 46) + '<p class="hint">Tap a character to hear it. Vowels keep their top‑row sound in every row (ka = kah).</p>' + kgrid(N.hiragana);
-    h += secHead("Two ticks ゛ and a circle ゜", "濁音") + '<p class="hint">か ka becomes が ga, は ha becomes ば ba or ぱ pa.</p>' + kgrid(N.dakuten);
+    var h = '<div class="kblock">' + secHead("Hiragana", "ひらがな", 46) + '<p class="hint">Tap a character to hear it. Vowels keep their top‑row sound in every row (ka = kah).</p>' + kgrid(N.hiragana) + '</div>';
+    h += '<div class="kblock">' + secHead("Two ticks ゛ and a circle ゜", "濁音") + '<p class="hint">か ka becomes が ga, は ha becomes ば ba or ぱ pa.</p>' + kgrid(N.dakuten);
     h += secHead("Combos with small ゃ ゅ ょ", "拗音") + '<p class="hint">き ki + small ゃ = きゃ kya, one syllable. Red frame: already in your phrases.</p><div class="cgrid">';
     N.combos.heads.forEach(function(hd){
       N.combos.smalls.forEach(function(s){
@@ -449,12 +506,12 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
         h += '<button type="button" class="kcell'+(seen?' seen':'')+'" data-say="'+esc(k)+'" aria-label="'+esc(k)+'"><span class="k">'+esc(k)+'</span><span class="r">'+esc(hd[1]+s[1])+'</span></button>';
       });
     });
-    h += '</div>';
-    h += secHead("Look-alikes to watch", "似ている字") + '<div class="tiles">';
+    h += '</div></div>';
+    h += '<div class="kblock">' + secHead("Look-alikes to watch", "似ている字") + '<div class="tiles">';
     N.lookAlikes.forEach(function(t){ h += '<div class="tile"><div class="big">'+esc(t[0])+'</div><p>'+esc(t[1])+'</p></div>'; });
-    h += '</div>' + secHead("Four reading rules", "読み方") + '<div class="tiles">';
+    h += '</div></div><div class="kblock">' + secHead("Four reading rules", "読み方") + '<div class="tiles">';
     N.rules.forEach(function(t){ h += '<div class="tile"><div class="t">'+esc(t[0])+'</div><div class="ex">'+esc(t[1])+'</div><div class="exr">'+esc(t[2])+'</div><p>'+esc(t[3])+'</p></div>'; });
-    h += '</div>';
+    h += '</div></div>';
     document.getElementById("panel-kana").innerHTML = h;
   }
 
@@ -546,6 +603,8 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     });
   }
   document.addEventListener("click", function(e){
+    var j = e.target.closest("[data-jump]");
+    if (j){ var t = document.getElementById(j.getAttribute("data-jump")); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
     var g = e.target.closest("[data-goto]");
     if (g) show(g.getAttribute("data-goto"));
   });
@@ -659,7 +718,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   })();
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "2 Nov 19:20";
+  var APP_VERSION = "2 Nov 19:45";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
