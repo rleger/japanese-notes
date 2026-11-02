@@ -434,7 +434,7 @@ html.st-lock, html.st-lock body{overflow:hidden}
 .st-tap{font-size:14px;color:var(--muted);font-style:italic;margin-top:10px}
 .st-card:not(.open) .q{display:none}
 .st-card.open .st-tap{display:none}
-.st-bot{display:grid;grid-template-columns:1fr auto auto 1fr;gap:12px;align-items:center;max-width:640px;width:100%;margin:0 auto}
+.st-bot{display:grid;grid-template-columns:1fr auto auto auto 1fr;gap:12px;align-items:center;max-width:640px;width:100%;margin:0 auto}
 .st-nav{min-height:56px;border:1px solid var(--line-strong);border-radius:16px;background:var(--card);font-size:30px;line-height:1;color:var(--ctl-ink);cursor:pointer;box-shadow:var(--shadow)}
 .st-nav:disabled{opacity:.35;cursor:default}
 .st-say{width:56px;height:56px}
@@ -456,9 +456,6 @@ html.st-lock, html.st-lock body{overflow:hidden}
 .kb-particle{background:var(--t-phrase-bg);border-color:var(--t-phrase-line)}
 .kb-kanji .kb-r{display:none}
 .kb-p{font-family:var(--jp);font-size:26px;align-self:center;color:var(--muted);padding:0 2px}
-.st-kbhint{font-size:12px;color:var(--muted);margin-top:-2px;cursor:pointer}
-.st-kbhint.q{display:none}
-.st-card.open .st-kbhint.q{display:block}
 
 @media (min-width: 760px){
   .card.k-lesson:hover{box-shadow:inset 0 -2px 0 var(--k-lesson), var(--shadow-md)}
@@ -478,12 +475,17 @@ body.quiz-ej .card .en{margin-top:0}
 .line .en{margin-top:6px}
 .st-card{gap:0}
 .st-card .tag{margin-bottom:18px}
-.st-kbhint{margin-top:6px}
 .st-ro{margin-top:10px;font-weight:600}
 .st-sl{margin-top:4px;font-size:16px}
 .st-en{margin-top:26px;font-weight:600}
 .st-note{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;line-height:1.55;width:100%;max-width:none}
 .st-tap{margin-top:22px}
+
+.st-brk{width:56px;height:56px;border-radius:50%;border:1px solid var(--line-strong);background:var(--card);box-shadow:var(--shadow);cursor:pointer;display:flex;align-items:baseline;justify-content:center;gap:1px;padding-top:13px;color:var(--ctl-ink)}
+.st-brk span:first-child{font-family:var(--jp);font-size:21px;line-height:1}
+.st-brk-r{font-size:13px;font-weight:700;line-height:1}
+.st-brk[aria-pressed="true"]{background:var(--sel-bg);border-color:var(--sel-line);color:var(--sel-ink)}
+@media (max-width: 380px){ .st-bot{gap:8px} .st-say, .st-star, .st-brk{width:50px;height:50px} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -967,6 +969,7 @@ body.quiz-ej .card .en{margin-top:0}
       '<div class="st-stage" id="stStage"><div class="st-card" id="stCard"></div></div>' +
       '<div class="st-bot"><button type="button" class="st-nav" id="stPrev" aria-label="Previous card">‹</button>' +
       '<button type="button" class="speak st-say" id="stSay" aria-label="Play">' + SPK + '</button>' +
+      '<button type="button" class="st-brk" id="stBrk" aria-pressed="false" aria-label="Show each sound"><span lang="ja">あ</span><span class="st-brk-r">a</span></button>' +
       '<button type="button" class="star st-star" id="stStar" aria-pressed="false" aria-label="Add to favorites">' + STAR_SVG + '</button>' +
       '<button type="button" class="st-nav" id="stNext" aria-label="Next card">›</button></div>';
     document.body.appendChild(root);
@@ -982,7 +985,6 @@ body.quiz-ej .card .en{margin-top:0}
       c.className = "st-card k-" + o.type + (hidden ? "" : " open");
       c.innerHTML = tagHTML(o) +
         '<div class="st-ja ' + jaSize(o.ja) + (hideJa ? ' q' : '') + (brk ? ' brk' : '') + '" id="stJa">' + (brk ? kanaBreakHTML(o.ja, o.ro) : esc(o.ja)) + '</div>' +
-        '<div class="st-kbhint' + (hideJa ? ' q' : '') + '">' + (brk ? 'Tap a character to hear it · tap here to hide' : 'Tap the Japanese to see each sound') + '</div>' +
         '<div class="st-ro' + (hideRo ? ' q' : '') + '">' + esc(o.ro) + '</div>' +
         (o.sl ? '<div class="st-sl' + (hideRo ? ' q' : '') + '">' + esc(o.sl) + '</div>' : '') +
         '<div class="st-en' + (hideEn ? ' q' : '') + '">' + esc(o.en) + '</div>' +
@@ -992,14 +994,15 @@ body.quiz-ej .card .en{margin-top:0}
       $("stPrev").disabled = idx === 0; $("stNext").disabled = idx === list.length - 1;
       $("stSay").setAttribute("data-say", o.ja);
       $("stSay").style.visibility = hideJa ? "hidden" : "visible";
+      $("stBrk").style.visibility = hideJa ? "hidden" : "visible"; $("stBrk").setAttribute("aria-pressed", brk ? "true" : "false");
       var on = isFav(o.ja); $("stStar").setAttribute("data-fav", o.ja); $("stStar").setAttribute("aria-pressed", on ? "true" : "false");
     }
     function toggleBreak(){
       var o = ITEMS[list[idx]], el = $("stJa"); brk = !brk;
       el.classList.toggle("brk", brk); el.innerHTML = brk ? kanaBreakHTML(o.ja, o.ro) : esc(o.ja);
-      var hint = el.nextElementSibling; if (hint) hint.textContent = brk ? 'Tap a character to hear it · tap here to hide' : 'Tap the Japanese to see each sound';
+      $("stBrk").setAttribute("aria-pressed", brk ? "true" : "false");
     }
-    function reveal(){ var c = $("stCard"); if (c.classList.contains("open")) return; c.classList.add("open"); $("stSay").style.visibility = "visible"; }
+    function reveal(){ var c = $("stCard"); if (c.classList.contains("open")) return; c.classList.add("open"); $("stSay").style.visibility = "visible"; $("stBrk").style.visibility = "visible"; }
     function open(el){
       var scope = el.closest("#searchResults") || el.closest("[role=tabpanel]") || document;
       var els = Array.prototype.filter.call(scope.querySelectorAll("[data-id]"), visible);
@@ -1054,7 +1057,8 @@ body.quiz-ej .card .en{margin-top:0}
       if (e.target.closest("#stPrev")){ go(-1); return; }
       if (e.target.closest("#stNext")){ go(1); return; }
       if (moved) return;
-      var jaEl = e.target.closest("#stJa, .st-kbhint");
+      if (e.target.closest("#stBrk")){ toggleBreak(); return; }
+      var jaEl = e.target.closest("#stJa");
       if (jaEl && jaEl.offsetParent !== null){ toggleBreak(); return; }
       if (e.target.closest("#stCard")){ reveal(); return; }
       if (e.target === stage || e.target === root) close();
@@ -1255,7 +1259,7 @@ body.quiz-ej .card .en{margin-top:0}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "2 Nov 23:45";
+  var APP_VERSION = "2 Nov 23:55";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
