@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-10-31",
+  updated: "2026-11-02",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -234,6 +234,29 @@ window.NOTES = {
           ["B", "なにをのみますか。", "nani o nomimasu ka?", "What will you drink? (なに = what · を, read o, marks the object)"],
           ["A", "コーヒーをのみます。", "kōhī o nomimasu", "I’ll have coffee. (コーヒー is katakana)"],
           ["B", "わたしもコーヒーをのみます。", "watashi mo kōhī o nomimasu", "I’ll have coffee too."]
+        ]}
+      ]
+    },
+    { number: 7, jp: "第7課",
+      words: [
+        ["ほしいです", "Pimsleur shows: 欲しいです. Example: コーヒーがほしいです。 I want a coffee.", "hoshii desu", "I want (a thing).", "hoh-shee dess"],
+        ["ほしくありません", "Pimsleur shows: 欲しくありません. Negative of ほしいです", "hoshiku arimasen", "I don’t want (it).", "hoh-shee-koo ah-ree-mah-sen"],
+        ["コーヒー", "Katakana (from “coffee”)", "kōhī", "Coffee.", "koh-hee"],
+        ["ラテ", "Katakana (from “latte”)", "rate", "Latte.", "rah-teh"],
+        ["こうちゃ", "Pimsleur shows: 紅茶 (literally “red tea”)", "kōcha", "Black tea.", "koh-chah"],
+        ["ひるごはん", "Pimsleur shows: 昼ご飯. ひる = noon · ごはん = meal (also “rice”)", "hirugohan", "Lunch.", "hee-roo-go-hahn"],
+        ["いいです", "Here: agreeing, “OK”. (Also “no thanks” depending on the tone)", "ii desu", "OK.", "ee-ee dess"],
+        ["ここで", "Where an action happens (like どこで). Example: ここでたべます。 I’ll eat here.", "koko de", "Here (at this place).", "koh-koh deh"],
+        ["わかりませんか", "Pimsleur shows: わかりませんか", "wakarimasen ka?", "You don’t know? / Don’t you understand?", "wah-kah-ree-mah-sen kah?"]
+      ],
+      dialogues: [
+        { title: "Speak Easy · my favorite café", note: "Pimsleur dialogue, lesson 7.", lines: [
+          ["A", "いまなにかたべますか。", "ima nanika tabemasu ka?", "Are you going to eat something now?"],
+          ["B", "あとでたべます。でも、なにかのみたいです。", "atode tabemasu. demo, nanika nomitai desu", "I’ll eat later. But I’d like to drink something. (〜たい = want to)"],
+          ["A", "どこで？", "doko de?", "Where?"],
+          ["B", "そうですね…わたしのおきにいりのカフェで。", "sō desu ne… watashi no okiniiri no kafe de", "Let me see… at my favorite café."],
+          ["A", "いいですね。どこですか。", "ii desu ne. doko desu ka?", "Sounds good. Where is it?"],
+          ["B", "あそこです。いきましょう。", "asoko desu. ikimashō", "It’s over there. Let’s go. (〜ましょう = let’s)"]
         ]}
       ]
     }
