@@ -499,6 +499,15 @@ body.kana-ruby .fc-front.ja{line-height:1.8}
 .rubytoggle span{font-family:var(--jp);font-size:16px;font-weight:400;line-height:1}
 .rubytoggle small{font-size:10px;font-weight:700;line-height:1}
 .rubytoggle[aria-pressed="true"] span{text-decoration:none}
+
+/* "sounds like" key: folded by default */
+details.skey{margin:12px 0 0}
+details.skey summary{display:inline-flex;align-items:center;gap:6px;min-height:32px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+details.skey summary::-webkit-details-marker{display:none}
+details.skey summary::before{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+details.skey[open] summary::before{transform:rotate(45deg)}
+details.skey .keys{margin:6px 0 4px}
+details.skey .keys span{font-size:12px;padding:3px 9px}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -781,9 +790,9 @@ body.kana-ruby .fc-front.ja{line-height:1.8}
   }
 
   function renderPhrases(){
-    var h = '<h2 class="sec" style="margin-top:12px"><span class="dot" aria-hidden="true"></span>How to read “sounds like”</h2><div class="keys">';
+    var h = '<details class="skey"><summary>How to read “sounds like”</summary><div class="keys">';
     N.soundKey.forEach(function(k){ h += '<span><b>'+esc(k[0])+'</b> '+esc(k[1])+'</span>'; });
-    h += '</div>';
+    h += '</div></details>';
     h += '<div class="jump" role="navigation" aria-label="Jump to a section">' + N.phraseGroups.map(function(g, gi){ return '<button type="button" data-jump="pg-'+gi+'">'+esc(g.short || cap(g.title.replace(/^(Essentials|Survival): /, "")))+'</button>'; }).join("") + '</div>';
     N.phraseGroups.forEach(function(g, gi){
       h += '<div class="group" data-group="'+gi+'"><div class="anchor" id="pg-'+gi+'"></div>'+secHead(g.title, g.jp, g.items.length);
@@ -1292,7 +1301,7 @@ body.kana-ruby .fc-front.ja{line-height:1.8}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 00:20";
+  var APP_VERSION = "3 Nov 00:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
