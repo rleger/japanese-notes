@@ -83,6 +83,8 @@ p.qhint{margin:6px 0 0;font-size:12px}
 .card .num{font-size:12px;font-weight:700;color:var(--red);width:20px;padding-top:7px;flex-shrink:0}
 .speak{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
 .speak svg{width:20px;height:20px}
+.speak.mini{display:inline-flex;width:34px;height:34px;vertical-align:middle;margin-left:6px}
+.speak.mini svg{width:16px;height:16px}
 .speak:active{background:var(--chip)}
 .speak.playing{background:var(--red);border-color:var(--red);color:#fff}
 .kcell.playing{border-color:var(--red);box-shadow:inset 0 0 0 2px var(--red)}
@@ -239,6 +241,107 @@ body.on-cards .tools, body.on-cards #quizHint{display:none !important}
 .cross{margin:8px 0 0;font-size:14px;color:var(--muted)}
 .cross .link{background:none;border:0;padding:6px 2px;min-height:36px;color:var(--red);font-weight:700;font-size:14px;cursor:pointer;text-decoration:underline}
 footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* actions column: play + star */
+.card .acts{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0}
+.star{width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:var(--line-strong);display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;padding:0}
+.star svg{width:20px;height:20px}
+.star[aria-pressed="true"]{color:var(--red)}
+.star[aria-pressed="true"] svg{fill:currentColor}
+.fc-star{position:absolute;top:13px;right:62px}
+/* rōmaji switch */
+.rotoggle{order:3;flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid var(--line-strong);background:var(--card);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.rotoggle[aria-pressed="true"]{background:var(--indigo);border-color:var(--indigo);color:var(--on-accent)}
+.rotoggle[aria-pressed="true"] span{text-decoration:line-through;text-decoration-thickness:2px}
+body.no-ro .card:not(.open) .ro, body.no-ro .line:not(.open) .ro, body.no-ro .kcell:not(.open) .r, body.no-ro .fc-front .ro, body.no-ro .pro{visibility:hidden}
+body.no-ro .card .body, body.no-ro .line .txt{cursor:pointer;-webkit-tap-highlight-color:transparent}
+body.no-ro .kq-card.open .pro{visibility:visible}
+/* tab badge */
+nav.tabs button{position:relative}
+.badge-n{position:absolute;top:2px;right:0;display:inline-block;min-width:16px;height:16px;line-height:16px;padding:0 4px;border-radius:9px;background:var(--red);color:var(--on-accent);font-size:10px;font-weight:700}
+/* practice switch */
+.pm-seg{margin-top:14px}
+.seg2{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* progress */
+.prog{margin:16px 0 4px;padding:14px 14px 10px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prog-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:14px}
+.prog-top b{font-size:18px;color:var(--indigo)}
+.streak{font-size:13px;font-weight:700;color:var(--red)}
+.pbar{display:flex;height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin:10px 0 4px;flex:1}
+.pbar i{display:block;height:100%}
+.pbar .pk{background:var(--indigo)}
+.pbar .pl{background:var(--red);opacity:.55}
+.prog-det summary{font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;padding:6px 0;min-height:32px}
+.prow{display:grid;grid-template-columns:96px minmax(0,1fr) 48px;gap:10px;align-items:center;font-size:13px}
+.prow .pbar{margin:6px 0}
+.prow .pn{text-align:right;color:var(--muted);font-weight:600}
+.chips .favchip[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:var(--on-accent)}
+.chips button:disabled{opacity:.4}
+/* kana and prices trainer */
+.kfirst{font-family:var(--jp);font-weight:400;font-size:16px}
+.kquick{display:flex;gap:14px;margin-top:4px}
+.kq-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:210px;padding:26px 18px;border:1px solid var(--line-strong);border-radius:18px;background:var(--card);text-align:center;color:inherit;font:inherit}
+button.kq-card{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.kq-prompt{font-size:40px;font-weight:700;line-height:1.1}
+.kq-prompt.ja{font-family:var(--jp);font-weight:400;font-size:84px}
+.kq-sub{margin:0;font-size:13px;color:var(--muted);font-style:italic}
+.kq-cat{position:absolute;top:12px;left:16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kq-ans{margin:4px 0 0;font-size:15px}
+.kq-ans .ja{font-family:var(--jp);font-size:20px}
+.kq-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.kq-opt{min-height:64px;border:1px solid var(--line-strong);border-radius:14px;background:var(--card);font-size:22px;font-weight:700;cursor:pointer;color:var(--ink)}
+.kq-opt.ja{font-family:var(--jp);font-weight:400;font-size:34px}
+.kq-opt.right{background:var(--indigo);border-color:var(--indigo);color:var(--on-accent)}
+.kq-opt.wrong{border:2px solid var(--red);color:var(--red);text-decoration:line-through}
+.kq-opt:disabled{cursor:default}
+.kq-next{margin-top:12px}
+.kq-next button{width:100%;min-height:52px;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer}
+.kweak{margin-top:22px}
+.kweak-row{display:flex;flex-wrap:wrap;gap:8px}
+.kweak-row.center{justify-content:center;margin-bottom:6px}
+.kchip{display:flex;flex-direction:column;align-items:center;min-width:52px;padding:6px 8px;border:1px solid var(--line-strong);border-radius:10px;background:var(--card);cursor:pointer;color:var(--ink)}
+.kchip .k{font-family:var(--jp);font-size:24px;line-height:1.1}
+.kchip .r{font-size:12px;font-weight:700}
+.pbig{font-family:var(--serif);font-size:56px;font-weight:700;line-height:1.1;letter-spacing:.01em}
+.pbig small{font-family:var(--jp);font-size:28px;font-weight:400;margin-left:4px}
+.pread{display:flex;flex-direction:column;gap:2px;align-items:center}
+.pread .ja{font-family:var(--jp);font-size:22px;overflow-wrap:anywhere}
+.pread .ja.big{font-size:28px;line-height:1.35}
+.pread .ro{font-size:15px;font-weight:700;color:var(--soft)}
+.pcheat{margin-top:24px}
+.pcheat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.pcell{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;color:var(--ink)}
+.pcell b{font-size:15px}
+.pcell .ja{font-family:var(--jp);font-size:15px}
+.pcell .ro{font-size:11px;color:var(--muted);font-weight:600}
+/* writing */
+.wmain{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.wbox{position:relative;width:min(100%,280px);aspect-ratio:1/1;border-radius:12px;background:var(--card);touch-action:none}
+.wbox svg,.wbox canvas{position:absolute;inset:0;width:100%;height:100%}
+.wbox.tracing{box-shadow:0 0 0 2px var(--indigo)}
+.wgrid rect{fill:none;stroke:var(--line-strong);stroke-width:.8}
+.wgrid line{stroke:var(--line);stroke-width:.6;stroke-dasharray:2 2}
+.wghost path{fill:none;stroke:var(--line);stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.wink path{fill:none;stroke:var(--ink);stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.wnum circle{fill:var(--red)}
+.wnum text{fill:var(--on-accent);font-size:6.4px;font-weight:700;text-anchor:middle;font-family:var(--ui)}
+.wside{flex:1;min-width:150px;display:flex;flex-direction:column;gap:12px}
+.winfo{display:flex;align-items:center;gap:12px;font-size:14px}
+.winfo .wch{font-family:var(--jp);font-size:44px;line-height:1}
+.wbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wbtn{min-height:44px;border:1px solid var(--line-strong);border-radius:12px;background:var(--card);font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.wbtn[aria-pressed="true"]{background:var(--indigo);border-color:var(--indigo);color:var(--on-accent)}
+.wpick{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;margin-top:14px}
+.wpick button{min-height:40px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-family:var(--jp);font-size:19px;cursor:pointer;padding:0;color:var(--ink)}
+.wpick button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:var(--on-accent)}
+.credit{font-size:11px;color:var(--muted);margin:10px 0 0}
+.credit a{color:inherit}
+@media (min-width: 760px){
+  .pm-seg, #pmKana, #pmPrices{max-width:640px;margin-left:auto;margin-right:auto}
+  .pm-seg{margin-top:20px}
+  .wbox{width:300px}
+}
+@media (max-width: 400px){ .wpick{grid-template-columns:repeat(8,minmax(0,1fr))} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -260,7 +363,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     <button role="tab" id="tab-lessons" aria-controls="panel-lessons" data-tab="lessons">Lessons</button>
     <button role="tab" id="tab-phrases" aria-controls="panel-phrases" data-tab="phrases">Phrases</button>
     <button role="tab" id="tab-kana" aria-controls="panel-kana" data-tab="kana">Kana</button>
-    <button role="tab" id="tab-cards" aria-controls="panel-cards" data-tab="cards">Cards</button>
+    <button role="tab" id="tab-cards" aria-controls="panel-cards" data-tab="cards">Practice<span class="badge-n" id="dueBadge" hidden></span></button>
   </div>
 </nav>
 
@@ -275,6 +378,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
       </select>
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </label>
+    <button type="button" class="rotoggle" id="roBtn" aria-pressed="false" aria-label="Hide rōmaji"><span>ro</span></button>
     <div class="search" id="searchBox" hidden>
       <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <label for="q">Search phrases</label>
@@ -287,9 +391,20 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   <section id="panel-phrases" role="tabpanel" aria-labelledby="tab-phrases" hidden></section>
   <section id="panel-kana" role="tabpanel" aria-labelledby="tab-kana" hidden></section>
   <section id="panel-cards" role="tabpanel" aria-labelledby="tab-cards" hidden>
+    <div class="pm-seg seg" role="tablist" aria-label="Practice">
+      <button type="button" role="tab" data-pm="cards">Cards</button>
+      <button type="button" role="tab" data-pm="kana">Kana</button>
+      <button type="button" role="tab" data-pm="prices">Prices</button>
+    </div>
+    <div id="pmCards">
     <div id="fcSetup">
-      <h2 class="sec" style="margin-top:12px"><span class="dot" aria-hidden="true"></span>Flash cards <span class="jp">単語カード</span></h2>
-      <p class="hint">Shuffled cards from all your lessons. Tap the card to flip it, then tell the app if you knew it.</p>
+      <div class="prog" id="fcProgress"></div>
+      <div class="fc-opt"><span class="fc-lab" id="lbMode">Mode</span>
+        <div class="seg seg2" role="radiogroup" aria-labelledby="lbMode" data-opt="mode">
+          <button type="button" role="radio" data-v="due">Due today</button>
+          <button type="button" role="radio" data-v="all">Shuffle all</button>
+        </div>
+        <p class="hint" id="fcModeHint" style="margin:6px 0 0"></p></div>
       <div class="fc-opt"><span class="fc-lab" id="lbContent">Content</span>
         <div class="seg" role="radiogroup" aria-labelledby="lbContent" data-opt="content">
           <button type="button" role="radio" data-v="words">Words</button>
@@ -320,6 +435,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
           <span class="fc-back" id="fcBack" hidden></span>
           <span class="fc-tap" id="fcTap">Tap to flip</span>
         </button>
+        <button type="button" class="star fc-star" id="fcStar" aria-pressed="false" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></button>
         <button type="button" class="speak fc-speak" id="fcSpeak" aria-label="Play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
       </div>
       <div class="fc-actions" id="fcActions" hidden>
@@ -336,6 +452,9 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
       </div>
       <button type="button" class="link" id="fcSettings" style="display:block;margin:14px auto 0">Change settings</button>
     </div>
+    </div>
+    <div id="pmKana" hidden></div>
+    <div id="pmPrices" hidden></div>
   </section>
 
   <footer class="foot">
@@ -436,9 +555,18 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
         '<div class="reveal reveal-ja">Say it in Japanese, then tap to check</div>'+
         (p[4] ? '<div class="sl">'+esc(p[4])+'</div>' : '')+
         (p[1] ? '<div class="note">'+esc(p[1])+'</div>' : '')+
-      '</div>'+ speakBtn(p[0]) +
-    '</div>';
+      '</div><div class="acts">'+ speakBtn(p[0]) + starBtn(p[0]) +
+    '</div></div>';
   }
+  function cap(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
+  /* favorites */
+  function favKey(ja){ return String(ja).replace(/[。？?！、\s]/g, ""); }
+  var favs = {};
+  try { (JSON.parse(store.get("favs") || "[]") || []).forEach(function(k){ favs[k] = 1; }); } catch(e){}
+  function isFav(ja){ return !!favs[favKey(ja)]; }
+  function setFav(ja, on){ var k = favKey(ja); if (on) favs[k] = 1; else delete favs[k]; store.set("favs", JSON.stringify(Object.keys(favs))); }
+  function starBtn(ja){ var on = isFav(ja); return '<button type="button" class="star" data-fav="'+esc(ja)+'" aria-pressed="'+(on?"true":"false")+'" aria-label="'+(on?"Remove from":"Add to")+' favorites">'+STAR_SVG+'</button>'; }
+  var STAR_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>';
   function pad(i){ return (i < 9 ? "0" : "") + (i+1); }
   function secHead(title, jp, count){
     return '<h2 class="sec"><span class="dot" aria-hidden="true"></span>'+esc(title)+(jp ? ' <span class="jp">'+esc(jp)+'</span>' : '')+(count != null ? '<span class="count">'+count+'</span>' : '')+'</h2>';
@@ -476,8 +604,9 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     var h = '<h2 class="sec" style="margin-top:12px"><span class="dot" aria-hidden="true"></span>How to read “sounds like”</h2><div class="keys">';
     N.soundKey.forEach(function(k){ h += '<span><b>'+esc(k[0])+'</b> '+esc(k[1])+'</span>'; });
     h += '</div>';
+    h += '<div class="jump" role="navigation" aria-label="Jump to a section">' + N.phraseGroups.map(function(g, gi){ return '<button type="button" data-jump="pg-'+gi+'">'+esc(g.short || cap(g.title.replace(/^(Essentials|Survival): /, "")))+'</button>'; }).join("") + '</div>';
     N.phraseGroups.forEach(function(g, gi){
-      h += '<div class="group" data-group="'+gi+'">'+secHead(g.title, g.jp, g.items.length);
+      h += '<div class="group" data-group="'+gi+'"><div class="anchor" id="pg-'+gi+'"></div>'+secHead(g.title, g.jp, g.items.length);
       g.items.forEach(function(p,i){ h += card(p, pad(i)); });
       h += '</div>';
     });
@@ -512,6 +641,7 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     h += '</div></div><div class="kblock">' + secHead("Four reading rules", "読み方") + '<div class="tiles">';
     N.rules.forEach(function(t){ h += '<div class="tile"><div class="t">'+esc(t[0])+'</div><div class="ex">'+esc(t[1])+'</div><div class="exr">'+esc(t[2])+'</div><p>'+esc(t[3])+'</p></div>'; });
     h += '</div></div>';
+    h += '<div class="kblock" id="writeBlock">' + secHead("Writing: stroke order", "書き順") + '<p class="hint">Pick a character to see the order of its strokes, then trace it with your finger.</p><div id="writeArea"></div></div>';
     document.getElementById("panel-kana").innerHTML = h;
   }
 
@@ -554,16 +684,36 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   quizSel.addEventListener("change", function(){ setQuiz(quizSel.value); });
 
   /* clicks: speak + reveal */
+  function revealMode(){ var b = document.body.classList; return b.contains("quiz") || b.contains("no-ro"); }
   document.addEventListener("click", function(e){
+    var fv = e.target.closest("[data-fav]");
+    if (fv){
+      var ja = fv.getAttribute("data-fav"), on = !isFav(ja); setFav(ja, on);
+      Array.prototype.forEach.call(document.querySelectorAll("[data-fav]"), function(b){ if (favKey(b.getAttribute("data-fav")) === favKey(ja)){ b.setAttribute("aria-pressed", on ? "true" : "false"); b.setAttribute("aria-label", (on ? "Remove from" : "Add to") + " favorites"); } });
+      toast(on ? "Added to favorites ★" : "Removed from favorites", 1400);
+      if (window.FCrefresh) window.FCrefresh();
+      return;
+    }
     var sp = e.target.closest("[data-say]");
     if (sp){
       say(sp.getAttribute("data-say"), sp);
-      if (sp.classList.contains("kcell") && document.body.classList.contains("quiz")) sp.classList.toggle("open");
+      if (sp.classList.contains("kcell") && revealMode()) sp.classList.toggle("open");
       return;
     }
     var body = e.target.closest(".card .body, .line .txt");
-    if (body && document.body.classList.contains("quiz")) body.parentNode.classList.toggle("open");
+    if (body && revealMode()) body.parentNode.classList.toggle("open");
   });
+  /* hide / show rōmaji */
+  var roBtn = document.getElementById("roBtn");
+  function setRo(hidden){
+    document.body.classList.toggle("no-ro", hidden);
+    roBtn.setAttribute("aria-pressed", hidden ? "true" : "false");
+    roBtn.setAttribute("aria-label", hidden ? "Show rōmaji" : "Hide rōmaji");
+    Array.prototype.forEach.call(document.querySelectorAll(".open"), function(el){ el.classList.remove("open"); });
+    store.set("noro", hidden ? "1" : "0");
+  }
+  roBtn.addEventListener("click", function(){ var h = !document.body.classList.contains("no-ro"); setRo(h); toast(h ? "Rōmaji hidden: read the hiragana, tap to check" : "Rōmaji shown", 2200); });
+  setRo(store.get("noro") === "1");
 
   /* search */
   var qEl = document.getElementById("q");
@@ -610,15 +760,16 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   });
   qEl.addEventListener("input", runSearch);
 
-  /* ---------- flash cards ---------- */
+  /* ---------- flash cards (spaced repetition) ---------- */
   var FC = (function(){
     var $ = function(id){ return document.getElementById(id); };
-    var JP_RE = /[\u3040-\u30ff\u4e00-\u9faf]/;
+    var DAY = 86400000, NEW_PER_DAY = 10, INTERVALS = [0, 1, 3, 7, 14, 30, 60];
     function isSentence(ja){ return /[。？?！]$/.test(ja) || ja.indexOf("、") > -1; }
-    function cleanEn(en){ return String(en || "").replace(/\s*\([^)]*[\u3040-\u30ff\u4e00-\u9faf][^)]*\)/g, "").trim(); }
-    function key(ja){ return String(ja).replace(/[。？?！、\s]/g, ""); }
+    function cleanEn(en){ return String(en || "").replace(/\s*\([^)]*[぀-ヿ一-龯][^)]*\)/g, "").trim(); }
+    var key = favKey;
+    function today(){ var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
     var pool = [], seen = {};
-    function add(o){ var k = key(o.ja); if (!k || seen[k]) return; seen[k] = 1; pool.push(o); }
+    function add(o){ var k = key(o.ja); if (!k || seen[k]) return; seen[k] = 1; o.k = k; pool.push(o); }
     N.lessons.slice().sort(function(a,b){ return a.number - b.number; }).forEach(function(L){
       var src = "L" + L.number;
       L.words.forEach(function(w){ add({ ja: w[0], note: w[1], ro: w[2], en: w[3], sl: w[4], kind: isSentence(w[0]) ? "sentences" : "words", src: src }); });
@@ -626,54 +777,111 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
       var dl = L.dialogues || (L.dialogue ? [{ lines: L.dialogue }] : []);
       dl.forEach(function(D){ D.lines.forEach(function(d){ add({ ja: d[1], ro: d[2], en: d[3], kind: "sentences", src: src }); }); });
     });
-    N.phraseGroups.forEach(function(g){ g.items.forEach(function(p){ add({ ja: p[0], note: p[1], ro: p[2], en: p[3], sl: p[4], kind: isSentence(p[0]) ? "sentences" : "words", src: "phrases" }); }); });
+    N.phraseGroups.forEach(function(g){ g.items.forEach(function(p){ add({ ja: p[0], note: p[1], ro: p[2], en: p[3], sl: p[4], kind: isSentence(p[0]) ? "sentences" : "words", src: g.src || "phrases" }); }); });
 
-    var sources = N.lessons.map(function(L){ return { id: "L" + L.number, label: "Lesson " + L.number }; }).concat([{ id: "phrases", label: "Phrase pages" }]);
-    var cfg = { content: "both", dir: "je", src: {} };
-    try { var saved = JSON.parse(store.get("fc") || "null"); if (saved){ cfg.content = saved.content || cfg.content; cfg.dir = saved.dir || cfg.dir; cfg.src = saved.src || {}; } } catch(e){}
+    var sources = N.lessons.map(function(L){ return { id: "L" + L.number, label: "Lesson " + L.number }; })
+      .concat([{ id: "phrases", label: "Phrase pages" }, { id: "survival", label: "Survival" }, { id: "numbers", label: "Numbers" }])
+      .filter(function(s){ return pool.some(function(c){ return c.src === s.id; }); });
+    var cfg = { content: "both", dir: "je", mode: "due", src: {}, favOnly: false };
+    try { var saved = JSON.parse(store.get("fc") || "null"); if (saved){ ["content","dir","mode","favOnly"].forEach(function(k){ if (saved[k] !== undefined) cfg[k] = saved[k]; }); cfg.src = saved.src || {}; } } catch(e){}
     sources.forEach(function(s){ if (!(s.id in cfg.src)) cfg.src[s.id] = true; });
 
-    var queue = [], cur = null, total = 0, done = 0, firstTry = 0, missed = [], missedKeys = {}, flipped = false;
+    /* SRS state: key -> [box, due, reps, lapses] */
+    var S = {};
+    try { S = JSON.parse(store.get("srs") || "{}") || {}; } catch(e){ S = {}; }
+    function saveS(){ store.set("srs", JSON.stringify(S)); }
+    function newToday(){ try { var o = JSON.parse(store.get("newday") || "null"); return o && o.d === today() ? o.n : 0; } catch(e){ return 0; } }
+    function bumpNew(){ store.set("newday", JSON.stringify({ d: today(), n: newToday() + 1 })); }
+    function days(){ try { return JSON.parse(store.get("days") || "[]") || []; } catch(e){ return []; } }
+    function markDay(){ var d = days(), t = today(); if (d[d.length - 1] !== t){ d.push(t); if (d.length > 400) d = d.slice(-400); store.set("days", JSON.stringify(d)); } }
+    function streak(){
+      var d = days(); if (!d.length) return 0;
+      var set = {}; d.forEach(function(x){ set[x] = 1; });
+      var n = 0, cur = new Date();
+      function fmt(dt){ return dt.getFullYear() + "-" + ("0" + (dt.getMonth() + 1)).slice(-2) + "-" + ("0" + dt.getDate()).slice(-2); }
+      if (!set[fmt(cur)]) cur.setDate(cur.getDate() - 1);
+      while (set[fmt(cur)]){ n++; cur.setDate(cur.getDate() - 1); }
+      return n;
+    }
+    function grade(c, ok){
+      var st = S[c.k], isNew = !st;
+      if (!st) st = [0, 0, 0, 0];
+      if (ok){ st[0] = Math.min(st[0] + 1, INTERVALS.length - 1); st[1] = Date.now() + INTERVALS[st[0]] * DAY - 3600000; }
+      else { st[0] = 0; st[1] = Date.now(); st[3]++; }
+      st[2]++; S[c.k] = st; saveS(); markDay();
+      if (isNew) bumpNew();
+    }
+    function level(c){ var st = S[c.k]; if (!st) return "new"; return st[0] >= 3 ? "known" : "learning"; }
 
+    var queue = [], cur = null, total = 0, done = 0, firstTry = 0, missed = [], missedKeys = {}, flipped = false;
     function shuffle(a){ for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-    function selection(){ return pool.filter(function(c){ return cfg.src[c.src] && (cfg.content === "both" || c.kind === cfg.content); }); }
+    function filtered(){ return pool.filter(function(c){ return (cfg.favOnly ? isFav(c.ja) : cfg.src[c.src]) && (cfg.content === "both" || c.kind === cfg.content); }); }
+    function dueSplit(list){
+      var now = Date.now(), due = [], fresh = [];
+      list.forEach(function(c){ var st = S[c.k]; if (!st) fresh.push(c); else if (st[1] <= now) due.push(c); });
+      var room = Math.max(0, NEW_PER_DAY - newToday());
+      return { due: due, fresh: fresh.slice(0, room), freshAll: fresh.length };
+    }
+    function selection(){ var f = filtered(); if (cfg.mode === "all") return f; var d = dueSplit(f); return d.due.concat(d.fresh); }
     function save(){ store.set("fc", JSON.stringify(cfg)); }
 
+    function updateBadge(){
+      var d = dueSplit(pool), n = d.due.length + d.fresh.length, b = $("dueBadge");
+      b.hidden = !n; b.textContent = n > 99 ? "99+" : n;
+    }
+    function bar(k, l, n){ var t = k + l + n || 1; return '<span class="pbar" aria-hidden="true"><i class="pk" style="width:'+(k/t*100)+'%"></i><i class="pl" style="width:'+(l/t*100)+'%"></i></span>'; }
+    function renderProgress(){
+      var tot = { known: 0, learning: 0, "new": 0 }, per = {};
+      pool.forEach(function(c){ var lv = level(c); tot[lv]++; per[c.src] = per[c.src] || { known: 0, learning: 0, "new": 0 }; per[c.src][lv]++; });
+      var st = streak(), h = '<div class="prog-top"><div><b>' + tot.known + '</b> known · ' + tot.learning + ' learning · ' + tot["new"] + ' new</div><div class="streak">' + (st ? st + '-day streak' : 'Start your streak today') + '</div></div>';
+      h += bar(tot.known, tot.learning, tot["new"]);
+      h += '<details class="prog-det"><summary>Progress by lesson</summary><div class="prog-rows">';
+      sources.forEach(function(s){ var p = per[s.id]; if (!p) return; var t = p.known + p.learning + p["new"]; h += '<div class="prow"><span>' + esc(s.label) + '</span>' + bar(p.known, p.learning, p["new"]) + '<span class="pn">' + p.known + '/' + t + '</span></div>'; });
+      h += '</div><p class="hint" style="margin:8px 0 0">Known = right 3 times in a row, spaced over days.</p></details>';
+      $("fcProgress").innerHTML = h;
+    }
     function renderSetup(){
       Array.prototype.forEach.call(document.querySelectorAll("#fcSetup .seg"), function(g){
         var opt = g.getAttribute("data-opt");
         Array.prototype.forEach.call(g.children, function(b){ b.setAttribute("aria-checked", b.getAttribute("data-v") === cfg[opt] ? "true" : "false"); });
       });
-      $("fcSources").innerHTML = sources.map(function(s){ return '<button type="button" data-src="'+s.id+'" aria-pressed="'+(cfg.src[s.id] ? "true" : "false")+'">'+esc(s.label)+'</button>'; }).join("");
-      var n = selection().length;
-      $("fcStart").textContent = n ? "Start · " + n + " cards" : "No cards for this choice";
+      var favN = pool.filter(function(c){ return isFav(c.ja); }).length;
+      $("fcSources").innerHTML = '<button type="button" class="favchip" data-favonly aria-pressed="'+(cfg.favOnly ? "true" : "false")+'">★ Favorites only' + (favN ? ' (' + favN + ')' : '') + '</button>' +
+        sources.map(function(s){ return '<button type="button" data-src="'+s.id+'" aria-pressed="'+(cfg.src[s.id] && !cfg.favOnly ? "true" : "false")+'"'+(cfg.favOnly ? ' disabled' : '')+'>'+esc(s.label)+'</button>'; }).join("");
+      var f = filtered(), d = dueSplit(f), n = selection().length;
+      $("fcModeHint").textContent = cfg.mode === "due"
+        ? (d.due.length + " to review · " + d.fresh.length + " new (max " + NEW_PER_DAY + " new a day" + (d.freshAll > d.fresh.length ? ", " + (d.freshAll - d.fresh.length) + " waiting" : "") + ")")
+        : "Every selected card, shuffled. Your answers still count for spaced repetition.";
+      $("fcStart").textContent = n ? "Start · " + n + " cards" : (cfg.mode === "due" ? "All done for today ✓" : "No cards for this choice");
       $("fcStart").disabled = !n;
+      renderProgress(); updateBadge();
     }
     function view(which){ $("fcSetup").hidden = which !== "setup"; $("fcPlay").hidden = which !== "play"; $("fcDone").hidden = which !== "done"; }
-
     function start(list){
       queue = shuffle(list.map(function(c){ return { c: c, dir: cfg.dir === "mix" ? (Math.random() < .5 ? "je" : "ej") : cfg.dir, missed: false }; }));
       total = queue.length; done = 0; firstTry = 0; missed = []; missedKeys = {};
       view("play"); next(); window.scrollTo(0,0);
     }
+    function setStar(){ var on = isFav(cur.c.ja); $("fcStar").setAttribute("aria-pressed", on ? "true" : "false"); $("fcStar").setAttribute("data-fav", cur.c.ja); }
     function next(){
       if (!queue.length){ finish(); return; }
       cur = queue.shift(); flipped = false;
-      var c = cur.c;
+      var c = cur.c, lv = level(c);
       $("fcProg").textContent = (done + 1) + " / " + total + (firstTry ? "  ·  ✓ " + firstTry : "");
       $("fcBarFill").style.width = Math.round(done / total * 100) + "%";
-      $("fcTag").textContent = cur.dir === "je" ? "Japanese → English" : "English → Japanese";
+      $("fcTag").textContent = (cur.dir === "je" ? "Japanese → English" : "English → Japanese") + (lv === "new" ? " · new" : "");
       var f = $("fcFront");
       if (cur.dir === "je"){ f.className = "fc-front ja"; f.innerHTML = esc(c.ja) + '<span class="ro">' + esc(c.ro) + '</span>'; }
       else { f.className = "fc-front"; f.textContent = cleanEn(c.en); }
       $("fcBack").hidden = true; $("fcTap").hidden = false; $("fcActions").hidden = true;
       $("fcSpeak").style.visibility = cur.dir === "je" ? "visible" : "hidden";
       $("fcSpeak").setAttribute("data-say", c.ja);
+      setStar();
     }
     function flip(){
       if (!cur || flipped) return;
       flipped = true; var c = cur.c, h = "";
-      if (cur.dir === "je") h = '<span class="en">' + esc(c.en) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
+      if (cur.dir === "je") h = (document.body.classList.contains("no-ro") ? '<span class="ro">' + esc(c.ro) + '</span>' : '') + '<span class="en">' + esc(c.en) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
       else h = '<span class="ja">' + esc(c.ja) + '</span><span class="ro">' + esc(c.ro) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
       if (c.note) h += '<span class="note">' + esc(c.note) + '</span>';
       $("fcBack").innerHTML = h; $("fcBack").hidden = false; $("fcTap").hidden = true; $("fcActions").hidden = false;
@@ -681,26 +889,29 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
     }
     function answer(ok){
       if (!flipped) return;
+      grade(cur.c, ok);
       if (ok){ done++; if (!cur.missed) firstTry++; }
       else {
         cur.missed = true;
-        var k = key(cur.c.ja); if (!missedKeys[k]){ missedKeys[k] = 1; missed.push(cur.c); }
+        if (!missedKeys[cur.c.k]){ missedKeys[cur.c.k] = 1; missed.push(cur.c); }
         var pos = Math.min(queue.length, 3 + Math.floor(Math.random() * 3));
         queue.splice(pos, 0, cur);
       }
-      next();
+      updateBadge(); next();
     }
     function finish(){
       $("fcBarFill").style.width = "100%";
-      $("fcScore").innerHTML = '<b>' + firstTry + ' / ' + total + '</b>known on the first try' + (missed.length ? '<br>' + missed.length + ' card' + (missed.length > 1 ? 's' : '') + ' to review' : '<br>Perfect round!');
+      var st = streak();
+      $("fcScore").innerHTML = '<b>' + firstTry + ' / ' + total + '</b>known on the first try' + (missed.length ? '<br>' + missed.length + ' card' + (missed.length > 1 ? 's' : '') + ' to review' : '<br>Perfect round!') + (st ? '<br><span class="streak">' + st + '-day streak</span>' : '');
       $("fcMissed").hidden = !missed.length;
-      view("done");
+      $("fcNew").textContent = cfg.mode === "due" ? "Back" : "New shuffle";
+      view("done"); renderProgress(); updateBadge();
     }
-
     document.addEventListener("click", function(e){
-      var t = e.target.closest("#panel-cards button"); if (!t) return;
+      var t = e.target.closest("#pmCards button"); if (!t || t.hasAttribute("data-fav")) return;
       var seg = t.parentNode.getAttribute && t.parentNode.getAttribute("data-opt");
       if (seg){ cfg[seg] = t.getAttribute("data-v"); save(); renderSetup(); return; }
+      if (t.hasAttribute("data-favonly")){ cfg.favOnly = !cfg.favOnly; save(); renderSetup(); return; }
       if (t.hasAttribute("data-src")){ var id = t.getAttribute("data-src"); cfg.src[id] = !cfg.src[id]; save(); renderSetup(); return; }
       switch (t.id){
         case "fcStart": start(selection()); break;
@@ -709,19 +920,36 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
         case "fcAgain": answer(false); break;
         case "fcStop": renderSetup(); view("setup"); break;
         case "fcMissed": start(missed.slice()); break;
-        case "fcNew": start(selection()); break;
+        case "fcNew": if (cfg.mode === "due"){ renderSetup(); view("setup"); } else start(selection()); break;
         case "fcSettings": renderSetup(); view("setup"); break;
       }
     });
+    window.FCrefresh = function(){ if (!$("fcSetup").hidden) renderSetup(); };
     renderSetup(); view("setup");
-    return { count: function(){ return pool.length; } };
+    return { refresh: renderSetup };
   })();
 
+  /* practice sub-sections */
+  function showPm(name){
+    if (["cards","kana","prices"].indexOf(name) < 0) name = "cards";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-pm]"), function(b){ b.setAttribute("aria-selected", b.getAttribute("data-pm") === name ? "true" : "false"); b.setAttribute("aria-checked", b.getAttribute("data-pm") === name ? "true" : "false"); });
+    document.getElementById("pmCards").hidden = name !== "cards";
+    document.getElementById("pmKana").hidden = name !== "kana";
+    document.getElementById("pmPrices").hidden = name !== "prices";
+    store.set("pm", name);
+    if (name === "cards") FC.refresh();
+    if (window.PRACTICE) window.PRACTICE.show(name);
+  }
+  document.addEventListener("click", function(e){ var b = e.target.closest("[data-pm]"); if (b) showPm(b.getAttribute("data-pm")); });
+
+  window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
+
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "2 Nov 19:45";
+  var APP_VERSION = "2 Nov 21:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
+  showPm(store.get("pm") || "cards");
   var savedQuiz = store.get("quiz");
   setQuiz(savedQuiz === "1" ? "je" : savedQuiz);
 
@@ -784,5 +1012,6 @@ footer.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);fo
   });
 })();
 </script>
+<script>document.write('<script src="practice.js?r=' + Date.now() + '"><\/script>');</script>
 </body>
 </html>

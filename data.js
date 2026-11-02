@@ -116,6 +116,82 @@ window.NOTES = {
       ["○○にいきたいです。", "Kanji form: ○○に行きたいです。 に = to (a place) · いきたい = want to go. Example: うえのえきにいきたいです。 I want to go to Ueno Station.", "○○ ni ikitai desu", "I want to go to ○○.", "… nee ee-kee-tye dess"],
       ["にほんごがわかりません。", "Kanji form: 日本語がわかりません。 ～ます → ～ません = negative (Lesson 5)", "nihongo ga wakarimasen", "I don’t understand Japanese.", "nee-hon-go gah wah-kah-ree-mah-sen"],
       ["えいごではなしてくれませんか。", "Kanji form: 英語で話してくれませんか。 で = in (a language) · はなして くれませんか = could you (speak) for me? (はなします, Lesson 4)", "eigo de hanashite kuremasen ka?", "Could you speak in English?", "ay-go deh hah-nahsh-teh koo-reh-mah-sen kah?"]
+    ]},
+    { title: "Survival: restaurant", short: "Restaurant", jp: "レストラン", src: "survival", items: [
+      ["なんめいさまですか。", "Kanji form: 何名様ですか。 What the staff asks at the door", "nanmei-sama desu ka?", "How many people? (staff)", "nahn-may-sah-mah dess kah?"],
+      ["ふたりです。", "Kanji form: 二人です。 ひとり = one person", "futari desu", "Two people.", "foo-tah-ree dess"],
+      ["メニューをおねがいします。", "メニュー is katakana", "menyū o onegai shimasu", "The menu, please.", "meh-nyoo oh oh-neh-guy shee-mahss"],
+      ["これをください。", "Point at the menu. ください = please give me", "kore o kudasai", "This one, please.", "koh-reh oh koo-dah-sye"],
+      ["おすすめはなんですか。", "Kanji form: おすすめは何ですか。", "osusume wa nan desu ka?", "What do you recommend?", "oh-soo-soo-meh wah nahn dess kah?"],
+      ["おみずをください。", "Kanji form: お水をください。", "omizu o kudasai", "Water, please.", "oh-mee-zoo oh koo-dah-sye"],
+      ["〜はたべられません。", "Kanji form: 〜は食べられません。 Example: にくはたべられません。 I can’t eat meat.", "~ wa taberaremasen", "I can’t eat ~.", "… wah tah-beh-rah-reh-mah-sen"],
+      ["おかいけいをおねがいします。", "Kanji form: お会計をお願いします。", "okaikei o onegai shimasu", "The bill, please.", "oh-kye-kay oh oh-neh-guy shee-mahss"],
+      ["カードでいいですか。", "カード is katakana", "kādo de ii desu ka?", "Can I pay by card?", "kah-doh deh ee-ee dess kah?"]
+    ]},
+    { title: "Survival: train and station", short: "Train", jp: "駅", src: "survival", items: [
+      ["〜まで、いちまいください。", "Kanji form: 〜まで、一枚ください。 Example: きょうとまで、にまいください。 Two tickets to Kyoto.", "~ made, ichimai kudasai", "One ticket to ~, please.", "… mah-deh, ee-chee-my koo-dah-sye"],
+      ["このでんしゃは〜にいきますか。", "Kanji form: この電車は〜に行きますか。", "kono densha wa ~ ni ikimasu ka?", "Does this train go to ~?", "koh-noh den-shah wah … nee ee-kee-mahss kah?"],
+      ["なんばんせんですか。", "Kanji form: 何番線ですか。", "nanbansen desu ka?", "Which platform?", "nahn-bahn-sen dess kah?"],
+      ["のりかえはどこですか。", "Kanji form: 乗り換えはどこですか。", "norikae wa doko desu ka?", "Where do I change trains?", "noh-ree-kah-eh wah doh-koh dess kah?"],
+      ["つぎのでんしゃはなんじですか。", "Kanji form: 次の電車は何時ですか。", "tsugi no densha wa nanji desu ka?", "What time is the next train?", "tsoo-gee noh den-shah wah nahn-jee dess kah?"],
+      ["していせき", "Kanji form: 指定席", "shiteiseki", "Reserved seat.", "shee-tay-seh-kee"],
+      ["じゆうせき", "Kanji form: 自由席", "jiyūseki", "Unreserved seat.", "jee-yoo-seh-kee"]
+    ]},
+    { title: "Survival: hotel", short: "Hotel", jp: "ホテル", src: "survival", items: [
+      ["よやくしています。", "Kanji form: 予約しています。", "yoyaku shite imasu", "I have a reservation.", "yoh-yah-koo shteh ee-mahss"],
+      ["チェックインをおねがいします。", "チェックイン is katakana", "chekkuin o onegai shimasu", "Check-in, please.", "check-een oh oh-neh-guy shee-mahss"],
+      ["にもつをあずかってもらえますか。", "Kanji form: 荷物を預かってもらえますか。", "nimotsu o azukatte moraemasu ka?", "Could you keep our luggage?", "nee-moh-tsoo oh ah-zoo-kaht-teh moh-rah-eh-mahss kah?"],
+      ["Wi-Fiのパスワードはなんですか。", "パスワード is katakana", "waifai no pasuwādo wa nan desu ka?", "What is the Wi-Fi password?", "wye-fye noh pah-soo-wah-doh wah nahn dess kah?"],
+      ["ちょうしょくはなんじからですか。", "Kanji form: 朝食は何時からですか。", "chōshoku wa nanji kara desu ka?", "From what time is breakfast?", "choh-shoh-koo wah nahn-jee kah-rah dess kah?"]
+    ]},
+    { title: "Survival: shopping", short: "Shopping", jp: "買い物", src: "survival", items: [
+      ["これはいくらですか。", "", "kore wa ikura desu ka?", "How much is this?", "koh-reh wah ee-koo-rah dess kah?"],
+      ["みているだけです。", "Kanji form: 見ているだけです。", "mite iru dake desu", "I’m just looking.", "mee-teh ee-roo dah-keh dess"],
+      ["カードはつかえますか。", "Kanji form: カードは使えますか。", "kādo wa tsukaemasu ka?", "Do you take cards?", "kah-doh wah tsoo-kah-eh-mahss kah?"],
+      ["ふくろはいりません。", "Kanji form: 袋はいりません。", "fukuro wa irimasen", "I don’t need a bag.", "foo-koo-roh wah ee-ree-mah-sen"],
+      ["めんぜいできますか。", "Kanji form: 免税できますか。 Bring your passport", "menzei dekimasu ka?", "Can I buy tax-free?", "men-zay deh-kee-mahss kah?"]
+    ]},
+    { title: "Survival: when you need help", short: "Help", jp: "困ったとき", src: "survival", items: [
+      ["もういちどおねがいします。", "Kanji form: もう一度お願いします。", "mō ichido onegai shimasu", "Once more, please.", "moh ee-chee-doh oh-neh-guy shee-mahss"],
+      ["ゆっくりおねがいします。", "", "yukkuri onegai shimasu", "More slowly, please.", "yook-koo-ree oh-neh-guy shee-mahss"],
+      ["みちにまよいました。", "Kanji form: 道に迷いました。", "michi ni mayoimashita", "I’m lost.", "mee-chee nee mah-yoh-ee-mahsh-tah"],
+      ["びょういんはどこですか。", "Kanji form: 病院はどこですか。", "byōin wa doko desu ka?", "Where is a hospital?", "byoh-een wah doh-koh dess kah?"],
+      ["けいさつをよんでください。", "Kanji form: 警察を呼んでください。", "keisatsu o yonde kudasai", "Please call the police.", "kay-sah-tsoo oh yohn-deh koo-dah-sye"],
+      ["たすけて！", "Kanji form: 助けて！", "tasukete!", "Help!", "tah-soo-keh-teh!"]
+    ]},
+    { title: "Signs to recognize", short: "Signs", jp: "看板", src: "survival", items: [
+      ["入口", "Read: いりぐち", "iriguchi", "Entrance.", "ee-ree-goo-chee"],
+      ["出口", "Read: でぐち. Stations also have 東口 east, 西口 west, 南口 south, 北口 north exits", "deguchi", "Exit.", "deh-goo-chee"],
+      ["改札", "Read: かいさつ", "kaisatsu", "Ticket gates.", "kye-sah-tsoo"],
+      ["お手洗い", "Read: おてあらい. Also written トイレ", "otearai", "Toilets.", "oh-teh-ah-rye"],
+      ["男 / 女", "Read: おとこ / おんな", "otoko / onna", "Men / Women.", "oh-toh-koh / ohn-nah"],
+      ["営業中", "Read: えいぎょうちゅう", "eigyōchū", "Open (for business).", "ay-gyoh-choo"],
+      ["準備中", "Read: じゅんびちゅう", "junbichū", "Closed (preparing).", "joon-bee-choo"],
+      ["禁煙", "Read: きんえん", "kin’en", "No smoking.", "keen-en"],
+      ["押 / 引", "Read: おす / ひく. On doors", "osu / hiku", "Push / Pull.", "oh-soo / hee-koo"]
+    ]},
+    { title: "Numbers", short: "Numbers", jp: "数字", src: "numbers", items: [
+      ["いち", "Kanji: 一", "ichi", "1", "ee-chee"],
+      ["に", "Kanji: 二", "ni", "2", "nee"],
+      ["さん", "Kanji: 三", "san", "3", "sahn"],
+      ["よん", "Kanji: 四. Also し (shi), avoided because it sounds like “death”", "yon", "4", "yohn"],
+      ["ご", "Kanji: 五", "go", "5", "goh"],
+      ["ろく", "Kanji: 六", "roku", "6", "roh-koo"],
+      ["なな", "Kanji: 七. Also しち (shichi)", "nana", "7", "nah-nah"],
+      ["はち", "Kanji: 八", "hachi", "8", "hah-chee"],
+      ["きゅう", "Kanji: 九", "kyū", "9", "kyoo"],
+      ["じゅう", "Kanji: 十", "jū", "10", "joo"],
+      ["じゅういち", "Kanji: 十一. 10 + 1", "jū ichi", "11", "joo ee-chee"],
+      ["にじゅう", "Kanji: 二十. 2 × 10", "ni jū", "20", "nee joo"],
+      ["ひゃく", "Kanji: 百", "hyaku", "100", "hyah-koo"],
+      ["さんびゃく", "Irregular: h → b", "sanbyaku", "300", "sahn-byah-koo"],
+      ["ろっぴゃく", "Irregular: h → pp", "roppyaku", "600", "rohp-pyah-koo"],
+      ["はっぴゃく", "Irregular: h → pp", "happyaku", "800", "hahp-pyah-koo"],
+      ["せん", "Kanji: 千", "sen", "1,000", "sen"],
+      ["さんぜん", "Irregular: s → z", "sanzen", "3,000", "sahn-zen"],
+      ["はっせん", "Irregular", "hassen", "8,000", "hahs-sen"],
+      ["いちまん", "Kanji: 一万. Japanese counts in blocks of 10,000 (man), not 1,000", "ichi man", "10,000", "ee-chee mahn"],
+      ["えん", "Kanji: 円. Written ¥", "en", "Yen.", "en"]
     ]}
   ],
 
