@@ -323,7 +323,13 @@ window.NOTES = {
         ["ひるごはん", "Pimsleur shows: 昼ご飯. ひる = noon · ごはん = meal (also “rice”)", "hirugohan", "Lunch.", "hee-roo-go-hahn"],
         ["いいです", "Here: agreeing, “OK”. (Also “no thanks” depending on the tone)", "ii desu", "OK.", "ee-ee dess"],
         ["ここで", "Where an action happens (like どこで). Example: ここでたべます。 I’ll eat here.", "koko de", "Here (at this place).", "koh-koh deh"],
-        ["わかりませんか", "Pimsleur shows: わかりませんか", "wakarimasen ka?", "You don’t know? / Don’t you understand?", "wah-kah-ree-mah-sen kah?"]
+        ["わかりませんか", "Pimsleur shows: わかりませんか", "wakarimasen ka?", "You don’t know? / Don’t you understand?", "wah-kah-ree-mah-sen kah?"],
+        ["なにを", "Pimsleur shows: 何を. を (read “o”) marks what you eat, drink, want to do. Example: なにをたべますか。 What will you eat?", "nani o", "What (as the object).", "nah-nee oh"]
+      ],
+      sentences: [
+        ["なにをたべますか。", "Pimsleur shows: 何を食べますか。", "nani o tabemasu ka?", "What will you eat?", "nah-nee oh tah-beh-mahss kah?"],
+        ["ひるごはんをたべます。", "Pimsleur shows: 昼ご飯を食べます。", "hirugohan o tabemasu", "I’ll eat lunch.", "hee-roo-go-hahn oh tah-beh-mahss"],
+        ["コーヒーがほしいです。", "Pimsleur shows: コーヒーが欲しいです。 With ほしい the thing you want takes が, not を", "kōhī ga hoshii desu", "I want a coffee.", "koh-hee gah hoh-shee dess"]
       ],
       dialogues: [
         { title: "Speak Easy · my favorite café", note: "Pimsleur dialogue, lesson 7.", lines: [
