@@ -6,7 +6,7 @@
 <title>日本語ノート</title>
 <meta name="description" content="Romain's Japanese study notes: hiragana, Pimsleur phrases, lesson by lesson.">
 <meta name="theme-color" content="#F9FAFB" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#030712" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="日本語">
@@ -17,18 +17,22 @@
 <link rel="icon" href="icons/icon-192.png">
 <style>
 :root{
-  --bg:#F9FAFB; --ink:#111827; --muted:#6B7280; --soft:#374151;
-  --line:#E5E7EB; --line-strong:#D1D5DB; --card:#FFFFFF;
-  --red:#A8352A; --indigo:#22385A; --chip:#F3F4F6; --on-accent:#FFFFFF;
+  --bg:#F9FAFB; --ink:oklch(21% 0.034 264.665); --muted:oklch(44.6% 0.03 256.802); --soft:oklch(37.3% 0.034 259.733);
+  --line:oklch(92.8% 0.006 264.531); --line-strong:oklch(87.2% 0.01 258.338); --card:#FFFFFF;
+  --red:oklch(44.4% 0.177 26.899); --red-btn:oklch(44.4% 0.177 26.899); --indigo:oklch(37.2% 0.044 257.287); --chip:oklch(96.7% 0.003 264.542); --on-accent:#FFFFFF;
+  --ctl-ink:oklch(37.3% 0.034 259.733); --tab-ink:oklch(55.1% 0.027 264.364);
+  --sel-bg:oklch(96.2% 0.018 272.314); --sel-line:oklch(87% 0.065 274.039); --sel-ink:oklch(45.7% 0.24 277.023);
+  --hot-bg:oklch(97.1% 0.013 17.38); --hot-line:oklch(88.5% 0.062 18.334); --hot-ink:oklch(50.5% 0.213 27.518);
+  --bar-k:oklch(37.2% 0.044 257.287); --bar-l:oklch(86.9% 0.022 252.894); --pen:#334155;
   --shadow:0 1px 2px 0 rgb(0 0 0 / .05); --shadow-md:0 1px 3px 0 rgb(0 0 0 / .08), 0 1px 2px -1px rgb(0 0 0 / .08);
   --jp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP","Yu Gothic",system-ui,sans-serif;
   --serif:"Hiragino Mincho ProN","Noto Serif JP","Yu Mincho",Georgia,serif;
   --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){ --bg:#141414; --ink:#F2EFE9; --muted:#B5B5B5; --soft:#D0D0D0; --line:#3A3A3A; --line-strong:#5C5C5C; --card:#1C1C1C; --red:#E07A6E; --indigo:#9DB4DA; --chip:#262626; --on-accent:#141414; --shadow:none; --shadow-md:none; }
+  :root:not([data-theme="light"]){ --bg:oklch(13% 0.028 261.692); --ink:oklch(96.7% 0.003 264.542); --muted:oklch(70.7% 0.022 261.325); --soft:oklch(87.2% 0.01 258.338); --line:oklch(27.8% 0.033 256.848); --line-strong:oklch(37.3% 0.034 259.733); --card:oklch(21% 0.034 264.665); --red:oklch(70.4% 0.191 22.216); --red-btn:oklch(44.4% 0.177 26.899); --indigo:oklch(86.9% 0.022 252.894); --chip:oklch(27.8% 0.033 256.848); --on-accent:oklch(13% 0.028 261.692); --shadow:none; --shadow-md:none; --ctl-ink:oklch(87.2% 0.01 258.338); --tab-ink:oklch(70.7% 0.022 261.325); --sel-bg:oklch(51.1% 0.262 276.966 / .2); --sel-line:oklch(51.1% 0.262 276.966 / .4); --sel-ink:oklch(87% 0.065 274.039); --hot-bg:oklch(57.7% 0.245 27.325 / .18); --hot-line:oklch(57.7% 0.245 27.325 / .4); --hot-ink:oklch(88.5% 0.062 18.334); --bar-k:oklch(78.5% 0.115 274.713); --bar-l:oklch(44.6% 0.03 256.802); --pen:#CBD5E1; }
 }
-:root[data-theme="dark"]{ --bg:#141414; --ink:#F2EFE9; --muted:#B5B5B5; --soft:#D0D0D0; --line:#3A3A3A; --line-strong:#5C5C5C; --card:#1C1C1C; --red:#E07A6E; --indigo:#9DB4DA; --chip:#262626; --on-accent:#141414; --shadow:none; --shadow-md:none; }
+:root[data-theme="dark"]{ --bg:oklch(13% 0.028 261.692); --ink:oklch(96.7% 0.003 264.542); --muted:oklch(70.7% 0.022 261.325); --soft:oklch(87.2% 0.01 258.338); --line:oklch(27.8% 0.033 256.848); --line-strong:oklch(37.3% 0.034 259.733); --card:oklch(21% 0.034 264.665); --red:oklch(70.4% 0.191 22.216); --red-btn:oklch(44.4% 0.177 26.899); --indigo:oklch(86.9% 0.022 252.894); --chip:oklch(27.8% 0.033 256.848); --on-accent:oklch(13% 0.028 261.692); --shadow:none; --shadow-md:none; --ctl-ink:oklch(87.2% 0.01 258.338); --tab-ink:oklch(70.7% 0.022 261.325); --sel-bg:oklch(51.1% 0.262 276.966 / .2); --sel-line:oklch(51.1% 0.262 276.966 / .4); --sel-ink:oklch(87% 0.065 274.039); --hot-bg:oklch(57.7% 0.245 27.325 / .18); --hot-line:oklch(57.7% 0.245 27.325 / .4); --hot-ink:oklch(88.5% 0.062 18.334); --bar-k:oklch(78.5% 0.115 274.713); --bar-l:oklch(44.6% 0.03 256.802); --pen:#CBD5E1; }
 :root{ color-scheme: light dark; }
 :root[data-theme="light"]{ color-scheme: light; }
 :root[data-theme="dark"]{ color-scheme: dark; }
@@ -58,7 +62,7 @@ nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(-
 .quizsel{order:2;flex-shrink:0;display:inline-flex;align-items:center;gap:4px;min-height:40px;padding:0 2px 0 10px;border:1px solid var(--line-strong);border-radius:22px;background:var(--card);font-size:14px;font-weight:600}
 .quizsel.on{background:var(--indigo);border-color:var(--indigo);color:var(--on-accent)}
 .quizsel select{font:inherit;font-weight:600;color:inherit;background:transparent;border:0;min-height:38px;padding:0 2px;cursor:pointer;-webkit-appearance:none;appearance:none}
-.quizsel select option{color:#1E1C19}
+.quizsel select option{color:#111827}
 .quizsel .chev{width:14px;height:14px;margin-right:8px}
 .quizsel .qicon{width:18px;height:18px;flex-shrink:0}
 .search{order:1;flex:1;min-width:0;position:relative}
@@ -365,6 +369,24 @@ footer.foot{border-top-color:var(--line)}
   details.dlg .line{background:var(--card)}
   details.dlg .line.who-B{background:var(--chip)}
 }
+
+/* ---------- controls: neutral when off, subtle indigo tint when on (Tailwind palette) ---------- */
+nav.tabs button{color:var(--tab-ink)}
+nav.tabs button[aria-selected="true"]{color:var(--ink)}
+.seg button, .chips button, .jump button, .quizsel, .rotoggle, .toggle, .wbtn, .kq-opt, .fc-again{color:var(--ctl-ink)}
+.seg button[aria-checked="true"], .chips button[aria-pressed="true"], .quizsel.on, .rotoggle[aria-pressed="true"], .toggle[aria-pressed="true"], .wbtn[aria-pressed="true"], .wpick button[aria-pressed="true"], .kq-opt.right{
+  background:var(--sel-bg);color:var(--sel-ink);border-color:var(--sel-line)}
+.seg button[aria-checked="true"]{box-shadow:inset 0 0 0 1px var(--sel-line)}
+.chips .favchip[aria-pressed="true"], .kq-opt.wrong{background:var(--hot-bg);color:var(--hot-ink);border:1px solid var(--hot-line)}
+.kq-opt.right{border-width:1px}
+.fc-lab, .kgrid .h, .kgrid .lab, .subsec{color:var(--indigo)}
+.fc-start{background:var(--red-btn)}
+.badge-n{background:var(--red-btn);color:#fff}
+.seal{background:var(--red-btn)}
+.speak.playing{background:var(--sel-bg);border-color:var(--sel-line);color:var(--sel-ink)}
+.pbar .pk{background:var(--bar-k)}
+.pbar .pl{background:var(--bar-l);opacity:1}
+.star[aria-pressed="true"]{color:var(--red-btn)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -968,7 +990,7 @@ footer.foot{border-top-color:var(--line)}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "2 Nov 21:45";
+  var APP_VERSION = "2 Nov 22:00";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
@@ -1001,7 +1023,7 @@ footer.foot{border-top-color:var(--line)}
     themeBtn.innerHTML = ICONS[t];
     themeBtn.setAttribute("aria-label", "Theme: " + LABEL[t] + ". Tap to change.");
     var dark = t === "dark" || (t === "auto" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
-    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#141414" : "#F9FAFB"); m.removeAttribute("media"); });
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#030712" : "#F9FAFB"); m.removeAttribute("media"); });
     store.set("theme", t);
     return t;
   }

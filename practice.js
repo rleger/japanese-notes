@@ -326,7 +326,7 @@
     c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr);
     ctx = c.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.lineWidth = Math.max(6, r.width * .045);
-    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--indigo").trim() || "#22385A";
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--pen").trim() || "#334155";
     c.style.pointerEvents = W.trace ? "auto" : "none";
     box.classList.toggle("tracing", W.trace);
   }
