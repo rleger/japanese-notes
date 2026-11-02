@@ -211,6 +211,29 @@ window.NOTES = {
         ["わかります", "", "wakarimasu", "I understand.", "wah-kah-ree-mahss"]
       ]
     },
+    { number: 2, jp: "第2課",
+      words: [
+        ["じょうず", "Pimsleur shows: 上手", "jōzu", "Skilled, good at (something).", "joh-zoo"],
+        ["ありがとう", "Casual. Add ございます to be polite", "arigatō", "Thanks.", "ah-ree-gah-toh"],
+        ["じゃあ、また", "Pimsleur shows: じゃあ、また", "jaa, mata", "See you, then.", "jah, mah-tah"],
+        ["ありがとうございます", "", "arigatō gozaimasu", "Thank you (polite).", "ah-ree-gah-toh go-zye-mahss"],
+        ["いい", "", "ii", "Good, nice.", "ee-ee"],
+        ["そう", "", "sō", "So, like that.", "soh"],
+        ["おてんき", "Pimsleur shows: お天気. お makes it polite", "otenki", "Weather.", "oh-ten-kee"],
+        ["じょうずじゃありません", "Pimsleur shows: 上手じゃありません", "jōzu ja arimasen", "I’m not good (at it).", "joh-zoo jah ah-ree-mah-sen"],
+        ["そうですね", "", "sō desu ne", "That’s right. / Let me see…", "soh dess neh"],
+        ["おはよう", "Casual. おはようございます is the polite form", "ohayō", "Good morning (casual).", "oh-hah-yoh"]
+      ],
+      dialogues: [
+        { title: "Speak Easy · do you understand Japanese?", note: "Pimsleur Speak Easy dialogue.", lines: [
+          ["A", "すみません。にほんごがわかりますか。", "sumimasen. nihongo ga wakarimasu ka?", "Excuse me. Do you understand Japanese?"],
+          ["B", "はい、すこし。", "hai, sukoshi", "Yes, a little."],
+          ["A", "アメリカのかたですか。", "amerika no kata desu ka?", "Are you American?"],
+          ["B", "はい。アメリカじんです。えいごがわかりますか。", "hai. amerikajin desu. eigo ga wakarimasu ka?", "Yes, I’m American. Do you understand English?"],
+          ["A", "いいえ、わかりません。", "iie, wakarimasen", "No, I don’t."]
+        ]}
+      ]
+    },
     { number: 3, jp: "第3課",
       words: [
         ["まだまだです", "", "mada mada desu", "I still have a long way to go. (modest reply to a compliment)", "mah-dah mah-dah dess"],
