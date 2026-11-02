@@ -401,8 +401,8 @@ nav.tabs button[aria-selected="true"]{color:var(--ink)}
 :root[data-theme="dark"]{ --k-lesson:oklch(70.2% 0.183 293.541 / .75); --k-phrase:oklch(70.4% 0.14 182.503 / .75);
   --t-lesson-bg:oklch(70.2% 0.183 293.541 / .16); --t-lesson-ink:oklch(89.4% 0.057 293.283); --t-lesson-line:oklch(70.2% 0.183 293.541 / .35);
   --t-phrase-bg:oklch(70.4% 0.14 182.503 / .16); --t-phrase-ink:oklch(91% 0.096 180.426); --t-phrase-line:oklch(70.4% 0.14 182.503 / .35); }
-.card.k-lesson{box-shadow:inset 0 2px 0 var(--k-lesson), var(--shadow)}
-.card.k-phrase{box-shadow:inset 0 2px 0 var(--k-phrase), var(--shadow)}
+.card.k-lesson{box-shadow:inset 0 -2px 0 var(--k-lesson), var(--shadow)}
+.card.k-phrase{box-shadow:inset 0 -2px 0 var(--k-phrase), var(--shadow)}
 .card[data-id], .line[data-id]{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .tag{display:inline-block;margin:0 0 6px;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.02em;border:1px solid transparent;line-height:1.5}
 .tag.t-lesson{background:var(--t-lesson-bg);color:var(--t-lesson-ink);border-color:var(--t-lesson-line)}
@@ -422,8 +422,8 @@ html.st-lock, html.st-lock body{overflow:hidden}
 .st-icon svg{width:20px;height:20px}
 .st-stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:12px 0;touch-action:pan-y;overflow:hidden}
 .st-card{width:100%;max-width:640px;max-height:100%;overflow:auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:26px 22px 28px;border:1px solid var(--line);border-radius:22px;background:var(--card);box-shadow:var(--shadow-md);cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;will-change:transform}
-.st-card.k-lesson{box-shadow:inset 0 3px 0 var(--k-lesson), var(--shadow-md)}
-.st-card.k-phrase{box-shadow:inset 0 3px 0 var(--k-phrase), var(--shadow-md)}
+.st-card.k-lesson{box-shadow:inset 0 -3px 0 var(--k-lesson), var(--shadow-md)}
+.st-card.k-phrase{box-shadow:inset 0 -3px 0 var(--k-phrase), var(--shadow-md)}
 .st-card .tag{margin-bottom:10px}
 .st-ja{font-family:var(--jp);font-weight:400;line-height:1.3;letter-spacing:.02em;overflow-wrap:anywhere;word-break:keep-all;line-break:strict}
 .st-ja.s1{font-size:60px}.st-ja.s2{font-size:44px}.st-ja.s3{font-size:34px}.st-ja.s4{font-size:27px}
@@ -461,9 +461,29 @@ html.st-lock, html.st-lock body{overflow:hidden}
 .st-card.open .st-kbhint.q{display:block}
 
 @media (min-width: 760px){
-  .card.k-lesson:hover{box-shadow:inset 0 2px 0 var(--k-lesson), var(--shadow-md)}
-  .card.k-phrase:hover{box-shadow:inset 0 2px 0 var(--k-phrase), var(--shadow-md)}
+  .card.k-lesson:hover{box-shadow:inset 0 -2px 0 var(--k-lesson), var(--shadow-md)}
+  .card.k-phrase:hover{box-shadow:inset 0 -2px 0 var(--k-phrase), var(--shadow-md)}
 }
+
+/* ---------- card hierarchy: [Japanese + rōmaji + sounds like] · translation · note ---------- */
+.card .tag{margin-bottom:8px}
+.card .ja{line-height:1.3}
+.card .ro{font-size:15px;font-weight:600;color:var(--soft);margin-top:3px;letter-spacing:.01em}
+.card .sl{font-size:13px;font-weight:500;color:var(--red);margin-top:1px;opacity:.9}
+.card .en{font-size:15px;font-weight:500;color:var(--ink);margin-top:10px;line-height:1.4}
+.card .note{font-size:12.5px;line-height:1.5;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.card .reveal{margin-top:10px}
+body.quiz-ej .card .en{margin-top:0}
+.line .ro{font-weight:600;color:var(--soft);margin-top:2px}
+.line .en{margin-top:6px}
+.st-card{gap:0}
+.st-card .tag{margin-bottom:18px}
+.st-kbhint{margin-top:6px}
+.st-ro{margin-top:10px;font-weight:600}
+.st-sl{margin-top:4px;font-size:16px}
+.st-en{margin-top:26px;font-weight:600}
+.st-note{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;line-height:1.55;width:100%;max-width:none}
+.st-tap{margin-top:22px}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -681,10 +701,10 @@ html.st-lock, html.st-lock body{overflow:hidden}
         (withTag ? tagHTML(o) : '')+
         '<div class="ja">'+esc(o.ja)+'</div>'+
         '<div class="ro">'+esc(o.ro)+'</div>'+
+        (o.sl ? '<div class="sl">'+esc(o.sl)+'</div>' : '')+
+        '<div class="reveal reveal-ja">Tap to study, the Japanese is hidden</div>'+
         '<div class="reveal reveal-en">Tap to study, the English is hidden</div>'+
         '<div class="en">'+esc(o.en)+'</div>'+
-        '<div class="reveal reveal-ja">Tap to study, the Japanese is hidden</div>'+
-        (o.sl ? '<div class="sl">'+esc(o.sl)+'</div>' : '')+
         (o.note ? '<div class="note">'+esc(o.note)+'</div>' : '')+
       '</div><div class="acts">'+ speakBtn(o.ja) + starBtn(o.ja) +
     '</div></div>';
@@ -964,8 +984,8 @@ html.st-lock, html.st-lock body{overflow:hidden}
         '<div class="st-ja ' + jaSize(o.ja) + (hideJa ? ' q' : '') + (brk ? ' brk' : '') + '" id="stJa">' + (brk ? kanaBreakHTML(o.ja, o.ro) : esc(o.ja)) + '</div>' +
         '<div class="st-kbhint' + (hideJa ? ' q' : '') + '">' + (brk ? 'Tap a character to hear it · tap here to hide' : 'Tap the Japanese to see each sound') + '</div>' +
         '<div class="st-ro' + (hideRo ? ' q' : '') + '">' + esc(o.ro) + '</div>' +
+        (o.sl ? '<div class="st-sl' + (hideRo ? ' q' : '') + '">' + esc(o.sl) + '</div>' : '') +
         '<div class="st-en' + (hideEn ? ' q' : '') + '">' + esc(o.en) + '</div>' +
-        (o.sl ? '<div class="st-sl' + (hideJa || hideEn ? ' q' : '') + '">' + esc(o.sl) + '</div>' : '') +
         (o.note ? '<div class="st-note' + (hideJa || hideEn ? ' q' : '') + '">' + esc(o.note) + '</div>' : '') +
         (hidden ? '<div class="st-tap">' + (hideJa ? 'Say it in Japanese, then tap to check' : hideEn ? 'Say what it means, then tap to check' : 'Read it, then tap to check the rōmaji') + '</div>' : '');
       $("stPos").textContent = (idx + 1) + " / " + list.length;
@@ -1235,7 +1255,7 @@ html.st-lock, html.st-lock body{overflow:hidden}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "2 Nov 23:30";
+  var APP_VERSION = "2 Nov 23:45";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
