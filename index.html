@@ -486,6 +486,19 @@ body.quiz-ej .card .en{margin-top:0}
 .st-brk-r{font-size:13px;font-weight:700;line-height:1}
 .st-brk[aria-pressed="true"]{background:var(--sel-bg);border-color:var(--sel-line);color:var(--sel-ink)}
 @media (max-width: 380px){ .st-bot{gap:8px} .st-say, .st-star, .st-brk{width:50px;height:50px} }
+
+/* kana with their sounds (global switch) */
+.ja-ruby{display:none}
+body.kana-ruby .ja-ruby{display:inline}
+body.kana-ruby .ja-plain{display:none}
+.ja-ruby ruby{ruby-position:over;margin:0 .04em}
+.ja-ruby rt{font-family:var(--ui);font-size:.42em;font-weight:600;color:var(--muted);letter-spacing:0;line-height:1.1;padding-bottom:1px}
+body.kana-ruby .card .ja, body.kana-ruby .line .ja{line-height:1.75}
+body.kana-ruby .fc-front.ja{line-height:1.8}
+.rubytoggle{gap:0;align-items:baseline;padding-top:9px}
+.rubytoggle span{font-family:var(--jp);font-size:16px;font-weight:400;line-height:1}
+.rubytoggle small{font-size:10px;font-weight:700;line-height:1}
+.rubytoggle[aria-pressed="true"] span{text-decoration:none}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -522,6 +535,7 @@ body.quiz-ej .card .en{margin-top:0}
       </select>
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </label>
+    <button type="button" class="rotoggle rubytoggle" id="rubyBtn" aria-pressed="false" aria-label="Show the sound of each hiragana"><span lang="ja">あ</span><small>a</small></button>
     <button type="button" class="rotoggle" id="roBtn" aria-pressed="false" aria-label="Hide rōmaji"><span>ro</span></button>
     <div class="search" id="searchBox" hidden>
       <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -696,12 +710,20 @@ body.quiz-ej .card .en{margin-top:0}
     return o;
   }
   function tagHTML(o){ return '<span class="tag t-'+o.type+'">'+esc(o.tag)+(o.sub ? ' · '+esc(o.sub) : '')+(o.who ? ' · '+esc(o.who) : '')+'</span>'; }
+  function rubyHTML(ja, ro){
+    return kanaBreak(ja, ro).map(function(t){
+      if (t.punct) return esc(t.k);
+      if (t.note === "kanji") return esc(t.k);
+      return '<ruby>' + esc(t.k) + '<rt>' + esc(t.r || "") + '</rt></ruby>';
+    }).join("");
+  }
+  function jaHTML(ja, ro){ return '<span class="ja-plain">' + esc(ja) + '</span><span class="ja-ruby" aria-hidden="true">' + rubyHTML(ja, ro) + '</span>'; }
   function cardHTML(o, withTag){
     return '<div class="card k-'+o.type+'" data-id="'+o.id+'">'+
       (o.num && !withTag ? '<span class="num">'+o.num+'</span>' : '')+
       '<div class="body">'+
         (withTag ? tagHTML(o) : '')+
-        '<div class="ja">'+esc(o.ja)+'</div>'+
+        '<div class="ja">'+jaHTML(o.ja, o.ro)+'</div>'+
         '<div class="ro">'+esc(o.ro)+'</div>'+
         (o.sl ? '<div class="sl">'+esc(o.sl)+'</div>' : '')+
         '<div class="reveal reveal-ja">Tap to study, the Japanese is hidden</div>'+
@@ -749,7 +771,7 @@ body.quiz-ej .card .en{margin-top:0}
         h += '<details class="dlg"><summary>'+esc(D.title || "Put together · dialogue")+'</summary>';
         D.lines.forEach(function(d){
           var o = reg({ ja: d[1], ro: d[2], en: d[3], who: d[0], type: "lesson", tag: lt, sub: D.title || "Dialogue" });
-          h += '<div class="line who-'+esc(d[0])+'" data-id="'+o.id+'"><span class="who">'+esc(d[0])+'</span><div class="txt" style="flex:1;min-width:0"><div class="ja">'+esc(d[1])+'</div><div class="ro">'+esc(d[2])+'</div><div class="en">'+esc(d[3])+'</div><div class="reveal reveal-line">Tap to check</div></div>'+speakBtn(d[1])+'</div>';
+          h += '<div class="line who-'+esc(d[0])+'" data-id="'+o.id+'"><span class="who">'+esc(d[0])+'</span><div class="txt" style="flex:1;min-width:0"><div class="ja">'+jaHTML(d[1], d[2])+'</div><div class="ro">'+esc(d[2])+'</div><div class="en">'+esc(d[3])+'</div><div class="reveal reveal-line">Tap to check</div></div>'+speakBtn(d[1])+'</div>';
         });
         h += '<p class="hint" style="margin:8px 0 12px">'+esc(D.note || "Example built from this lesson’s words.")+'</p></details>';
       });
@@ -873,6 +895,16 @@ body.quiz-ej .card .en{margin-top:0}
   }
   roBtn.addEventListener("click", function(){ var h = !document.body.classList.contains("no-ro"); setRo(h); toast(h ? "Rōmaji hidden: read the hiragana, tap to check" : "Rōmaji shown", 2200); });
   setRo(store.get("noro") === "1");
+  /* show each kana with its sound, everywhere */
+  var rubyBtn = document.getElementById("rubyBtn");
+  function setRuby(on){
+    document.body.classList.toggle("kana-ruby", on);
+    rubyBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    rubyBtn.setAttribute("aria-label", on ? "Hide the sound of each hiragana" : "Show the sound of each hiragana");
+    store.set("ruby", on ? "1" : "0");
+  }
+  rubyBtn.addEventListener("click", function(){ var on = !document.body.classList.contains("kana-ruby"); setRuby(on); toast(on ? "Each character now shows its sound" : "Sounds hidden", 1800); });
+  setRuby(store.get("ruby") === "1");
 
   /* search: everything, current tab first */
   var qEl = document.getElementById("q");
@@ -1008,6 +1040,7 @@ body.quiz-ej .card .en{margin-top:0}
       var els = Array.prototype.filter.call(scope.querySelectorAll("[data-id]"), visible);
       list = els.map(function(x){ return x.getAttribute("data-id"); });
       idx = Math.max(0, list.indexOf(el.getAttribute("data-id")));
+      if (document.body.classList.contains("kana-ruby")) brk = true;
       fill(); root.hidden = false; isOpen = true;
       document.documentElement.classList.add("st-lock");
       try { history.pushState({ study: 1 }, ""); } catch(e){}
@@ -1185,7 +1218,7 @@ body.quiz-ej .card .en{margin-top:0}
       $("fcBarFill").style.width = Math.round(done / total * 100) + "%";
       $("fcTag").textContent = (cur.dir === "je" ? "Japanese → English" : "English → Japanese") + (lv === "new" ? " · new" : "");
       var f = $("fcFront");
-      if (cur.dir === "je"){ f.className = "fc-front ja"; f.innerHTML = esc(c.ja) + '<span class="ro">' + esc(c.ro) + '</span>'; }
+      if (cur.dir === "je"){ f.className = "fc-front ja"; f.innerHTML = jaHTML(c.ja, c.ro) + '<span class="ro">' + esc(c.ro) + '</span>'; }
       else { f.className = "fc-front"; f.textContent = cleanEn(c.en); }
       $("fcBack").hidden = true; $("fcTap").hidden = false; $("fcActions").hidden = true;
       $("fcSpeak").style.visibility = cur.dir === "je" ? "visible" : "hidden";
@@ -1259,7 +1292,7 @@ body.quiz-ej .card .en{margin-top:0}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "2 Nov 23:55";
+  var APP_VERSION = "3 Nov 00:10";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

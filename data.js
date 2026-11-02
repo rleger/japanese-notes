@@ -196,6 +196,21 @@ window.NOTES = {
   ],
 
   lessons: [
+    { number: 1, jp: "第1課",
+      words: [
+        ["アメリカじん", "Pimsleur shows: アメリカ人. アメリカ is katakana, じん (人) = person", "amerikajin", "American (person).", "ah-meh-ree-kah-jeen"],
+        ["いいえ", "", "iie", "No.", "ee-eh"],
+        ["えいご", "Pimsleur shows: 英語", "eigo", "English (language).", "ay-go"],
+        ["です", "Ends a polite sentence, like “is / am / are”. The final u is almost silent", "desu", "Is / am / are.", "dess"],
+        ["わかりません", "", "wakarimasen", "I don’t understand.", "wah-kah-ree-mah-sen"],
+        ["わかりますか。", "か at the end turns it into a question", "wakarimasu ka?", "Do you understand?", "wah-kah-ree-mahss kah?"],
+        ["アメリカのかた", "Pimsleur shows: アメリカの方. かた = polite word for “person”", "amerika no kata", "An American (polite).", "ah-meh-ree-kah noh kah-tah"],
+        ["にほんご", "Pimsleur shows: 日本語", "nihongo", "Japanese (language).", "nee-hon-go"],
+        ["はい", "", "hai", "Yes.", "hi"],
+        ["すこし", "Pimsleur shows: 少し", "sukoshi", "A little.", "s’koh-shee"],
+        ["わかります", "", "wakarimasu", "I understand.", "wah-kah-ree-mahss"]
+      ]
+    },
     { number: 3, jp: "第3課",
       words: [
         ["まだまだです", "", "mada mada desu", "I still have a long way to go. (modest reply to a compliment)", "mah-dah mah-dah dess"],
