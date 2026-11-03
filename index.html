@@ -762,6 +762,10 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .tip-foot{margin:10px 2px 0;font-size:12.5px;line-height:1.5;color:var(--muted);font-family:var(--jp)}
 .res-tips{margin-top:8px}
 @media (max-width: 380px){ .tip-cols{grid-template-columns:1fr} }
+
+.tip-cols.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tip-mark b{white-space:nowrap}
+@media (max-width: 640px){ .tip-cols.n3 .tip-mark b{font-size:24px} .tip-cols.n3{grid-template-columns:1fr} .tip-cols.n3 .tip-col{display:grid;grid-template-columns:1fr 1fr;column-gap:12px} .tip-cols.n3 .tip-mark{grid-column:1/-1} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1010,7 +1014,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     function ex(e){ return '<div class="tip-ex"><span class="tip-ja"><span class="tseg">' + hl(e[0]) + '<b class="pt">' + esc(e[1]) + '</b></span><span class="tseg">' + hl(e[2]) + '</span></span><span class="tip-ro">' + hl(e[3]) + '</span><span class="tip-en">' + hl(e[4]) + '</span></div>'; }
     return '<div class="tip">' + (tag ? '<span class="tag t-lesson">' + esc(tag) + ' · Note</span>' : '') +
       '<div class="tip-head"><span class="tip-badge" aria-hidden="true">i</span><span class="tip-title">' + hl(t.title) + '</span><span class="tip-lead">' + hl(t.lead) + '</span></div>' +
-      '<div class="tip-cols">' + t.cols.map(function(c){
+      '<div class="tip-cols n' + t.cols.length + '">' + t.cols.map(function(c){
         return '<div class="tip-col"><div class="tip-mark"><b lang="ja">' + esc(c.mark) + '</b><span>' + esc(c.ro) + ' · ' + hl(c.label) + '</span></div>' + c.ex.map(ex).join("") + '</div>';
       }).join("") + '</div>' + (t.foot ? '<p class="tip-foot">' + hl(t.foot) + '</p>' : '') + '</div>';
   }
@@ -1639,7 +1643,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 22:30";
+  var APP_VERSION = "3 Nov 22:45";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

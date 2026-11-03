@@ -373,13 +373,21 @@ window.NOTES = {
         ["コーヒーがほしいです。", "Pimsleur shows: コーヒーが欲しいです。 With ほしい the thing you want takes が, not を", "kōhī ga hoshii desu", "I want a coffee.", "koh-hee gah hoh-shee dess"]
       ],
       tips: [
-        { title: "を or が?", jp: "を・が", keys: "particle o wo ga object subject want understand drink eat",
+        { title: "を (o) or が (ga)?", jp: "を・が", keys: "particle o wo ga object subject want understand drink eat",
           lead: "The word after decides, not the thing itself.",
           cols: [
             { mark: "を", ro: "o", label: "an action", ex: [["コーヒー", "を", "のみます", "kōhī o nomimasu", "I drink coffee"], ["なに", "を", "たべますか", "nani o tabemasu ka", "What will you eat?"]] },
             { mark: "が", ro: "ga", label: "a state", ex: [["コーヒー", "が", "ほしいです", "kōhī ga hoshii desu", "I want coffee"], ["にほんご", "が", "わかります", "nihongo ga wakarimasu", "I understand Japanese"]] }
           ],
-          foot: "が also with じょうず and すき. But 〜たい (want to do) keeps を: コーヒーをのみたいです." }
+          foot: "が (ga) also with じょうず (jōzu) and すき (suki). But 〜たい (-tai, want to do) keeps を (o): コーヒーをのみたいです (kōhī o nomitai desu)." },
+        { title: "〜ます, 〜たい or 〜ましょう? (-masu, -tai, -mashō)", jp: "ます・たい・ましょう", keys: "verb ending masu tai mashou mashō want let's do drink eat go nomitai tabetai ikimashou",
+          lead: "Same verb, new ending: keep the start のみ (nomi), change the end.",
+          cols: [
+            { mark: "〜ます", ro: "-masu", label: "I do it", ex: [["のみ", "ます", "", "nomimasu", "I drink / I’ll drink"], ["たべ", "ます", "", "tabemasu", "I eat / I’ll eat"]] },
+            { mark: "〜たい", ro: "-tai desu", label: "I want to", ex: [["のみ", "たい", "です", "nomitai desu", "I want to drink"], ["たべ", "たい", "です", "tabetai desu", "I want to eat"]] },
+            { mark: "〜ましょう", ro: "-mashō", label: "let’s do it", ex: [["のみ", "ましょう", "", "nomimashō", "Let’s drink"], ["いき", "ましょう", "", "ikimashō", "Let’s go"]] }
+          ],
+          foot: "Works with every verb: いきます (ikimasu, I go) → いきたいです (ikitai desu, I want to go) → いきましょう (ikimashō, let’s go)." }
       ],
       dialogues: [
         { title: "Speak Easy · my favorite café", note: "Pimsleur dialogue, lesson 7.", lines: [
