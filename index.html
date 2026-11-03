@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>日本語ノート</title>
 <meta name="description" content="Romain's Japanese study notes: hiragana, Pimsleur phrases, lesson by lesson.">
-<meta name="theme-color" content="#F9FAFB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#F5F5F4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#030712" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -17,7 +17,7 @@
 <link rel="icon" href="icons/icon-192.png">
 <style>
 :root{
-  --bg:#F9FAFB; --ink:oklch(21% 0.034 264.665); --muted:oklch(44.6% 0.03 256.802); --soft:oklch(37.3% 0.034 259.733);
+  --bg:oklch(97% 0.001 106.424); --ink:oklch(21% 0.034 264.665); --muted:oklch(44.6% 0.03 256.802); --soft:oklch(37.3% 0.034 259.733);
   --line:oklch(92.8% 0.006 264.531); --line-strong:oklch(87.2% 0.01 258.338); --card:#FFFFFF;
   --red:oklch(44.4% 0.177 26.899); --red-btn:oklch(44.4% 0.177 26.899); --indigo:oklch(37.2% 0.044 257.287); --chip:oklch(96.7% 0.003 264.542); --on-accent:#FFFFFF;
   --ctl-ink:oklch(37.3% 0.034 259.733); --tab-ink:oklch(55.1% 0.027 264.364);
@@ -538,7 +538,7 @@ header.top{gap:10px}
 @media (max-width: 380px){ header.top .refresh{width:40px;height:40px} .top p{display:none} }
 
 /* ================= v2: controls, practice, kana colour, kana page ================= */
-:root{ --track:oklch(96.7% 0.003 264.542); --seg-on:#FFFFFF; --seg-ink:oklch(44.6% 0.03 256.802); --on-bg:oklch(27.9% 0.041 260.031); --on-ink:#FFFFFF; --kana:oklch(28.2% 0.091 267.935); --ok-bg:oklch(97.9% 0.021 166.113); --ok-line:oklch(84.5% 0.143 164.978); --ok-ink:oklch(43.2% 0.095 166.913); --flame:oklch(76.9% 0.188 70.08); --flame-bg:oklch(98.7% 0.022 95.277); --flame-ink:oklch(47.3% 0.137 46.201); }
+:root{ --track:oklch(96.7% 0.003 264.542); --seg-on:#FFFFFF; --seg-ink:oklch(44.6% 0.03 256.802); --on-bg:oklch(27.9% 0.041 260.031); --on-ink:#FFFFFF; --kana:oklch(37.9% 0.146 265.522); --ok-bg:oklch(97.9% 0.021 166.113); --ok-line:oklch(84.5% 0.143 164.978); --ok-ink:oklch(43.2% 0.095 166.913); --flame:oklch(76.9% 0.188 70.08); --flame-bg:oklch(98.7% 0.022 95.277); --flame-ink:oklch(47.3% 0.137 46.201); }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --track:oklch(27.8% 0.033 256.848); --seg-on:oklch(37.3% 0.034 259.733); --seg-ink:oklch(87.2% 0.01 258.338); --on-bg:oklch(96.8% 0.007 247.896); --on-ink:oklch(20.8% 0.042 265.755); --kana:oklch(88.2% 0.059 254.128); --ok-bg:oklch(69.6% 0.17 162.48 / .16); --ok-line:oklch(69.6% 0.17 162.48 / .45); --ok-ink:oklch(90.5% 0.093 164.15); --flame:oklch(76.9% 0.188 70.08); --flame-bg:oklch(76.9% 0.188 70.08 / .15); --flame-ink:oklch(92.4% 0.12 95.746); } }
 :root[data-theme="dark"]{ --track:oklch(27.8% 0.033 256.848); --seg-on:oklch(37.3% 0.034 259.733); --seg-ink:oklch(87.2% 0.01 258.338); --on-bg:oklch(96.8% 0.007 247.896); --on-ink:oklch(20.8% 0.042 265.755); --kana:oklch(88.2% 0.059 254.128); --ok-bg:oklch(69.6% 0.17 162.48 / .16); --ok-line:oklch(69.6% 0.17 162.48 / .45); --ok-ink:oklch(90.5% 0.093 164.15); --flame:oklch(76.9% 0.188 70.08); --flame-bg:oklch(76.9% 0.188 70.08 / .15); --flame-ink:oklch(92.4% 0.12 95.746); }
 
@@ -630,15 +630,6 @@ header.top{gap:10px}
   .pcard, .prog{padding-left:20px;padding-right:20px}
 }
 
-/* TEMPORARY background test (light mode only) */
-.bgtest{display:flex;align-items:center;gap:8px;max-width:720px;margin:8px auto 0;padding:0 16px;font-size:12px;font-weight:600;color:var(--muted)}
-.bgtest select{font:inherit;font-weight:600;color:var(--ink);background:var(--card);border:1px dashed var(--line-strong);border-radius:8px;padding:4px 8px;min-height:30px}
-@media (min-width: 760px){ .bgtest{max-width:1180px;padding:0 32px} }
-:root:not([data-theme="dark"]) body{background:var(--bg-test, var(--bg))}
-:root:not([data-theme="dark"]) nav.tabs{background:color-mix(in srgb, var(--bg-test, var(--bg)) 92%, transparent)}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) body{background:var(--bg)} :root:not([data-theme="light"]) nav.tabs{background:color-mix(in srgb, var(--bg) 92%, transparent)} :root:not([data-theme="light"]) .bgtest{display:none} }
-:root[data-theme="dark"] .bgtest{display:none}
-
 /* practice: source picker */
 .src{display:flex;flex-direction:column;gap:14px}
 .switch-row{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--track);text-align:left;cursor:pointer;color:var(--ink);-webkit-tap-highlight-color:transparent}
@@ -662,6 +653,14 @@ header.top{gap:10px}
 .src-q button{border:0;background:transparent;font-size:12.5px;font-weight:600;color:var(--seg-ink);padding:4px 10px;border-radius:6px;cursor:pointer;min-height:28px}
 .src-q button:active{background:var(--seg-on)}
 .src-q button:disabled{opacity:.5;cursor:default}
+
+/* TEMPORARY phrase colour test (light mode only; dark keeps its own values) */
+.bgtest{display:flex;align-items:center;gap:8px;max-width:720px;margin:8px auto 0;padding:0 16px;font-size:12px;font-weight:600;color:var(--muted)}
+.bgtest select{font:inherit;font-weight:600;color:var(--ink);background:var(--card);border:1px dashed var(--line-strong);border-radius:8px;padding:4px 8px;min-height:30px}
+@media (min-width: 760px){ .bgtest{max-width:1180px;padding:0 32px} }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .bgtest{display:none} }
+:root[data-theme="dark"] .bgtest{display:none}
+:root{ --k-phrase:var(--pk-k, oklch(85.5% 0.138 181.071)); --t-phrase-bg:var(--pk-bg, oklch(98.4% 0.014 180.72)); --t-phrase-line:var(--pk-line, oklch(91% 0.096 180.426)); --t-phrase-ink:var(--pk-ink, oklch(43.7% 0.078 188.216)); }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1475,7 +1474,7 @@ header.top{gap:10px}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 12:40";
+  var APP_VERSION = "3 Nov 13:00";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
@@ -1508,7 +1507,7 @@ header.top{gap:10px}
     themeBtn.innerHTML = ICONS[t];
     themeBtn.setAttribute("aria-label", "Theme: " + LABEL[t] + ". Tap to change.");
     var dark = t === "dark" || (t === "auto" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
-    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#030712" : "#F9FAFB"); m.removeAttribute("media"); });
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#030712" : "#F5F5F4"); m.removeAttribute("media"); });
     store.set("theme", t);
     return t;
   }
@@ -1519,15 +1518,16 @@ header.top{gap:10px}
   });
   if (window.matchMedia){ var mq = matchMedia("(prefers-color-scheme: dark)"); var onMq = function(){ if (curTheme === "auto") applyTheme("auto"); }; if (mq.addEventListener) mq.addEventListener("change", onMq); else if (mq.addListener) mq.addListener(onMq); }
 
-  /* TEMPORARY: background colour picker for light mode */
+  /* TEMPORARY: phrase card colour picker (light mode) */
   (function(){
+    var C = [["oklch(85.5% 0.138 181.071)", "oklch(98.4% 0.014 180.72)", "oklch(91% 0.096 180.426)", "oklch(43.7% 0.078 188.216)"], ["oklch(90.1% 0.058 230.902)", "oklch(97.7% 0.013 236.62)", "oklch(90.1% 0.058 230.902)", "oklch(44.3% 0.11 240.79)"], ["oklch(82.8% 0.111 230.318)", "oklch(97.7% 0.013 236.62)", "oklch(90.1% 0.058 230.902)", "oklch(44.3% 0.11 240.79)"], ["oklch(91.7% 0.08 205.041)", "oklch(98.4% 0.019 200.873)", "oklch(91.7% 0.08 205.041)", "oklch(45% 0.085 224.283)"], ["oklch(90.5% 0.093 164.15)", "oklch(97.9% 0.021 166.113)", "oklch(90.5% 0.093 164.15)", "oklch(43.2% 0.095 166.913)"], ["oklch(92.5% 0.084 155.995)", "oklch(98.2% 0.018 155.826)", "oklch(92.5% 0.084 155.995)", "oklch(44.8% 0.119 151.328)"], ["oklch(92.4% 0.12 95.746)", "oklch(98.7% 0.022 95.277)", "oklch(92.4% 0.12 95.746)", "oklch(47.3% 0.137 46.201)"], ["oklch(90.1% 0.076 70.697)", "oklch(98% 0.016 73.684)", "oklch(90.1% 0.076 70.697)", "oklch(47% 0.157 37.304)"], ["oklch(89.2% 0.058 10.001)", "oklch(96.9% 0.015 12.422)", "oklch(89.2% 0.058 10.001)", "oklch(45.5% 0.188 13.697)"], ["oklch(89.9% 0.061 343.231)", "oklch(97.1% 0.014 343.198)", "oklch(89.9% 0.061 343.231)", "oklch(45.9% 0.187 3.815)"], ["oklch(70.9% 0.01 56.259)", "oklch(97% 0.001 106.424)", "oklch(86.9% 0.005 56.366)", "oklch(37.4% 0.01 67.558)"], ["oklch(73.7% 0.021 106.9)", "oklch(96.6% 0.005 106.5)", "oklch(88% 0.011 106.6)", "oklch(39.4% 0.023 107.4)"], ["oklch(72.3% 0.014 214.4)", "oklch(96.3% 0.002 197.1)", "oklch(87.2% 0.007 219.6)", "oklch(37.8% 0.015 216)"], ["oklch(71.4% 0.014 41.2)", "oklch(96% 0.002 17.2)", "oklch(86.8% 0.007 39.5)", "oklch(36.7% 0.016 35.7)"]];
     var wrap = document.createElement("label");
-    wrap.className = "bgtest"; wrap.innerHTML = '<span>Background (test)</span><select id="bgSel"><option value="#F9FAFB">gray-50 (current)</option><option value="oklch(96.7% 0.003 264.542)">gray-100</option><option value="oklch(92.8% 0.006 264.531)">gray-200</option><option value="oklch(96.8% 0.007 247.896)">slate-100</option><option value="oklch(92.9% 0.013 255.508)">slate-200</option><option value="oklch(96.7% 0.001 286.375)">zinc-100</option><option value="oklch(92% 0.004 286.32)">zinc-200</option><option value="oklch(97% 0 0)">neutral-100</option><option value="oklch(92.2% 0 0)">neutral-200</option><option value="oklch(97% 0.001 106.424)">stone-100</option><option value="oklch(92.3% 0.003 48.717)">stone-200</option><option value="oklch(96% 0.003 325.6)">mauve-100</option><option value="oklch(92.2% 0.005 325.62)">mauve-200</option><option value="oklch(96.3% 0.002 197.1)">mist-100</option><option value="oklch(92.5% 0.005 214.3)">mist-200</option><option value="oklch(96.6% 0.005 106.5)">olive-100</option><option value="oklch(93% 0.007 106.5)">olive-200</option><option value="oklch(96% 0.002 17.2)">taupe-100</option><option value="oklch(92.2% 0.005 34.3)">taupe-200</option></select>';
+    wrap.className = "bgtest"; wrap.innerHTML = '<span>Phrase colour (test)</span><select id="pkSel"><option value="0">teal-300 (current)</option><option value="1">sky-200</option><option value="2">sky-300</option><option value="3">cyan-200</option><option value="4">emerald-200</option><option value="5">green-200</option><option value="6">amber-200</option><option value="7">orange-200</option><option value="8">rose-200</option><option value="9">pink-200</option><option value="10">stone-400</option><option value="11">olive-400</option><option value="12">mist-400</option><option value="13">taupe-400</option></select>';
     var head = document.querySelector("header.top"); head.parentNode.insertBefore(wrap, head.nextSibling);
-    var sel = wrap.querySelector("select");
-    function apply(v){ if (v && v !== "#F9FAFB") document.documentElement.style.setProperty("--bg-test", v); else document.documentElement.style.removeProperty("--bg-test"); }
-    var saved = store.get("bgtest"); if (saved){ sel.value = saved; apply(saved); }
-    sel.addEventListener("change", function(){ store.set("bgtest", sel.value); apply(sel.value); toast(sel.options[sel.selectedIndex].text, 1200); });
+    var sel = wrap.querySelector("select"), r = document.documentElement.style;
+    function apply(i){ var c = C[+i] || C[0]; r.setProperty("--pk-k", c[0]); r.setProperty("--pk-bg", c[1]); r.setProperty("--pk-line", c[2]); r.setProperty("--pk-ink", c[3]); }
+    var saved = store.get("pktest"); if (saved){ sel.value = saved; } apply(sel.value);
+    sel.addEventListener("change", function(){ store.set("pktest", sel.value); apply(sel.value); toast(sel.options[sel.selectedIndex].text, 1200); });
   })();
 
   /* Refresh button: clear the saved copy, drop the offline worker, reload fresh */
