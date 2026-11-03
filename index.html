@@ -658,6 +658,10 @@ header.top{gap:10px}
 :root{ --k-lesson:oklch(70.9% 0.01 56.259); --k-phrase:oklch(90.1% 0.076 70.697); --t-lesson-bg:oklch(97% 0.001 106.424); --t-lesson-line:oklch(86.9% 0.005 56.366); --t-lesson-ink:oklch(37.4% 0.01 67.558); --t-phrase-bg:oklch(98% 0.016 73.684); --t-phrase-line:oklch(90.1% 0.076 70.697); --t-phrase-ink:oklch(47% 0.157 37.304); }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --k-lesson:oklch(70.9% 0.01 56.259 / .7); --k-phrase:oklch(83.7% 0.128 66.29 / .7); --t-lesson-bg:oklch(70.9% 0.01 56.259 / .14); --t-lesson-line:oklch(70.9% 0.01 56.259 / .35); --t-lesson-ink:oklch(86.9% 0.005 56.366); --t-phrase-bg:oklch(83.7% 0.128 66.29 / .14); --t-phrase-line:oklch(83.7% 0.128 66.29 / .35); --t-phrase-ink:oklch(90.1% 0.076 70.697); } }
 :root[data-theme="dark"]{ --k-lesson:oklch(70.9% 0.01 56.259 / .7); --k-phrase:oklch(83.7% 0.128 66.29 / .7); --t-lesson-bg:oklch(70.9% 0.01 56.259 / .14); --t-lesson-line:oklch(70.9% 0.01 56.259 / .35); --t-lesson-ink:oklch(86.9% 0.005 56.366); --t-phrase-bg:oklch(83.7% 0.128 66.29 / .14); --t-phrase-line:oklch(83.7% 0.128 66.29 / .35); --t-phrase-ink:oklch(90.1% 0.076 70.697); }
+
+/* flip */
+.fc-wrap, .st-stage{perspective:1200px}
+.fc-card, .st-card{backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-style:preserve-3d}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -897,6 +901,19 @@ header.top{gap:10px}
   function card(p, n, meta){
     meta = meta || {};
     return cardHTML(reg({ ja: p[0], note: p[1], ro: p[2], en: p[3], sl: p[4], num: n, type: meta.type || "phrase", tag: meta.tag || "Phrases", sub: meta.sub || "" }), false);
+  }
+  /* card flip: turn to the edge, swap the content, turn back */
+  var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function flipCard(el, swap){
+    if (!el || reduceMotion){ swap(); return; }
+    el.style.transition = "transform .16s ease-in"; el.style.transform = "rotateY(90deg)";
+    setTimeout(function(){
+      swap();
+      el.style.transition = "none"; el.style.transform = "rotateY(-90deg)";
+      el.getBoundingClientRect();
+      el.style.transition = "transform .22s cubic-bezier(.2,.8,.3,1)"; el.style.transform = "";
+      setTimeout(function(){ el.style.transition = ""; }, 240);
+    }, 160);
   }
   function cap(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
   /* favorites */
@@ -1196,7 +1213,7 @@ header.top{gap:10px}
       el.classList.toggle("brk", brk); el.innerHTML = brk ? kanaBreakHTML(o.ja, o.ro) : esc(o.ja);
       $("stBrk").setAttribute("aria-pressed", brk ? "true" : "false");
     }
-    function reveal(){ var c = $("stCard"); if (c.classList.contains("open")) return; c.classList.add("open"); $("stSay").style.visibility = "visible"; $("stBrk").style.visibility = "visible"; }
+    function reveal(){ var c = $("stCard"); if (c.classList.contains("open")) return; flipCard(c, function(){ c.classList.add("open"); $("stSay").style.visibility = "visible"; $("stBrk").style.visibility = "visible"; }); }
     function open(el){
       var scope = el.closest("#searchResults") || el.closest("[role=tabpanel]") || document;
       var els = Array.prototype.filter.call(scope.querySelectorAll("[data-id]"), visible);
@@ -1405,8 +1422,11 @@ header.top{gap:10px}
       if (cur.dir === "je") h = (document.body.classList.contains("no-ro") ? '<span class="ro">' + esc(c.ro) + '</span>' : '') + '<span class="en">' + esc(c.en) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
       else h = '<span class="ja">' + esc(c.ja) + '</span><span class="ro">' + esc(c.ro) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
       if (c.note) h += '<span class="note">' + esc(c.note) + '</span>';
-      $("fcBack").innerHTML = h; $("fcBack").hidden = false; $("fcTap").hidden = true; $("fcActions").hidden = false;
-      $("fcSpeak").style.visibility = "visible";
+      flipCard($("fcCard"), function(){
+        $("fcBack").innerHTML = h; $("fcBack").hidden = false; $("fcTap").hidden = true;
+        $("fcSpeak").style.visibility = "visible";
+      });
+      $("fcActions").hidden = false;
     }
     function answer(ok){
       if (!flipped) return;
@@ -1471,7 +1491,7 @@ header.top{gap:10px}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 13:10";
+  var APP_VERSION = "3 Nov 13:20";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
