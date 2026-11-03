@@ -371,6 +371,15 @@ window.NOTES = {
         ["コーヒーをのみます。", "Pimsleur shows: コーヒーを飲みます。 を (read “o”) marks what you drink", "kōhī o nomimasu", "I’ll drink coffee. / I’ll have a coffee.", "koh-hee oh noh-mee-mahss"],
         ["コーヒーがほしいです。", "Pimsleur shows: コーヒーが欲しいです。 With ほしい the thing you want takes が, not を", "kōhī ga hoshii desu", "I want a coffee.", "koh-hee gah hoh-shee dess"]
       ],
+      tips: [
+        { title: "を or が?", jp: "を・が", keys: "particle o wo ga object subject want understand drink eat",
+          lead: "The word after decides, not the thing itself.",
+          cols: [
+            { mark: "を", ro: "o", label: "an action", ex: [["コーヒー", "を", "のみます", "kōhī o nomimasu", "I drink coffee"], ["なに", "を", "たべますか", "nani o tabemasu ka", "What will you eat?"]] },
+            { mark: "が", ro: "ga", label: "a state", ex: [["コーヒー", "が", "ほしいです", "kōhī ga hoshii desu", "I want coffee"], ["にほんご", "が", "わかります", "nihongo ga wakarimasu", "I understand Japanese"]] }
+          ],
+          foot: "が also with じょうず and すき. But 〜たい (want to do) keeps を: コーヒーをのみたいです." }
+      ],
       dialogues: [
         { title: "Speak Easy · my favorite café", note: "Pimsleur dialogue, lesson 7.", lines: [
           ["A", "いまなにかたべますか。", "ima nanika tabemasu ka?", "Are you going to eat something now?"],

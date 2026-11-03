@@ -738,6 +738,30 @@ body.searching #quizHint{display:block}
 mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;padding:0 1px}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) mark{background:oklch(55.4% 0.135 66.442 / .55)} }
 :root[data-theme="dark"] mark{background:oklch(55.4% 0.135 66.442 / .55)}
+
+/* grammar note */
+.tip{margin:16px 0 6px;padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.group > .tip{grid-column:1/-1}
+.tip .tag{margin-bottom:10px}
+.tip-head{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;margin-bottom:12px}
+.tip-badge{grid-row:span 2;width:28px;height:28px;border-radius:50%;background:var(--track);color:var(--muted);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-weight:700;font-size:15px}
+.tip-title{font-family:var(--serif);font-weight:700;font-size:17px}
+.tip-lead{font-size:13px;color:var(--muted)}
+.tip-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tip-col{background:var(--track);border-radius:12px;padding:12px}
+.tip-mark{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.tip-mark b{font-family:var(--jp);font-weight:400;font-size:30px;line-height:1;color:var(--red)}
+.tip-mark span{font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.05em}
+.tip-ex{display:flex;flex-direction:column;padding:6px 0;border-top:1px solid var(--line)}
+.tip-ja{font-family:var(--jp);font-size:17px;color:var(--kana);line-height:1.4}
+.tip-ja .tseg{display:inline-block}
+@media (max-width: 520px){ .tip-ja{font-size:15.5px} .tip{padding:14px} .tip-col{padding:10px} }
+.tip-ja .pt{font-weight:400;color:var(--red);background:color-mix(in srgb, var(--red) 12%, transparent);border-radius:4px;padding:0 2px;margin:0 1px}
+.tip-ro{font-size:12.5px;font-weight:600;color:var(--soft)}
+.tip-en{font-size:12.5px;color:var(--muted)}
+.tip-foot{margin:10px 2px 0;font-size:12.5px;line-height:1.5;color:var(--muted);font-family:var(--jp)}
+.res-tips{margin-top:8px}
+@media (max-width: 380px){ .tip-cols{grid-template-columns:1fr} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -980,6 +1004,16 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     }
     return out + (open ? "</mark>" : "");
   }
+  /* grammar notes: one reusable visual, two columns that compare */
+  var TIPS = [];
+  function tipHTML(t, tag){
+    function ex(e){ return '<div class="tip-ex"><span class="tip-ja"><span class="tseg">' + hl(e[0]) + '<b class="pt">' + esc(e[1]) + '</b></span><span class="tseg">' + hl(e[2]) + '</span></span><span class="tip-ro">' + hl(e[3]) + '</span><span class="tip-en">' + hl(e[4]) + '</span></div>'; }
+    return '<div class="tip">' + (tag ? '<span class="tag t-lesson">' + esc(tag) + ' · Note</span>' : '') +
+      '<div class="tip-head"><span class="tip-badge" aria-hidden="true">i</span><span class="tip-title">' + hl(t.title) + '</span><span class="tip-lead">' + hl(t.lead) + '</span></div>' +
+      '<div class="tip-cols">' + t.cols.map(function(c){
+        return '<div class="tip-col"><div class="tip-mark"><b lang="ja">' + esc(c.mark) + '</b><span>' + esc(c.ro) + ' · ' + hl(c.label) + '</span></div>' + c.ex.map(ex).join("") + '</div>';
+      }).join("") + '</div>' + (t.foot ? '<p class="tip-foot">' + hl(t.foot) + '</p>' : '') + '</div>';
+  }
   function cardHTML(o, withTag){
     return '<div class="card k-'+o.type+'" data-id="'+o.id+'">'+
       (o.num && !withTag ? '<span class="num">'+o.num+'</span>' : '')+
@@ -1042,6 +1076,10 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
         h += '<h3 class="subsec">Sentences</h3>';
         L.sentences.forEach(function(w,i){ h += card(w, pad(i), { type: "lesson", tag: lt, sub: "Sentence" }); });
       }
+      (L.tips || []).forEach(function(t){
+        TIPS.push({ t: t, tag: lt, search: norm([t.title, t.jp, t.lead, t.foot, t.keys].concat(t.cols.map(function(c){ return c.mark + " " + c.ro + " " + c.label + " " + c.ex.map(function(e){ return e.join(" "); }).join(" "); })).join(" ")) });
+        h += tipHTML(t);
+      });
       var dlgs = L.dialogues || (L.dialogue && L.dialogue.length ? [{ title: L.dialogueTitle, note: L.dialogueNote, lines: L.dialogue }] : []);
       dlgs.forEach(function(D){
         h += '<details class="dlg"><summary>'+esc(D.title || "Put together · dialogue")+'</summary>';
@@ -1209,10 +1247,12 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     ORDER.forEach(function(id){ var o = ITEMS[id]; if (words.every(function(w){ return o.search.indexOf(w) > -1; })) groups[o.type].push(o); });
     Object.keys(groups).forEach(function(k){ groups[k] = groups[k].map(function(o, i){ return { o: o, s: score(o), i: i }; }).sort(function(a, b){ return a.s - b.s || a.i - b.i; }).map(function(x){ return x.o; }); });
     var first = currentTab === "phrases" ? ["phrase", "lesson"] : ["lesson", "phrase"];
-    var total = groups.lesson.length + groups.phrase.length;
+    var tips = TIPS.filter(function(x){ return words.every(function(w){ return x.search.indexOf(w) > -1; }); });
+    var total = groups.lesson.length + groups.phrase.length + tips.length;
     var h = '<p class="res-count"><b>' + total + '</b> result' + (total === 1 ? '' : 's') + ' for “' + esc(qEl.value.trim()) + '” across the whole app</p>';
     if (!total) h += '<p class="empty-state">Nothing matches in your lessons or phrases.</p>';
-    else if (!groups[first[0]].length) h += '<p class="res-none">Nothing in ' + (first[0] === "lesson" ? "Lessons" : "Phrases") + ', showing matches from ' + (first[0] === "lesson" ? "Phrases" : "Lessons") + '.</p>';
+    if (tips.length) h += '<div class="res-tips">' + tips.map(function(x){ return tipHTML(x.t, x.tag); }).join("") + '</div>';
+    if (total && !groups[first[0]].length && (groups.lesson.length + groups.phrase.length)) h += '<p class="res-none">Nothing in ' + (first[0] === "lesson" ? "Lessons" : "Phrases") + ', showing matches from ' + (first[0] === "lesson" ? "Phrases" : "Lessons") + '.</p>';
     first.forEach(function(k){
       var list = groups[k]; if (!list.length) return;
       h += '<div class="group res-group">' + secHead(k === "lesson" ? "In Lessons" : "In Phrases", k === "lesson" ? "レッスン" : "フレーズ", list.length) +
@@ -1599,7 +1639,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 22:15";
+  var APP_VERSION = "3 Nov 22:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
