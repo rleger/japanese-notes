@@ -536,6 +536,99 @@ header.top{gap:10px}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .sync-state.s-ok{color:oklch(84.5% 0.143 164.978)} }
 :root[data-theme="dark"] .sync-state.s-ok{color:oklch(84.5% 0.143 164.978)}
 @media (max-width: 380px){ header.top .refresh{width:40px;height:40px} .top p{display:none} }
+
+/* ================= v2: controls, practice, kana colour, kana page ================= */
+:root{ --track:oklch(96.7% 0.003 264.542); --seg-on:#FFFFFF; --seg-ink:oklch(44.6% 0.03 256.802); --on-bg:oklch(27.9% 0.041 260.031); --on-ink:#FFFFFF; --kana:oklch(28.2% 0.091 267.935); --ok-bg:oklch(97.9% 0.021 166.113); --ok-line:oklch(84.5% 0.143 164.978); --ok-ink:oklch(43.2% 0.095 166.913); --flame:oklch(76.9% 0.188 70.08); --flame-bg:oklch(98.7% 0.022 95.277); --flame-ink:oklch(47.3% 0.137 46.201); }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --track:oklch(27.8% 0.033 256.848); --seg-on:oklch(37.3% 0.034 259.733); --seg-ink:oklch(87.2% 0.01 258.338); --on-bg:oklch(96.8% 0.007 247.896); --on-ink:oklch(20.8% 0.042 265.755); --kana:oklch(88.2% 0.059 254.128); --ok-bg:oklch(69.6% 0.17 162.48 / .16); --ok-line:oklch(69.6% 0.17 162.48 / .45); --ok-ink:oklch(90.5% 0.093 164.15); --flame:oklch(76.9% 0.188 70.08); --flame-bg:oklch(76.9% 0.188 70.08 / .15); --flame-ink:oklch(92.4% 0.12 95.746); } }
+:root[data-theme="dark"]{ --track:oklch(27.8% 0.033 256.848); --seg-on:oklch(37.3% 0.034 259.733); --seg-ink:oklch(87.2% 0.01 258.338); --on-bg:oklch(96.8% 0.007 247.896); --on-ink:oklch(20.8% 0.042 265.755); --kana:oklch(88.2% 0.059 254.128); --ok-bg:oklch(69.6% 0.17 162.48 / .16); --ok-line:oklch(69.6% 0.17 162.48 / .45); --ok-ink:oklch(90.5% 0.093 164.15); --flame:oklch(76.9% 0.188 70.08); --flame-bg:oklch(76.9% 0.188 70.08 / .15); --flame-ink:oklch(92.4% 0.12 95.746); }
+
+/* segmented controls: grey track, the chosen option lifts as a white pill */
+.seg{display:grid;gap:3px;padding:3px;background:var(--track);border:0;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line);overflow:visible}
+.seg button{min-height:40px;border:0 !important;border-radius:9px;background:transparent;color:var(--seg-ink);font-size:14.5px;font-weight:600;box-shadow:none;transition:background .15s,color .15s,box-shadow .15s}
+.seg button[aria-checked="true"]{background:var(--seg-on);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0 / .1), 0 0 0 1px rgb(0 0 0 / .04)}
+.pm-seg{margin-top:16px}
+.pm-seg button{min-height:42px;font-size:15px}
+
+/* multi-select chips: outline when off, filled with a check when on */
+.chips button{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 14px;border:1px solid var(--line-strong);background:var(--card);color:var(--ctl-ink);box-shadow:var(--shadow);font-size:14px}
+.chips button[aria-pressed="true"]{background:var(--on-bg);border-color:var(--on-bg);color:var(--on-ink);box-shadow:none;padding-left:10px}
+.chips button[aria-pressed="true"]::before{content:"";width:14px;height:14px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
+.chips .favchip[aria-pressed="true"]{background:var(--on-bg);border-color:var(--on-bg);color:var(--on-ink)}
+.chips .favchip[aria-pressed="true"]::before{display:none}
+.chips button:disabled{opacity:.35;box-shadow:none}
+
+/* toggle buttons (Quiz, ro, あa, Trace, character picker): filled when on */
+.quizsel.on, .rotoggle[aria-pressed="true"], .toggle[aria-pressed="true"], .wbtn[aria-pressed="true"], .wpick button[aria-pressed="true"], .st-brk[aria-pressed="true"]{background:var(--on-bg);border-color:var(--on-bg);color:var(--on-ink);box-shadow:none}
+.rotoggle[aria-pressed="true"] span{text-decoration:none}
+#roBtn[aria-pressed="true"] span{text-decoration:line-through}
+
+/* answers: green for right, red for wrong */
+.kq-opt.right{background:var(--ok-bg);border:1px solid var(--ok-line);color:var(--ok-ink)}
+.kq-opt.wrong{background:var(--hot-bg);border:1px solid var(--hot-line);color:var(--hot-ink)}
+
+/* practice layout */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:2px 16px;margin:14px 0 0}
+.pcard .fc-opt{margin:0;padding:14px 0}
+.pcard .fc-opt + .fc-opt{border-top:1px solid var(--line)}
+.fc-lab{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+#fcModeHint{font-size:12.5px}
+.fc-start{color:#fff;margin-top:16px;border-radius:14px;min-height:52px;font-size:16.5px;box-shadow:0 1px 2px rgb(0 0 0 / .12)}
+.kweak.pcard, .pcheat.pcard{padding:14px 16px 16px;margin-top:18px}
+#pmKana > h2.sec, #pmPrices > h2.sec{margin-top:20px}
+.kquick{margin-top:6px}
+
+/* progress card */
+.prog{margin:14px 0 0;padding:16px 16px 6px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow)}
+.prog-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.prog-title{font-family:var(--serif);font-size:17px;font-weight:700}
+.streak-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--track);color:var(--muted)}
+.streak-pill svg{width:14px;height:14px}
+.streak-pill.on{background:var(--flame-bg);color:var(--flame-ink)}
+.streak-pill.on svg{color:var(--flame)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stat{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;background:var(--track)}
+.stat b{font-size:24px;line-height:1.1;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat span{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted)}
+.stat span::before{content:"";width:8px;height:8px;border-radius:50%}
+.s-k span::before{background:var(--bar-k)}
+.s-l span::before{background:var(--bar-l)}
+.s-n span::before{background:var(--card);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.prog .pbar{height:6px;margin:14px 0 6px}
+.prog-det{border-top:1px solid var(--line);margin-top:10px}
+.prog-det summary{padding:10px 0;min-height:40px}
+
+/* all Japanese text in one quiet ink: Tailwind blue-950 (blue-200 in dark mode) */
+.card .ja, .line .ja, .st-ja, .fc-front.ja, .fc-back .ja, .kcell .k, .tile .big, .tile .ex, .kq-prompt.ja, .kq-opt.ja, .kb-k, .kchip .k, .pread .ja, .pcell .ja, .winfo .wch, .kfirst, .wpick button:not([aria-pressed="true"]), .ja-plain, .ja-ruby ruby{color:var(--kana)}
+.wink path{stroke:var(--kana)}
+.kq-opt.ja.right, .kq-opt.ja.wrong{color:inherit}
+
+/* kana page: each block is a card, calmer grids */
+#panel-kana .kblock{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:4px 16px 18px;margin-top:16px}
+#panel-kana .kblock > h2.sec:first-child{margin-top:14px}
+#panel-kana .kblock h2.sec{margin:26px 0 6px}
+#panel-kana .kblock > h2.sec:first-child{margin-top:14px}
+#panel-kana p.hint{margin:0 0 14px;line-height:1.5}
+.kgrid{grid-template-columns:30px repeat(5,minmax(0,1fr));gap:6px}
+.kgrid .h{font-size:11px;color:var(--muted);padding:0 0 2px}
+.kgrid .lab{font-size:11px;color:var(--muted)}
+.kcell{min-height:64px;border-color:var(--line);border-radius:12px;box-shadow:none;background:var(--card)}
+.kcell .r{font-size:12px;color:var(--soft)}
+.kcell.empty{background:transparent;border-color:transparent}
+.kcell.seen{border:1.5px solid var(--red)}
+.cgrid{gap:6px}
+.cgrid .kcell{min-height:56px}
+.tiles{gap:10px}
+#panel-kana .tile{background:var(--track);border:0;border-radius:12px;padding:12px 14px;box-shadow:none}
+#panel-kana .tile p{line-height:1.45}
+#writeBlock .wmain{margin-top:4px}
+.wpick{gap:6px;margin-top:18px}
+@media (min-width: 1080px){
+  #panel-kana:not([hidden]){column-gap:20px}
+  #panel-kana .kblock{margin-top:20px}
+}
+@media (min-width: 760px){
+  .pcard, .prog{padding-left:20px;padding-right:20px}
+}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -595,6 +688,7 @@ header.top{gap:10px}
     <div id="pmCards">
     <div id="fcSetup">
       <div class="prog" id="fcProgress"></div>
+      <div class="pcard">
       <div class="fc-opt"><span class="fc-lab" id="lbMode">Mode</span>
         <div class="seg seg2" role="radiogroup" aria-labelledby="lbMode" data-opt="mode">
           <button type="button" role="radio" data-v="due">Due today</button>
@@ -615,6 +709,7 @@ header.top{gap:10px}
         </div></div>
       <div class="fc-opt"><span class="fc-lab">From</span>
         <div class="chips" id="fcSources"></div></div>
+      </div>
       <button type="button" class="fc-start" id="fcStart">Start</button>
     </div>
 
@@ -1218,7 +1313,9 @@ header.top{gap:10px}
     function renderProgress(){
       var tot = { known: 0, learning: 0, "new": 0 }, per = {};
       pool.forEach(function(c){ var lv = level(c); tot[lv]++; per[c.src] = per[c.src] || { known: 0, learning: 0, "new": 0 }; per[c.src][lv]++; });
-      var st = streak(), h = '<div class="prog-top"><div><b>' + tot.known + '</b> known · ' + tot.learning + ' learning · ' + tot["new"] + ' new</div><div class="streak">' + (st ? st + '-day streak' : 'Start your streak today') + '</div></div>';
+      var st = streak();
+      var h = '<div class="prog-head"><span class="prog-title">Your progress</span><span class="streak-pill' + (st ? ' on' : '') + '"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c.6 3.2-1 5.2-2.6 7C7.8 10.8 6.5 12.5 6.5 15a5.5 5.5 0 0 0 11 0c0-2.1-.9-3.8-2.2-5.2-.3 1.4-1 2.4-2.1 2.9.4-3.6-.6-7.6-1.2-10.7z"/></svg>' + (st ? st + '-day streak' : 'No streak yet') + '</span></div>' +
+        '<div class="stats"><div class="stat s-k"><b>' + tot.known + '</b><span>Known</span></div><div class="stat s-l"><b>' + tot.learning + '</b><span>Learning</span></div><div class="stat s-n"><b>' + tot["new"] + '</b><span>New</span></div></div>';
       h += bar(tot.known, tot.learning, tot["new"]);
       h += '<details class="prog-det"><summary>Progress by lesson</summary><div class="prog-rows">';
       sources.forEach(function(s){ var p = per[s.id]; if (!p) return; var t = p.known + p.learning + p["new"]; h += '<div class="prow"><span>' + esc(s.label) + '</span>' + bar(p.known, p.learning, p["new"]) + '<span class="pn">' + p.known + '/' + t + '</span></div>'; });
@@ -1330,7 +1427,7 @@ header.top{gap:10px}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 09:30";
+  var APP_VERSION = "3 Nov 12:15";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

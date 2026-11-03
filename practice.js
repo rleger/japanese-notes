@@ -46,12 +46,12 @@
     var n = kanaPool().length;
     var h = '<h2 class="sec"><span class="dot" aria-hidden="true"></span>Kana trainer <span class="jp">ひらがな練習</span></h2>' +
       '<p class="hint">Pick the rows you know, then match each character with its sound. Characters you miss come back more often.</p>' +
-      '<div class="fc-opt"><span class="fc-lab">Rows</span><div class="chips" id="kRows">' +
+      '<div class="pcard"><div class="fc-opt"><span class="fc-lab">Rows</span><div class="chips" id="kRows">' +
       ROWS.map(function(r){ return '<button type="button" data-krow="'+r.id+'" aria-pressed="'+(KC.rows[r.id] ? "true" : "false")+'"><span class="kfirst">'+esc(r.items[0][0])+'</span> '+esc(r.label)+'</button>'; }).join("") +
       '</div><div class="kquick"><button type="button" class="link" data-kall="1">Select all</button><button type="button" class="link" data-kall="0">Clear</button></div></div>' +
       '<div class="fc-opt"><span class="fc-lab">Direction</span><div class="seg seg2" data-kdir>' +
       '<button type="button" role="radio" data-v="kr" aria-checked="'+(KC.dir === "kr")+'">あ → a</button>' +
-      '<button type="button" role="radio" data-v="rk" aria-checked="'+(KC.dir === "rk")+'">a → あ</button></div></div>' +
+      '<button type="button" role="radio" data-v="rk" aria-checked="'+(KC.dir === "rk")+'">a → あ</button></div></div></div>' +
       '<button type="button" class="fc-start" id="kStart"'+(n < 4 ? ' disabled' : '')+'>'+(n < 4 ? 'Pick at least one more row' : 'Start · 15 questions')+'</button>' +
       weakList();
     $("pmKana").innerHTML = h;
@@ -60,7 +60,7 @@
     var w = Object.keys(KS).filter(function(k){ return KS[k][1] > 0; }).sort(function(a, b){ return (KS[b][1] - KS[b][0] * .3) - (KS[a][1] - KS[a][0] * .3); }).slice(0, 8);
     if (!w.length) return "";
     var map = {}; allKana().forEach(function(x){ map[x[0]] = x[1]; });
-    return '<div class="kweak"><span class="fc-lab">Your trickiest so far</span><div class="kweak-row">' + w.map(function(k){ return '<button type="button" class="kchip" data-say="'+esc(k)+'"><span class="k">'+esc(k)+'</span><span class="r">'+esc(map[k] || "")+'</span></button>'; }).join("") + '</div></div>';
+    return '<div class="kweak pcard"><span class="fc-lab">Your trickiest so far</span><div class="kweak-row">' + w.map(function(k){ return '<button type="button" class="kchip" data-say="'+esc(k)+'"><span class="k">'+esc(k)+'</span><span class="r">'+esc(map[k] || "")+'</span></button>'; }).join("") + '</div></div>';
   }
   function kanaStart(){
     kq = { n: 0, total: 15, right: 0, missed: {}, last: null };
@@ -184,12 +184,12 @@
   function pricesSetup(){
     var h = '<h2 class="sec"><span class="dot" aria-hidden="true"></span>Numbers and prices <span class="jp">いくらですか</span></h2>' +
       '<p class="hint">Real price tags you will meet: konbini, food, trains, temples, rooms. Prices are read with えん (en) at the end.</p>' +
-      '<div class="fc-opt"><span class="fc-lab">Mode</span><div class="seg seg2" data-pmode>' +
+      '<div class="pcard"><div class="fc-opt"><span class="fc-lab">Mode</span><div class="seg seg2" data-pmode>' +
       '<button type="button" role="radio" data-v="say" aria-checked="'+(PC.mode === "say")+'">Say the price</button>' +
       '<button type="button" role="radio" data-v="pick" aria-checked="'+(PC.mode === "pick")+'">Read the Japanese</button></div>' +
-      '<p class="hint" style="margin:6px 0 0">'+(PC.mode === "say" ? 'You see 1,500円, say it out loud, then tap to check.' : 'You see せんごひゃくえん, pick the right price.')+'</p></div>' +
+      '<p class="hint" style="margin:6px 0 0">'+(PC.mode === "say" ? 'You see 1,500円, say it out loud, then tap to check.' : 'You see せんごひゃくえん, pick the right price.')+'</p></div></div>' +
       '<button type="button" class="fc-start" id="pStart">Start · 10 prices</button>' +
-      '<div class="pcheat"><span class="fc-lab">Sound changes to remember</span><div class="pcheat-grid">' +
+      '<div class="pcheat pcard"><span class="fc-lab">Sound changes to remember</span><div class="pcheat-grid">' +
       [[300, "さんびゃく", "sanbyaku"], [600, "ろっぴゃく", "roppyaku"], [800, "はっぴゃく", "happyaku"], [3000, "さんぜん", "sanzen"], [8000, "はっせん", "hassen"], [10000, "いちまん", "ichiman"], [4, "よえん", "yo en (4 yen)"]].map(function(x){
         return '<button type="button" class="pcell" data-say="'+esc(x[1])+'"><b>'+fmt(x[0])+'</b><span class="ja">'+esc(x[1])+'</span><span class="ro">'+esc(x[2])+'</span></button>';
       }).join("") + '</div><p class="hint" style="margin:8px 0 0">Japanese counts in blocks of 10,000 (まん man): 12,000 = いちまんにせん, "one man two thousand".</p></div>';
