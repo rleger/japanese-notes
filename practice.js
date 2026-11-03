@@ -249,12 +249,14 @@
   /* ======================= WRITING ======================= */
   var W = { ch: store.get("writech") || "あ", timers: [], trace: false, step: 0 };
   var strokesLoading = false;
-  function loadStrokes(cb){
+  var strokeWaiters = [];
+  function loadStrokes(cb, onErr){
     if (window.STROKES){ cb(); return; }
+    strokeWaiters.push([cb, onErr]);
     if (strokesLoading) return; strokesLoading = true;
     var s = document.createElement("script"); s.src = "strokes.js?r=" + Date.now();
-    s.onload = function(){ cb(); };
-    s.onerror = function(){ strokesLoading = false; var a = $("writeArea"); if (a) a.innerHTML = '<p class="hint">Could not load the stroke data. Check your connection and tap refresh.</p>'; };
+    s.onload = function(){ var w = strokeWaiters; strokeWaiters = []; w.forEach(function(x){ x[0](); }); };
+    s.onerror = function(){ strokesLoading = false; var w = strokeWaiters; strokeWaiters = []; w.forEach(function(x){ if (x[1]) x[1](); }); var a = $("writeArea"); if (a && !window.STROKES) a.innerHTML = '<p class="hint">Could not load the stroke data. Check your connection and tap refresh.</p>'; };
     document.head.appendChild(s);
   }
   function writeRender(){
@@ -374,6 +376,75 @@
   }
   // the kana panel is hidden at first: re-size the canvas when it becomes visible
   document.addEventListener("click", function(e){ if (e.target.closest('[data-tab="kana"]')) setTimeout(function(){ if ($("wCanvas")) sizeCanvas(); }, 50); });
+
+  /* ======================= stroke-order modal (tap any kana) ======================= */
+  var KM = (function(){
+    var root = document.createElement("div");
+    root.className = "kmodal"; root.id = "kModal"; root.hidden = true;
+    root.setAttribute("role", "dialog"); root.setAttribute("aria-modal", "true"); root.setAttribute("aria-label", "How to write it");
+    document.body.appendChild(root);
+    var timers = [], cur = "";
+    function clear(){ timers.forEach(clearTimeout); timers = []; }
+    function romaji(t){
+      var b = A.kanaBreak ? A.kanaBreak(t, "") : [];
+      return b.filter(function(x){ return !x.punct; }).map(function(x){ return x.r || ""; }).join(" ");
+    }
+    function boxSVG(ch){
+      var d = window.STROKES[ch];
+      var h = '<g class="wgrid"><rect x="1" y="1" width="107" height="107" rx="6"/><line x1="54.5" y1="2" x2="54.5" y2="107"/><line x1="2" y1="54.5" x2="107" y2="54.5"/></g>';
+      h += '<g class="wghost">' + d.d.map(function(p){ return '<path d="' + p + '"/>'; }).join("") + '</g>';
+      h += '<g class="wink">' + d.d.map(function(p){ return '<path d="' + p + '"/>'; }).join("") + '</g>';
+      h += '<g class="wnum">' + d.s.map(function(pt, i){ return '<g><circle cx="' + pt[0] + '" cy="' + pt[1] + '" r="5.2"/><text x="' + pt[0] + '" y="' + (pt[1] + 2.1) + '">' + (i + 1) + '</text></g>'; }).join("") + '</g>';
+      return '<svg viewBox="0 0 109 109" aria-hidden="true">' + h + '</svg>';
+    }
+    function play(){
+      clear();
+      var svgs = root.querySelectorAll(".km-box svg"), t = 250;
+      Array.prototype.forEach.call(svgs, function(svg){
+        var inks = svg.querySelectorAll(".wink path"), nums = svg.querySelectorAll(".wnum g");
+        Array.prototype.forEach.call(inks, function(p){ var L = p.getTotalLength(); p._L = L; p.style.transition = "none"; p.style.strokeDasharray = L + " " + L; p.style.strokeDashoffset = L; });
+        Array.prototype.forEach.call(nums, function(g){ g.style.transition = "none"; g.style.opacity = 0; });
+        svg.getBoundingClientRect();
+        Array.prototype.forEach.call(inks, function(p, i){
+          var dur = Math.max(380, p._L * 11);
+          timers.push(setTimeout(function(){
+            nums[i].style.transition = "opacity .2s"; nums[i].style.opacity = 1;
+            p.style.transition = "stroke-dashoffset " + dur + "ms ease-in-out"; p.style.strokeDashoffset = 0;
+          }, t));
+          t += dur + 200;
+        });
+        t += 250;
+      });
+    }
+    function render(){
+      var chars = Array.from(cur).filter(function(c){ return window.STROKES[c]; });
+      if (!chars.length){ close(); toast("No stroke order for this character", 1600); return; }
+      var total = chars.reduce(function(n, c){ return n + window.STROKES[c].d.length; }, 0);
+      root.innerHTML = '<div class="km-card"><div class="km-head"><div><span class="km-ch">' + esc(cur) + '</span><span class="km-ro">' + esc(romaji(cur)) + '</span></div>' +
+        '<button type="button" class="st-icon" data-km="close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>' +
+        '<div class="km-boxes n' + chars.length + '">' + chars.map(function(c){ return '<div class="km-box">' + boxSVG(c) + '</div>'; }).join("") + '</div>' +
+        '<p class="km-info">' + total + ' stroke' + (total > 1 ? 's' : '') + ' · follow the numbers, top to bottom, left to right</p>' +
+        '<div class="km-btns"><button type="button" class="wbtn" data-km="play">▶ Replay</button><button type="button" class="wbtn" data-say="' + esc(cur) + '">Listen</button></div>' +
+        '<p class="credit">Stroke data: KanjiVG, CC BY-SA 3.0</p></div>';
+      play();
+    }
+    function open(text){
+      cur = String(text || "").replace(/[\s、。？！?!・〜~…]/g, "");
+      if (!cur) return;
+      root.hidden = false; document.documentElement.classList.add("st-lock");
+      root.innerHTML = '<div class="km-card"><p class="hint">Loading…</p></div>';
+      loadStrokes(render, function(){ close(); toast("Couldn’t load the stroke data", 1800); });
+    }
+    function close(){ clear(); root.hidden = true; if (document.getElementById("study") && !document.getElementById("study").hidden) return; document.documentElement.classList.remove("st-lock"); }
+    root.addEventListener("click", function(e){
+      if (e.target === root){ close(); return; }
+      var b = e.target.closest("[data-km]"); if (!b) return;
+      if (b.getAttribute("data-km") === "close") close(); else play();
+    });
+    document.addEventListener("keydown", function(e){ if (!root.hidden && e.key === "Escape"){ e.stopPropagation(); close(); } }, true);
+    return { open: open, close: close };
+  })();
+  window.KanaModal = KM;
 
   /* ======================= wiring ======================= */
   var shown = {};

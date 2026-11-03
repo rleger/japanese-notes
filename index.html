@@ -693,6 +693,25 @@ footer.foot > #offline{grid-column:1 / -1;justify-self:center}
 footer.foot > #offline:empty, footer.foot > #voice:empty{display:none}
 footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
 @media (max-width: 520px){ footer.foot{grid-template-columns:1fr 1fr} footer.foot > #voice{grid-column:1 / -1;grid-row:2;justify-self:start;text-align:left} }
+
+/* stroke-order modal */
+.kmodal{position:fixed;inset:0;z-index:45;background:var(--st-bg);display:flex;align-items:center;justify-content:center;padding:16px}
+.km-card{width:100%;max-width:440px;max-height:100%;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-md);padding:16px 18px 14px}
+.km-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.km-ch{font-family:var(--jp);font-size:34px;line-height:1;color:var(--kana);margin-right:12px}
+.km-ro{font-size:17px;font-weight:700;color:var(--soft)}
+.km-boxes{display:grid;gap:10px;grid-template-columns:repeat(var(--n,1),minmax(0,1fr));justify-content:center}
+.km-boxes.n1{--n:1;max-width:280px;margin:0 auto}
+.km-boxes.n2{--n:2}.km-boxes.n3{--n:3}.km-boxes.n4,.km-boxes.n5,.km-boxes.n6{--n:3}
+.km-box{aspect-ratio:1/1;background:var(--card)}
+.km-box svg{width:100%;height:100%;display:block}
+.km-info{margin:12px 0 0;font-size:12.5px;color:var(--muted);text-align:center}
+.km-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.km-card .credit{text-align:center;margin-top:10px}
+.ja-ruby ruby{cursor:pointer}
+
+/* Japanese on a filled (selected) control takes the control's text colour */
+[aria-pressed="true"] .kfirst, [aria-pressed="true"] .ja, [aria-pressed="true"] [lang="ja"], [aria-checked="true"] .kfirst, .kq-opt.right, .kq-opt.wrong{color:inherit}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1086,7 +1105,13 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
       if (window.FCrefresh) window.FCrefresh();
       return;
     }
+    var rb = e.target.closest(".ja-ruby ruby");
+    if (rb && window.KanaModal){
+      var base = Array.prototype.filter.call(rb.childNodes, function(n){ return n.nodeType === 3; }).map(function(n){ return n.textContent; }).join("");
+      e.stopImmediatePropagation(); window.KanaModal.open(base); return;
+    }
     var sp = e.target.closest("[data-say]");
+    if (sp && window.KanaModal && (sp.classList.contains("kcell") || sp.classList.contains("kb-t") || sp.classList.contains("kchip"))) window.KanaModal.open(sp.getAttribute("data-say"));
     if (sp){
       say(sp.getAttribute("data-say"), sp);
       if (sp.classList.contains("kcell") && revealMode()) sp.classList.toggle("open");
@@ -1523,10 +1548,10 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
   }
   document.addEventListener("click", function(e){ var b = e.target.closest("[data-pm]"); if (b) showPm(b.getAttribute("data-pm")); });
 
-  window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
+  window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 13:45";
+  var APP_VERSION = "3 Nov 14:10";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
