@@ -508,6 +508,34 @@ details.skey summary::before{content:"";width:6px;height:6px;border-right:1.5px 
 details.skey[open] summary::before{transform:rotate(45deg)}
 details.skey .keys{margin:6px 0 4px}
 details.skey .keys span{font-size:12px;padding:3px 9px}
+
+/* sync */
+header.top{gap:10px}
+.top p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.syncbtn{position:relative}
+.syncbtn .sdot{position:absolute;top:7px;right:7px;width:8px;height:8px;border-radius:50%;background:transparent;box-shadow:0 0 0 2px var(--card)}
+.syncbtn[data-state="ok"] .sdot{background:oklch(69.6% 0.17 162.48)}
+.syncbtn[data-state="busy"] .sdot{background:var(--line-strong)}
+.syncbtn[data-state="off"] .sdot{background:oklch(76.9% 0.188 70.08)}
+.syncbtn[data-state="error"] .sdot{background:var(--red-btn)}
+.sheet{position:fixed;inset:0;z-index:40;background:var(--st-bg);display:flex;align-items:flex-end;justify-content:center;padding:16px 12px calc(12px + env(safe-area-inset-bottom))}
+.sheet-card{width:100%;max-width:520px;max-height:100%;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-md);padding:18px 18px 20px}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sheet-head h2{margin:0;font-family:var(--serif);font-size:20px}
+.sync-state{margin:0 0 8px;font-weight:600;font-size:15px}
+.sync-state.s-ok{color:oklch(50.8% 0.118 165.612)}
+.sync-state.s-error{color:var(--red)}
+.sync-state.s-off, .sync-state.s-busy{color:var(--muted)}
+.sync-steps{margin:0 0 12px;padding-left:20px;font-size:13px;color:var(--soft);line-height:1.5}
+.sync-steps li{margin:4px 0}
+.sync-input{width:100%;min-height:46px;border:1px solid var(--line-strong);border-radius:12px;padding:0 12px;font-size:16px;background:var(--card);color:var(--ink);font-family:ui-monospace,Menlo,monospace}
+.sheet-row .fc-start{margin-top:12px}
+.sheet-sep{height:1px;background:var(--line);margin:18px 0 12px}
+.sheet-two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (min-width: 760px){ .sheet{align-items:center} }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .sync-state.s-ok{color:oklch(84.5% 0.143 164.978)} }
+:root[data-theme="dark"] .sync-state.s-ok{color:oklch(84.5% 0.143 164.978)}
+@media (max-width: 380px){ header.top .refresh{width:40px;height:40px} .top p{display:none} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -752,7 +780,8 @@ details.skey .keys span{font-size:12px;padding:3px 9px}
   var favs = {};
   try { (JSON.parse(store.get("favs") || "[]") || []).forEach(function(k){ favs[k] = 1; }); } catch(e){}
   function isFav(ja){ return !!favs[favKey(ja)]; }
-  function setFav(ja, on){ var k = favKey(ja); if (on) favs[k] = 1; else delete favs[k]; store.set("favs", JSON.stringify(Object.keys(favs))); }
+  function loadFavs(){ favs = {}; try { (JSON.parse(store.get("favs") || "[]") || []).forEach(function(k){ favs[k] = 1; }); } catch(e){} }
+  function setFav(ja, on){ loadFavs(); var k = favKey(ja); if (on) favs[k] = 1; else delete favs[k]; store.set("favs", JSON.stringify(Object.keys(favs))); }
   function starBtn(ja){ var on = isFav(ja); return '<button type="button" class="star" data-fav="'+esc(ja)+'" aria-pressed="'+(on?"true":"false")+'" aria-label="'+(on?"Remove from":"Add to")+' favorites">'+STAR_SVG+'</button>'; }
   var STAR_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>';
   function pad(i){ return (i < 9 ? "0" : "") + (i+1); }
@@ -1301,7 +1330,7 @@ details.skey .keys span{font-size:12px;padding:3px 9px}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 00:30";
+  var APP_VERSION = "3 Nov 09:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
@@ -1369,5 +1398,6 @@ details.skey .keys span{font-size:12px;padding:3px 9px}
 })();
 </script>
 <script>document.write('<script src="practice.js?r=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="sync.js?r=' + Date.now() + '"><\/script>');</script>
 </body>
 </html>

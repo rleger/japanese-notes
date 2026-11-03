@@ -1,12 +1,13 @@
 /* Offline support: always try the network first, bypassing the browser cache,
    so updates show up immediately; fall back to the saved copy when offline. */
-const CACHE = "jp-notes-v23";
+const CACHE = "jp-notes-v24";
 const FILES = [
   "./",
   "index.html",
   "data.js",
   "practice.js",
   "strokes.js",
+  "sync.js",
   "manifest.webmanifest",
   "icons/apple-touch-icon.png",
   "icons/icon-192.png",
