@@ -670,6 +670,29 @@ header.top{gap:10px}
 .fc-ruby small{font-size:10px;font-weight:700;line-height:1}
 .fc-ruby[aria-pressed="true"]{background:var(--on-bg);border-color:var(--on-bg);color:var(--on-ink);box-shadow:none}
 body.kana-ruby .fc-back .ja{line-height:1.8}
+
+/* flash card: question and answer centred, the note sits at the bottom like a footnote */
+.fc-card{justify-content:flex-start;gap:0;padding:52px 22px 18px}
+.fc-front{margin-top:auto;padding:0 8px}
+.fc-back{margin-bottom:auto;margin-top:18px;padding-top:18px;gap:6px;align-items:center}
+.fc-back .ja{font-size:30px;line-height:1.35}
+.fc-back .ro{font-size:16px;font-weight:600;color:var(--soft)}
+.fc-back .sl{font-size:14px}
+.fc-back .en{font-size:19px;font-weight:600}
+.fc-note{display:block;width:100%;margin-top:22px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.5;color:var(--muted);font-family:var(--jp);text-align:left}
+.fc-card:not(:has(.fc-back:not([hidden]))) .fc-front{margin-bottom:auto}
+.fc-tap{position:static;margin-top:auto;padding-top:16px}
+.fc-card .fc-back:not([hidden]) ~ .fc-tap{display:none}
+
+/* footer: three even columns, nothing empty taking space */
+footer.foot{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-top:40px;padding:16px 0 4px;font-size:12px}
+footer.foot > :first-child{justify-self:start}
+footer.foot > #voice{justify-self:center;text-align:center}
+footer.foot > #ver{justify-self:end}
+footer.foot > #offline{grid-column:1 / -1;justify-self:center}
+footer.foot > #offline:empty, footer.foot > #voice:empty{display:none}
+footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
+@media (max-width: 520px){ footer.foot{grid-template-columns:1fr 1fr} footer.foot > #voice{grid-column:1 / -1;grid-row:2;justify-self:start;text-align:left} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -766,6 +789,7 @@ body.kana-ruby .fc-back .ja{line-height:1.8}
           <span class="fc-tag" id="fcTag"></span>
           <span class="fc-front" id="fcFront"></span>
           <span class="fc-back" id="fcBack" hidden></span>
+          <span class="fc-note" id="fcNote" hidden></span>
           <span class="fc-tap" id="fcTap">Tap to flip</span>
         </button>
         <button type="button" class="star fc-star" id="fcStar" aria-pressed="false" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></button>
@@ -1422,7 +1446,7 @@ body.kana-ruby .fc-back .ja{line-height:1.8}
       var f = $("fcFront");
       if (cur.dir === "je"){ f.className = "fc-front ja"; f.innerHTML = jaHTML(c.ja, c.ro) + '<span class="ro">' + esc(c.ro) + '</span>'; }
       else { f.className = "fc-front"; f.textContent = cleanEn(c.en); }
-      $("fcBack").hidden = true; $("fcTap").hidden = false; $("fcActions").hidden = true;
+      $("fcBack").hidden = true; $("fcNote").hidden = true; $("fcTap").hidden = false; $("fcActions").hidden = true;
       $("fcSpeak").style.visibility = cur.dir === "je" ? "visible" : "hidden";
       $("fcSpeak").setAttribute("data-say", c.ja);
       setStar();
@@ -1432,9 +1456,9 @@ body.kana-ruby .fc-back .ja{line-height:1.8}
       flipped = true; var c = cur.c, h = "";
       if (cur.dir === "je") h = (document.body.classList.contains("no-ro") ? '<span class="ro">' + esc(c.ro) + '</span>' : '') + '<span class="en">' + esc(c.en) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
       else h = '<span class="ja">' + jaHTML(c.ja, c.ro) + '</span><span class="ro">' + esc(c.ro) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
-      if (c.note) h += '<span class="note">' + esc(c.note) + '</span>';
       flipCard($("fcCard"), function(){
         $("fcBack").innerHTML = h; $("fcBack").hidden = false; $("fcTap").hidden = true;
+        $("fcNote").textContent = c.note || ""; $("fcNote").hidden = !c.note;
         $("fcSpeak").style.visibility = "visible";
       });
       $("fcActions").hidden = false;
@@ -1502,7 +1526,7 @@ body.kana-ruby .fc-back .ja{line-height:1.8}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 13:30";
+  var APP_VERSION = "3 Nov 13:45";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

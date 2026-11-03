@@ -1,6 +1,6 @@
 /* Offline support: always try the network first, bypassing the browser cache,
    so updates show up immediately; fall back to the saved copy when offline. */
-const CACHE = "jp-notes-v30";
+const CACHE = "jp-notes-v31";
 const FILES = [
   "./",
   "index.html",
