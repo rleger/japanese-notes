@@ -662,6 +662,14 @@ header.top{gap:10px}
 /* flip */
 .fc-wrap, .st-stage{perspective:1200px}
 .fc-card, .st-card{backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-style:preserve-3d}
+
+/* sounds toggle on the flash card */
+.fc-tools{display:inline-flex;align-items:center;gap:10px}
+.fc-ruby{display:inline-flex;align-items:baseline;justify-content:center;gap:0;width:40px;height:34px;padding-top:7px;border:1px solid var(--line-strong);border-radius:10px;background:var(--card);color:var(--ctl-ink);box-shadow:var(--shadow);cursor:pointer}
+.fc-ruby span{font-family:var(--jp);font-size:16px;line-height:1}
+.fc-ruby small{font-size:10px;font-weight:700;line-height:1}
+.fc-ruby[aria-pressed="true"]{background:var(--on-bg);border-color:var(--on-bg);color:var(--on-ink);box-shadow:none}
+body.kana-ruby .fc-back .ja{line-height:1.8}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -749,7 +757,8 @@ header.top{gap:10px}
     <div id="fcPlay" hidden>
       <div class="fc-top">
         <span id="fcProg"></span>
-        <button type="button" class="link" id="fcStop">End</button>
+        <span class="fc-tools"><button type="button" class="fc-ruby" id="fcRuby" data-ruby-toggle aria-pressed="false" aria-label="Show the sound of each hiragana"><span lang="ja">あ</span><small>a</small></button>
+        <button type="button" class="link" id="fcStop">End</button></span>
       </div>
       <div class="fc-bar" aria-hidden="true"><span id="fcBarFill"></span></div>
       <div class="fc-wrap">
@@ -1079,11 +1088,13 @@ header.top{gap:10px}
   function setRuby(on){
     document.body.classList.toggle("kana-ruby", on);
     rubyBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-ruby-toggle]"), function(b){ b.setAttribute("aria-pressed", on ? "true" : "false"); });
     rubyBtn.setAttribute("aria-label", on ? "Hide the sound of each hiragana" : "Show the sound of each hiragana");
     store.set("ruby", on ? "1" : "0");
   }
   rubyBtn.addEventListener("click", function(){ var on = !document.body.classList.contains("kana-ruby"); setRuby(on); toast(on ? "Each character now shows its sound" : "Sounds hidden", 1800); });
   setRuby(store.get("ruby") === "1");
+  document.addEventListener("click", function(e){ if (e.target.closest("[data-ruby-toggle]")) rubyBtn.click(); });
 
   /* search: everything, current tab first */
   var qEl = document.getElementById("q");
@@ -1420,7 +1431,7 @@ header.top{gap:10px}
       if (!cur || flipped) return;
       flipped = true; var c = cur.c, h = "";
       if (cur.dir === "je") h = (document.body.classList.contains("no-ro") ? '<span class="ro">' + esc(c.ro) + '</span>' : '') + '<span class="en">' + esc(c.en) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
-      else h = '<span class="ja">' + esc(c.ja) + '</span><span class="ro">' + esc(c.ro) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
+      else h = '<span class="ja">' + jaHTML(c.ja, c.ro) + '</span><span class="ro">' + esc(c.ro) + '</span>' + (c.sl ? '<span class="sl">' + esc(c.sl) + '</span>' : "");
       if (c.note) h += '<span class="note">' + esc(c.note) + '</span>';
       flipCard($("fcCard"), function(){
         $("fcBack").innerHTML = h; $("fcBack").hidden = false; $("fcTap").hidden = true;
@@ -1491,7 +1502,7 @@ header.top{gap:10px}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 13:20";
+  var APP_VERSION = "3 Nov 13:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
