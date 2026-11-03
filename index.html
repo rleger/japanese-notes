@@ -712,6 +712,32 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
 
 /* Japanese on a filled (selected) control takes the control's text colour */
 [aria-pressed="true"] .kfirst, [aria-pressed="true"] .ja, [aria-pressed="true"] [lang="ja"], [aria-checked="true"] .kfirst, .kq-opt.right, .kq-opt.wrong{color:inherit}
+
+/* ---------- header search + grouped study options ---------- */
+header.top{flex-wrap:wrap;row-gap:10px}
+.hsearch{order:10;flex:1 1 100%;min-width:0;position:relative}
+.hsearch input{min-height:42px;border-radius:12px;border:1px solid var(--line-strong);background:var(--card);box-shadow:var(--shadow);padding:0 12px 0 38px;font-size:16px}
+.hsearch input:focus{outline:2px solid var(--on-bg);outline-offset:1px}
+.hsearch .sicon{left:13px}
+@media (min-width: 760px){
+  header.top{flex-wrap:nowrap}
+  .hsearch{order:0;flex:0 1 360px;margin-left:auto}
+  .hsearch + .refresh, .hsearch ~ .syncbtn{margin-left:0}
+}
+.tools{padding-top:12px}
+.tbgroup{display:inline-flex;align-items:stretch;border:1px solid var(--line-strong);border-radius:12px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.tbgroup > *{border:0 !important;border-radius:0 !important;box-shadow:none !important;min-height:40px}
+.tbgroup > * + *{border-left:1px solid var(--line) !important}
+.tbgroup .quizsel{padding:0 4px 0 12px}
+.tbgroup .rotoggle{width:46px;height:auto}
+.tbgroup .rubytoggle{padding-top:0;align-items:center}
+.tbgroup .rubytoggle span{transform:translateY(1px)}
+body.searching .tools{display:flex}
+body.searching #quizHint{display:block}
+/* highlighted matches */
+mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) mark{background:oklch(55.4% 0.135 66.442 / .55)} }
+:root[data-theme="dark"] mark{background:oklch(55.4% 0.135 66.442 / .55)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -721,6 +747,11 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
   <div style="flex:1;min-width:0">
     <h1>日本語ノート</h1>
     <p>Japanese study notes · Pimsleur</p>
+  </div>
+  <div class="search hsearch" id="searchBox" role="search">
+    <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <label for="q">Search everything</label>
+    <input id="q" type="search" placeholder="Search lessons and phrases" autocomplete="off" enterkeyhint="search">
   </div>
   <button type="button" class="refresh" id="themeBtn" aria-label="Theme: automatic"></button>
   <button type="button" class="refresh" id="refreshBtn" aria-label="Refresh and clear the saved copy">
@@ -739,6 +770,7 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
 
 <main class="wrap">
   <div class="tools">
+    <div class="tbgroup" role="group" aria-label="Study options">
     <label class="quizsel" id="quizWrap">
       <svg class="qicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
       <select id="quizSel" aria-label="Quiz mode">
@@ -750,10 +782,6 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
     </label>
     <button type="button" class="rotoggle rubytoggle" id="rubyBtn" aria-pressed="false" aria-label="Show the sound of each hiragana"><span lang="ja">あ</span><small>a</small></button>
     <button type="button" class="rotoggle" id="roBtn" aria-pressed="false" aria-label="Hide rōmaji"><span>ro</span></button>
-    <div class="search" id="searchBox" hidden>
-      <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <label for="q">Search phrases</label>
-      <input id="q" type="search" placeholder="Search everything: eki, park, えき…" autocomplete="off">
     </div>
   </div>
   <p class="hint qhint" id="quizHint" hidden>English hidden: say what it means, then tap the card to check.</p>
@@ -935,18 +963,35 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
     }).join("");
   }
   function jaHTML(ja, ro){ return '<span class="ja-plain">' + esc(ja) + '</span><span class="ja-ruby" aria-hidden="true">' + rubyHTML(ja, ro) + '</span>'; }
+  /* highlight the searched words; matching ignores case and macrons (kōen = koen) */
+  var HL = null;
+  function hl(text){
+    text = String(text == null ? "" : text);
+    if (!HL || !HL.length || !text) return esc(text);
+    var nchars = [], map = [];
+    for (var i = 0; i < text.length; i++){ var n = norm(text[i]); for (var j = 0; j < n.length; j++){ nchars.push(n[j]); map.push(i); } }
+    var ns = nchars.join(""), marks = new Array(text.length + 1).join("0").split("");
+    HL.forEach(function(w){ if (!w) return; var k = ns.indexOf(w); while (k > -1){ for (var x = k; x < k + w.length; x++) marks[map[x]] = "1"; k = ns.indexOf(w, k + w.length); } });
+    var out = "", open = false;
+    for (var c = 0; c < text.length; c++){
+      if (marks[c] === "1" && !open){ out += "<mark>"; open = true; }
+      if (marks[c] !== "1" && open){ out += "</mark>"; open = false; }
+      out += esc(text[c]);
+    }
+    return out + (open ? "</mark>" : "");
+  }
   function cardHTML(o, withTag){
     return '<div class="card k-'+o.type+'" data-id="'+o.id+'">'+
       (o.num && !withTag ? '<span class="num">'+o.num+'</span>' : '')+
       '<div class="body">'+
         (withTag ? tagHTML(o) : '')+
-        '<div class="ja">'+jaHTML(o.ja, o.ro)+'</div>'+
-        '<div class="ro">'+esc(o.ro)+'</div>'+
-        (o.sl ? '<div class="sl">'+esc(o.sl)+'</div>' : '')+
+        '<div class="ja">'+(HL ? '<span class="ja-plain">'+hl(o.ja)+'</span><span class="ja-ruby" aria-hidden="true">'+rubyHTML(o.ja, o.ro)+'</span>' : jaHTML(o.ja, o.ro))+'</div>'+
+        '<div class="ro">'+hl(o.ro)+'</div>'+
+        (o.sl ? '<div class="sl">'+hl(o.sl)+'</div>' : '')+
         '<div class="reveal reveal-ja">Tap to study, the Japanese is hidden</div>'+
         '<div class="reveal reveal-en">Tap to study, the English is hidden</div>'+
-        '<div class="en">'+esc(o.en)+'</div>'+
-        (o.note ? '<div class="note">'+esc(o.note)+'</div>' : '')+
+        '<div class="en">'+hl(o.en)+'</div>'+
+        (o.note ? '<div class="note">'+hl(o.note)+'</div>' : '')+
       '</div><div class="acts">'+ speakBtn(o.ja) + starBtn(o.ja) +
     '</div></div>';
   }
@@ -1066,14 +1111,13 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
       b.tabIndex = on ? 0 : -1;
       document.getElementById("panel-"+b.getAttribute("data-tab")).hidden = !on;
     });
-    document.getElementById("searchBox").hidden = name === "kana" || name === "cards";
     document.body.classList.toggle("on-cards", name === "cards");
     currentTab = name;
     runSearch();
     store.set("tab", name);
     window.scrollTo(0,0);
   }
-  tabs.forEach(function(b){ b.addEventListener("click", function(){ show(b.getAttribute("data-tab")); }); });
+  tabs.forEach(function(b){ b.addEventListener("click", function(){ if (qEl && qEl.value){ qEl.value = ""; } show(b.getAttribute("data-tab")); }); });
 
   /* quiz */
   var quizSel = document.getElementById("quizSel");
@@ -1150,11 +1194,13 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
   var resEl = document.getElementById("searchResults");
   function runSearch(){
     var q = norm(qEl.value.trim());
-    var on = !!q && (currentTab === "lessons" || currentTab === "phrases");
-    ["lessons", "phrases"].forEach(function(n){ document.getElementById("panel-" + n).hidden = on || currentTab !== n; });
+    var on = !!q;
+    ["lessons", "phrases", "kana", "cards"].forEach(function(n){ document.getElementById("panel-" + n).hidden = on || currentTab !== n; });
+    document.body.classList.toggle("searching", on);
     resEl.hidden = !on;
-    if (!on){ resEl.innerHTML = ""; return; }
+    if (!on){ resEl.innerHTML = ""; HL = null; return; }
     var words = q.split(/\s+/).filter(Boolean);
+    HL = words;
     function score(o){
       var hay = norm(o.ja + " " + o.ro + " " + o.en);
       return words.every(function(w){ return new RegExp("(^|[\\s(/,.!?・])" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(hay) || hay.indexOf(w) === 0; }) ? 0 : 1;
@@ -1162,7 +1208,7 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
     var groups = { lesson: [], phrase: [] };
     ORDER.forEach(function(id){ var o = ITEMS[id]; if (words.every(function(w){ return o.search.indexOf(w) > -1; })) groups[o.type].push(o); });
     Object.keys(groups).forEach(function(k){ groups[k] = groups[k].map(function(o, i){ return { o: o, s: score(o), i: i }; }).sort(function(a, b){ return a.s - b.s || a.i - b.i; }).map(function(x){ return x.o; }); });
-    var first = currentTab === "lessons" ? ["lesson", "phrase"] : ["phrase", "lesson"];
+    var first = currentTab === "phrases" ? ["phrase", "lesson"] : ["lesson", "phrase"];
     var total = groups.lesson.length + groups.phrase.length;
     var h = '<p class="res-count"><b>' + total + '</b> result' + (total === 1 ? '' : 's') + ' for “' + esc(qEl.value.trim()) + '” across the whole app</p>';
     if (!total) h += '<p class="empty-state">Nothing matches in your lessons or phrases.</p>';
@@ -1173,7 +1219,9 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
         list.map(function(o){ return cardHTML(o, true); }).join("") + '</div>';
     });
     resEl.innerHTML = h;
+    HL = null;
   }
+  qEl.addEventListener("keydown", function(e){ if (e.key === "Escape"){ qEl.value = ""; runSearch(); qEl.blur(); } });
   document.addEventListener("click", function(e){
     var j = e.target.closest("[data-jump]");
     if (j){ var t = document.getElementById(j.getAttribute("data-jump")); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
@@ -1551,7 +1599,7 @@ footer.foot:not(:has(#voice:not(:empty))){grid-template-columns:1fr 1fr}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 14:10";
+  var APP_VERSION = "3 Nov 22:15";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

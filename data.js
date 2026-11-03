@@ -362,6 +362,7 @@ window.NOTES = {
         ["いいです", "Here: agreeing, “OK”. (Also “no thanks” depending on the tone)", "ii desu", "OK.", "ee-ee dess"],
         ["ここで", "Where an action happens (like どこで). Example: ここでたべます。 I’ll eat here.", "koko de", "Here (at this place).", "koh-koh deh"],
         ["わかりませんか", "Pimsleur shows: わかりませんか", "wakarimasen ka?", "You don’t know? / Don’t you understand?", "wah-kah-ree-mah-sen kah?"],
+        ["いいですか。", "Asking for permission or agreement. Same いい as “good”, said with a rising tone", "ii desu ka?", "Is it OK? / Is that all right?", "ee-ee dess kah?"],
         ["なにを", "Pimsleur shows: 何を. を (read “o”) marks what you eat, drink, want to do. Example: なにをたべますか。 What will you eat?", "nani o", "What (as the object).", "nah-nee oh"]
       ],
       sentences: [
