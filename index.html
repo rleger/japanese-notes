@@ -629,6 +629,39 @@ header.top{gap:10px}
 @media (min-width: 760px){
   .pcard, .prog{padding-left:20px;padding-right:20px}
 }
+
+/* TEMPORARY background test (light mode only) */
+.bgtest{display:flex;align-items:center;gap:8px;max-width:720px;margin:8px auto 0;padding:0 16px;font-size:12px;font-weight:600;color:var(--muted)}
+.bgtest select{font:inherit;font-weight:600;color:var(--ink);background:var(--card);border:1px dashed var(--line-strong);border-radius:8px;padding:4px 8px;min-height:30px}
+@media (min-width: 760px){ .bgtest{max-width:1180px;padding:0 32px} }
+:root:not([data-theme="dark"]) body{background:var(--bg-test, var(--bg))}
+:root:not([data-theme="dark"]) nav.tabs{background:color-mix(in srgb, var(--bg-test, var(--bg)) 92%, transparent)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) body{background:var(--bg)} :root:not([data-theme="light"]) nav.tabs{background:color-mix(in srgb, var(--bg) 92%, transparent)} :root:not([data-theme="light"]) .bgtest{display:none} }
+:root[data-theme="dark"] .bgtest{display:none}
+
+/* practice: source picker */
+.src{display:flex;flex-direction:column;gap:14px}
+.switch-row{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--track);text-align:left;cursor:pointer;color:var(--ink);-webkit-tap-highlight-color:transparent}
+.switch-row .sw-star{font-size:20px;color:var(--line-strong);line-height:1}
+.switch-row[aria-checked="true"] .sw-star{color:var(--flame)}
+.sw-text{flex:1;display:flex;flex-direction:column;gap:1px}
+.sw-text b{font-size:15px}
+.sw-text small{font-size:12.5px;color:var(--muted)}
+.switch{position:relative;width:44px;height:26px;border-radius:13px;background:var(--line-strong);flex-shrink:0;transition:background .15s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgb(0 0 0 / .25);transition:transform .15s}
+.switch-row[aria-checked="true"] .switch{background:var(--on-bg)}
+.switch-row[aria-checked="true"] .switch::after{transform:translateX(18px)}
+:root[data-theme="dark"] .switch-row[aria-checked="true"] .switch::after{background:var(--on-ink)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .switch-row[aria-checked="true"] .switch::after{background:var(--on-ink)} }
+.src-group.off{opacity:.45}
+.src-group.off button:disabled{opacity:1}
+.src-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.src-title{font-size:13px;font-weight:700;color:var(--ink)}
+.src-n{font-weight:600;color:var(--muted);margin-left:4px;font-variant-numeric:tabular-nums}
+.src-q{display:inline-flex;gap:2px;padding:2px;border-radius:8px;background:var(--track)}
+.src-q button{border:0;background:transparent;font-size:12.5px;font-weight:600;color:var(--seg-ink);padding:4px 10px;border-radius:6px;cursor:pointer;min-height:28px}
+.src-q button:active{background:var(--seg-on)}
+.src-q button:disabled{opacity:.5;cursor:default}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -708,7 +741,7 @@ header.top{gap:10px}
           <button type="button" role="radio" data-v="mix">Mixed</button>
         </div></div>
       <div class="fc-opt"><span class="fc-lab">From</span>
-        <div class="chips" id="fcSources"></div></div>
+        <div class="src" id="fcSources"></div></div>
       </div>
       <button type="button" class="fc-start" id="fcStart">Start</button>
     </div>
@@ -1328,8 +1361,18 @@ header.top{gap:10px}
         Array.prototype.forEach.call(g.children, function(b){ b.setAttribute("aria-checked", b.getAttribute("data-v") === cfg[opt] ? "true" : "false"); });
       });
       var favN = pool.filter(function(c){ return isFav(c.ja); }).length;
-      $("fcSources").innerHTML = '<button type="button" class="favchip" data-favonly aria-pressed="'+(cfg.favOnly ? "true" : "false")+'">★ Favorites only' + (favN ? ' (' + favN + ')' : '') + '</button>' +
-        sources.map(function(s){ return '<button type="button" data-src="'+s.id+'" aria-pressed="'+(cfg.src[s.id] && !cfg.favOnly ? "true" : "false")+'"'+(cfg.favOnly ? ' disabled' : '')+'>'+esc(s.label)+'</button>'; }).join("");
+      function chip(s){ return '<button type="button" data-src="'+s.id+'" aria-pressed="'+(cfg.src[s.id] ? "true" : "false")+'"'+(cfg.favOnly ? ' disabled' : '')+'>'+esc(s.label)+'</button>'; }
+      function group(name, title, list){
+        if (!list.length) return "";
+        var on = list.filter(function(s){ return cfg.src[s.id]; }).length;
+        return '<div class="src-group' + (cfg.favOnly ? ' off' : '') + '"><div class="src-head"><span class="src-title">' + title + ' <span class="src-n">' + on + '/' + list.length + '</span></span>' +
+          '<span class="src-q"><button type="button" data-srcset="' + name + ':all"' + (cfg.favOnly ? ' disabled' : '') + '>All</button><button type="button" data-srcset="' + name + ':none"' + (cfg.favOnly ? ' disabled' : '') + '>None</button></span></div>' +
+          '<div class="chips">' + list.map(chip).join("") + '</div></div>';
+      }
+      var lessonsSrc = sources.filter(function(s){ return /^L\d/.test(s.id); }), otherSrc = sources.filter(function(s){ return !/^L\d/.test(s.id); });
+      $("fcSources").innerHTML =
+        '<button type="button" class="switch-row" data-favonly role="switch" aria-checked="'+(cfg.favOnly ? "true" : "false")+'"><span class="sw-star" aria-hidden="true">★</span><span class="sw-text"><b>Favorites only</b><small>' + (favN ? favN + ' starred card' + (favN > 1 ? 's' : '') : 'Star cards with ★ to build this deck') + '</small></span><span class="switch" aria-hidden="true"></span></button>' +
+        group("lessons", "Lessons", lessonsSrc) + group("other", "Phrase sections", otherSrc);
       var f = filtered(), d = dueSplit(f), n = selection().length;
       $("fcModeHint").textContent = cfg.mode === "due"
         ? (d.due.length + " to review · " + d.fresh.length + " new (max " + NEW_PER_DAY + " new a day" + (d.freshAll > d.fresh.length ? ", " + (d.freshAll - d.fresh.length) + " waiting" : "") + ")")
@@ -1394,6 +1437,11 @@ header.top{gap:10px}
       var seg = t.parentNode.getAttribute && t.parentNode.getAttribute("data-opt");
       if (seg){ cfg[seg] = t.getAttribute("data-v"); save(); renderSetup(); return; }
       if (t.hasAttribute("data-favonly")){ cfg.favOnly = !cfg.favOnly; save(); renderSetup(); return; }
+      if (t.hasAttribute("data-srcset")){
+        var ps = t.getAttribute("data-srcset").split(":"), isL = function(id){ return /^L\d/.test(id); };
+        sources.forEach(function(s){ if ((ps[0] === "lessons") === isL(s.id)) cfg.src[s.id] = ps[1] === "all"; });
+        save(); renderSetup(); return;
+      }
       if (t.hasAttribute("data-src")){ var id = t.getAttribute("data-src"); cfg.src[id] = !cfg.src[id]; save(); renderSetup(); return; }
       switch (t.id){
         case "fcStart": start(selection()); break;
@@ -1427,7 +1475,7 @@ header.top{gap:10px}
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 12:15";
+  var APP_VERSION = "3 Nov 12:40";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
@@ -1470,6 +1518,17 @@ header.top{gap:10px}
     toast("Theme: " + LABEL[curTheme], 1600);
   });
   if (window.matchMedia){ var mq = matchMedia("(prefers-color-scheme: dark)"); var onMq = function(){ if (curTheme === "auto") applyTheme("auto"); }; if (mq.addEventListener) mq.addEventListener("change", onMq); else if (mq.addListener) mq.addListener(onMq); }
+
+  /* TEMPORARY: background colour picker for light mode */
+  (function(){
+    var wrap = document.createElement("label");
+    wrap.className = "bgtest"; wrap.innerHTML = '<span>Background (test)</span><select id="bgSel"><option value="#F9FAFB">gray-50 (current)</option><option value="oklch(96.7% 0.003 264.542)">gray-100</option><option value="oklch(92.8% 0.006 264.531)">gray-200</option><option value="oklch(96.8% 0.007 247.896)">slate-100</option><option value="oklch(92.9% 0.013 255.508)">slate-200</option><option value="oklch(96.7% 0.001 286.375)">zinc-100</option><option value="oklch(92% 0.004 286.32)">zinc-200</option><option value="oklch(97% 0 0)">neutral-100</option><option value="oklch(92.2% 0 0)">neutral-200</option><option value="oklch(97% 0.001 106.424)">stone-100</option><option value="oklch(92.3% 0.003 48.717)">stone-200</option><option value="oklch(96% 0.003 325.6)">mauve-100</option><option value="oklch(92.2% 0.005 325.62)">mauve-200</option><option value="oklch(96.3% 0.002 197.1)">mist-100</option><option value="oklch(92.5% 0.005 214.3)">mist-200</option><option value="oklch(96.6% 0.005 106.5)">olive-100</option><option value="oklch(93% 0.007 106.5)">olive-200</option><option value="oklch(96% 0.002 17.2)">taupe-100</option><option value="oklch(92.2% 0.005 34.3)">taupe-200</option></select>';
+    var head = document.querySelector("header.top"); head.parentNode.insertBefore(wrap, head.nextSibling);
+    var sel = wrap.querySelector("select");
+    function apply(v){ if (v && v !== "#F9FAFB") document.documentElement.style.setProperty("--bg-test", v); else document.documentElement.style.removeProperty("--bg-test"); }
+    var saved = store.get("bgtest"); if (saved){ sel.value = saved; apply(saved); }
+    sel.addEventListener("change", function(){ store.set("bgtest", sel.value); apply(sel.value); toast(sel.options[sel.selectedIndex].text, 1200); });
+  })();
 
   /* Refresh button: clear the saved copy, drop the offline worker, reload fresh */
   var refreshBtn = document.getElementById("refreshBtn");
