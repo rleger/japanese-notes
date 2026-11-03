@@ -368,6 +368,7 @@ window.NOTES = {
       sentences: [
         ["なにをたべますか。", "Pimsleur shows: 何を食べますか。", "nani o tabemasu ka?", "What will you eat?", "nah-nee oh tah-beh-mahss kah?"],
         ["ひるごはんをたべます。", "Pimsleur shows: 昼ご飯を食べます。", "hirugohan o tabemasu", "I’ll eat lunch.", "hee-roo-go-hahn oh tah-beh-mahss"],
+        ["コーヒーをのみます。", "Pimsleur shows: コーヒーを飲みます。 を (read “o”) marks what you drink", "kōhī o nomimasu", "I’ll drink coffee. / I’ll have a coffee.", "koh-hee oh noh-mee-mahss"],
         ["コーヒーがほしいです。", "Pimsleur shows: コーヒーが欲しいです。 With ほしい the thing you want takes が, not を", "kōhī ga hoshii desu", "I want a coffee.", "koh-hee gah hoh-shee dess"]
       ],
       dialogues: [
