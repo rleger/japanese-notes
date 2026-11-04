@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-02",
+  updated: "2026-11-04",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -397,6 +397,28 @@ window.NOTES = {
           ["B", "そうですね…わたしのおきにいりのカフェで。", "sō desu ne… watashi no okiniiri no kafe de", "Let me see… at my favorite café."],
           ["A", "いいですね。どこですか。", "ii desu ne. doko desu ka?", "Sounds good. Where is it?"],
           ["B", "あそこです。いきましょう。", "asoko desu. ikimashō", "It’s over there. Let’s go. (〜ましょう = let’s)"]
+        ]}
+      ]
+    },
+    { number: 8, jp: "第8課",
+      words: [
+        ["かいます", "Pimsleur shows: 買います", "kaimasu", "I buy / I’ll buy.", "kye-mahss"],
+        ["かいますか。", "Pimsleur shows: 買いますか。", "kaimasu ka?", "Will you buy (it)?", "kye-mahss kah?"],
+        ["ごとうちグッズ", "Pimsleur shows: ご当地グッズ. Souvenirs you only find in that town or region (local snacks, keychains, mascots). グッズ is katakana, from “goods”", "gotōchi guzzu", "Local souvenirs.", "go-toh-chee goo-zzoo"],
+        ["と", "Joins nouns: コーヒーとこうちゃ (kōhī to kōcha) = coffee and black tea", "to", "And (between things).", "toh"],
+        ["だれ", "Pimsleur shows: 誰", "dare", "Who?", "dah-reh"],
+        ["いまから", "Pimsleur shows: 今から. いま (ima) now + から (kara) from", "ima kara", "From now on / starting now.", "ee-mah kah-rah"],
+        ["ホテル", "Katakana (from “hotel”)", "hoteru", "Hotel.", "hoh-teh-roo"],
+        ["から", "Comes after the word: いまから (ima kara) = from now, ホテルから (hoteru kara) = from the hotel", "kara", "From.", "kah-rah"],
+        ["ホテルのレストラン", "の (no) links two nouns, like “’s”: the hotel’s restaurant", "hoteru no resutoran", "The hotel restaurant.", "hoh-teh-roo noh reh-s’toh-rahn"]
+      ],
+      dialogues: [
+        { title: "Speak Easy · two coffees", note: "Pimsleur dialogue, lesson 8. Notice を (o) with のみます (nomimasu) but が (ga) with ほしい (hoshii).", lines: [
+          ["A", "たなかさん、なにかたべますか。", "Tanaka san, nanika tabemasu ka?", "Mr. / Ms. Tanaka, will you eat something?"],
+          ["B", "いいえ、でもなにかのみたいです。", "iie, demo nanika nomitai desu", "No, but I’d like to drink something."],
+          ["A", "なにをのみますか。", "nani o nomimasu ka?", "What will you drink?"],
+          ["B", "そうですね…こうちゃ、いいえ、コーヒーをのみます。", "sō desu ne… kōcha, iie, kōhī o nomimasu", "Let me see… black tea, no, I’ll have coffee."],
+          ["A", "わたしもコーヒーがほしいです。…すみません！コーヒーをふたつおねがいします。", "watashi mo kōhī ga hoshii desu… sumimasen! kōhī o futatsu onegai shimasu", "I want coffee too… Excuse me! Two coffees, please. (ふたつ futatsu = two things)"]
         ]}
       ]
     }
