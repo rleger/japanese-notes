@@ -406,6 +406,7 @@ window.NOTES = {
         ["かいますか。", "Pimsleur shows: 買いますか。", "kaimasu ka?", "Will you buy (it)?", "kye-mahss kah?"],
         ["ごとうちグッズ", "Pimsleur shows: ご当地グッズ. Souvenirs you only find in that town or region (local snacks, keychains, mascots). グッズ (guzzu) is katakana, from “goods”", "gotōchi guzzu", "Local souvenirs.", "go-toh-chee goo-zzoo"],
         ["と", "Joins nouns: コーヒーとこうちゃ (kōhī to kōcha) = coffee and black tea", "to", "And (between things).", "toh"],
+        ["か", "Between two things it means “or”: コーヒーかこうちゃ (kōhī ka kōcha) = coffee or black tea. At the end of a sentence it makes a question (…ですか, desu ka)", "ka", "Or (between things).", "kah"],
         ["だれ", "Pimsleur shows: 誰", "dare", "Who?", "dah-reh"],
         ["いまから", "Pimsleur shows: 今から. いま (ima) now + から (kara) from", "ima kara", "From now on / starting now.", "ee-mah kah-rah"],
         ["ホテル", "Katakana (from “hotel”)", "hoteru", "Hotel.", "hoh-teh-roo"],
