@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-04",
+  updated: "2026-11-05",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -411,6 +411,9 @@ window.NOTES = {
         ["ホテル", "Katakana (from “hotel”)", "hoteru", "Hotel.", "hoh-teh-roo"],
         ["から", "Comes after the word: いまから (ima kara) = from now, ホテルから (hoteru kara) = from the hotel", "kara", "From.", "kah-rah"],
         ["ホテルのレストラン", "の (no) links two nouns, like “’s”: the hotel’s restaurant", "hoteru no resutoran", "The hotel restaurant.", "hoh-teh-roo noh reh-s’toh-rahn"]
+      ],
+      sentences: [
+        ["レストランはどこですか。", "は is read “wa” here. Same pattern as 上野駅はどこですか (Ueno eki wa doko desu ka, Lesson 4): [place] は どこですか", "resutoran wa doko desu ka?", "Where is the restaurant?", "reh-s’toh-rahn wah doh-koh dess kah?"]
       ],
       dialogues: [
         { title: "Speak Easy · two coffees", note: "Pimsleur dialogue, lesson 8. Notice を (o) with のみます (nomimasu) but が (ga) with ほしい (hoshii).", lines: [
