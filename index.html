@@ -766,6 +766,26 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .tip-cols.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .tip-mark b{white-space:nowrap}
 @media (max-width: 640px){ .tip-cols.n3 .tip-mark b{font-size:24px} .tip-cols.n3{grid-template-columns:1fr} .tip-cols.n3 .tip-col{display:grid;grid-template-columns:1fr 1fr;column-gap:12px} .tip-cols.n3 .tip-mark{grid-column:1/-1} }
+
+/* lesson header: a clear break between lessons + quick quiz */
+#panel-lessons .group + .group{margin-top:28px}
+:root{--lh-bg:oklch(92.3% 0.003 48.717)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--lh-bg:oklch(27.8% 0.033 256.848)} }
+:root[data-theme="dark"]{--lh-bg:oklch(27.8% 0.033 256.848)}
+.lesson-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:28px 0 10px;padding:14px 14px 14px 14px;border:0;border-radius:16px;background:var(--lh-bg);scroll-margin-top:70px}
+.lh-main{display:flex;align-items:center;gap:12px;min-width:0}
+.lh-num{width:44px;height:44px;border-radius:12px;background:var(--on-bg);color:var(--on-ink);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:22px;flex-shrink:0}
+.lh-text{display:flex;flex-direction:column;gap:1px;min-width:0}
+.lh-title{font-family:var(--serif);font-weight:700;font-size:20px;line-height:1.15}
+.lh-jp{font-family:var(--jp);font-weight:400;font-size:15px;color:var(--red);margin-left:4px}
+.lh-sub{font-size:12.5px;font-weight:600;color:var(--muted)}
+.lh-quiz{display:inline-flex;align-items:center;gap:4px;padding:3px;border-radius:12px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.lh-ql{display:inline-flex;align-items:center;gap:4px;padding:0 6px 0 8px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.lh-ql svg{width:12px;height:12px}
+.lh-quiz button{min-height:34px;padding:0 10px;border:0;border-radius:9px;background:transparent;font-size:13.5px;font-weight:600;color:var(--ctl-ink);cursor:pointer}
+.lh-quiz button:hover, .lh-quiz button:active{background:var(--on-bg);color:var(--on-ink)}
+@media (max-width: 420px){ .lh-quiz{width:100%;justify-content:space-between} .lh-quiz button{flex:1} }
+@media (min-width: 760px){ .lesson-head{margin:36px 0 12px;padding:16px 18px} .lh-title{font-size:22px} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1073,7 +1093,12 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     else h += '<div class="jump" role="navigation" aria-label="Jump to a lesson">' + ls.map(function(L){ return '<button type="button" data-jump="lesson-'+L.number+'">Lesson '+L.number+'</button>'; }).join("") + '</div>';
     ls.forEach(function(L){
       h += '<div class="group">';
-      h += '<div class="lesson-head" id="lesson-'+L.number+'"><span class="badge">Lesson '+L.number+'</span><span class="jp">'+esc(L.jp||"")+'</span><span class="count">'+L.words.length+' words'+(L.sentences && L.sentences.length ? ' · '+L.sentences.length+' sentences' : '')+'</span></div>';
+      var dlgN = (L.dialogues || (L.dialogue ? [1] : [])).length;
+      h += '<div class="lesson-head" id="lesson-'+L.number+'">' +
+        '<div class="lh-main"><span class="lh-num">'+L.number+'</span><div class="lh-text"><span class="lh-title">Lesson '+L.number+' <span class="lh-jp">'+esc(L.jp||"")+'</span></span>' +
+        '<span class="lh-sub">'+L.words.length+' words'+(L.sentences && L.sentences.length ? ' · '+L.sentences.length+' sentences' : '')+(dlgN ? ' · '+dlgN+' dialogue'+(dlgN > 1 ? 's' : '') : '')+'</span></div></div>' +
+        '<div class="lh-quiz" role="group" aria-label="Quick quiz on lesson '+L.number+'"><span class="lh-ql"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Quiz</span>' +
+        '<button type="button" data-lquiz="'+L.number+':je">JP → EN</button><button type="button" data-lquiz="'+L.number+':ej">EN → JP</button></div></div>';
       var lt = "Lesson " + L.number;
       L.words.forEach(function(w,i){ h += card(w, pad(i), { type: "lesson", tag: lt, sub: /[。？?！]$/.test(w[0]) ? "Sentence" : "Word" }); });
       if (L.sentences && L.sentences.length){
@@ -1547,8 +1572,9 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
       renderProgress(); updateBadge();
     }
     function view(which){ $("fcSetup").hidden = which !== "setup"; $("fcPlay").hidden = which !== "play"; $("fcDone").hidden = which !== "done"; }
-    function start(list){
-      queue = shuffle(list.map(function(c){ return { c: c, dir: cfg.dir === "mix" ? (Math.random() < .5 ? "je" : "ej") : cfg.dir, missed: false }; }));
+    function start(list, forceDir){
+      var dd = forceDir || cfg.dir;
+      queue = shuffle(list.map(function(c){ return { c: c, dir: dd === "mix" ? (Math.random() < .5 ? "je" : "ej") : dd, missed: false }; }));
       total = queue.length; done = 0; firstTry = 0; missed = []; missedKeys = {};
       view("play"); next(); window.scrollTo(0,0);
     }
@@ -1624,7 +1650,12 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     });
     window.FCrefresh = function(){ if (!$("fcSetup").hidden) renderSetup(); };
     renderSetup(); view("setup");
-    return { refresh: renderSetup };
+    function quick(num, dir){
+      var list = pool.filter(function(c){ return c.src === "L" + num; });
+      if (!list.length){ toast("No cards in this lesson yet", 1500); return; }
+      start(list, dir);
+    }
+    return { refresh: renderSetup, quick: quick };
   })();
 
   /* practice sub-sections */
@@ -1640,10 +1671,16 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   }
   document.addEventListener("click", function(e){ var b = e.target.closest("[data-pm]"); if (b) showPm(b.getAttribute("data-pm")); });
 
+  document.addEventListener("click", function(e){
+    var b = e.target.closest("[data-lquiz]"); if (!b) return;
+    var p = b.getAttribute("data-lquiz").split(":");
+    if (qEl.value){ qEl.value = ""; }
+    show("cards"); showPm("cards"); FC.quick(+p[0], p[1]);
+  });
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "5 Nov 09:05";
+  var APP_VERSION = "5 Nov 12:40";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
