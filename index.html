@@ -786,6 +786,16 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .lh-quiz button:hover, .lh-quiz button:active{background:var(--on-bg);color:var(--on-ink)}
 @media (max-width: 420px){ .lh-quiz{width:100%;justify-content:space-between} .lh-quiz button{flex:1} }
 @media (min-width: 760px){ .lesson-head{margin:36px 0 12px;padding:16px 18px} .lh-title{font-size:22px} }
+
+/* light look: soft glow stone-100 → stone-200, stone-100 control tracks, stone-300 lesson band */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){--track:oklch(97% 0.001 106.424);--chip:oklch(97% 0.001 106.424);--lh-bg:oklch(86.9% 0.005 56.366)}
+  :root:not([data-theme="dark"]) body{background:radial-gradient(120% 70% at 50% 0%, oklch(97% 0.001 106.424) 0%, oklch(92.3% 0.003 48.717) 100%) fixed}
+  :root:not([data-theme="dark"]) nav.tabs{background:color-mix(in srgb, oklch(97% 0.001 106.424) 80%, transparent)}
+}
+:root[data-theme="light"]{--track:oklch(97% 0.001 106.424);--chip:oklch(97% 0.001 106.424);--lh-bg:oklch(86.9% 0.005 56.366)}
+:root[data-theme="light"] body{background:radial-gradient(120% 70% at 50% 0%, oklch(97% 0.001 106.424) 0%, oklch(92.3% 0.003 48.717) 100%) fixed}
+:root[data-theme="light"] nav.tabs{background:color-mix(in srgb, oklch(97% 0.001 106.424) 80%, transparent)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1680,7 +1690,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "5 Nov 13:10";
+  var APP_VERSION = "5 Nov 13:15";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
@@ -1749,6 +1759,5 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 </script>
 <script>document.write('<script src="practice.js?r=' + Date.now() + '"><\/script>');</script>
 <script>document.write('<script src="sync.js?r=' + Date.now() + '"><\/script>');</script>
-<script>document.write('<script src="tune.js?r=' + Date.now() + '"><\/script>');</script>
 </body>
 </html>
