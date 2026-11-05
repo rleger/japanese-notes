@@ -416,6 +416,7 @@ window.NOTES = {
       ],
       sentences: [
         ["コーヒーをおねがいします。", "Pimsleur shows: コーヒーをお願いします。 In quick speech the を (o) is often dropped: コーヒー、おねがいします (kōhī, onegai shimasu)", "kōhī o onegai shimasu", "A coffee, please.", "koh-hee oh oh-neh-guy shee-mahss"],
+        ["いまからなにをしますか。", "Pimsleur shows: 今から何をしますか。 いまから (ima kara) = from now · なにを (nani o) = what · します (shimasu) = to do", "ima kara nani o shimasu ka?", "What are you going to do now?", "ee-mah kah-rah nah-nee oh shee-mahss kah?"],
         ["レストランはどこですか。", "は is read “wa” here. Same pattern as うえのえきはどこですか (Ueno eki wa doko desu ka, Lesson 4): [place] は どこですか (wa doko desu ka)", "resutoran wa doko desu ka?", "Where is the restaurant?", "reh-s’toh-rahn wah doh-koh dess kah?"]
       ],
       dialogues: [
