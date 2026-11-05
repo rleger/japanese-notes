@@ -1126,7 +1126,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   function renderKana(){
     var h = '<div class="kblock">' + secHead("Hiragana", "ひらがな", 46) + '<p class="hint">Tap a character to hear it. Vowels keep their top‑row sound in every row (ka = kah).</p>' + kgrid(N.hiragana) + '</div>';
     h += '<div class="kblock">' + secHead("Two ticks ゛ and a circle ゜", "濁音") + '<p class="hint">か ka becomes が ga, は ha becomes ば ba or ぱ pa.</p>' + kgrid(N.dakuten);
-    h += secHead("Combos with small ゃ ゅ ょ", "拗音") + '<p class="hint">き ki + small ゃ = きゃ kya, one syllable. Red frame: already in your phrases.</p><div class="cgrid">';
+    h += secHead("Combos with small ゃ ゅ ょ", "拗音") + '<p class="hint">き ki + small ゃ (ya) = きゃ kya, one syllable. Red frame: already in your phrases.</p><div class="cgrid">';
     N.combos.heads.forEach(function(hd){
       N.combos.smalls.forEach(function(s){
         var k = hd[0]+s[0], seen = N.combos.seen.indexOf(k) > -1;
@@ -1643,7 +1643,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "3 Nov 22:45";
+  var APP_VERSION = "5 Nov 09:05";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

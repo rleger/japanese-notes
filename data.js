@@ -35,21 +35,21 @@ window.NOTES = {
   },
 
   lookAlikes: [
-    ["あ お", "お has an extra little flick on the right."],
-    ["ぬ め", "ぬ ends in a small loop, め does not."],
-    ["る ろ", "る curls into a loop, ろ stays open."],
-    ["は ほ", "ほ has a second bar that closes the top."],
-    ["さ ち", "Mirror twins: さ bulges left, ち bulges right."],
-    ["き さ", "き has two crossbars, さ only one."],
-    ["ね れ わ", "ね ends in a loop, れ kicks out, わ curls in."],
-    ["い り", "い: the left stroke is longer. り: the right one is."]
+    ["あ お", "お (o) has an extra little flick on the right; あ is a."],
+    ["ぬ め", "ぬ (nu) ends in a small loop, め (me) does not."],
+    ["る ろ", "る (ru) curls into a loop, ろ (ro) stays open."],
+    ["は ほ", "ほ (ho) has a second bar that closes the top; は is ha."],
+    ["さ ち", "Mirror twins: さ (sa) bulges left, ち (chi) bulges right."],
+    ["き さ", "き (ki) has two crossbars, さ (sa) only one."],
+    ["ね れ わ", "ね (ne) ends in a loop, れ (re) kicks out, わ (wa) curls in."],
+    ["い り", "い (i): the left stroke is longer. り (ri): the right one is."]
   ],
 
   rules: [
     ["Small っ: pause, then double", "きって", "kitte · stamp", "A tiny stop before the next sound, which is doubled: kit·te."],
     ["Long vowels: hold the sound", "ありがとう", "arigatō", "う after o, and い after e, mostly stretch the vowel. Pimsleur just writes arigato."],
-    ["Particles read differently", "こんにちは", "konnichiwa", "Used as a particle, は is read wa, を is read o and へ is read e."],
-    ["Whispered u and i", "です · ます", "dess · mahss", "After s, k, sh or t, u and i almost vanish: すこし sounds like s’koshi."]
+    ["Particles read differently", "こんにちは", "konnichiwa", "Used as a particle, は (ha) is read wa, を (wo) is read o and へ (he) is read e."],
+    ["Whispered u and i", "です · ます", "dess · mahss", "After s, k, sh or t, u and i almost vanish: すこし (sukoshi) sounds like s’koshi."]
   ],
 
   soundKey: [
@@ -76,12 +76,12 @@ window.NOTES = {
       ["すみません。えいごがわかりますか。", "Pimsleur shows: すみません。英語がわかりますか。", "sumimasen. eigo ga wakarimasu ka?", "Excuse me. Do you understand English?", "s’mee-mah-sen. ay-go gah wah-kah-ree-mahss kah?"],
       ["いいえ、わかりません。にほんごがわかりますか。", "Pimsleur shows: いいえ、わかりません。日本語がわかりますか。", "iie, wakarimasen. nihongo ga wakarimasu ka?", "No, I don’t. Do you understand Japanese?", "ee-eh, wah-kah-ree-mah-sen. nee-hon-go gah wah-kah-ree-mahss kah?"],
       ["はい、すこしわかります。", "", "hai, sukoshi wakarimasu", "Yes, a little.", "hi, s’ko-shee wah-kah-ree-mahss"],
-      ["アメリカのかたですか。", "アメリカ is katakana. の = of, かた = person (polite)", "amerika no kata desu ka?", "Are you American? (lit. a person of America?)", "ah-meh-ree-kah no kah-tah dess kah?"],
-      ["はい、アメリカじんです。", "Pimsleur shows: はい、アメリカ人です。 じん (人) = nationality", "hai, amerikajin desu", "Yes, I’m American.", "hi, ah-meh-ree-kah-jeen dess"]
+      ["アメリカのかたですか。", "アメリカ (amerika) is katakana. の (no) = of, かた (kata) = person (polite)", "amerika no kata desu ka?", "Are you American? (lit. a person of America?)", "ah-meh-ree-kah no kah-tah dess kah?"],
+      ["はい、アメリカじんです。", "Pimsleur shows: はい、アメリカ人です。 じん (jin, 人) = nationality", "hai, amerikajin desu", "Yes, I’m American.", "hi, ah-meh-ree-kah-jeen dess"]
     ]},
     { title: "Where are you from?", jp: "出身", items: [
       ["どこからきましたか。", "Kanji form: どこから来ましたか。", "doko kara kimashita ka?", "Where are you from? (lit. where did you come from?)", "doh-koh kah-rah kee-mahsh-tah kah?"],
-      ["フランスのかたですか。", "フランス is katakana", "furansu no kata desu ka?", "Are you French?", "foo-rahn-soo no kah-tah dess kah?"],
+      ["フランスのかたですか。", "フランス (furansu) is katakana", "furansu no kata desu ka?", "Are you French?", "foo-rahn-soo no kah-tah dess kah?"],
       ["フランスじん", "Kanji form: フランス人", "furansujin", "French person", "foo-rahn-soo-jeen"],
       ["いいえ、フランスじんです。", "Kanji form: いいえ、フランス人です。", "iie, furansujin desu", "No, I’m French. (answer to “Are you American?”)", "ee-eh, foo-rahn-soo-jeen dess"],
       ["フランスからきました。", "Kanji form: フランスから来ました。", "furansu kara kimashita", "I’m from France. (lit. I came from France)", "foo-rahn-soo kah-rah kee-mahsh-tah"]
@@ -93,8 +93,8 @@ window.NOTES = {
       ["おねがいします", "", "onegai shimasu", "Please (asking for something).", "oh-neh-guy shee-mahss"],
       ["どうぞ", "", "dōzo", "Please, go ahead.", "doh-zoh"],
       ["だいじょうぶです", "", "daijōbu desu", "It’s OK / I’m fine.", "dye-joh-boo dess"],
-      ["いいです。", "いい = good. Depending on the tone: “that’s fine” or a polite “no thanks”", "ii desu", "It’s fine.", "ee-ee dess"],
-      ["いいですか。", "Also “May I?” (e.g. pointing at a seat or a photo). Answer: はい、どうぞ。", "ii desu ka?", "Is it all right?", "ee-ee dess kah?"],
+      ["いいです。", "いい (ii) = good. Depending on the tone: “that’s fine” or a polite “no thanks”", "ii desu", "It’s fine.", "ee-ee dess"],
+      ["いいですか。", "Also “May I?” (e.g. pointing at a seat or a photo). Answer: はい、どうぞ (hai, dōzo).", "ii desu ka?", "Is it all right?", "ee-ee dess kah?"],
       ["わかりません", "", "wakarimasen", "I don’t understand.", "wah-kah-ree-mah-sen"]
     ]},
     { title: "Essentials: greetings", jp: "挨拶", items: [
@@ -109,27 +109,27 @@ window.NOTES = {
       ["おいしい", "", "oishii", "Delicious.", "oh-ee-shee"],
       ["かんぱい", "", "kanpai", "Cheers!", "kahm-pie"],
       ["いくらですか", "", "ikura desu ka", "How much is it?", "ee-koo-rah dess kah"],
-      ["トイレはどこですか", "トイレ is katakana (toire)", "toire wa doko desu ka", "Where is the toilet?", "toy-reh wah doh-koh dess kah"]
+      ["トイレはどこですか", "トイレ (toire) is katakana", "toire wa doko desu ka", "Where is the toilet?", "toy-reh wah doh-koh dess kah"]
     ]},
     { title: "Getting around", jp: "旅の言葉", items: [
-      ["○○はどこですか。", "Pattern from Lesson 4. Example: トイレはどこですか。 Where is the toilet?", "○○ wa doko desu ka?", "Where is ○○?", "… wah doh-koh dess kah?"],
-      ["○○にいきたいです。", "Kanji form: ○○に行きたいです。 に = to (a place) · いきたい = want to go. Example: うえのえきにいきたいです。 I want to go to Ueno Station.", "○○ ni ikitai desu", "I want to go to ○○.", "… nee ee-kee-tye dess"],
-      ["にほんごがわかりません。", "Kanji form: 日本語がわかりません。 ～ます → ～ません = negative (Lesson 5)", "nihongo ga wakarimasen", "I don’t understand Japanese.", "nee-hon-go gah wah-kah-ree-mah-sen"],
-      ["えいごではなしてくれませんか。", "Kanji form: 英語で話してくれませんか。 で = in (a language) · はなして くれませんか = could you (speak) for me? (はなします, Lesson 4)", "eigo de hanashite kuremasen ka?", "Could you speak in English?", "ay-go deh hah-nahsh-teh koo-reh-mah-sen kah?"]
+      ["○○はどこですか。", "Pattern from Lesson 4. Example: トイレはどこですか (toire wa doko desu ka). Where is the toilet?", "○○ wa doko desu ka?", "Where is ○○?", "… wah doh-koh dess kah?"],
+      ["○○にいきたいです。", "Kanji form: ○○に行きたいです。 に (ni) = to (a place) · いきたい (ikitai) = want to go. Example: うえのえきにいきたいです (Ueno eki ni ikitai desu). I want to go to Ueno Station.", "○○ ni ikitai desu", "I want to go to ○○.", "… nee ee-kee-tye dess"],
+      ["にほんごがわかりません。", "Kanji form: 日本語がわかりません。 ～ます (-masu) → ～ません (-masen) = negative (Lesson 5)", "nihongo ga wakarimasen", "I don’t understand Japanese.", "nee-hon-go gah wah-kah-ree-mah-sen"],
+      ["えいごではなしてくれませんか。", "Kanji form: 英語で話してくれませんか。 で (de) = in (a language) · はなしてくれませんか (hanashite kuremasen ka) = could you (speak) for me? (はなします, hanashimasu, Lesson 4)", "eigo de hanashite kuremasen ka?", "Could you speak in English?", "ay-go deh hah-nahsh-teh koo-reh-mah-sen kah?"]
     ]},
     { title: "Survival: restaurant", short: "Restaurant", jp: "レストラン", src: "survival", items: [
       ["なんめいさまですか。", "Kanji form: 何名様ですか。 What the staff asks at the door", "nanmei-sama desu ka?", "How many people? (staff)", "nahn-may-sah-mah dess kah?"],
-      ["ふたりです。", "Kanji form: 二人です。 ひとり = one person", "futari desu", "Two people.", "foo-tah-ree dess"],
-      ["メニューをおねがいします。", "メニュー is katakana", "menyū o onegai shimasu", "The menu, please.", "meh-nyoo oh oh-neh-guy shee-mahss"],
-      ["これをください。", "Point at the menu. ください = please give me", "kore o kudasai", "This one, please.", "koh-reh oh koo-dah-sye"],
+      ["ふたりです。", "Kanji form: 二人です。 ひとり (hitori) = one person", "futari desu", "Two people.", "foo-tah-ree dess"],
+      ["メニューをおねがいします。", "メニュー (menyū) is katakana", "menyū o onegai shimasu", "The menu, please.", "meh-nyoo oh oh-neh-guy shee-mahss"],
+      ["これをください。", "Point at the menu. ください (kudasai) = please give me", "kore o kudasai", "This one, please.", "koh-reh oh koo-dah-sye"],
       ["おすすめはなんですか。", "Kanji form: おすすめは何ですか。", "osusume wa nan desu ka?", "What do you recommend?", "oh-soo-soo-meh wah nahn dess kah?"],
       ["おみずをください。", "Kanji form: お水をください。", "omizu o kudasai", "Water, please.", "oh-mee-zoo oh koo-dah-sye"],
-      ["〜はたべられません。", "Kanji form: 〜は食べられません。 Example: にくはたべられません。 I can’t eat meat.", "~ wa taberaremasen", "I can’t eat ~.", "… wah tah-beh-rah-reh-mah-sen"],
+      ["〜はたべられません。", "Kanji form: 〜は食べられません。 Example: にくはたべられません (niku wa taberaremasen). I can’t eat meat.", "~ wa taberaremasen", "I can’t eat ~.", "… wah tah-beh-rah-reh-mah-sen"],
       ["おかいけいをおねがいします。", "Kanji form: お会計をお願いします。", "okaikei o onegai shimasu", "The bill, please.", "oh-kye-kay oh oh-neh-guy shee-mahss"],
-      ["カードでいいですか。", "カード is katakana", "kādo de ii desu ka?", "Can I pay by card?", "kah-doh deh ee-ee dess kah?"]
+      ["カードでいいですか。", "カード (kādo) is katakana", "kādo de ii desu ka?", "Can I pay by card?", "kah-doh deh ee-ee dess kah?"]
     ]},
     { title: "Survival: train and station", short: "Train", jp: "駅", src: "survival", items: [
-      ["〜まで、いちまいください。", "Kanji form: 〜まで、一枚ください。 Example: きょうとまで、にまいください。 Two tickets to Kyoto.", "~ made, ichimai kudasai", "One ticket to ~, please.", "… mah-deh, ee-chee-my koo-dah-sye"],
+      ["〜まで、いちまいください。", "Kanji form: 〜まで、一枚ください。 Example: きょうとまで、にまいください (Kyōto made, nimai kudasai). Two tickets to Kyoto.", "~ made, ichimai kudasai", "One ticket to ~, please.", "… mah-deh, ee-chee-my koo-dah-sye"],
       ["このでんしゃは〜にいきますか。", "Kanji form: この電車は〜に行きますか。", "kono densha wa ~ ni ikimasu ka?", "Does this train go to ~?", "koh-noh den-shah wah … nee ee-kee-mahss kah?"],
       ["なんばんせんですか。", "Kanji form: 何番線ですか。", "nanbansen desu ka?", "Which platform?", "nahn-bahn-sen dess kah?"],
       ["のりかえはどこですか。", "Kanji form: 乗り換えはどこですか。", "norikae wa doko desu ka?", "Where do I change trains?", "noh-ree-kah-eh wah doh-koh dess kah?"],
@@ -139,9 +139,9 @@ window.NOTES = {
     ]},
     { title: "Survival: hotel", short: "Hotel", jp: "ホテル", src: "survival", items: [
       ["よやくしています。", "Kanji form: 予約しています。", "yoyaku shite imasu", "I have a reservation.", "yoh-yah-koo shteh ee-mahss"],
-      ["チェックインをおねがいします。", "チェックイン is katakana", "chekkuin o onegai shimasu", "Check-in, please.", "check-een oh oh-neh-guy shee-mahss"],
+      ["チェックインをおねがいします。", "チェックイン (chekkuin) is katakana", "chekkuin o onegai shimasu", "Check-in, please.", "check-een oh oh-neh-guy shee-mahss"],
       ["にもつをあずかってもらえますか。", "Kanji form: 荷物を預かってもらえますか。", "nimotsu o azukatte moraemasu ka?", "Could you keep our luggage?", "nee-moh-tsoo oh ah-zoo-kaht-teh moh-rah-eh-mahss kah?"],
-      ["Wi-Fiのパスワードはなんですか。", "パスワード is katakana", "waifai no pasuwādo wa nan desu ka?", "What is the Wi-Fi password?", "wye-fye noh pah-soo-wah-doh wah nahn dess kah?"],
+      ["Wi-Fiのパスワードはなんですか。", "パスワード (pasuwādo) is katakana", "waifai no pasuwādo wa nan desu ka?", "What is the Wi-Fi password?", "wye-fye noh pah-soo-wah-doh wah nahn dess kah?"],
       ["ちょうしょくはなんじからですか。", "Kanji form: 朝食は何時からですか。", "chōshoku wa nanji kara desu ka?", "From what time is breakfast?", "choh-shoh-koo wah nahn-jee kah-rah dess kah?"]
     ]},
     { title: "Survival: shopping", short: "Shopping", jp: "買い物", src: "survival", items: [
@@ -160,15 +160,15 @@ window.NOTES = {
       ["たすけて！", "Kanji form: 助けて！", "tasukete!", "Help!", "tah-soo-keh-teh!"]
     ]},
     { title: "Signs to recognize", short: "Signs", jp: "看板", src: "survival", items: [
-      ["入口", "Read: いりぐち", "iriguchi", "Entrance.", "ee-ree-goo-chee"],
-      ["出口", "Read: でぐち. Stations also have 東口 east, 西口 west, 南口 south, 北口 north exits", "deguchi", "Exit.", "deh-goo-chee"],
-      ["改札", "Read: かいさつ", "kaisatsu", "Ticket gates.", "kye-sah-tsoo"],
-      ["お手洗い", "Read: おてあらい. Also written トイレ", "otearai", "Toilets.", "oh-teh-ah-rye"],
-      ["男 / 女", "Read: おとこ / おんな", "otoko / onna", "Men / Women.", "oh-toh-koh / ohn-nah"],
-      ["営業中", "Read: えいぎょうちゅう", "eigyōchū", "Open (for business).", "ay-gyoh-choo"],
-      ["準備中", "Read: じゅんびちゅう", "junbichū", "Closed (preparing).", "joon-bee-choo"],
-      ["禁煙", "Read: きんえん", "kin’en", "No smoking.", "keen-en"],
-      ["押 / 引", "Read: おす / ひく. On doors", "osu / hiku", "Push / Pull.", "oh-soo / hee-koo"]
+      ["入口", "Read: いりぐち (iriguchi)", "iriguchi", "Entrance.", "ee-ree-goo-chee"],
+      ["出口", "Read: でぐち (deguchi). Stations also have 東口 (higashiguchi) east, 西口 (nishiguchi) west, 南口 (minamiguchi) south, 北口 (kitaguchi) north exits", "deguchi", "Exit.", "deh-goo-chee"],
+      ["改札", "Read: かいさつ (kaisatsu)", "kaisatsu", "Ticket gates.", "kye-sah-tsoo"],
+      ["お手洗い", "Read: おてあらい (otearai). Also written トイレ (toire)", "otearai", "Toilets.", "oh-teh-ah-rye"],
+      ["男 / 女", "Read: おとこ (otoko) / おんな (onna)", "otoko / onna", "Men / Women.", "oh-toh-koh / ohn-nah"],
+      ["営業中", "Read: えいぎょうちゅう (eigyōchū)", "eigyōchū", "Open (for business).", "ay-gyoh-choo"],
+      ["準備中", "Read: じゅんびちゅう (junbichū)", "junbichū", "Closed (preparing).", "joon-bee-choo"],
+      ["禁煙", "Read: きんえん (kin’en)", "kin’en", "No smoking.", "keen-en"],
+      ["押 / 引", "Read: おす (osu) / ひく (hiku). On doors", "osu / hiku", "Push / Pull.", "oh-soo / hee-koo"]
     ]},
     { title: "Numbers", short: "Numbers", jp: "数字", src: "numbers", items: [
       ["いち", "Kanji: 一", "ichi", "1", "ee-chee"],
@@ -198,13 +198,13 @@ window.NOTES = {
   lessons: [
     { number: 1, jp: "第1課",
       words: [
-        ["アメリカじん", "Pimsleur shows: アメリカ人. アメリカ is katakana, じん (人) = person", "amerikajin", "American (person).", "ah-meh-ree-kah-jeen"],
+        ["アメリカじん", "Pimsleur shows: アメリカ人. アメリカ (amerika) is katakana, じん (jin, 人) = person", "amerikajin", "American (person).", "ah-meh-ree-kah-jeen"],
         ["いいえ", "", "iie", "No.", "ee-eh"],
         ["えいご", "Pimsleur shows: 英語", "eigo", "English (language).", "ay-go"],
         ["です", "Ends a polite sentence, like “is / am / are”. The final u is almost silent", "desu", "Is / am / are.", "dess"],
         ["わかりません", "", "wakarimasen", "I don’t understand.", "wah-kah-ree-mah-sen"],
-        ["わかりますか。", "か at the end turns it into a question", "wakarimasu ka?", "Do you understand?", "wah-kah-ree-mahss kah?"],
-        ["アメリカのかた", "Pimsleur shows: アメリカの方. かた = polite word for “person”", "amerika no kata", "An American (polite).", "ah-meh-ree-kah noh kah-tah"],
+        ["わかりますか。", "か (ka) at the end turns it into a question", "wakarimasu ka?", "Do you understand?", "wah-kah-ree-mahss kah?"],
+        ["アメリカのかた", "Pimsleur shows: アメリカの方. かた (kata) = polite word for “person”", "amerika no kata", "An American (polite).", "ah-meh-ree-kah noh kah-tah"],
         ["にほんご", "Pimsleur shows: 日本語", "nihongo", "Japanese (language).", "nee-hon-go"],
         ["はい", "", "hai", "Yes.", "hi"],
         ["すこし", "Pimsleur shows: 少し", "sukoshi", "A little.", "s’koh-shee"],
@@ -214,15 +214,15 @@ window.NOTES = {
     { number: 2, jp: "第2課",
       words: [
         ["じょうず", "Pimsleur shows: 上手", "jōzu", "Skilled, good at (something).", "joh-zoo"],
-        ["ありがとう", "Casual. Add ございます to be polite", "arigatō", "Thanks.", "ah-ree-gah-toh"],
+        ["ありがとう", "Casual. Add ございます (gozaimasu) to be polite", "arigatō", "Thanks.", "ah-ree-gah-toh"],
         ["じゃあ、また", "Pimsleur shows: じゃあ、また", "jaa, mata", "See you, then.", "jah, mah-tah"],
         ["ありがとうございます", "", "arigatō gozaimasu", "Thank you (polite).", "ah-ree-gah-toh go-zye-mahss"],
         ["いい", "", "ii", "Good, nice.", "ee-ee"],
         ["そう", "", "sō", "So, like that.", "soh"],
-        ["おてんき", "Pimsleur shows: お天気. お makes it polite", "otenki", "Weather.", "oh-ten-kee"],
+        ["おてんき", "Pimsleur shows: お天気. お (o) makes it polite", "otenki", "Weather.", "oh-ten-kee"],
         ["じょうずじゃありません", "Pimsleur shows: 上手じゃありません", "jōzu ja arimasen", "I’m not good (at it).", "joh-zoo jah ah-ree-mah-sen"],
         ["そうですね", "", "sō desu ne", "That’s right. / Let me see…", "soh dess neh"],
-        ["おはよう", "Casual. おはようございます is the polite form", "ohayō", "Good morning (casual).", "oh-hah-yoh"]
+        ["おはよう", "Casual. おはようございます (ohayō gozaimasu) is the polite form", "ohayō", "Good morning (casual).", "oh-hah-yoh"]
       ],
       dialogues: [
         { title: "Speak Easy · do you understand Japanese?", note: "Pimsleur Speak Easy dialogue.", lines: [
@@ -237,10 +237,10 @@ window.NOTES = {
     { number: 3, jp: "第3課",
       words: [
         ["まだまだです", "", "mada mada desu", "I still have a long way to go. (modest reply to a compliment)", "mah-dah mah-dah dess"],
-        ["どうも", "Example: どうもありがとうございます。 Thank you very much.", "dōmo", "Very much, indeed. Alone: a quick “thanks”.", "doh-moh"],
+        ["どうも", "Example: どうもありがとうございます (dōmo arigatō gozaimasu). Thank you very much.", "dōmo", "Very much, indeed. Alone: a quick “thanks”.", "doh-moh"],
         ["こんにちは", "は here is read wa", "konnichiwa", "Good afternoon / hello.", "kon-nee-chee-wah"],
         ["まだ", "", "mada", "Still / not yet.", "mah-dah"],
-        ["いやな", "Example: いやなおてんきですね。 Nasty weather, isn’t it?", "iyana", "Unpleasant, nasty (e.g. weather).", "ee-yah-nah"],
+        ["いやな", "Example: いやなおてんきですね (iya na otenki desu ne). Nasty weather, isn’t it?", "iyana", "Unpleasant, nasty (e.g. weather).", "ee-yah-nah"],
         ["にほんのかた", "Pimsleur shows: 日本のかた", "nihon no kata", "A Japanese person (polite).", "nee-hon no kah-tah"],
         ["にほんじん", "Pimsleur shows: 日本人", "nihonjin", "Japanese (person).", "nee-hon-jeen"],
         ["でも", "", "demo", "But / however.", "deh-moh"],
@@ -248,9 +248,9 @@ window.NOTES = {
         ["にほん", "Pimsleur shows: 日本", "nihon", "Japan.", "nee-hon"],
         ["まだじょうずじゃありません。", "Pimsleur shows: まだ上手じゃありません。", "mada jōzu ja arimasen", "I’m not good yet.", "mah-dah joh-zoo jah ah-ree-mah-sen"],
         ["にほんじんじゃありません。", "Pimsleur shows: 日本人じゃありません。", "nihonjin ja arimasen", "I’m not Japanese.", "nee-hon-jeen jah ah-ree-mah-sen"],
-        ["そうです", "Without ね: a plain “yes, that’s it” (そうですね = “indeed, isn’t it?”)", "sō desu", "That’s right / Yes, it is.", "soh dess"],
+        ["そうです", "Without ね (ne): a plain “yes, that’s it” (そうですね, sō desu ne = “indeed, isn’t it?”)", "sō desu", "That’s right / Yes, it is.", "soh dess"],
         ["ええ", "", "ee", "Yes (softer, more conversational than はい).", "eh-eh"],
-        ["おじょうずです", "Pimsleur shows: お上手です. お = polite: said about someone else, never about yourself", "ojōzu desu", "You’re very skilled (polite).", "oh-joh-zoo dess"]
+        ["おじょうずです", "Pimsleur shows: お上手です. お (o) = polite: said about someone else, never about yourself", "ojōzu desu", "You’re very skilled (polite).", "oh-joh-zoo dess"]
       ],
       dialogues: [
         { title: "Speak Easy 1 · the compliment", note: "Pimsleur dialogue, lesson 3.", lines: [
@@ -276,9 +276,9 @@ window.NOTES = {
     },
     { number: 4, jp: "第4課",
       words: [
-        ["どこ", "Example: えきはどこですか。 Where is the station?", "doko", "Where?", "doh-koh"],
-        ["じょうずに", "Pimsleur shows: 上手に. Example: にほんごをじょうずにはなしますね。 You speak Japanese well. (を is read o)", "jōzu ni", "Well, skillfully (how you do something).", "joh-zoo nee"],
-        ["ここ", "ここ here (near me) · あそこ over there (far from both of us)", "koko", "Here.", "koh-koh"],
+        ["どこ", "Example: えきはどこですか (eki wa doko desu ka). Where is the station?", "doko", "Where?", "doh-koh"],
+        ["じょうずに", "Pimsleur shows: 上手に. Example: にほんごをじょうずにはなしますね (nihongo o jōzu ni hanashimasu ne). You speak Japanese well.", "jōzu ni", "Well, skillfully (how you do something).", "joh-zoo nee"],
+        ["ここ", "ここ (koko) here, near me · あそこ (asoko) over there, far from both of us", "koko", "Here.", "koh-koh"],
         ["えき", "Pimsleur shows: 駅", "eki", "Station.", "eh-kee"],
         ["こうえん", "Pimsleur shows: 公園", "kōen", "Park.", "koh-en"],
         ["あそこ", "", "asoko", "Over there.", "ah-soh-koh"],
@@ -289,12 +289,12 @@ window.NOTES = {
       ],
       dialogues: [
         { title: "Speak Easy · Ueno Park", note: "Pimsleur dialogue, lesson 4.", lines: [
-          ["A", "あのう、すみません。", "anō, sumimasen", "Um, excuse me. (あのう = polite hesitation)"],
+          ["A", "あのう、すみません。", "anō, sumimasen", "Um, excuse me. (あのう, anō = polite hesitation)"],
           ["B", "はい、なんですか。", "hai, nan desu ka?", "Yes, what is it?"],
           ["A", "うえのこうえんはどこですか。", "Ueno kōen wa doko desu ka?", "Where is Ueno Park?"],
           ["B", "あそこです。", "asoko desu", "It’s over there."],
           ["A", "うえのえきは？", "Ueno eki wa?", "And Ueno Station?"],
-          ["B", "ここですよ。", "koko desu yo", "It’s right here. (よ = “I tell you”)"],
+          ["B", "ここですよ。", "koko desu yo", "It’s right here. (よ, yo = “I tell you”)"],
           ["A", "どうもありがとうございます。", "dōmo arigatō gozaimasu", "Thank you very much."]
         ]}
       ]
@@ -302,11 +302,11 @@ window.NOTES = {
     { number: 5, jp: "第5課",
       words: [
         ["たべます", "Pimsleur shows: 食べます", "tabemasu", "I / you eat.", "tah-beh-mahss"],
-        ["たべませんか", "Pimsleur shows: 食べませんか. ～ませんか = “won’t you…?”, a polite invitation", "tabemasen ka?", "Would you like to eat?", "tah-beh-mah-sen kah?"],
-        ["なにか", "Pimsleur shows: 何か. Example: なにかたべませんか。 Would you like to eat something?", "nanika", "Something.", "nah-nee-kah"],
+        ["たべませんか", "Pimsleur shows: 食べませんか. ～ませんか (-masen ka) = “won’t you…?”, a polite invitation", "tabemasen ka?", "Would you like to eat?", "tah-beh-mah-sen kah?"],
+        ["なにか", "Pimsleur shows: 何か. Example: なにかたべませんか (nanika tabemasen ka). Would you like to eat something?", "nanika", "Something.", "nah-nee-kah"],
         ["そうですね", "Here: thinking before you answer. Also “that’s right, isn’t it?” (Phrases)", "sō desu ne", "Well… let me see.", "soh dess neh"],
-        ["いえ", "A shorter, softer いいえ", "ie", "No (as in “No, thank you”).", "ee-eh (short)"],
-        ["たべません", "Pimsleur shows: 食べません. ～ます = do · ～ません = don’t", "tabemasen", "I / you don’t eat.", "tah-beh-mah-sen"],
+        ["いえ", "A shorter, softer いいえ (iie)", "ie", "No (as in “No, thank you”).", "ee-eh (short)"],
+        ["たべません", "Pimsleur shows: 食べません. ～ます (-masu) = do · ～ません (-masen) = don’t", "tabemasen", "I / you don’t eat.", "tah-beh-mah-sen"],
         ["のみます", "Pimsleur shows: 飲みます", "nomimasu", "I / you drink.", "noh-mee-mahss"],
         ["いえ、けっこうです", "Pimsleur shows: いえ、結構です. Small っ = short pause: kek·kō", "ie, kekkō desu", "No, thank you. (polite refusal)", "ee-eh, keck-koh dess"],
         ["のみませんか", "Pimsleur shows: 飲みませんか", "nomimasen ka?", "Would you like to drink (something)?", "noh-mee-mah-sen kah?"]
@@ -320,23 +320,23 @@ window.NOTES = {
     },
     { number: 6, jp: "第6課",
       words: [
-        ["どこで", "Where an action happens. Example: どこでたべますか。 Where shall we eat?", "doko de", "Where (at which place)?", "doh-koh deh"],
-        ["わたしの", "Pimsleur shows: 私の. の = ’s / of. Example: わたしのおきにいりのレストラン my favorite restaurant", "watashi no", "My.", "wah-tah-shee noh"],
-        ["はなしません", "Pimsleur shows: 話しません. ～ます → ～ません (Lesson 5)", "hanashimasen", "I / you don’t speak.", "hah-nah-shee-mah-sen"],
-        ["いつ", "Example: いつたべますか。 When shall we eat?", "itsu", "When?", "ee-tsoo"],
+        ["どこで", "Where an action happens. Example: どこでたべますか (doko de tabemasu ka). Where shall we eat?", "doko de", "Where (at which place)?", "doh-koh deh"],
+        ["わたしの", "Pimsleur shows: 私の. の (no) = ’s / of. Example: わたしのおきにいりのレストラン (watashi no okiniiri no resutoran), my favorite restaurant", "watashi no", "My.", "wah-tah-shee noh"],
+        ["はなしません", "Pimsleur shows: 話しません. ～ます (-masu) → ～ません (-masen), Lesson 5", "hanashimasen", "I / you don’t speak.", "hah-nah-shee-mah-sen"],
+        ["いつ", "Example: いつたべますか (itsu tabemasu ka). When shall we eat?", "itsu", "When?", "ee-tsoo"],
         ["レストラン", "Katakana (from English “restaurant”)", "resutoran", "Restaurant.", "reh-soo-toh-rahn"],
-        ["あとで", "Pimsleur shows: 後で. Example: あとでたべます。 I’ll eat later.", "atode", "Later.", "ah-toh-deh"],
+        ["あとで", "Pimsleur shows: 後で. Example: あとでたべます (atode tabemasu). I’ll eat later.", "atode", "Later.", "ah-toh-deh"],
         ["おきにいりの", "Pimsleur shows: お気に入りの", "okiniiri no", "Favorite.", "oh-kee-nee-ee-ree noh"],
-        ["わたしも", "Pimsleur shows: 私も. も = too, also", "watashi mo", "Me too / I also.", "wah-tah-shee moh"],
-        ["いま", "Pimsleur shows: 今. Example: いまのみます。 I’ll drink now.", "ima", "Now.", "ee-mah"],
+        ["わたしも", "Pimsleur shows: 私も. も (mo) = too, also", "watashi mo", "Me too / I also.", "wah-tah-shee moh"],
+        ["いま", "Pimsleur shows: 今. Example: いまのみます (ima nomimasu). I’ll drink now.", "ima", "Now.", "ee-mah"],
         ["カフェ", "Katakana (from French “café”)", "kafe", "Café.", "kah-feh"]
       ],
       sentences: [
         ["いまたべません。", "Pimsleur shows: 今食べません。", "ima tabemasen", "I’m not going to eat now.", "ee-mah tah-beh-mah-sen"],
         ["どこでたべますか。", "Pimsleur shows: どこで食べますか。", "doko de tabemasu ka?", "Where are you going to eat?", "doh-koh deh tah-beh-mahss kah?"],
         ["わたしもはなしません。", "Pimsleur shows: 私も話しません。", "watashi mo hanashimasen", "I don’t speak (it) either.", "wah-tah-shee moh hah-nah-shee-mah-sen"],
-        ["いい、でもあとで。", "Pimsleur shows: いい、でも後で。 いい = good, fine (here: yes) · でも = but · あとで = later", "ii, demo atode", "Yes, but later.", "ee-ee, deh-moh ah-toh-deh"],
-        ["カフェでなにかのみませんか。", "Pimsleur shows: カフェで何か飲みませんか。 で = at (where you do it)", "kafe de nanika nomimasen ka?", "Won’t you drink something at the café?", "kah-feh deh nah-nee-kah noh-mee-mah-sen kah?"]
+        ["いい、でもあとで。", "Pimsleur shows: いい、でも後で。 いい (ii) = good, fine (here: yes) · でも (demo) = but · あとで (atode) = later", "ii, demo atode", "Yes, but later.", "ee-ee, deh-moh ah-toh-deh"],
+        ["カフェでなにかのみませんか。", "Pimsleur shows: カフェで何か飲みませんか。 で (de) = at (where you do it)", "kafe de nanika nomimasen ka?", "Won’t you drink something at the café?", "kah-feh deh nah-nee-kah noh-mee-mah-sen kah?"]
       ],
       dialogues: [
         { title: "Speak Easy · coffee", note: "Pimsleur dialogue, lesson 6.", lines: [
@@ -345,32 +345,32 @@ window.NOTES = {
           ["A", "そうですね。", "sō desu ne", "It is."],
           ["B", "なにかたべませんか。", "nanika tabemasen ka?", "Would you like to eat something?"],
           ["A", "いえ、けっこうです。でも、なにかのみます。", "ie, kekkō desu. demo, nanika nomimasu", "No, thank you. But I’ll drink something."],
-          ["B", "なにをのみますか。", "nani o nomimasu ka?", "What will you drink? (なに = what · を, read o, marks the object)"],
-          ["A", "コーヒーをのみます。", "kōhī o nomimasu", "I’ll have coffee. (コーヒー is katakana)"],
+          ["B", "なにをのみますか。", "nani o nomimasu ka?", "What will you drink? (なに, nani = what · を, read o, marks the object)"],
+          ["A", "コーヒーをのみます。", "kōhī o nomimasu", "I’ll have coffee. (コーヒー, kōhī, is katakana)"],
           ["B", "わたしもコーヒーをのみます。", "watashi mo kōhī o nomimasu", "I’ll have coffee too."]
         ]}
       ]
     },
     { number: 7, jp: "第7課",
       words: [
-        ["ほしいです", "Pimsleur shows: 欲しいです. Example: コーヒーがほしいです。 I want a coffee.", "hoshii desu", "I want (a thing).", "hoh-shee dess"],
-        ["ほしくありません", "Pimsleur shows: 欲しくありません. Negative of ほしいです", "hoshiku arimasen", "I don’t want (it).", "hoh-shee-koo ah-ree-mah-sen"],
+        ["ほしいです", "Pimsleur shows: 欲しいです. Example: コーヒーがほしいです (kōhī ga hoshii desu). I want a coffee.", "hoshii desu", "I want (a thing).", "hoh-shee dess"],
+        ["ほしくありません", "Pimsleur shows: 欲しくありません. Negative of ほしいです (hoshii desu)", "hoshiku arimasen", "I don’t want (it).", "hoh-shee-koo ah-ree-mah-sen"],
         ["コーヒー", "Katakana (from “coffee”)", "kōhī", "Coffee.", "koh-hee"],
         ["ラテ", "Katakana (from “latte”)", "rate", "Latte.", "rah-teh"],
         ["こうちゃ", "Pimsleur shows: 紅茶 (literally “red tea”)", "kōcha", "Black tea.", "koh-chah"],
-        ["ひるごはん", "Pimsleur shows: 昼ご飯. ひる = noon · ごはん = meal (also “rice”)", "hirugohan", "Lunch.", "hee-roo-go-hahn"],
+        ["ひるごはん", "Pimsleur shows: 昼ご飯. ひる (hiru) = noon · ごはん (gohan) = meal (also “rice”)", "hirugohan", "Lunch.", "hee-roo-go-hahn"],
         ["いいです", "Here: agreeing, “OK”. (Also “no thanks” depending on the tone)", "ii desu", "OK.", "ee-ee dess"],
-        ["ここで", "Where an action happens (like どこで). Example: ここでたべます。 I’ll eat here.", "koko de", "Here (at this place).", "koh-koh deh"],
+        ["ここで", "Where an action happens (like どこで, doko de). Example: ここでたべます (koko de tabemasu). I’ll eat here.", "koko de", "Here (at this place).", "koh-koh deh"],
         ["わかりませんか", "Pimsleur shows: わかりませんか", "wakarimasen ka?", "You don’t know? / Don’t you understand?", "wah-kah-ree-mah-sen kah?"],
-        ["いいですか。", "Asking for permission or agreement. Same いい as “good”, said with a rising tone", "ii desu ka?", "Is it OK? / Is that all right?", "ee-ee dess kah?"],
-        ["いきましょう", "Pimsleur shows: 行きましょう. いきます (go) → 〜ましょう = “let’s…”", "ikimashō", "Let’s go.", "ee-kee-mah-shoh"],
-        ["なにを", "Pimsleur shows: 何を. を (read “o”) marks what you eat, drink, want to do. Example: なにをたべますか。 What will you eat?", "nani o", "What (as the object).", "nah-nee oh"]
+        ["いいですか。", "Asking for permission or agreement. Same いい (ii) as “good”, said with a rising tone", "ii desu ka?", "Is it OK? / Is that all right?", "ee-ee dess kah?"],
+        ["いきましょう", "Pimsleur shows: 行きましょう. いきます (ikimasu, go) → 〜ましょう (-mashō) = “let’s…”", "ikimashō", "Let’s go.", "ee-kee-mah-shoh"],
+        ["なにを", "Pimsleur shows: 何を. を (read “o”) marks what you eat, drink, want to do. Example: なにをたべますか (nani o tabemasu ka). What will you eat?", "nani o", "What (as the object).", "nah-nee oh"]
       ],
       sentences: [
         ["なにをたべますか。", "Pimsleur shows: 何を食べますか。", "nani o tabemasu ka?", "What will you eat?", "nah-nee oh tah-beh-mahss kah?"],
         ["ひるごはんをたべます。", "Pimsleur shows: 昼ご飯を食べます。", "hirugohan o tabemasu", "I’ll eat lunch.", "hee-roo-go-hahn oh tah-beh-mahss"],
         ["コーヒーをのみます。", "Pimsleur shows: コーヒーを飲みます。 を (read “o”) marks what you drink", "kōhī o nomimasu", "I’ll drink coffee. / I’ll have a coffee.", "koh-hee oh noh-mee-mahss"],
-        ["コーヒーがほしいです。", "Pimsleur shows: コーヒーが欲しいです。 With ほしい the thing you want takes が, not を", "kōhī ga hoshii desu", "I want a coffee.", "koh-hee gah hoh-shee dess"]
+        ["コーヒーがほしいです。", "Pimsleur shows: コーヒーが欲しいです。 With ほしい (hoshii) the thing you want takes が (ga), not を (o)", "kōhī ga hoshii desu", "I want a coffee.", "koh-hee gah hoh-shee dess"]
       ],
       tips: [
         { title: "を (o) or が (ga)?", jp: "を・が", keys: "particle o wo ga object subject want understand drink eat",
@@ -392,11 +392,11 @@ window.NOTES = {
       dialogues: [
         { title: "Speak Easy · my favorite café", note: "Pimsleur dialogue, lesson 7.", lines: [
           ["A", "いまなにかたべますか。", "ima nanika tabemasu ka?", "Are you going to eat something now?"],
-          ["B", "あとでたべます。でも、なにかのみたいです。", "atode tabemasu. demo, nanika nomitai desu", "I’ll eat later. But I’d like to drink something. (〜たい = want to)"],
+          ["B", "あとでたべます。でも、なにかのみたいです。", "atode tabemasu. demo, nanika nomitai desu", "I’ll eat later. But I’d like to drink something. (〜たい, -tai = want to)"],
           ["A", "どこで？", "doko de?", "Where?"],
           ["B", "そうですね…わたしのおきにいりのカフェで。", "sō desu ne… watashi no okiniiri no kafe de", "Let me see… at my favorite café."],
           ["A", "いいですね。どこですか。", "ii desu ne. doko desu ka?", "Sounds good. Where is it?"],
-          ["B", "あそこです。いきましょう。", "asoko desu. ikimashō", "It’s over there. Let’s go. (〜ましょう = let’s)"]
+          ["B", "あそこです。いきましょう。", "asoko desu. ikimashō", "It’s over there. Let’s go. (〜ましょう, -mashō = let’s)"]
         ]}
       ]
     },
@@ -404,7 +404,7 @@ window.NOTES = {
       words: [
         ["かいます", "Pimsleur shows: 買います", "kaimasu", "I buy / I’ll buy.", "kye-mahss"],
         ["かいますか。", "Pimsleur shows: 買いますか。", "kaimasu ka?", "Will you buy (it)?", "kye-mahss kah?"],
-        ["ごとうちグッズ", "Pimsleur shows: ご当地グッズ. Souvenirs you only find in that town or region (local snacks, keychains, mascots). グッズ is katakana, from “goods”", "gotōchi guzzu", "Local souvenirs.", "go-toh-chee goo-zzoo"],
+        ["ごとうちグッズ", "Pimsleur shows: ご当地グッズ. Souvenirs you only find in that town or region (local snacks, keychains, mascots). グッズ (guzzu) is katakana, from “goods”", "gotōchi guzzu", "Local souvenirs.", "go-toh-chee goo-zzoo"],
         ["と", "Joins nouns: コーヒーとこうちゃ (kōhī to kōcha) = coffee and black tea", "to", "And (between things).", "toh"],
         ["だれ", "Pimsleur shows: 誰", "dare", "Who?", "dah-reh"],
         ["いまから", "Pimsleur shows: 今から. いま (ima) now + から (kara) from", "ima kara", "From now on / starting now.", "ee-mah kah-rah"],
@@ -415,7 +415,7 @@ window.NOTES = {
       ],
       sentences: [
         ["コーヒーをおねがいします。", "Pimsleur shows: コーヒーをお願いします。 In quick speech the を (o) is often dropped: コーヒー、おねがいします (kōhī, onegai shimasu)", "kōhī o onegai shimasu", "A coffee, please.", "koh-hee oh oh-neh-guy shee-mahss"],
-        ["レストランはどこですか。", "は is read “wa” here. Same pattern as 上野駅はどこですか (Ueno eki wa doko desu ka, Lesson 4): [place] は どこですか", "resutoran wa doko desu ka?", "Where is the restaurant?", "reh-s’toh-rahn wah doh-koh dess kah?"]
+        ["レストランはどこですか。", "は is read “wa” here. Same pattern as うえのえきはどこですか (Ueno eki wa doko desu ka, Lesson 4): [place] は どこですか (wa doko desu ka)", "resutoran wa doko desu ka?", "Where is the restaurant?", "reh-s’toh-rahn wah doh-koh dess kah?"]
       ],
       dialogues: [
         { title: "Speak Easy · two coffees", note: "Pimsleur dialogue, lesson 8. Notice を (o) with のみます (nomimasu) but が (ga) with ほしい (hoshii).", lines: [
