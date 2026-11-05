@@ -410,9 +410,11 @@ window.NOTES = {
         ["いまから", "Pimsleur shows: 今から. いま (ima) now + から (kara) from", "ima kara", "From now on / starting now.", "ee-mah kah-rah"],
         ["ホテル", "Katakana (from “hotel”)", "hoteru", "Hotel.", "hoh-teh-roo"],
         ["から", "Comes after the word: いまから (ima kara) = from now, ホテルから (hoteru kara) = from the hotel", "kara", "From.", "kah-rah"],
+        ["おねがいします", "Pimsleur shows: お願いします. Put the thing you ask for in front: コーヒーをおねがいします (kōhī o onegai shimasu). Among friends: おねがい (onegai)", "onegai shimasu", "Please (asking for something).", "oh-neh-guy shee-mahss"],
         ["ホテルのレストラン", "の (no) links two nouns, like “’s”: the hotel’s restaurant", "hoteru no resutoran", "The hotel restaurant.", "hoh-teh-roo noh reh-s’toh-rahn"]
       ],
       sentences: [
+        ["コーヒーをおねがいします。", "Pimsleur shows: コーヒーをお願いします。 In quick speech the を (o) is often dropped: コーヒー、おねがいします (kōhī, onegai shimasu)", "kōhī o onegai shimasu", "A coffee, please.", "koh-hee oh oh-neh-guy shee-mahss"],
         ["レストランはどこですか。", "は is read “wa” here. Same pattern as 上野駅はどこですか (Ueno eki wa doko desu ka, Lesson 4): [place] は どこですか", "resutoran wa doko desu ka?", "Where is the restaurant?", "reh-s’toh-rahn wah doh-koh dess kah?"]
       ],
       dialogues: [
