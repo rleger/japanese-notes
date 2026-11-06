@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-05",
+  updated: "2026-11-06",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -406,6 +406,7 @@ window.NOTES = {
         ["かいますか。", "Pimsleur shows: 買いますか。", "kaimasu ka?", "Will you buy (it)?", "kye-mahss kah?"],
         ["ごとうちグッズ", "Pimsleur shows: ご当地グッズ. Souvenirs you only find in that town or region (local snacks, keychains, mascots). グッズ (guzzu) is katakana, from “goods”", "gotōchi guzzu", "Local souvenirs.", "go-toh-chee goo-zzoo"],
         ["と", "Joins nouns: コーヒーとこうちゃ (kōhī to kōcha) = coffee and black tea", "to", "And (between things).", "toh"],
+        ["します", "Very common verb. Same endings as のみます (nomimasu): しません (shimasen) = don’t do · したいです (shitai desu) = want to do · しましょう (shimashō) = let’s do. Example: なにをしますか (nani o shimasu ka) = what will you do?", "shimasu", "I do / I’ll do.", "shee-mahss"],
         ["か", "Between two things it means “or”: コーヒーかこうちゃ (kōhī ka kōcha) = coffee or black tea. At the end of a sentence it makes a question (…ですか, desu ka)", "ka", "Or (between things).", "kah"],
         ["だれ", "Pimsleur shows: 誰", "dare", "Who?", "dah-reh"],
         ["いまから", "Pimsleur shows: 今から. いま (ima) now + から (kara) from", "ima kara", "From now on / starting now.", "ee-mah kah-rah"],
