@@ -796,6 +796,18 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 :root[data-theme="light"]{--track:oklch(97% 0.001 106.424);--chip:oklch(97% 0.001 106.424);--lh-bg:oklch(86.9% 0.005 56.366)}
 :root[data-theme="light"] body{background:radial-gradient(120% 70% at 50% 0%, oklch(97% 0.001 106.424) 0%, oklch(92.3% 0.003 48.717) 100%) fixed}
 :root[data-theme="light"] nav.tabs{background:color-mix(in srgb, oklch(97% 0.001 106.424) 80%, transparent)}
+
+/* phrase families */
+.fam-head{margin-top:34px}
+#panel-phrases .jump + .fam-head{margin-top:16px}
+.lh-mark{font-family:var(--jp);font-weight:400;font-size:22px}
+.sub-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 6px}
+.sub-head h2.sec{margin:0;flex:1;min-width:0}
+.sub-quiz{display:inline-flex;gap:2px;padding:2px;border-radius:9px;background:var(--track)}
+.sub-quiz button{border:0;background:transparent;font-size:12px;font-weight:600;color:var(--seg-ink);padding:5px 8px;border-radius:7px;cursor:pointer;min-height:30px}
+.sub-quiz button:active, .sub-quiz button:hover{background:var(--card);color:var(--ink)}
+@media (min-width: 760px){ .group > .sub-head{grid-column:1/-1} }
+@media (max-width: 600px){ .sub-head{row-gap:8px} .sub-head h2.sec{flex-basis:100%} .sub-quiz{margin-left:19px} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1133,15 +1145,40 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     document.getElementById("panel-lessons").innerHTML = h;
   }
 
+  /* phrase families: a few big sections, each with its own quick quiz */
+  var FAMS = [
+    { key: "basics", label: "Pimsleur basics", jp: "基本", mark: "基", test: function(t){ return /^(My Pimsleur phrases|Speak Easy dialogue|Where are you from\?)$/.test(t); } },
+    { key: "essentials", label: "Essentials", jp: "必須", mark: "要", test: function(t){ return /^Essentials/.test(t); } },
+    { key: "small", label: "Small words", jp: "小さな言葉", mark: "小", test: function(t){ return /^Small words/.test(t); } },
+    { key: "travel", label: "Travel and survival", jp: "旅", mark: "旅", test: function(t){ return /^(Getting around|Survival|Signs)/.test(t); } },
+    { key: "numbers", label: "Numbers", jp: "数字", mark: "数", test: function(t){ return /^Numbers/.test(t); } }
+  ];
+  function famOf(g){ for (var i = 0; i < FAMS.length; i++) if (FAMS[i].test(g.title)) return FAMS[i]; return FAMS[0]; }
+  function subName(g){ return g.short || cap(g.title.replace(/^(Essentials|Survival|Small words): /, "")); }
+  function quizGroup(attr, label){
+    return '<div class="lh-quiz" role="group" aria-label="Quick quiz: ' + esc(label) + '"><span class="lh-ql"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Quiz</span>' +
+      '<button type="button" data-pquiz="' + attr + ':je">JP → EN</button><button type="button" data-pquiz="' + attr + ':ej">EN → JP</button></div>';
+  }
   function renderPhrases(){
     var h = '<details class="skey"><summary>How to read “sounds like”</summary><div class="keys">';
     N.soundKey.forEach(function(k){ h += '<span><b>'+esc(k[0])+'</b> '+esc(k[1])+'</span>'; });
     h += '</div></details>';
-    h += '<div class="jump" role="navigation" aria-label="Jump to a section">' + N.phraseGroups.map(function(g, gi){ return '<button type="button" data-jump="pg-'+gi+'">'+esc(g.short || cap(g.title.replace(/^(Essentials|Survival|Small words): /, "")))+'</button>'; }).join("") + '</div>';
+    var used = FAMS.filter(function(f){ return N.phraseGroups.some(function(g){ return famOf(g) === f; }); });
+    h += '<div class="jump" role="navigation" aria-label="Jump to a section">' + used.map(function(f){ return '<button type="button" data-jump="pf-'+f.key+'">'+esc(f.label)+'</button>'; }).join("") + '</div>';
+    var lastFam = null;
     N.phraseGroups.forEach(function(g, gi){
-      h += '<div class="group" data-group="'+gi+'"><div class="anchor" id="pg-'+gi+'"></div>'+secHead(g.title, g.jp, g.items.length);
-      var sub = g.short || cap(g.title.replace(/^(Essentials|Survival|Small words): /, ""));
-      g.items.forEach(function(p,i){ h += card(p, pad(i), { type: "phrase", tag: "Phrases", sub: sub }); });
+      var f = famOf(g);
+      if (f !== lastFam){
+        lastFam = f;
+        var gs = N.phraseGroups.filter(function(x){ return famOf(x) === f; }), n = gs.reduce(function(a, x){ return a + x.items.length; }, 0);
+        h += '<div class="lesson-head fam-head" id="pf-'+f.key+'"><div class="lh-main"><span class="lh-num lh-mark" lang="ja">'+esc(f.mark)+'</span><div class="lh-text">' +
+          '<span class="lh-title">'+esc(f.label)+' <span class="lh-jp">'+esc(f.jp)+'</span></span><span class="lh-sub">'+n+' cards'+(gs.length > 1 ? ' · '+gs.length+' sections' : '')+'</span></div></div>' +
+          quizGroup("f:" + f.key, f.label) + '</div>';
+      }
+      var multi = N.phraseGroups.filter(function(x){ return famOf(x) === f; }).length > 1;
+      h += '<div class="group" data-group="'+gi+'"><div class="anchor" id="pg-'+gi+'"></div>';
+      if (multi) h += '<div class="sub-head">' + secHead(subName(g), g.jp, g.items.length) + '<span class="sub-quiz"><button type="button" data-pquiz="g:'+gi+':je" aria-label="Quiz '+esc(subName(g))+', Japanese to English">JP → EN</button><button type="button" data-pquiz="g:'+gi+':ej" aria-label="Quiz '+esc(subName(g))+', English to Japanese">EN → JP</button></span></div>';
+      g.items.forEach(function(p,i){ h += card(p, pad(i), { type: "phrase", tag: "Phrases", sub: subName(g) }); });
       h += '</div>';
     });
     document.getElementById("panel-phrases").innerHTML = h;
@@ -1665,7 +1702,13 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
       if (!list.length){ toast("No cards in this lesson yet", 1500); return; }
       start(list, dir);
     }
-    return { refresh: renderSetup, quick: quick };
+    function quickKeys(keys, dir){
+      var set = {}; keys.forEach(function(k){ set[key(k)] = 1; });
+      var list = pool.filter(function(c){ return set[c.k]; });
+      if (!list.length){ toast("No cards here yet", 1500); return; }
+      start(list, dir);
+    }
+    return { refresh: renderSetup, quick: quick, quickKeys: quickKeys };
   })();
 
   /* practice sub-sections */
@@ -1682,6 +1725,15 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   document.addEventListener("click", function(e){ var b = e.target.closest("[data-pm]"); if (b) showPm(b.getAttribute("data-pm")); });
 
   document.addEventListener("click", function(e){
+    var pq = e.target.closest("[data-pquiz]");
+    if (pq){
+      var a = pq.getAttribute("data-pquiz").split(":"), groups;
+      if (a[0] === "f"){ var fam = FAMS.filter(function(f){ return f.key === a[1]; })[0]; groups = N.phraseGroups.filter(function(g){ return famOf(g) === fam; }); }
+      else groups = [N.phraseGroups[+a[1]]];
+      var keys = []; groups.forEach(function(g){ g.items.forEach(function(p){ keys.push(p[0]); }); });
+      if (qEl.value){ qEl.value = ""; }
+      show("cards"); showPm("cards"); FC.quickKeys(keys, a[2]); return;
+    }
     var b = e.target.closest("[data-lquiz]"); if (!b) return;
     var p = b.getAttribute("data-lquiz").split(":");
     if (qEl.value){ qEl.value = ""; }
@@ -1690,7 +1742,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "6 Nov 23:40";
+  var APP_VERSION = "6 Nov 23:55";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
