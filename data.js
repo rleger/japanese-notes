@@ -111,6 +111,38 @@ window.NOTES = {
       ["いくらですか", "", "ikura desu ka", "How much is it?", "ee-koo-rah dess kah"],
       ["トイレはどこですか", "トイレ (toire) is katakana", "toire wa doko desu ka", "Where is the toilet?", "toy-reh wah doh-koh dess kah"]
     ]},
+    { title: "Small words: questions", short: "Question words", jp: "疑問詞", src: "smallwords", items: [
+      ["なに / なん", "Pimsleur shows: 何. なん (nan) before です (desu): なんですか (nan desu ka). なに (nani) elsewhere: なにをたべますか (nani o tabemasu ka)", "nani / nan", "What?", "nah-nee / nahn"],
+      ["どこ", "えきはどこですか (eki wa doko desu ka) = where is the station?", "doko", "Where?", "doh-koh"],
+      ["だれ", "Pimsleur shows: 誰. だれですか (dare desu ka) = who is it?", "dare", "Who?", "dah-reh"],
+      ["いつ", "いつたべますか (itsu tabemasu ka) = when shall we eat?", "itsu", "When?", "ee-tsoo"],
+      ["どうして", "Not in your lessons yet. Casual: なんで (nande). どうしてですか (dōshite desu ka) = why is that?", "dōshite", "Why?", "doh-sh’teh"],
+      ["いくら", "Not in your lessons yet. いくらですか (ikura desu ka) = how much is it?", "ikura", "How much (money)?", "ee-koo-rah"],
+      ["どれ", "Not in your lessons yet. どれですか (dore desu ka) = which one?", "dore", "Which one?", "doh-reh"]
+    ]},
+    { title: "Small words: linking", short: "Linking words", jp: "つなぐ言葉", src: "smallwords", items: [
+      ["と", "A と B: you take both. コーヒーとこうちゃ (kōhī to kōcha) = coffee and tea", "to", "And (A and B).", "toh"],
+      ["か", "A か B: you take one. コーヒーかこうちゃ (kōhī ka kōcha) = coffee or tea", "ka", "Or (A or B).", "kah"],
+      ["でも", "Starts the sentence: でも、まだまだです (demo, mada mada desu) = but I still have a long way to go", "demo", "But.", "deh-moh"],
+      ["も", "Replaces は (wa) or が (ga): わたしも (watashi mo) = me too", "mo", "Too, also.", "moh"],
+      ["の", "A の B = A’s B: ホテルのレストラン (hoteru no resutoran) = the hotel’s restaurant", "no", "’s, of.", "noh"],
+      ["から", "After the word: いまから (ima kara) = from now, ホテルから (hoteru kara) = from the hotel", "kara", "From.", "kah-rah"],
+      ["まで", "After the word: きょうとまで (Kyōto made) = to Kyoto (tickets). いまから…まで (ima kara … made) = from now until…", "made", "Until, as far as.", "mah-deh"]
+    ]},
+    { title: "Small words: here and there", short: "Here & there", jp: "こそあど", src: "smallwords", items: [
+      ["ここ", "Near me. ここでたべます (koko de tabemasu) = I’ll eat here", "koko", "Here.", "koh-koh"],
+      ["そこ", "Near you. Not in your lessons yet", "soko", "There (near you).", "soh-koh"],
+      ["あそこ", "Far from both of us. あそこです (asoko desu) = it’s over there", "asoko", "Over there.", "ah-soh-koh"],
+      ["これ", "This thing (near me). これをください (kore o kudasai) = this one, please", "kore", "This (one).", "koh-reh"],
+      ["それ", "That thing (near you). Not in your lessons yet", "sore", "That (one).", "soh-reh"],
+      ["あれ", "That thing over there. Not in your lessons yet", "are", "That (one) over there.", "ah-reh"]
+    ]},
+    { title: "Small words: time", short: "Time words", jp: "時の言葉", src: "smallwords", items: [
+      ["いま", "Pimsleur shows: 今. いまのみます (ima nomimasu) = I’ll drink now", "ima", "Now.", "ee-mah"],
+      ["あとで", "Pimsleur shows: 後で. あとでたべます (atode tabemasu) = I’ll eat later", "atode", "Later.", "ah-toh-deh"],
+      ["いまから", "Pimsleur shows: 今から. いまからなにをしますか (ima kara nani o shimasu ka) = what are you doing now?", "ima kara", "From now on.", "ee-mah kah-rah"],
+      ["まだ", "まだまだです (mada mada desu) = I still have a long way to go", "mada", "Still, not yet.", "mah-dah"]
+    ]},
     { title: "Getting around", jp: "旅の言葉", items: [
       ["○○はどこですか。", "Pattern from Lesson 4. Example: トイレはどこですか (toire wa doko desu ka). Where is the toilet?", "○○ wa doko desu ka?", "Where is ○○?", "… wah doh-koh dess kah?"],
       ["○○にいきたいです。", "Kanji form: ○○に行きたいです。 に (ni) = to (a place) · いきたい (ikitai) = want to go. Example: うえのえきにいきたいです (Ueno eki ni ikitai desu). I want to go to Ueno Station.", "○○ ni ikitai desu", "I want to go to ○○.", "… nee ee-kee-tye dess"],

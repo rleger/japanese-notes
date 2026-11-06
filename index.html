@@ -1137,10 +1137,10 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     var h = '<details class="skey"><summary>How to read “sounds like”</summary><div class="keys">';
     N.soundKey.forEach(function(k){ h += '<span><b>'+esc(k[0])+'</b> '+esc(k[1])+'</span>'; });
     h += '</div></details>';
-    h += '<div class="jump" role="navigation" aria-label="Jump to a section">' + N.phraseGroups.map(function(g, gi){ return '<button type="button" data-jump="pg-'+gi+'">'+esc(g.short || cap(g.title.replace(/^(Essentials|Survival): /, "")))+'</button>'; }).join("") + '</div>';
+    h += '<div class="jump" role="navigation" aria-label="Jump to a section">' + N.phraseGroups.map(function(g, gi){ return '<button type="button" data-jump="pg-'+gi+'">'+esc(g.short || cap(g.title.replace(/^(Essentials|Survival|Small words): /, "")))+'</button>'; }).join("") + '</div>';
     N.phraseGroups.forEach(function(g, gi){
       h += '<div class="group" data-group="'+gi+'"><div class="anchor" id="pg-'+gi+'"></div>'+secHead(g.title, g.jp, g.items.length);
-      var sub = g.short || cap(g.title.replace(/^(Essentials|Survival): /, ""));
+      var sub = g.short || cap(g.title.replace(/^(Essentials|Survival|Small words): /, ""));
       g.items.forEach(function(p,i){ h += card(p, pad(i), { type: "phrase", tag: "Phrases", sub: sub }); });
       h += '</div>';
     });
@@ -1493,7 +1493,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     N.phraseGroups.forEach(function(g){ g.items.forEach(function(p){ add({ ja: p[0], note: p[1], ro: p[2], en: p[3], sl: p[4], kind: isSentence(p[0]) ? "sentences" : "words", src: g.src || "phrases" }); }); });
 
     var sources = N.lessons.map(function(L){ return { id: "L" + L.number, label: "Lesson " + L.number }; })
-      .concat([{ id: "phrases", label: "Phrase pages" }, { id: "survival", label: "Survival" }, { id: "numbers", label: "Numbers" }])
+      .concat([{ id: "phrases", label: "Phrase pages" }, { id: "smallwords", label: "Small words" }, { id: "survival", label: "Survival" }, { id: "numbers", label: "Numbers" }])
       .filter(function(s){ return pool.some(function(c){ return c.src === s.id; }); });
     var cfg = { content: "both", dir: "je", mode: "due", src: {}, favOnly: false };
     try { var saved = JSON.parse(store.get("fc") || "null"); if (saved){ ["content","dir","mode","favOnly"].forEach(function(k){ if (saved[k] !== undefined) cfg[k] = saved[k]; }); cfg.src = saved.src || {}; } } catch(e){}
@@ -1690,7 +1690,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "5 Nov 13:15";
+  var APP_VERSION = "6 Nov 23:40";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
