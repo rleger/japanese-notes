@@ -1531,7 +1531,14 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     var $ = function(id){ return document.getElementById(id); };
     var DAY = 86400000, NEW_PER_DAY = 10, INTERVALS = [0, 1, 3, 7, 14, 30, 60];
     function isSentence(ja){ return /[。？?！]$/.test(ja) || ja.indexOf("、") > -1; }
-    function cleanEn(en){ return String(en || "").replace(/\s*\([^)]*[぀-ヿ一-龯][^)]*\)/g, "").trim(); }
+    function cleanEn(en, ro){
+      var words = String(ro || "").toLowerCase().split(/[^a-zāīūēō]+/).filter(function(w){ return w.length >= 3; });
+      return String(en || "").replace(/\s*\(([^)]*)\)/g, function(m, inner){
+        if (/[぀-ヿ一-龯]/.test(inner)) return "";
+        var low = inner.toLowerCase();
+        return words.some(function(w){ return low.indexOf(w) > -1; }) ? "" : m;
+      }).trim();
+    }
     var key = favKey;
     function today(){ var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
     var pool = [], seen = {};
@@ -1660,7 +1667,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
       $("fcTag").textContent = (cur.dir === "je" ? "Japanese → English" : "English → Japanese") + (lv === "new" ? " · new" : "");
       var f = $("fcFront");
       if (cur.dir === "je"){ f.className = "fc-front ja"; f.innerHTML = jaHTML(c.ja, c.ro) + '<span class="ro">' + esc(c.ro) + '</span>'; }
-      else { f.className = "fc-front"; f.textContent = cleanEn(c.en); }
+      else { f.className = "fc-front"; f.textContent = cleanEn(c.en, c.ro); }
       $("fcBack").hidden = true; $("fcNote").hidden = true; $("fcTap").hidden = false; $("fcActions").hidden = true;
       $("fcSpeak").style.visibility = cur.dir === "je" ? "visible" : "hidden";
       $("fcSpeak").setAttribute("data-say", c.ja);
@@ -1768,7 +1775,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "7 Nov 09:15";
+  var APP_VERSION = "7 Nov 09:25";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
