@@ -808,6 +808,15 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .sub-quiz button:active, .sub-quiz button:hover{background:var(--card);color:var(--ink)}
 @media (min-width: 760px){ .group > .sub-head{grid-column:1/-1} }
 @media (max-width: 600px){ .sub-head{row-gap:8px} .sub-head h2.sec{flex-basis:100%} .sub-quiz{margin-left:19px} }
+
+/* today's reviews + round size */
+.today{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--flame-bg);border:1px solid color-mix(in srgb, var(--flame) 35%, transparent)}
+.today.done{background:var(--ok-bg);border-color:var(--ok-line)}
+.today-txt{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.today-txt b{font-size:16px;color:var(--ink)}
+.today-txt span{font-size:12.5px;color:var(--muted)}
+.today-go{min-height:40px;padding:0 18px;border:0;border-radius:10px;background:var(--red-btn);color:#fff;font-size:15px;font-weight:700;cursor:pointer;flex-shrink:0}
+.seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -876,6 +885,13 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
           <button type="button" role="radio" data-v="all">Shuffle all</button>
         </div>
         <p class="hint" id="fcModeHint" style="margin:6px 0 0"></p></div>
+      <div class="fc-opt"><span class="fc-lab" id="lbSize">Cards per round</span>
+        <div class="seg seg4" role="radiogroup" aria-labelledby="lbSize" data-opt="size">
+          <button type="button" role="radio" data-v="10">10</button>
+          <button type="button" role="radio" data-v="20">20</button>
+          <button type="button" role="radio" data-v="30">30</button>
+          <button type="button" role="radio" data-v="all">All</button>
+        </div></div>
       <div class="fc-opt"><span class="fc-lab" id="lbContent">Content</span>
         <div class="seg" role="radiogroup" aria-labelledby="lbContent" data-opt="content">
           <button type="button" role="radio" data-v="words">Words</button>
@@ -1532,8 +1548,8 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     var sources = N.lessons.map(function(L){ return { id: "L" + L.number, label: "Lesson " + L.number }; })
       .concat([{ id: "phrases", label: "Phrase pages" }, { id: "smallwords", label: "Small words" }, { id: "survival", label: "Survival" }, { id: "numbers", label: "Numbers" }])
       .filter(function(s){ return pool.some(function(c){ return c.src === s.id; }); });
-    var cfg = { content: "both", dir: "je", mode: "due", src: {}, favOnly: false };
-    try { var saved = JSON.parse(store.get("fc") || "null"); if (saved){ ["content","dir","mode","favOnly"].forEach(function(k){ if (saved[k] !== undefined) cfg[k] = saved[k]; }); cfg.src = saved.src || {}; } } catch(e){}
+    var cfg = { content: "both", dir: "je", mode: "due", size: "20", src: {}, favOnly: false };
+    try { var saved = JSON.parse(store.get("fc") || "null"); if (saved){ ["content","dir","mode","size","favOnly"].forEach(function(k){ if (saved[k] !== undefined) cfg[k] = saved[k]; }); cfg.src = saved.src || {}; } } catch(e){}
     sources.forEach(function(s){ if (!(s.id in cfg.src)) cfg.src[s.id] = true; });
 
     /* SRS state: key -> [box, due, reps, lapses] */
@@ -1572,7 +1588,13 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
       var room = Math.max(0, NEW_PER_DAY - newToday());
       return { due: due, fresh: fresh.slice(0, room), freshAll: fresh.length };
     }
-    function selection(){ var f = filtered(); if (cfg.mode === "all") return f; var d = dueSplit(f); return d.due.concat(d.fresh); }
+    function limit(list){ var n = cfg.size === "all" ? list.length : +cfg.size; return list.slice(0, n); }
+    function selection(){
+      var f = filtered();
+      if (cfg.mode === "all") return limit(shuffle(f.slice()));
+      var d = dueSplit(f); return limit(shuffle(d.due.slice()).concat(shuffle(d.fresh.slice())));
+    }
+    function todayRound(){ var d = dueSplit(pool); return { due: d.due, fresh: d.fresh, list: shuffle(d.due.slice()).concat(shuffle(d.fresh.slice())) }; }
     function save(){ store.set("fc", JSON.stringify(cfg)); }
 
     function updateBadge(){
@@ -1583,8 +1605,11 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     function renderProgress(){
       var tot = { known: 0, learning: 0, "new": 0 }, per = {};
       pool.forEach(function(c){ var lv = level(c); tot[lv]++; per[c.src] = per[c.src] || { known: 0, learning: 0, "new": 0 }; per[c.src][lv]++; });
-      var st = streak();
-      var h = '<div class="prog-head"><span class="prog-title">Your progress</span><span class="streak-pill' + (st ? ' on' : '') + '"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c.6 3.2-1 5.2-2.6 7C7.8 10.8 6.5 12.5 6.5 15a5.5 5.5 0 0 0 11 0c0-2.1-.9-3.8-2.2-5.2-.3 1.4-1 2.4-2.1 2.9.4-3.6-.6-7.6-1.2-10.7z"/></svg>' + (st ? st + '-day streak' : 'No streak yet') + '</span></div>' +
+      var st = streak(), td = todayRound(), tn = td.list.length;
+      var tday = '<div class="today' + (tn ? '' : ' done') + '"><div class="today-txt"><b>' + (tn ? 'Today: ' + tn + ' card' + (tn > 1 ? 's' : '') : 'All done for today ✓') + '</b><span>' +
+        (tn ? td.due.length + ' to review · ' + td.fresh.length + ' new · from all lessons and sections' : 'Come back tomorrow, or shuffle below') + '</span></div>' +
+        (tn ? '<button type="button" class="today-go" id="fcToday">Start</button>' : '') + '</div>';
+      var h = tday + '<div class="prog-head"><span class="prog-title">Your progress</span><span class="streak-pill' + (st ? ' on' : '') + '"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c.6 3.2-1 5.2-2.6 7C7.8 10.8 6.5 12.5 6.5 15a5.5 5.5 0 0 0 11 0c0-2.1-.9-3.8-2.2-5.2-.3 1.4-1 2.4-2.1 2.9.4-3.6-.6-7.6-1.2-10.7z"/></svg>' + (st ? st + '-day streak' : 'No streak yet') + '</span></div>' +
         '<div class="stats"><div class="stat s-k"><b>' + tot.known + '</b><span>Known</span></div><div class="stat s-l"><b>' + tot.learning + '</b><span>Learning</span></div><div class="stat s-n"><b>' + tot["new"] + '</b><span>New</span></div></div>';
       h += bar(tot.known, tot.learning, tot["new"]);
       h += '<details class="prog-det"><summary>Progress by lesson</summary><div class="prog-rows">';
@@ -1612,8 +1637,8 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
         group("lessons", "Lessons", lessonsSrc) + group("other", "Phrase sections", otherSrc);
       var f = filtered(), d = dueSplit(f), n = selection().length;
       $("fcModeHint").textContent = cfg.mode === "due"
-        ? (d.due.length + " to review · " + d.fresh.length + " new (max " + NEW_PER_DAY + " new a day" + (d.freshAll > d.fresh.length ? ", " + (d.freshAll - d.fresh.length) + " waiting" : "") + ")")
-        : "Every selected card, shuffled. Your answers still count for spaced repetition.";
+        ? ("In your selection: " + d.due.length + " to review · " + d.fresh.length + " new (max " + NEW_PER_DAY + " new a day)")
+        : f.length + " cards in your selection, shuffled. Answers still count for spaced repetition.";
       $("fcStart").textContent = n ? "Start · " + n + " cards" : (cfg.mode === "due" ? "All done for today ✓" : "No cards for this choice");
       $("fcStart").disabled = !n;
       renderProgress(); updateBadge();
@@ -1686,6 +1711,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
       if (t.hasAttribute("data-src")){ var id = t.getAttribute("data-src"); cfg.src[id] = !cfg.src[id]; save(); renderSetup(); return; }
       switch (t.id){
         case "fcStart": start(selection()); break;
+        case "fcToday": start(todayRound().list); break;
         case "fcCard": flip(); break;
         case "fcGot": answer(true); break;
         case "fcAgain": answer(false); break;
@@ -1742,7 +1768,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "6 Nov 23:55";
+  var APP_VERSION = "7 Nov 09:15";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
