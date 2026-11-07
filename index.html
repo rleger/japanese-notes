@@ -6,7 +6,7 @@
 <title>日本語ノート</title>
 <meta name="description" content="Romain's Japanese study notes: hiragana, Pimsleur phrases, lesson by lesson.">
 <meta name="theme-color" content="#F5F5F4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#030712" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#1c1917" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="日本語">
@@ -818,6 +818,16 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .today-go{min-height:40px;padding:0 18px;border:0;border-radius:10px;background:var(--red-btn);color:#fff;font-size:15px;font-weight:700;cursor:pointer;flex-shrink:0}
 .seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .seg5{grid-template-columns:repeat(5,minmax(0,1fr))}
+
+/* dark look: same warm stone tint as light mode, cards one step lighter than the page */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:oklch(14.7% 0.004 49.25);--card:oklch(26.8% 0.007 34.298);--ink:oklch(97% 0.001 106.424);--muted:oklch(70.9% 0.01 56.259);--soft:oklch(86.9% 0.005 56.366);--line:oklch(37.4% 0.01 67.558);--line-strong:oklch(44.4% 0.011 73.639);--chip:oklch(21.6% 0.006 56.043);--track:oklch(21.6% 0.006 56.043);--lh-bg:oklch(37.4% 0.01 67.558);--tab-ink:oklch(70.9% 0.01 56.259);--ctl-ink:oklch(86.9% 0.005 56.366);--seg-on:oklch(37.4% 0.01 67.558);--seg-ink:oklch(86.9% 0.005 56.366);--on-bg:oklch(92.3% 0.003 48.717);--on-ink:oklch(21.6% 0.006 56.043);--st-bg:oklch(14.7% 0.004 49.25 / .88);--st-fg:oklch(70.9% 0.01 56.259);--bar-l:oklch(44.4% 0.011 73.639)}
+  :root:not([data-theme="light"]) body{background:radial-gradient(120% 70% at 50% 0%, oklch(21.6% 0.006 56.043) 0%, oklch(14.7% 0.004 49.25) 100%) fixed}
+  :root:not([data-theme="light"]) nav.tabs{background:color-mix(in srgb, oklch(21.6% 0.006 56.043) 82%, transparent)}
+}
+:root[data-theme="dark"]{--bg:oklch(14.7% 0.004 49.25);--card:oklch(26.8% 0.007 34.298);--ink:oklch(97% 0.001 106.424);--muted:oklch(70.9% 0.01 56.259);--soft:oklch(86.9% 0.005 56.366);--line:oklch(37.4% 0.01 67.558);--line-strong:oklch(44.4% 0.011 73.639);--chip:oklch(21.6% 0.006 56.043);--track:oklch(21.6% 0.006 56.043);--lh-bg:oklch(37.4% 0.01 67.558);--tab-ink:oklch(70.9% 0.01 56.259);--ctl-ink:oklch(86.9% 0.005 56.366);--seg-on:oklch(37.4% 0.01 67.558);--seg-ink:oklch(86.9% 0.005 56.366);--on-bg:oklch(92.3% 0.003 48.717);--on-ink:oklch(21.6% 0.006 56.043);--st-bg:oklch(14.7% 0.004 49.25 / .88);--st-fg:oklch(70.9% 0.01 56.259);--bar-l:oklch(44.4% 0.011 73.639)}
+:root[data-theme="dark"] body{background:radial-gradient(120% 70% at 50% 0%, oklch(21.6% 0.006 56.043) 0%, oklch(14.7% 0.004 49.25) 100%) fixed}
+:root[data-theme="dark"] nav.tabs{background:color-mix(in srgb, oklch(21.6% 0.006 56.043) 82%, transparent)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1777,7 +1787,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "7 Nov 09:30";
+  var APP_VERSION = "7 Nov 22:55";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
@@ -1810,7 +1820,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     themeBtn.innerHTML = ICONS[t];
     themeBtn.setAttribute("aria-label", "Theme: " + LABEL[t] + ". Tap to change.");
     var dark = t === "dark" || (t === "auto" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
-    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#030712" : "#F5F5F4"); m.removeAttribute("media"); });
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#1c1917" : "#F5F5F4"); m.removeAttribute("media"); });
     store.set("theme", t);
     return t;
   }
