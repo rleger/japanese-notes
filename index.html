@@ -817,6 +817,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .today-txt span{font-size:12.5px;color:var(--muted)}
 .today-go{min-height:40px;padding:0 18px;border:0;border-radius:10px;background:var(--red-btn);color:#fff;font-size:15px;font-weight:700;cursor:pointer;flex-shrink:0}
 .seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.seg5{grid-template-columns:repeat(5,minmax(0,1fr))}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -886,10 +887,11 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
         </div>
         <p class="hint" id="fcModeHint" style="margin:6px 0 0"></p></div>
       <div class="fc-opt"><span class="fc-lab" id="lbSize">Cards per round</span>
-        <div class="seg seg4" role="radiogroup" aria-labelledby="lbSize" data-opt="size">
+        <div class="seg seg5" role="radiogroup" aria-labelledby="lbSize" data-opt="size">
           <button type="button" role="radio" data-v="10">10</button>
           <button type="button" role="radio" data-v="20">20</button>
           <button type="button" role="radio" data-v="30">30</button>
+          <button type="button" role="radio" data-v="50">50</button>
           <button type="button" role="radio" data-v="all">All</button>
         </div></div>
       <div class="fc-opt"><span class="fc-lab" id="lbContent">Content</span>
@@ -1775,7 +1777,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "7 Nov 09:25";
+  var APP_VERSION = "7 Nov 09:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
