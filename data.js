@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-06",
+  updated: "2026-11-08",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -459,6 +459,43 @@ window.NOTES = {
           ["A", "なにをのみますか。", "nani o nomimasu ka?", "What will you drink?"],
           ["B", "そうですね…こうちゃ、いいえ、コーヒーをのみます。", "sō desu ne… kōcha, iie, kōhī o nomimasu", "Let me see… black tea, no, I’ll have coffee."],
           ["A", "わたしもコーヒーがほしいです。…すみません！コーヒーをふたつおねがいします。", "watashi mo kōhī ga hoshii desu… sumimasen! kōhī o futatsu onegai shimasu", "I want coffee too… Excuse me! Two coffees, please. (ふたつ futatsu = two things)"]
+        ]}
+      ]
+    },
+    { number: 9, jp: "第9課",
+      words: [
+        ["じ", "Pimsleur shows: 時. Goes after the number: いちじ (ichi ji) = 1 o’clock, はちじ (hachi ji) = 8 o’clock", "ji", "O’clock.", "jee"],
+        ["いちじ", "Pimsleur shows: 一時. いち (ichi) one + じ (ji)", "ichi ji", "1 o’clock.", "ee-chee jee"],
+        ["に", "Pimsleur shows: 二. So にじ (ni ji) = 2 o’clock", "ni", "2", "nee"],
+        ["はち", "Pimsleur shows: 八", "hachi", "8", "hah-chee"],
+        ["はちじ", "Pimsleur shows: 八時", "hachi ji", "8 o’clock.", "hah-chee jee"],
+        ["くじ", "Pimsleur shows: 九時. 9 is usually きゅう (kyū), but for the hour it is く (ku): くじ (ku ji), never きゅうじ", "ku ji", "9 o’clock.", "koo jee"],
+        ["いっしょに", "Pimsleur shows: 一緒に. Example: いっしょにたべませんか (issho ni tabemasen ka) = shall we eat together?", "issho ni", "Together.", "ees-shoh nee"],
+        ["といっしょに", "Pimsleur shows: と一緒に. The person comes first: パーカーさんといっしょに (Pākā san to issho ni) = together with Mr. Parker", "to issho ni", "(Together) with someone.", "toh ees-shoh nee"],
+        ["わかりました", "Pimsleur shows: わかりました. Past of わかります (wakarimasu). What you say when someone tells you a time or a plan", "wakarimashita", "Got it / Understood / OK.", "wah-kah-ree-mahsh-tah"]
+      ],
+      sentences: [
+        ["パーカーさんもたべませんか。", "Pimsleur shows: パーカーさんも食べませんか。 も (mo) = too · 〜ませんか (-masen ka) = won’t you…? (a friendly invitation, Lesson 5)", "Pākā san mo tabemasen ka?", "Won’t you eat too, Mr. Parker?", "pah-kah sahn moh tah-beh-mah-sen kah?"],
+        ["ホテルのレストランで？", "で (de) = at (where it happens), like どこで (doko de)", "hoteru no resutoran de?", "At the hotel restaurant?", "hoh-teh-roo noh reh-s’toh-rahn deh?"]
+      ],
+      tips: [
+        { title: "Telling the hour: number + じ (ji)", jp: "〜じ", keys: "time hour o'clock oclock ji nanji what time ichiji hachiji kuji yoji shichiji number",
+          lead: "Say the number, add じ (ji). Three hours change their number.",
+          cols: [
+            { mark: "じ", ro: "ji", label: "as usual", ex: [["いち", "じ", "", "ichi ji", "1 o’clock"], ["に", "じ", "", "ni ji", "2 o’clock"], ["はち", "じ", "", "hachi ji", "8 o’clock"]] },
+            { mark: "4·7·9", ro: "ji", label: "special", ex: [["よ", "じ", "", "yo ji", "4 o’clock (not yon)"], ["しち", "じ", "", "shichi ji", "7 o’clock (not nana)"], ["く", "じ", "", "ku ji", "9 o’clock (not kyū)"]] }
+          ],
+          foot: "To ask: なんじですか (nan ji desu ka) = what time is it? / at what time?" }
+      ],
+      dialogues: [
+        { title: "Speak Easy · lunch at the hotel", note: "Pimsleur dialogue, lesson 9. A friendly invitation with 〜ませんか (-masen ka).", lines: [
+          ["A", "さとうさん、こんにちは。", "Satō san, konnichiwa", "Hello, Mr. / Ms. Satō."],
+          ["B", "あ、パーカーさん、こんにちは。", "a, Pākā san, konnichiwa", "Oh, Mr. / Ms. Parker, hello."],
+          ["A", "さとうさん、いまからなにをしますか。", "Satō san, ima kara nani o shimasu ka?", "What are you going to do now?"],
+          ["B", "ひるごはんをたべます。パーカーさんもたべませんか。", "hirugohan o tabemasu. Pākā san mo tabemasen ka?", "I’m going to have lunch. Won’t you eat too?"],
+          ["A", "ええ、どこでたべますか。", "ee, doko de tabemasu ka?", "Yes. Where shall we eat?"],
+          ["B", "そうですね、ホテルのレストランで？", "sō desu ne, hoteru no resutoran de?", "Let me see… at the hotel restaurant?"],
+          ["A", "ええ、いいですね。", "ee, ii desu ne", "Yes, sounds good."]
         ]}
       ]
     }
