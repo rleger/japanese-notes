@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-08",
+  updated: "2026-11-09",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -472,6 +472,7 @@ window.NOTES = {
         ["くじ", "Pimsleur shows: 九時. 9 is usually きゅう (kyū), but for the hour it is く (ku): くじ (ku ji), never きゅうじ", "ku ji", "9 o’clock.", "koo jee"],
         ["いっしょに", "Pimsleur shows: 一緒に. Example: いっしょにたべませんか (issho ni tabemasen ka) = shall we eat together?", "issho ni", "Together.", "ees-shoh nee"],
         ["といっしょに", "Pimsleur shows: と一緒に. The person comes first: パーカーさんといっしょに (Pākā san to issho ni) = together with Mr. Parker", "to issho ni", "(Together) with someone.", "toh ees-shoh nee"],
+        ["ぜひ", "Kanji: 是非 (rarely used). The warm way to accept an invitation: ええ、ぜひ (ee, zehi) = yes, I’d love to. Answer to たべませんか (tabemasen ka, won’t you eat?)", "zehi", "By all means / I’d love to.", "zeh-hee"],
         ["わかりました", "Pimsleur shows: わかりました. Past of わかります (wakarimasu). What you say when someone tells you a time or a plan", "wakarimashita", "Got it / Understood / OK.", "wah-kah-ree-mahsh-tah"]
       ],
       sentences: [
