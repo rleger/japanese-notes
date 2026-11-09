@@ -472,6 +472,7 @@ window.NOTES = {
         ["くじ", "Pimsleur shows: 九時. 9 is usually きゅう (kyū), but for the hour it is く (ku): くじ (ku ji), never きゅうじ", "ku ji", "9 o’clock.", "koo jee"],
         ["いっしょに", "Pimsleur shows: 一緒に. Example: いっしょにたべませんか (issho ni tabemasen ka) = shall we eat together?", "issho ni", "Together.", "ees-shoh nee"],
         ["といっしょに", "Pimsleur shows: と一緒に. The person comes first: パーカーさんといっしょに (Pākā san to issho ni) = together with Mr. Parker", "to issho ni", "(Together) with someone.", "toh ees-shoh nee"],
+        ["なんじに", "Pimsleur shows: 何時に. なん (nan) what + じ (ji) hour + に (ni) at. Example: なんじにたべますか (nan ji ni tabemasu ka) = what time shall we eat? Answer with the hour + に: はちじに (hachi ji ni) = at 8", "nan ji ni", "At what time?", "nahn jee nee"],
         ["ぜひ", "Kanji: 是非 (rarely used). The warm way to accept an invitation: ええ、ぜひ (ee, zehi) = yes, I’d love to. Answer to たべませんか (tabemasen ka, won’t you eat?)", "zehi", "By all means / I’d love to.", "zeh-hee"],
         ["わかりました", "Pimsleur shows: わかりました. Past of わかります (wakarimasu). What you say when someone tells you a time or a plan", "wakarimashita", "Got it / Understood / OK.", "wah-kah-ree-mahsh-tah"]
       ],
@@ -486,7 +487,7 @@ window.NOTES = {
             { mark: "じ", ro: "ji", label: "as usual", ex: [["いち", "じ", "", "ichi ji", "1 o’clock"], ["に", "じ", "", "ni ji", "2 o’clock"], ["はち", "じ", "", "hachi ji", "8 o’clock"]] },
             { mark: "4·7·9", ro: "ji", label: "special", ex: [["よ", "じ", "", "yo ji", "4 o’clock (not yon)"], ["しち", "じ", "", "shichi ji", "7 o’clock (not nana)"], ["く", "じ", "", "ku ji", "9 o’clock (not kyū)"]] }
           ],
-          foot: "To ask: なんじですか (nan ji desu ka) = what time is it? / at what time?" }
+          foot: "To ask: なんじですか (nan ji desu ka) = what time is it? · なんじに (nan ji ni) = at what time? Answer: くじに (ku ji ni) = at 9." }
       ],
       dialogues: [
         { title: "Speak Easy · lunch at the hotel", note: "Pimsleur dialogue, lesson 9. A friendly invitation with 〜ませんか (-masen ka).", lines: [
