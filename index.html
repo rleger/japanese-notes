@@ -211,6 +211,7 @@ body.quiz .line:not(.open) .reveal-line{display:block}
 }
 /* flash cards */
 body.on-cards .tools, body.on-cards #quizHint{display:none !important}
+body.on-rules:not(.searching) .tools, body.on-rules:not(.searching) #quizHint{display:none !important}
 .fc-opt{margin:14px 0}
 .fc-lab{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo);margin-bottom:6px}
 .seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line-strong);border-radius:12px;overflow:hidden}
@@ -761,6 +762,20 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .tip-en{font-size:12.5px;color:var(--muted)}
 .tip-foot{margin:10px 2px 0;font-size:12.5px;line-height:1.5;color:var(--muted);font-family:var(--jp)}
 .res-tips{margin-top:8px}
+.tip-cols.n1{grid-template-columns:1fr}
+@media (min-width: 560px){ .tip-cols.n1 .tip-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:14px} .tip-cols.n1 .tip-mark{grid-column:1/-1} }
+.tip{scroll-margin-top:70px}
+#panel-rules .lesson-head{scroll-margin-top:70px}
+#panel-rules .tip{margin:12px 0 0}
+.rules-intro{margin:4px 2px 12px}
+.rules-toc{margin:14px 0 4px;padding:6px 16px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);display:grid;gap:0 28px}
+@media (min-width: 760px){ .rules-toc{grid-template-columns:1fr 1fr} }
+.rt-sec{display:flex;flex-direction:column;padding-top:8px}
+.rt-h{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:6px 0 2px}
+.rules-toc button{text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:9px 0;font-size:14.5px;color:var(--ink);cursor:pointer;font-family:inherit}
+.rules-toc .rt-h + button{border-top:0}
+.rules-toc button:hover{color:var(--red)}
+@media (max-width: 420px){ nav.tabs .in{gap:0;padding:0 6px} nav.tabs button{font-size:14px} }
 @media (max-width: 380px){ .tip-cols{grid-template-columns:1fr} }
 
 .tip-cols.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -853,6 +868,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   <div class="in" role="tablist">
     <button role="tab" id="tab-lessons" aria-controls="panel-lessons" data-tab="lessons">Lessons</button>
     <button role="tab" id="tab-phrases" aria-controls="panel-phrases" data-tab="phrases">Phrases</button>
+    <button role="tab" id="tab-rules" aria-controls="panel-rules" data-tab="rules">Rules</button>
     <button role="tab" id="tab-kana" aria-controls="panel-kana" data-tab="kana">Kana</button>
     <button role="tab" id="tab-cards" aria-controls="panel-cards" data-tab="cards">Practice<span class="badge-n" id="dueBadge" hidden></span></button>
   </div>
@@ -879,6 +895,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   <section id="panel-lessons" role="tabpanel" aria-labelledby="tab-lessons"></section>
   <section id="panel-phrases" role="tabpanel" aria-labelledby="tab-phrases" hidden></section>
   <section id="searchResults" class="results" aria-live="polite" hidden></section>
+  <section id="panel-rules" role="tabpanel" aria-labelledby="tab-rules" hidden></section>
   <section id="panel-kana" role="tabpanel" aria-labelledby="tab-kana" hidden></section>
   <section id="panel-cards" role="tabpanel" aria-labelledby="tab-cards" hidden>
     <div class="pm-seg seg" role="tablist" aria-label="Practice">
@@ -1080,12 +1097,17 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   }
   /* grammar notes: one reusable visual, two columns that compare */
   var TIPS = [];
+  var GR = N.grammar || [];
+  GR.forEach(function(sec){ sec.rules.forEach(function(t, i){
+    t.id = "rule-" + sec.key + "-" + i;
+    TIPS.push({ t: t, tag: t.lesson ? "Lesson " + t.lesson + " · Rule" : "Rules", search: norm([t.title, t.jp, t.lead, t.foot, t.keys].concat(t.cols.map(function(c){ return c.mark + " " + c.ro + " " + c.label + " " + c.ex.map(function(e){ return e.join(" "); }).join(" "); })).join(" ")) });
+  }); });
   function tipHTML(t, tag){
     function ex(e){ return '<div class="tip-ex"><span class="tip-ja"><span class="tseg">' + hl(e[0]) + '<b class="pt">' + esc(e[1]) + '</b></span><span class="tseg">' + hl(e[2]) + '</span></span><span class="tip-ro">' + hl(e[3]) + '</span><span class="tip-en">' + hl(e[4]) + '</span></div>'; }
-    return '<div class="tip">' + (tag ? '<span class="tag t-lesson">' + esc(tag) + ' · Note</span>' : '') +
+    return '<div class="tip"' + (t.id ? ' id="' + t.id + '"' : '') + '>' + (tag ? '<span class="tag t-lesson">' + esc(tag) + '</span>' : '') +
       '<div class="tip-head"><span class="tip-badge" aria-hidden="true">i</span><span class="tip-title">' + hl(t.title) + '</span><span class="tip-lead">' + hl(t.lead) + '</span></div>' +
       '<div class="tip-cols n' + t.cols.length + '">' + t.cols.map(function(c){
-        return '<div class="tip-col"><div class="tip-mark"><b lang="ja">' + esc(c.mark) + '</b><span>' + esc(c.ro) + ' · ' + hl(c.label) + '</span></div>' + c.ex.map(ex).join("") + '</div>';
+        return '<div class="tip-col"><div class="tip-mark">' + (c.mark ? '<b lang="ja">' + esc(c.mark) + '</b>' : '') + '<span>' + [c.ro ? esc(c.ro) : "", hl(c.label)].filter(Boolean).join(" · ") + '</span></div>' + c.ex.map(ex).join("") + '</div>';
       }).join("") + '</div>' + (t.foot ? '<p class="tip-foot">' + hl(t.foot) + '</p>' : '') + '</div>';
   }
   function cardHTML(o, withTag){
@@ -1155,10 +1177,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
         h += '<h3 class="subsec">Sentences</h3>';
         L.sentences.forEach(function(w,i){ h += card(w, pad(i), { type: "lesson", tag: lt, sub: "Sentence" }); });
       }
-      (L.tips || []).forEach(function(t){
-        TIPS.push({ t: t, tag: lt, search: norm([t.title, t.jp, t.lead, t.foot, t.keys].concat(t.cols.map(function(c){ return c.mark + " " + c.ro + " " + c.label + " " + c.ex.map(function(e){ return e.join(" "); }).join(" "); })).join(" ")) });
-        h += tipHTML(t);
-      });
+      GR.forEach(function(sec){ sec.rules.forEach(function(t){ if (t.lesson === L.number) h += tipHTML({ title: t.title, lead: t.lead, cols: t.cols, foot: t.foot }); }); });
       var dlgs = L.dialogues || (L.dialogue && L.dialogue.length ? [{ title: L.dialogueTitle, note: L.dialogueNote, lines: L.dialogue }] : []);
       dlgs.forEach(function(D){
         h += '<details class="dlg"><summary>'+esc(D.title || "Put together · dialogue")+'</summary>';
@@ -1212,6 +1231,18 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     document.getElementById("panel-phrases").innerHTML = h;
   }
 
+  function renderRules(){
+    var h = '<p class="hint rules-intro">Grammar in small bites, from your lessons. Red marks the part that matters.</p>';
+    h += '<nav class="rules-toc" aria-label="All rules">' + GR.map(function(sec){
+      return '<div class="rt-sec"><span class="rt-h">'+esc(sec.label)+'</span>' + sec.rules.map(function(t){ return '<button type="button" data-jump="'+t.id+'">'+esc(t.title)+'</button>'; }).join("") + '</div>';
+    }).join("") + '</nav>';
+    GR.forEach(function(sec){
+      h += '<div class="lesson-head fam-head" id="rs-'+sec.key+'"><div class="lh-main"><span class="lh-num lh-mark" lang="ja">'+esc(sec.mark)+'</span><div class="lh-text">' +
+        '<span class="lh-title">'+esc(sec.label)+' <span class="lh-jp">'+esc(sec.jp)+'</span></span><span class="lh-sub">'+sec.rules.length+' rule'+(sec.rules.length > 1 ? 's' : '')+'</span></div></div></div>';
+      sec.rules.forEach(function(t){ h += tipHTML(t, t.lesson ? "Lesson " + t.lesson : (t.from || "")); });
+    });
+    document.getElementById("panel-rules").innerHTML = h;
+  }
   function kgrid(rows){
     var h = '<div class="kgrid"><span></span><span class="h">a</span><span class="h">i</span><span class="h">u</span><span class="h">e</span><span class="h">o</span>';
     rows.forEach(function(r){
@@ -1254,6 +1285,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
       document.getElementById("panel-"+b.getAttribute("data-tab")).hidden = !on;
     });
     document.body.classList.toggle("on-cards", name === "cards");
+    document.body.classList.toggle("on-rules", name === "rules");
     currentTab = name;
     runSearch();
     store.set("tab", name);
@@ -1337,7 +1369,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   function runSearch(){
     var q = norm(qEl.value.trim());
     var on = !!q;
-    ["lessons", "phrases", "kana", "cards"].forEach(function(n){ document.getElementById("panel-" + n).hidden = on || currentTab !== n; });
+    ["lessons", "phrases", "rules", "kana", "cards"].forEach(function(n){ document.getElementById("panel-" + n).hidden = on || currentTab !== n; });
     document.body.classList.toggle("searching", on);
     resEl.hidden = !on;
     if (!on){ resEl.innerHTML = ""; HL = null; return; }
@@ -1786,8 +1818,8 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   });
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
-  renderLessons(); renderPhrases(); renderKana();
-  var APP_VERSION = "10 Nov 13:10";
+  renderLessons(); renderPhrases(); renderRules(); renderKana();
+  var APP_VERSION = "10 Nov 19:30";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

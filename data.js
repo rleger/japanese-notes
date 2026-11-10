@@ -236,6 +236,136 @@ window.NOTES = {
     ]}
   ],
 
+  /* Rules page: grammar reference. lesson = also shown inside that lesson; from = where it came up */
+  grammar: [
+    { key: "sentence", label: "Building a sentence", jp: "文の形", mark: "文", rules: [
+      { from: "Lesson 1", title: "The verb comes last", jp: "語順", keys: "word order verb end sentence structure",
+        lead: "Japanese keeps the verb for the very end. Who, what and where come before it.",
+        cols: [
+          { mark: "〜ます", ro: "-masu", label: "always at the end", ex: [["わたしはコーヒーを", "のみます", "", "watashi wa kōhī o nomimasu", "I drink coffee"], ["ホテルのレストランで", "たべます", "", "hoteru no resutoran de tabemasu", "I eat at the hotel restaurant"], ["いまからなにを", "しますか", "", "ima kara nani o shimasu ka?", "What will you do now?"]] }
+        ],
+        foot: "When it is obvious who you mean, drop わたしは (watashi wa): コーヒーをのみます (kōhī o nomimasu) is enough." },
+      { from: "Lesson 1", title: "です (desu), か (ka) and ね (ne)", jp: "です・か・ね", keys: "desu ka ne question ending is am are tone sentence end",
+        lead: "Small endings that change the whole sentence.",
+        cols: [
+          { mark: "です", ro: "desu", label: "it is", ex: [["アメリカじん", "です", "", "amerikajin desu", "I’m American"], ["げんき", "です", "", "genki desu", "I’m fine"]] },
+          { mark: "か", ro: "ka", label: "question", ex: [["わかります", "か", "", "wakarimasu ka?", "Do you understand?"], ["どこです", "か", "", "doko desu ka?", "Where is it?"]] },
+          { mark: "ね", ro: "ne", label: "isn’t it?", ex: [["いいです", "ね", "", "ii desu ne", "Sounds good"], ["そうです", "ね", "", "sō desu ne", "Let me see… / Right"]] }
+        ],
+        foot: "か (ka) is the question mark: no need to change the word order. The u of です (desu) and ます (masu) is almost silent: “dess”, “mahss”." },
+      { from: "Lesson 5", title: "Question word + か (ka) = some…", jp: "なにか", keys: "nanika dareka dokoka something someone somewhere question word ka",
+        lead: "Add か (ka) to a question word and it turns into “some…”.",
+        cols: [
+          { mark: "？", ro: "", label: "question", ex: [["なに", "", "", "nani", "what?"], ["だれ", "", "", "dare", "who?"], ["どこ", "", "", "doko", "where?"]] },
+          { mark: "＋か", ro: "+ka", label: "some…", ex: [["なに", "か", "", "nanika", "something"], ["だれ", "か", "", "dareka", "someone"], ["どこ", "か", "", "dokoka", "somewhere"]] }
+        ],
+        foot: "なにかたべませんか (nanika tabemasen ka) = would you like to eat something?" }
+    ]},
+    { key: "particles", label: "Particles", jp: "助詞", mark: "助", rules: [
+      { from: "Lesson 1", title: "は (wa): the topic", jp: "は", keys: "wa ha topic as for particle",
+        lead: "Says what you are talking about, like “as for…”. Written は, read wa.",
+        cols: [
+          { mark: "は", ro: "wa", label: "as for…", ex: [["わたし", "は", "アメリカじんです", "watashi wa amerikajin desu", "I am American"], ["トイレ", "は", "どこですか", "toire wa doko desu ka?", "Where is the toilet?"], ["レストラン", "は", "どこですか", "resutoran wa doko desu ka?", "Where is the restaurant?"]] }
+        ],
+        foot: "Also read wa at the end of こんにちは (konnichiwa) and こんばんは (konbanwa)." },
+      { lesson: 7, title: "を (o) or が (ga)?", jp: "を・が", keys: "particle o wo ga object subject want understand drink eat",
+          lead: "The word after decides, not the thing itself.",
+          cols: [
+            { mark: "を", ro: "o", label: "an action", ex: [["コーヒー", "を", "のみます", "kōhī o nomimasu", "I drink coffee"], ["なに", "を", "たべますか", "nani o tabemasu ka", "What will you eat?"]] },
+            { mark: "が", ro: "ga", label: "a state", ex: [["コーヒー", "が", "ほしいです", "kōhī ga hoshii desu", "I want coffee"], ["にほんご", "が", "わかります", "nihongo ga wakarimasu", "I understand Japanese"]] }
+          ],
+          foot: "が (ga) also with じょうず (jōzu) and すき (suki). But 〜たい (-tai, want to do) keeps を (o): コーヒーをのみたいです (kōhī o nomitai desu)." },
+      { lesson: 9, title: "も (mo): too, also", jp: "も", keys: "mo too also me too as well particle",
+        lead: "Goes right after the word it applies to, and takes the place of は (wa) or が (ga).",
+        cols: [
+          { mark: "は", ro: "wa", label: "plain", ex: [["さとうさん", "は", "たべます", "Satō san wa tabemasu", "Satō is eating"], ["わたし", "は", "コーヒーがほしいです", "watashi wa kōhī ga hoshii desu", "I want coffee"]] },
+          { mark: "も", ro: "mo", label: "too", ex: [["パーカーさん", "も", "たべませんか", "Pākā san mo tabemasen ka?", "Won’t you eat too?"], ["わたし", "も", "コーヒーがほしいです", "watashi mo kōhī ga hoshii desu", "I want coffee too"]] }
+        ],
+        foot: "Never はも (wa mo) or がも (ga mo): も (mo) replaces them. On its own: わたしも (watashi mo) = me too." },
+      { from: "Lesson 1", title: "の (no): ’s, of", jp: "の", keys: "no possessive of 's link nouns",
+        lead: "Links two nouns. The owner or the kind comes first.",
+        cols: [
+          { mark: "の", ro: "no", label: "’s / of", ex: [["ホテル", "の", "レストラン", "hoteru no resutoran", "the hotel’s restaurant"], ["わたし", "の", "おきにいり", "watashi no okiniiri", "my favorite"], ["アメリカ", "の", "かた", "amerika no kata", "a person from America"]] }
+        ],
+        foot: "Read it backwards in English: A の B (A no B) = B of A." },
+      { from: "Lesson 5", title: "で (de): where it happens", jp: "で", keys: "de place location at in language by means",
+        lead: "After a place: where the action happens. After a language: “in”.",
+        cols: [
+          { mark: "で", ro: "de", label: "at (a place)", ex: [["ホテルのレストラン", "で", "たべます", "hoteru no resutoran de tabemasu", "I’ll eat at the hotel restaurant"], ["どこ", "で", "たべますか", "doko de tabemasu ka?", "Where shall we eat?"]] },
+          { mark: "で", ro: "de", label: "in (a language)", ex: [["えいご", "で", "はなしてくれませんか", "eigo de hanashite kuremasen ka?", "Could you speak in English?"], ["にほんご", "で", "", "nihongo de", "in Japanese"]] }
+        ],
+        foot: "No action, no で (de): レストランはどこですか (resutoran wa doko desu ka) only asks where it is." },
+      { lesson: 9, title: "に (ni): at a time", jp: "に", keys: "ni at time hour when nanji ni",
+        lead: "After an hour it means “at”.",
+        cols: [
+          { mark: "に", ro: "ni", label: "at (a time)", ex: [["はちじ", "に", "たべます", "hachi ji ni tabemasu", "I’ll eat at 8"], ["なんじ", "に", "たべますか", "nan ji ni tabemasu ka?", "What time shall we eat?"]] }
+        ],
+        foot: "No に (ni) after いま (ima, now) or あとで (atode, later): いまたべます (ima tabemasu)." },
+      { from: "Lesson 8", title: "と (to) and か (ka): and, or", jp: "と・か", keys: "to ka and or with together between nouns",
+        lead: "Between two nouns only, not between sentences.",
+        cols: [
+          { mark: "と", ro: "to", label: "and · with", ex: [["コーヒー", "と", "こうちゃ", "kōhī to kōcha", "coffee and black tea"], ["パーカーさん", "と", "いっしょに", "Pākā san to issho ni", "together with Parker"]] },
+          { mark: "か", ro: "ka", label: "or", ex: [["コーヒー", "か", "こうちゃ", "kōhī ka kōcha", "coffee or black tea"], ["いま", "か", "あとで", "ima ka atode", "now or later"]] }
+        ],
+        foot: "Between two sentences, start the second with でも (demo, but): あとでたべます。でも、なにかのみたいです (atode tabemasu. demo, nanika nomitai desu)." },
+      { from: "Lesson 8", title: "から (kara): from", jp: "から", keys: "kara from starting since",
+        lead: "Like every particle, it comes after the word: “now from”.",
+        cols: [
+          { mark: "から", ro: "kara", label: "from", ex: [["いま", "から", "", "ima kara", "from now"], ["ホテル", "から", "", "hoteru kara", "from the hotel"], ["いま", "から", "なにをしますか", "ima kara nani o shimasu ka?", "What will you do now?"]] }
+        ],
+        foot: "" }
+    ]},
+    { key: "verbs", label: "Verbs", jp: "動詞", mark: "動", rules: [
+      { lesson: 7, title: "〜ます, 〜たい or 〜ましょう? (-masu, -tai, -mashō)", jp: "ます・たい・ましょう", keys: "verb ending masu tai mashou mashō want let's do drink eat go nomitai tabetai ikimashou",
+          lead: "Same verb, new ending: keep the start のみ (nomi), change the end.",
+          cols: [
+            { mark: "〜ます", ro: "-masu", label: "I do it", ex: [["のみ", "ます", "", "nomimasu", "I drink / I’ll drink"], ["たべ", "ます", "", "tabemasu", "I eat / I’ll eat"]] },
+            { mark: "〜たい", ro: "-tai desu", label: "I want to", ex: [["のみ", "たい", "です", "nomitai desu", "I want to drink"], ["たべ", "たい", "です", "tabetai desu", "I want to eat"]] },
+            { mark: "〜ましょう", ro: "-mashō", label: "let’s do it", ex: [["のみ", "ましょう", "", "nomimashō", "Let’s drink"], ["いき", "ましょう", "", "ikimashō", "Let’s go"]] }
+          ],
+          foot: "Works with every verb: いきます (ikimasu, I go) → いきたいです (ikitai desu, I want to go) → いきましょう (ikimashō, let’s go)." },
+      { from: "Lesson 5", title: "〜ません and 〜ませんか (-masen, -masen ka)", jp: "ません・ませんか", keys: "masen masen ka negative not invitation won't you would you like past mashita",
+        lead: "Swap ます (masu) for ません (masen) to say no. Add か (ka) to invite.",
+        cols: [
+          { mark: "〜ません", ro: "-masen", label: "I don’t", ex: [["たべ", "ません", "", "tabemasen", "I don’t eat"], ["わかり", "ません", "", "wakarimasen", "I don’t understand"]] },
+          { mark: "〜ませんか", ro: "-masen ka", label: "won’t you…?", ex: [["たべ", "ませんか", "", "tabemasen ka?", "Won’t you eat?"], ["のみ", "ませんか", "", "nomimasen ka?", "Would you like to drink?"]] }
+        ],
+        foot: "Answer an invitation with ええ、ぜひ (ee, zehi) = yes, I’d love to. Past: 〜ました (-mashita), as in わかりました (wakarimashita) = got it." },
+      { from: "Lesson 8", title: "ほしい (hoshii) or 〜たい (-tai)? Wanting", jp: "ほしい・たい", keys: "hoshii tai want thing want to do wanting order",
+        lead: "Want a thing: ほしい (hoshii). Want to do something: 〜たい (-tai).",
+        cols: [
+          { mark: "ほしい", ro: "hoshii", label: "a thing", ex: [["コーヒーが", "ほしい", "です", "kōhī ga hoshii desu", "I want a coffee"], ["なにが", "ほしい", "ですか", "nani ga hoshii desu ka?", "What do you want?"]] },
+          { mark: "〜たい", ro: "-tai", label: "to do", ex: [["コーヒーをのみ", "たい", "です", "kōhī o nomitai desu", "I want to drink coffee"], ["なにかたべ", "たい", "です", "nanika tabetai desu", "I want to eat something"]] }
+        ],
+        foot: "To order, ほしい (hoshii) sounds a bit blunt. Say おねがいします (onegai shimasu): コーヒーをおねがいします (kōhī o onegai shimasu)." }
+    ]},
+    { key: "polite", label: "Polite or casual", jp: "丁寧", mark: "礼", rules: [
+      { from: "Phrases", title: "Polite or casual", jp: "です・ます", keys: "polite casual formal friends desu masu genki onegai",
+        lead: "Strangers, staff, older people: polite. Friends: drop the ending.",
+        cols: [
+          { mark: "", ro: "", label: "polite", ex: [["おげんき", "ですか", "", "o genki desu ka?", "How are you?"], ["コーヒーをおねがい", "します", "", "kōhī o onegai shimasu", "A coffee, please"], ["げんき", "です", "", "genki desu", "I’m fine"]] },
+          { mark: "", ro: "", label: "casual", ex: [["げんき？", "", "", "genki?", "How are you?"], ["コーヒー、おねがい", "", "", "kōhī, onegai", "Coffee, please"], ["げんき", "", "", "genki", "I’m fine"]] }
+        ],
+        foot: "As a traveler, stay polite: です (desu) and ます (masu) are always safe." }
+    ]},
+    { key: "numbers", label: "Time and numbers", jp: "時間と数字", mark: "数", rules: [
+      { lesson: 9, title: "Telling the hour: number + じ (ji)", jp: "〜じ", keys: "time hour o'clock oclock ji nanji what time ichiji hachiji kuji yoji shichiji number",
+          lead: "Say the number, add じ (ji). Three hours change their number.",
+          cols: [
+            { mark: "じ", ro: "ji", label: "as usual", ex: [["いち", "じ", "", "ichi ji", "1 o’clock"], ["に", "じ", "", "ni ji", "2 o’clock"], ["はち", "じ", "", "hachi ji", "8 o’clock"]] },
+            { mark: "4·7·9", ro: "ji", label: "special", ex: [["よ", "じ", "", "yo ji", "4 o’clock (not yon)"], ["しち", "じ", "", "shichi ji", "7 o’clock (not nana)"], ["く", "じ", "", "ku ji", "9 o’clock (not kyū)"]] }
+          ],
+          foot: "To ask: なんじですか (nan ji desu ka) = what time is it? · なんじに (nan ji ni) = at what time? Answer: くじに (ku ji ni) = at 9." },
+      { from: "Phrases", title: "Hundreds and thousands: sound changes", jp: "びゃく・ぜん", keys: "numbers price hyaku byaku pyaku sen zen man hundred thousand yen",
+        lead: "For prices: 3, 6 and 8 change the sound of ひゃく (hyaku, 100) and せん (sen, 1,000).",
+        cols: [
+          { mark: "百", ro: "hyaku", label: "100s", ex: [["さん", "びゃく", "", "sanbyaku", "300"], ["ろっ", "ぴゃく", "", "roppyaku", "600"], ["はっ", "ぴゃく", "", "happyaku", "800"]] },
+          { mark: "千", ro: "sen", label: "1,000s", ex: [["さん", "ぜん", "", "sanzen", "3,000"], ["はっ", "せん", "", "hassen", "8,000"], ["いち", "まん", "", "ichi man", "10,000"]] }
+        ],
+        foot: "Japanese counts in blocks of 10,000 (まん, man): 20,000 yen = にまんえん (ni man en)." }
+    ]}
+  ],
+
   lessons: [
     { number: 1, jp: "第1課",
       words: [
@@ -413,23 +543,6 @@ window.NOTES = {
         ["コーヒーをのみます。", "Pimsleur shows: コーヒーを飲みます。 を (read “o”) marks what you drink", "kōhī o nomimasu", "I’ll drink coffee. / I’ll have a coffee.", "koh-hee oh noh-mee-mahss"],
         ["コーヒーがほしいです。", "Pimsleur shows: コーヒーが欲しいです。 With ほしい (hoshii) the thing you want takes が (ga), not を (o)", "kōhī ga hoshii desu", "I want a coffee.", "koh-hee gah hoh-shee dess"]
       ],
-      tips: [
-        { title: "を (o) or が (ga)?", jp: "を・が", keys: "particle o wo ga object subject want understand drink eat",
-          lead: "The word after decides, not the thing itself.",
-          cols: [
-            { mark: "を", ro: "o", label: "an action", ex: [["コーヒー", "を", "のみます", "kōhī o nomimasu", "I drink coffee"], ["なに", "を", "たべますか", "nani o tabemasu ka", "What will you eat?"]] },
-            { mark: "が", ro: "ga", label: "a state", ex: [["コーヒー", "が", "ほしいです", "kōhī ga hoshii desu", "I want coffee"], ["にほんご", "が", "わかります", "nihongo ga wakarimasu", "I understand Japanese"]] }
-          ],
-          foot: "が (ga) also with じょうず (jōzu) and すき (suki). But 〜たい (-tai, want to do) keeps を (o): コーヒーをのみたいです (kōhī o nomitai desu)." },
-        { title: "〜ます, 〜たい or 〜ましょう? (-masu, -tai, -mashō)", jp: "ます・たい・ましょう", keys: "verb ending masu tai mashou mashō want let's do drink eat go nomitai tabetai ikimashou",
-          lead: "Same verb, new ending: keep the start のみ (nomi), change the end.",
-          cols: [
-            { mark: "〜ます", ro: "-masu", label: "I do it", ex: [["のみ", "ます", "", "nomimasu", "I drink / I’ll drink"], ["たべ", "ます", "", "tabemasu", "I eat / I’ll eat"]] },
-            { mark: "〜たい", ro: "-tai desu", label: "I want to", ex: [["のみ", "たい", "です", "nomitai desu", "I want to drink"], ["たべ", "たい", "です", "tabetai desu", "I want to eat"]] },
-            { mark: "〜ましょう", ro: "-mashō", label: "let’s do it", ex: [["のみ", "ましょう", "", "nomimashō", "Let’s drink"], ["いき", "ましょう", "", "ikimashō", "Let’s go"]] }
-          ],
-          foot: "Works with every verb: いきます (ikimasu, I go) → いきたいです (ikitai desu, I want to go) → いきましょう (ikimashō, let’s go)." }
-      ],
       dialogues: [
         { title: "Speak Easy · my favorite café", note: "Pimsleur dialogue, lesson 7.", lines: [
           ["A", "いまなにかたべますか。", "ima nanika tabemasu ka?", "Are you going to eat something now?"],
@@ -488,15 +601,6 @@ window.NOTES = {
       sentences: [
         ["パーカーさんもたべませんか。", "Pimsleur shows: パーカーさんも食べませんか。 も (mo) = too · 〜ませんか (-masen ka) = won’t you…? (a friendly invitation, Lesson 5)", "Pākā san mo tabemasen ka?", "Won’t you eat too, Mr. Parker?", "pah-kah sahn moh tah-beh-mah-sen kah?"],
         ["ホテルのレストランで？", "で (de) = at (where it happens), like どこで (doko de)", "hoteru no resutoran de?", "At the hotel restaurant?", "hoh-teh-roo noh reh-s’toh-rahn deh?"]
-      ],
-      tips: [
-        { title: "Telling the hour: number + じ (ji)", jp: "〜じ", keys: "time hour o'clock oclock ji nanji what time ichiji hachiji kuji yoji shichiji number",
-          lead: "Say the number, add じ (ji). Three hours change their number.",
-          cols: [
-            { mark: "じ", ro: "ji", label: "as usual", ex: [["いち", "じ", "", "ichi ji", "1 o’clock"], ["に", "じ", "", "ni ji", "2 o’clock"], ["はち", "じ", "", "hachi ji", "8 o’clock"]] },
-            { mark: "4·7·9", ro: "ji", label: "special", ex: [["よ", "じ", "", "yo ji", "4 o’clock (not yon)"], ["しち", "じ", "", "shichi ji", "7 o’clock (not nana)"], ["く", "じ", "", "ku ji", "9 o’clock (not kyū)"]] }
-          ],
-          foot: "To ask: なんじですか (nan ji desu ka) = what time is it? · なんじに (nan ji ni) = at what time? Answer: くじに (ku ji ni) = at 9." }
       ],
       dialogues: [
         { title: "Speak Easy · lunch at the hotel", note: "Pimsleur dialogue, lesson 9. A friendly invitation with 〜ませんか (-masen ka).", lines: [
