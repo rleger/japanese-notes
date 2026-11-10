@@ -103,6 +103,15 @@ window.NOTES = {
       ["おやすみなさい", "", "oyasumi nasai", "Good night.", "oh-yah-soo-mee nah-sye"],
       ["はじめまして", "", "hajimemashite", "Nice to meet you.", "hah-jee-meh-mahsh-teh"]
     ]},
+    { title: "Essentials: how are you?", short: "How are you?", jp: "お元気ですか", items: [
+      ["おげんきですか。", "Kanji: お元気ですか。 Polite. Not a daily “hi, how are you”: you ask it to someone you haven’t seen for a while", "o genki desu ka?", "How are you? (polite)", "oh-ghen-kee dess kah?"],
+      ["げんき？", "Kanji: 元気？ Casual, with friends. Say it with a rising tone", "genki?", "How are you? (casual)", "ghen-kee?"],
+      ["さいきんどう？", "Kanji: 最近どう？ さいきん (saikin) = lately · どう (dō) = how. Casual, with friends", "saikin dō?", "What’s up? / How’s it going lately?", "sye-keen doh?"],
+      ["げんきです。", "Kanji: 元気です。 With friends just げんき (genki) or げんきだよ (genki da yo)", "genki desu", "I’m fine.", "ghen-kee dess"],
+      ["はい、おかげさまで。", "Kanji: お陰様で. Literally “thanks to you”. The classic polite answer to おげんきですか (o genki desu ka)", "hai, okagesama de", "Yes, I’m well, thank you.", "hye, oh-kah-geh-sah-mah deh"],
+      ["まあまあです。", "With friends just まあまあ (māmā)", "māmā desu", "So-so.", "mah-mah dess"],
+      ["○○さんは？", "Turn the question back. Example: たなかさんは？ (Tanaka san wa?) は is read wa", "○○ san wa?", "And you?", "… sahn wah?"]
+    ]},
     { title: "Essentials: food and out", jp: "食事", items: [
       ["いただきます", "", "itadakimasu", "Said before eating.", "ee-tah-dah-kee-mahss"],
       ["ごちそうさまでした", "", "gochisōsama deshita", "Said after the meal: thank you.", "go-chee-soh-sah-mah desh-tah"],
