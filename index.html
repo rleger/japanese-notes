@@ -1729,15 +1729,23 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
       });
       $("fcActions").hidden = false;
     }
+    /* a missed card comes back at a random spot, never right away, until it is right twice in a row */
+    function reinsert(o){
+      if (!queue.length) return false;              /* nothing left to put in between: never back to back */
+      var lo = Math.min(2, queue.length), hi = Math.min(queue.length, 8);
+      queue.splice(lo + Math.floor(Math.random() * (hi - lo + 1)), 0, o);
+      return true;
+    }
     function answer(ok){
       if (!flipped) return;
-      grade(cur.c, ok);
-      if (ok){ done++; if (!cur.missed) firstTry++; }
-      else {
-        cur.missed = true;
+      if (!ok || !cur.missed || !cur.regraded){ grade(cur.c, ok); if (ok && cur.missed) cur.regraded = true; }
+      if (ok){
+        if (cur.missed && cur.need > 1){ cur.need--; if (reinsert(cur)){ updateBadge(); next(); return; } }
+        done++; if (!cur.missed) firstTry++;
+      } else {
+        cur.missed = true; cur.need = 2; cur.regraded = false;
         if (!missedKeys[cur.c.k]){ missedKeys[cur.c.k] = 1; missed.push(cur.c); }
-        var pos = Math.min(queue.length, 3 + Math.floor(Math.random() * 3));
-        queue.splice(pos, 0, cur);
+        if (!reinsert(cur)) done++;               /* last card of the round: it stays in “Review missed” */
       }
       updateBadge(); next();
     }
@@ -1819,7 +1827,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "10 Nov 19:30";
+  var APP_VERSION = "10 Nov 19:35";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
