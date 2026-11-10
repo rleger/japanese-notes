@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-09",
+  updated: "2026-11-10",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -211,7 +211,7 @@ window.NOTES = {
       ["ろく", "Kanji: 六", "roku", "6", "roh-koo"],
       ["なな", "Kanji: 七. Also しち (shichi)", "nana", "7", "nah-nah"],
       ["はち", "Kanji: 八", "hachi", "8", "hah-chee"],
-      ["きゅう", "Kanji: 九", "kyū", "9", "kyoo"],
+      ["きゅう", "Kanji: 九. Also く (ku), used for 9 o’clock: くじ (ku ji)", "kyū", "9", "kyoo"],
       ["じゅう", "Kanji: 十", "jū", "10", "joo"],
       ["じゅういち", "Kanji: 十一. 10 + 1", "jū ichi", "11", "joo ee-chee"],
       ["にじゅう", "Kanji: 二十. 2 × 10", "ni jū", "20", "nee joo"],
