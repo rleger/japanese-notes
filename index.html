@@ -763,6 +763,8 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .tip-foot{margin:10px 2px 0;font-size:12.5px;line-height:1.5;color:var(--muted);font-family:var(--jp)}
 .res-tips{margin-top:8px}
 .tip-cols.n1{grid-template-columns:1fr}
+.tip-col{min-width:0}
+.tip-mark{flex-wrap:wrap;row-gap:4px}
 @media (min-width: 560px){ .tip-cols.n1 .tip-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:14px} .tip-cols.n1 .tip-mark{grid-column:1/-1} }
 .tip{scroll-margin-top:70px}
 #panel-rules .lesson-head{scroll-margin-top:70px}
@@ -1827,7 +1829,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "11 Nov 08:45";
+  var APP_VERSION = "11 Nov 09:45";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

@@ -253,6 +253,12 @@ window.NOTES = {
           { mark: "ね", ro: "ne", label: "isn’t it?", ex: [["いいです", "ね", "", "ii desu ne", "Sounds good"], ["そうです", "ね", "", "sō desu ne", "Let me see… / Right"]] }
         ],
         foot: "か (ka) is the question mark: no need to change the word order. The u of です (desu) and ます (masu) is almost silent: “dess”, “mahss”." },
+      { lesson: 10, title: "〜はどうですか (wa dō desu ka): how about…?", jp: "どうですか", keys: "dou dō desu ka how about suggest suggestion propose",
+        lead: "Put what you suggest first, then は どうですか (wa dō desu ka).",
+        cols: [
+          { mark: "どう", ro: "dō", label: "how about…?", ex: [["いちじは", "どう", "ですか", "ichi ji wa dō desu ka?", "How about one o’clock?"], ["ホテルのレストランは", "どう", "ですか", "hoteru no resutoran wa dō desu ka?", "How about the hotel restaurant?"], ["コーヒーは", "どう", "ですか", "kōhī wa dō desu ka?", "How about a coffee?"]] }
+        ],
+        foot: "Answer yes with いいですね (ii desu ne, sounds good), then close the plan: じゃあ、いちじに (jā, ichi ji ni) = see you at one, then." },
       { from: "Lesson 5", title: "Question word + か (ka) = some…", jp: "なにか", keys: "nanika dareka dokoka something someone somewhere question word ka",
         lead: "Add か (ka) to a question word and it turns into “some…”.",
         cols: [
@@ -307,7 +313,7 @@ window.NOTES = {
           { mark: "と", ro: "to", label: "and · with", ex: [["コーヒー", "と", "こうちゃ", "kōhī to kōcha", "coffee and black tea"], ["パーカーさん", "と", "いっしょに", "Pākā san to issho ni", "together with Parker"]] },
           { mark: "か", ro: "ka", label: "or", ex: [["コーヒー", "か", "こうちゃ", "kōhī ka kōcha", "coffee or black tea"], ["いま", "か", "あとで", "ima ka atode", "now or later"]] }
         ],
-        foot: "Between two sentences, start the second with でも (demo, but): あとでたべます。でも、なにかのみたいです (atode tabemasu. demo, nanika nomitai desu)." },
+        foot: "To offer another choice in a new question, start with それとも (soretomo, or): いちじ？それとも、ごじ？ (ichi ji? soretomo, go ji?). For “but”, start the sentence with でも (demo): あとでたべます。でも、なにかのみたいです (atode tabemasu. demo, nanika nomitai desu)." },
       { from: "Lesson 8", title: "から (kara): from", jp: "から", keys: "kara from starting since",
         lead: "Like every particle, it comes after the word: “now from”.",
         cols: [
@@ -324,6 +330,13 @@ window.NOTES = {
             { mark: "〜ましょう", ro: "-mashō", label: "let’s do it", ex: [["のみ", "ましょう", "", "nomimashō", "Let’s drink"], ["いき", "ましょう", "", "ikimashō", "Let’s go"]] }
           ],
           foot: "Works with every verb: いきます (ikimasu, I go) → いきたいです (ikitai desu, I want to go) → いきましょう (ikimashō, let’s go)." },
+      { lesson: 10, title: "〜たいです or 〜たくありません? (-tai desu, -taku arimasen)", jp: "たい・たくない", keys: "tai taku arimasen want don't want not want negative tabetaku nomitaku hoshiku",
+        lead: "To say you don’t want to: change たい (tai) into たくありません (taku arimasen).",
+        cols: [
+          { mark: "〜たい", ro: "-tai", label: "I want to", ex: [["たべ", "たい", "です", "tabetai desu", "I want to eat"], ["のみ", "たい", "です", "nomitai desu", "I want to drink"]] },
+          { mark: "〜たく", ro: "-taku", label: "don’t want to", ex: [["たべ", "たく", "ありません", "tabetaku arimasen", "I don’t want to eat"], ["のみ", "たく", "ありません", "nomitaku arimasen", "I don’t want to drink"]] }
+        ],
+        foot: "Same change for ほしい (hoshii, want a thing): ほしくありません (hoshiku arimasen) = I don’t want it." },
       { from: "Lesson 5", title: "〜ません and 〜ませんか (-masen, -masen ka)", jp: "ません・ませんか", keys: "masen masen ka negative not invitation won't you would you like past mashita",
         lead: "Swap ます (masu) for ません (masen) to say no. Add か (ka) to invite.",
         cols: [
@@ -611,6 +624,37 @@ window.NOTES = {
           ["A", "ええ、どこでたべますか。", "ee, doko de tabemasu ka?", "Yes. Where shall we eat?"],
           ["B", "そうですね、ホテルのレストランで？", "sō desu ne, hoteru no resutoran de?", "Let me see… at the hotel restaurant?"],
           ["A", "ええ、いいですね。", "ee, ii desu ne", "Yes, sounds good."]
+        ]}
+      ]
+    },
+    { number: 10, jp: "第10課",
+      words: [
+        ["たべたいです", "Pimsleur shows: 食べたいです. たべます (tabemasu) → たべたいです (tabetai desu)", "tabetai desu", "I want to eat.", "tah-beh-tye dess"],
+        ["たべたくありません", "Pimsleur shows: 食べたくありません. Negative of たべたいです (tabetai desu): 〜たい (-tai) → 〜たくありません (-taku arimasen). Same pattern as ほしくありません (hoshiku arimasen, Lesson 7)", "tabetaku arimasen", "I don’t want to eat.", "tah-beh-tah-koo ah-ree-mah-sen"],
+        ["のみたいです", "Pimsleur shows: 飲みたいです", "nomitai desu", "I want to drink.", "noh-mee-tye dess"],
+        ["ちょっと", "Pimsleur shows: ちょっと. Casual cousin of すこし (sukoshi). Also a soft way to say no: ちょっと… (chotto…) = that’s a bit difficult", "chotto", "A little bit.", "choht-toh"],
+        ["さん", "Pimsleur shows: 三. Same sound as the さん (san) after names, different meaning", "san", "3", "sahn"],
+        ["よ", "Pimsleur shows: 四. 4 is usually よん (yon), but for the hour it is よ (yo)", "yo", "4 (with o’clock).", "yoh"],
+        ["よじ", "Pimsleur shows: 四時. Never よんじ (yon ji)", "yo ji", "4 o’clock.", "yoh jee"],
+        ["ご", "Pimsleur shows: 五", "go", "5", "goh"],
+        ["ごじ", "Pimsleur shows: 五時", "go ji", "5 o’clock.", "goh jee"],
+        ["く", "Pimsleur shows: 九. 9 is usually きゅう (kyū), but for the hour it is く (ku): くじ (ku ji)", "ku", "9 (with o’clock).", "koo"],
+        ["それとも", "“Or” at the start of a question, to offer another choice. Between two nouns you use か (ka): コーヒーかこうちゃ (kōhī ka kōcha)", "soretomo", "Or (offering another choice).", "soh-reh-toh-moh"]
+      ],
+      sentences: [
+        ["それとも、ごじ？", "Pimsleur shows: それとも五時？", "soretomo, go ji?", "Or five o’clock?", "soh-reh-toh-moh, goh jee?"],
+        ["いちじはどうですか。", "Pimsleur shows: 一時はどうですか。 [thing] は どうですか (wa dō desu ka) = how about [thing]? Use it to suggest anything: コーヒーはどうですか (kōhī wa dō desu ka)", "ichi ji wa dō desu ka?", "How about one o’clock?", "ee-chee jee wah doh dess kah?"],
+        ["いっしょにひるごはんをたべませんか。", "Pimsleur shows: 一緒に昼ご飯を食べませんか。 いっしょに (issho ni) = together · 〜ませんか (-masen ka) = won’t you…?", "issho ni hirugohan o tabemasen ka?", "Would you like to have lunch together?", "ees-shoh nee hee-roo-go-hahn oh tah-beh-mah-sen kah?"],
+        ["じゃあ、いちじに。", "Pimsleur shows: じゃあ、一時に。 Closing a plan: じゃあ (jā) = well then · に (ni) = at", "jā, ichi ji ni", "See you at one, then.", "jah, ee-chee jee nee"]
+      ],
+      dialogues: [
+        { title: "Speak Easy · lunch at one", note: "Pimsleur dialogue, lesson 10. Making a plan: invite, set a time, pick a place.", lines: [
+          ["A", "さとうさん、いっしょにひるごはんをたべませんか。", "Satō san, issho ni hirugohan o tabemasen ka?", "Mr. / Ms. Satō, would you like to have lunch together?"],
+          ["B", "ええ、ぜひ。なんじにたべますか。", "ee, zehi. nan ji ni tabemasu ka?", "Yes, I’d love to. What time shall we eat?"],
+          ["A", "いちじはどうですか。", "ichi ji wa dō desu ka?", "How about one o’clock?"],
+          ["B", "わかりました。どこでたべますか。", "wakarimashita. doko de tabemasu ka?", "OK. Where shall we eat?"],
+          ["A", "ホテルとうきょうのレストランはどうですか。", "Hoteru Tōkyō no resutoran wa dō desu ka?", "How about the restaurant at the Hotel Tokyo? (とうきょう, Tōkyō, usually written 東京)"],
+          ["B", "いいですね。じゃあ、いちじに。", "ii desu ne. jā, ichi ji ni", "Sounds good. See you at one, then."]
         ]}
       ]
     }
