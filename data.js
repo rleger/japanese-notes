@@ -506,14 +506,14 @@ window.NOTES = {
         ["いまたべません。", "Pimsleur shows: 今食べません。", "ima tabemasen", "I’m not going to eat now.", "ee-mah tah-beh-mah-sen"],
         ["どこでたべますか。", "Pimsleur shows: どこで食べますか。", "doko de tabemasu ka?", "Where are you going to eat?", "doh-koh deh tah-beh-mahss kah?"],
         ["わたしもはなしません。", "Pimsleur shows: 私も話しません。", "watashi mo hanashimasen", "I don’t speak (it) either.", "wah-tah-shee moh hah-nah-shee-mah-sen"],
-        ["いい、でもあとで。", "Pimsleur shows: いい、でも後で。 いい (ii) = good, fine (here: yes) · でも (demo) = but · あとで (atode) = later", "ii, demo atode", "Yes, but later.", "ee-ee, deh-moh ah-toh-deh"],
+        ["いい、でもあとで。", "Pimsleur shows: いい、でも後で。 いい (ii) = good, fine (here: yes) · でも (demo) = but · あとで (atode) = later", "ii, demo atode", "OK, but later.", "ee-ee, deh-moh ah-toh-deh"],
         ["カフェでなにかのみませんか。", "Pimsleur shows: カフェで何か飲みませんか。 で (de) = at (where you do it)", "kafe de nanika nomimasen ka?", "Won’t you drink something at the café?", "kah-feh deh nah-nee-kah noh-mee-mah-sen kah?"]
       ],
       dialogues: [
         { title: "Speak Easy · coffee", note: "Pimsleur dialogue, lesson 6.", lines: [
           ["A", "こんにちは。", "konnichiwa", "Hello."],
           ["B", "こんにちは。いいおてんきですね。", "konnichiwa. ii otenki desu ne", "Hello. Nice weather, isn’t it?"],
-          ["A", "そうですね。", "sō desu ne", "It is."],
+          ["A", "そうですね。", "sō desu ne", "Yes, it is."],
           ["B", "なにかたべませんか。", "nanika tabemasen ka?", "Would you like to eat something?"],
           ["A", "いえ、けっこうです。でも、なにかのみます。", "ie, kekkō desu. demo, nanika nomimasu", "No, thank you. But I’ll drink something."],
           ["B", "なにをのみますか。", "nani o nomimasu ka?", "What will you drink? (なに, nani = what · を, read o, marks the object)"],
