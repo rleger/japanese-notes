@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-10",
+  updated: "2026-11-11",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -599,15 +599,15 @@ window.NOTES = {
         ["わかりました", "Pimsleur shows: わかりました. Past of わかります (wakarimasu). What you say when someone tells you a time or a plan", "wakarimashita", "Got it / Understood / OK.", "wah-kah-ree-mahsh-tah"]
       ],
       sentences: [
-        ["パーカーさんもたべませんか。", "Pimsleur shows: パーカーさんも食べませんか。 も (mo) = too · 〜ませんか (-masen ka) = won’t you…? (a friendly invitation, Lesson 5)", "Pākā san mo tabemasen ka?", "Won’t you eat too, Mr. Parker?", "pah-kah sahn moh tah-beh-mah-sen kah?"],
+        ["パーカーさんもたべませんか。", "Pimsleur shows: パーカーさんも食べませんか。 も (mo) = too · 〜ませんか (-masen ka) = won’t you…? (a friendly invitation, Lesson 5)", "Pākā san mo tabemasen ka?", "Would you like to eat too, Mr. / Ms. Parker?", "pah-kah sahn moh tah-beh-mah-sen kah?"],
         ["ホテルのレストランで？", "で (de) = at (where it happens), like どこで (doko de)", "hoteru no resutoran de?", "At the hotel restaurant?", "hoh-teh-roo noh reh-s’toh-rahn deh?"]
       ],
       dialogues: [
         { title: "Speak Easy · lunch at the hotel", note: "Pimsleur dialogue, lesson 9. A friendly invitation with 〜ませんか (-masen ka).", lines: [
           ["A", "さとうさん、こんにちは。", "Satō san, konnichiwa", "Hello, Mr. / Ms. Satō."],
           ["B", "あ、パーカーさん、こんにちは。", "a, Pākā san, konnichiwa", "Oh, Mr. / Ms. Parker, hello."],
-          ["A", "さとうさん、いまからなにをしますか。", "Satō san, ima kara nani o shimasu ka?", "What are you going to do now?"],
-          ["B", "ひるごはんをたべます。パーカーさんもたべませんか。", "hirugohan o tabemasu. Pākā san mo tabemasen ka?", "I’m going to have lunch. Won’t you eat too?"],
+          ["A", "さとうさん、いまからなにをしますか。", "Satō san, ima kara nani o shimasu ka?", "Mr. / Ms. Satō, what are you going to do now?"],
+          ["B", "ひるごはんをたべます。パーカーさんもたべませんか。", "hirugohan o tabemasu. Pākā san mo tabemasen ka?", "I’m going to have lunch. Would you like to eat too, Mr. / Ms. Parker?"],
           ["A", "ええ、どこでたべますか。", "ee, doko de tabemasu ka?", "Yes. Where shall we eat?"],
           ["B", "そうですね、ホテルのレストランで？", "sō desu ne, hoteru no resutoran de?", "Let me see… at the hotel restaurant?"],
           ["A", "ええ、いいですね。", "ee, ii desu ne", "Yes, sounds good."]
