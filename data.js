@@ -233,6 +233,44 @@ window.NOTES = {
       ["はっせん", "Irregular", "hassen", "8,000", "hahs-sen"],
       ["いちまん", "Kanji: 一万. Japanese counts in blocks of 10,000 (man), not 1,000", "ichi man", "10,000", "ee-chee mahn"],
       ["えん", "Kanji: 円. Written ¥", "en", "Yen.", "en"]
+    ]},
+    { title: "Bonus: eating and drinking", short: "Eating & drinking", jp: "食事", src: "bonus", items: [
+      ["ランチをたべます。", "Kanji: ランチを食べます。 ランチ (ranchi) is katakana, from “lunch”. Same as ひるごはん (hirugohan)", "ranchi o tabemasu", "I’ll have lunch.", "rahn-chee oh tah-beh-mahss"],
+      ["ランチたべる？", "Kanji: ランチ食べる？ Casual: たべる (taberu) = たべます (tabemasu), and を (o) is dropped", "ranchi taberu?", "Want to have lunch? (casual)", "rahn-chee tah-beh-roo?"],
+      ["いつごはんにしますか。", "Kanji: いつご飯にしますか。 いつ (itsu) = when · ごはんにします (gohan ni shimasu) = decide on a meal", "itsu gohan ni shimasu ka?", "When shall we eat?", "ee-tsoo go-hahn nee shee-mahss kah?"],
+      ["いつごはんにする？", "Kanji: いつご飯にする？ Casual: する (suru) = します (shimasu)", "itsu gohan ni suru?", "When shall we eat? (casual)", "ee-tsoo go-hahn nee soo-roo?"],
+      ["なにたべる？", "Kanji: 何食べる？ Casual: なにをたべますか (nani o tabemasu ka)", "nani taberu?", "What do you want to eat? (casual)", "nah-nee tah-beh-roo?"],
+      ["なにのむ？", "Kanji: 何飲む？ Casual: のむ (nomu) = のみます (nomimasu)", "nani nomu?", "What will you drink? (casual)", "nah-nee noh-moo?"],
+      ["おちゃかジュース、おねがいします。", "Kanji: お茶かジュース、お願いします。 か (ka) = or · おちゃ (ocha) = green tea · ジュース (jūsu) = juice", "ocha ka jūsu, onegai shimasu", "Tea or juice, please.", "oh-chah kah joo-soo, oh-neh-guy shee-mahss"],
+      ["ビール、ふたつおねがいします。", "Kanji: ビール、二つお願いします。 ふたつ (futatsu) = two (things)", "bīru, futatsu onegai shimasu", "Two beers, please.", "bee-roo, foo-tah-tsoo oh-neh-guy shee-mahss"],
+      ["ノンアルがほしいです。", "ノンアル (non’aru) is short for ノンアルコール (non’arukōru), alcohol-free. Alcohol-free beer: ノンアルビール (non’aru bīru)", "non’aru ga hoshii desu", "I’d like something without alcohol.", "nohn-ah-roo gah hoh-shee dess"],
+      ["ダイエットちゅうです。", "Kanji: ダイエット中です。 ちゅう (chū, 中) = in the middle of", "daietto chū desu", "I’m on a diet.", "dye-et-toh choo dess"],
+      ["しょくよくない。", "Kanji: 食欲ない。 しょくよく (shokuyoku) = appetite · ない (nai) = there is none. Polite: しょくよくがありません (shokuyoku ga arimasen)", "shokuyoku nai", "I have no appetite. (casual)", "shoh-koo-yoh-koo nye"],
+      ["いまはいいです。", "Kanji: 今はいいです。 A polite “not now”, for a drink or a dish you are offered", "ima wa ii desu", "I’m fine for now, thanks.", "ee-mah wah ee-ee dess"],
+      ["いまはいい。", "Kanji: 今はいい。 Casual version", "ima wa ii", "I’m fine for now. (casual)", "ee-mah wah ee-ee"]
+    ]},
+    { title: "Bonus: plans", short: "Plans", jp: "予定", src: "bonus", items: [
+      ["よていがありますか。", "Kanji: 予定がありますか。 よてい (yotei) = plans", "yotei ga arimasu ka?", "Do you have plans?", "yoh-tay gah ah-ree-mahss kah?"],
+      ["よていは？", "Kanji: 予定は？ Casual, は (read wa) = and what about…", "yotei wa?", "Any plans? (casual)", "yoh-tay wah?"],
+      ["すぐ？", "Kanji: 直ぐ (rarely written)", "sugu?", "Right away?", "soo-goo?"],
+      ["いつものところで。", "Kanji: いつもの所で。 いつもの (itsumo no) = the usual · ところ (tokoro) = place · で (de) = at", "itsumo no tokoro de", "At the usual place.", "ee-tsoo-moh noh toh-koh-roh deh"],
+      ["うちで。", "Kanji: 家で。 うち (uchi) = home, my place", "uchi de", "At home. / At my place.", "oo-chee deh"],
+      ["おてあらいはどこですか。", "Kanji: お手洗いはどこですか。 A politer word than トイレ (toire)", "otearai wa doko desu ka?", "Where is the restroom?", "oh-teh-ah-rye wah doh-koh dess kah?"]
+    ]},
+    { title: "Bonus: understanding", short: "Understanding", jp: "分かる", src: "bonus", items: [
+      ["わかる。", "Kanji: 分かる。 Casual of わかります (wakarimasu)", "wakaru", "I get it. (casual)", "wah-kah-roo"],
+      ["わかる？", "Kanji: 分かる？ Casual of わかりますか (wakarimasu ka)", "wakaru?", "Get it? / Do you understand? (casual)", "wah-kah-roo?"],
+      ["わかんない？", "Kanji: 分かんない？ Spoken, very casual form of わかりません (wakarimasen). Without the question: わかんない (wakannai) = I don’t get it", "wakannai?", "You don’t get it? (casual)", "wah-kahn-nye?"],
+      ["わかった。", "Kanji: 分かった。 Casual of わかりました (wakarimashita)", "wakatta", "Got it. (casual)", "wah-kaht-tah"],
+      ["りょうかい。", "Kanji: 了解。 Like “roger, noted”. Fine with friends and colleagues, a bit too casual for a boss or a client", "ryōkai", "Understood. / Roger.", "ryoh-kye"]
+    ]},
+    { title: "Bonus: quick replies", short: "Quick replies", jp: "あいづち", src: "bonus", items: [
+      ["うん、いいね。", "Casual. うん (un) = yeah, casual はい (hai)", "un, ii ne", "Yeah, sounds good. (casual)", "oon, ee-ee neh"],
+      ["うん、いいよ。", "Casual. よ (yo) adds “sure, I tell you”", "un, ii yo", "Yeah, sure. (casual)", "oon, ee-ee yoh"],
+      ["そうそう！", "Repeating そう (sō) = exactly, that’s it", "sō sō!", "Right, right! / That’s it!", "soh soh!"],
+      ["おなじ。", "Kanji: 同じ。 Polite: おなじです (onaji desu)", "onaji", "Same. (casual)", "oh-nah-jee"],
+      ["だいじょうぶ？", "Kanji: 大丈夫？ Casual of だいじょうぶですか (daijōbu desu ka)", "daijōbu?", "Are you OK? / Is it OK? (casual)", "dye-joh-boo?"],
+      ["ごめん。", "Casual. Polite: ごめんなさい (gomen nasai) or すみません (sumimasen)", "gomen", "Sorry. (casual)", "goh-men"]
     ]}
   ],
 
@@ -359,7 +397,14 @@ window.NOTES = {
           { mark: "", ro: "", label: "polite", ex: [["おげんき", "ですか", "", "o genki desu ka?", "How are you?"], ["コーヒーをおねがい", "します", "", "kōhī o onegai shimasu", "A coffee, please"], ["げんき", "です", "", "genki desu", "I’m fine"]] },
           { mark: "", ro: "", label: "casual", ex: [["げんき？", "", "", "genki?", "How are you?"], ["コーヒー、おねがい", "", "", "kōhī, onegai", "Coffee, please"], ["げんき", "", "", "genki", "I’m fine"]] }
         ],
-        foot: "As a traveler, stay polite: です (desu) and ます (masu) are always safe." }
+        foot: "As a traveler, stay polite: です (desu) and ます (masu) are always safe." },
+      { from: "Bonus", title: "Casual verbs: たべる (taberu) instead of たべます (tabemasu)", jp: "る・う", keys: "casual plain dictionary form taberu nomu suru wakaru wakatta wakannai friends verb",
+        lead: "With friends, verbs lose ます (masu). Questions just rise at the end, no か (ka).",
+        cols: [
+          { mark: "ます", ro: "masu", label: "polite", ex: [["たべ", "ます", "", "tabemasu", "I eat"], ["の", "みます", "", "nomimasu", "I drink"], ["し", "ます", "", "shimasu", "I do"], ["わか", "りました", "", "wakarimashita", "Got it"]] },
+          { mark: "る", ro: "ru", label: "casual", ex: [["たべ", "る", "", "taberu", "I eat"], ["の", "む", "", "nomu", "I drink"], ["", "する", "", "suru", "I do"], ["わか", "った", "", "wakatta", "Got it"]] }
+        ],
+        foot: "Questions: なにたべる？ (nani taberu?) = なにをたべますか (nani o tabemasu ka). Negative: わかんない (wakannai) = わかりません (wakarimasen). Listen for it, but speak polite with strangers." }
     ]},
     { key: "numbers", label: "Time and numbers", jp: "時間と数字", mark: "数", rules: [
       { lesson: 9, title: "Telling the hour: number + じ (ji)", jp: "〜じ", keys: "time hour o'clock oclock ji nanji what time ichiji hachiji kuji yoji shichiji number",

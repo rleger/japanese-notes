@@ -1200,10 +1200,11 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     { key: "essentials", label: "Essentials", jp: "必須", mark: "要", test: function(t){ return /^Essentials/.test(t); } },
     { key: "small", label: "Small words", jp: "小さな言葉", mark: "小", test: function(t){ return /^Small words/.test(t); } },
     { key: "travel", label: "Travel and survival", jp: "旅", mark: "旅", test: function(t){ return /^(Getting around|Survival|Signs)/.test(t); } },
-    { key: "numbers", label: "Numbers", jp: "数字", mark: "数", test: function(t){ return /^Numbers/.test(t); } }
+    { key: "numbers", label: "Numbers", jp: "数字", mark: "数", test: function(t){ return /^Numbers/.test(t); } },
+    { key: "bonus", label: "Pimsleur bonus", jp: "おまけ", mark: "＋", test: function(t){ return /^Bonus/.test(t); } }
   ];
   function famOf(g){ for (var i = 0; i < FAMS.length; i++) if (FAMS[i].test(g.title)) return FAMS[i]; return FAMS[0]; }
-  function subName(g){ return g.short || cap(g.title.replace(/^(Essentials|Survival|Small words): /, "")); }
+  function subName(g){ return g.short || cap(g.title.replace(/^(Essentials|Survival|Small words|Bonus): /, "")); }
   function quizGroup(attr, label){
     return '<div class="lh-quiz" role="group" aria-label="Quick quiz: ' + esc(label) + '"><span class="lh-ql"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Quiz</span>' +
       '<button type="button" data-pquiz="' + attr + ':je">JP → EN</button><button type="button" data-pquiz="' + attr + ':ej">EN → JP</button></div>';
@@ -1599,7 +1600,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     N.phraseGroups.forEach(function(g){ g.items.forEach(function(p){ add({ ja: p[0], note: p[1], ro: p[2], en: p[3], sl: p[4], kind: isSentence(p[0]) ? "sentences" : "words", src: g.src || "phrases" }); }); });
 
     var sources = N.lessons.map(function(L){ return { id: "L" + L.number, label: "Lesson " + L.number }; })
-      .concat([{ id: "phrases", label: "Phrase pages" }, { id: "smallwords", label: "Small words" }, { id: "survival", label: "Survival" }, { id: "numbers", label: "Numbers" }])
+      .concat([{ id: "phrases", label: "Phrase pages" }, { id: "smallwords", label: "Small words" }, { id: "survival", label: "Survival" }, { id: "numbers", label: "Numbers" }, { id: "bonus", label: "Pimsleur bonus" }])
       .filter(function(s){ return pool.some(function(c){ return c.src === s.id; }); });
     var cfg = { content: "both", dir: "je", mode: "due", size: "20", src: {}, favOnly: false };
     try { var saved = JSON.parse(store.get("fc") || "null"); if (saved){ ["content","dir","mode","size","favOnly"].forEach(function(k){ if (saved[k] !== undefined) cfg[k] = saved[k]; }); cfg.src = saved.src || {}; } } catch(e){}
@@ -1829,7 +1830,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "13 Nov 11:15";
+  var APP_VERSION = "13 Nov 11:35";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
