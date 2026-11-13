@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-11",
+  updated: "2026-11-13",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -92,7 +92,7 @@ window.NOTES = {
       ["すみません", "", "sumimasen", "Excuse me / Sorry.", "s’mee-mah-sen"],
       ["おねがいします", "", "onegai shimasu", "Please (asking for something).", "oh-neh-guy shee-mahss"],
       ["どうぞ", "", "dōzo", "Please, go ahead.", "doh-zoh"],
-      ["だいじょうぶです", "", "daijōbu desu", "It’s OK / I’m fine.", "dye-joh-boo dess"],
+      ["だいじょうぶです", "Kanji: 大丈夫です. Very useful: it’s fine / no problem. Also a polite “no thanks”, e.g. when the cashier offers a bag. As a question: だいじょうぶですか (daijōbu desu ka) = are you OK? / is that OK?", "daijōbu desu", "It’s OK / I’m fine.", "dye-joh-boo dess"],
       ["いいです。", "いい (ii) = good. Depending on the tone: “that’s fine” or a polite “no thanks”", "ii desu", "It’s fine.", "ee-ee dess"],
       ["いいですか。", "Also “May I?” (e.g. pointing at a seat or a photo). Answer: はい、どうぞ (hai, dōzo).", "ii desu ka?", "Is it all right?", "ee-ee dess kah?"],
       ["わかりません", "", "wakarimasen", "I don’t understand.", "wah-kah-ree-mah-sen"]
@@ -639,7 +639,8 @@ window.NOTES = {
         ["ご", "Pimsleur shows: 五", "go", "5", "goh"],
         ["ごじ", "Pimsleur shows: 五時", "go ji", "5 o’clock.", "goh jee"],
         ["く", "Pimsleur shows: 九. 9 is usually きゅう (kyū), but for the hour it is く (ku): くじ (ku ji)", "ku", "9 (with o’clock).", "koo"],
-        ["それとも", "“Or” at the start of a question, to offer another choice. Between two nouns you use か (ka): コーヒーかこうちゃ (kōhī ka kōcha)", "soretomo", "Or (offering another choice).", "soh-reh-toh-moh"]
+        ["それとも", "“Or” at the start of a question, to offer another choice. Between two nouns you use か (ka): コーヒーかこうちゃ (kōhī ka kōcha)", "soretomo", "Or (offering another choice).", "soh-reh-toh-moh"],
+        ["だいじょうぶです", "Kanji: 大丈夫です. Very useful: it’s fine / no problem. Also a polite “no thanks”, e.g. when the cashier offers a bag. As a question: だいじょうぶですか (daijōbu desu ka) = are you OK? / is that OK?", "daijōbu desu", "It’s fine / No problem.", "dye-joh-boo dess"]
       ],
       sentences: [
         ["それとも、ごじ？", "Pimsleur shows: それとも五時？", "soretomo, go ji?", "Or five o’clock?", "soh-reh-toh-moh, goh jee?"],
