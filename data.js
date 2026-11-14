@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-13",
+  updated: "2026-11-14",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -344,7 +344,7 @@ window.NOTES = {
         cols: [
           { mark: "に", ro: "ni", label: "at (a time)", ex: [["はちじ", "に", "たべます", "hachi ji ni tabemasu", "I’ll eat at 8"], ["なんじ", "に", "たべますか", "nan ji ni tabemasu ka?", "What time shall we eat?"]] }
         ],
-        foot: "No に (ni) after いま (ima, now) or あとで (atode, later): いまたべます (ima tabemasu)." },
+        foot: "No に (ni) after words like いま (ima, now), あとで (atode, later), きょう (kyō, today), あした (ashita, tomorrow) or こんばん (konban, tonight): あしたたべます (ashita tabemasu) = I’ll eat tomorrow." },
       { from: "Lesson 8", title: "と (to) and か (ka): and, or", jp: "と・か", keys: "to ka and or with together between nouns",
         lead: "Between two nouns only, not between sentences.",
         cols: [
@@ -702,6 +702,19 @@ window.NOTES = {
           ["A", "ホテルとうきょうのレストランはどうですか。", "Hoteru Tōkyō no resutoran wa dō desu ka?", "How about the restaurant at the Hotel Tokyo? (とうきょう, Tōkyō, usually written 東京)"],
           ["B", "いいですね。じゃあ、いちじに。", "ii desu ne. jā, ichi ji ni", "Sounds good. See you at one, then."]
         ]}
+      ]
+    },
+    { number: 11, jp: "第11課",
+      words: [
+        ["こんばん", "Pimsleur shows: 今晩. こん (kon) = this · ばん (ban) = evening. Same ばん as in こんばんは (konbanwa, good evening)", "konban", "This evening / tonight.", "kohm-bahn"],
+        ["ばんごはん", "Pimsleur shows: 晩ご飯. Like ひるごはん (hirugohan, lunch): ばん (ban) evening + ごはん (gohan) meal", "bangohan", "Dinner.", "bahn-go-hahn"],
+        ["しちじ", "Pimsleur shows: 七時. 7 is usually なな (nana), but for the hour it is しち (shichi)", "shichi ji", "7 o’clock.", "shee-chee jee"],
+        ["じゅうじ", "Pimsleur shows: 十時", "jū ji", "10 o’clock.", "joo jee"],
+        ["きょう", "Pimsleur shows: 今日", "kyō", "Today.", "kyoh"],
+        ["あした", "Pimsleur shows: 明日", "ashita", "Tomorrow.", "ah-shtah"],
+        ["よる", "Pimsleur shows: 夜. Later than ばん (ban): よる (yoru) is the night", "yoru", "Night.", "yoh-roo"],
+        ["あしたのよる", "Pimsleur shows: 明日の夜. の (no) links the two: tomorrow’s night", "ashita no yoru", "Tomorrow night.", "ah-shtah noh yoh-roo"],
+        ["じゃあ", "Pimsleur shows: じゃあ. Starts a decision or wraps up: じゃあ、しちじに (jā, shichi ji ni) = OK then, at seven", "jā", "Then / in that case / OK then.", "jah"]
       ]
     }
   ]
