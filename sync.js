@@ -95,7 +95,20 @@
       body: body ? JSON.stringify(body) : undefined
     }).then(function(r){
       if (r.status === 401) throw { kind: "auth" };
-      if (r.status === 403 || r.status === 404) throw { kind: r.status === 404 ? "missing" : "forbidden" };
+      if (r.status === 404) throw { kind: "missing" };
+      if (r.status === 403 || r.status === 429){
+        /* 403 is either “slow down” (rate limit) or a real permission problem: read GitHub’s answer to tell them apart */
+        var left = r.headers.get("x-ratelimit-remaining"), wait = +(r.headers.get("retry-after") || 0), reset = +(r.headers.get("x-ratelimit-reset") || 0);
+        return r.json().catch(function(){ return {}; }).then(function(j){
+          var m = (j && j.message) || "";
+          if (r.status === 429 || left === "0" || wait || /rate limit/i.test(m)){
+            var mins = wait ? Math.ceil(wait / 60) : reset ? Math.max(1, Math.ceil((reset * 1000 - Date.now()) / 60000)) : 5;
+            LS.set("sync_pause", String(Date.now() + mins * 60000));
+            throw { kind: "rate", mins: mins };
+          }
+          throw { kind: "forbidden", msg: m };
+        });
+      }
       if (!r.ok) throw { kind: "http", status: r.status };
       return r.status === 204 ? null : r.json();
     }, function(){ throw { kind: "net" }; });
@@ -132,7 +145,7 @@
     return (!st || st.hidden) && (!play || play.hidden) && !document.getElementById("kStop") && !document.getElementById("pStop");
   }
   function setStatus(state, msg){
-    lastErr = state === "error" ? msg : null;
+    lastErr = msg || null;
     var b = document.getElementById("syncBtn"); if (b) b.setAttribute("data-state", state);
     renderSheet();
   }
@@ -141,6 +154,7 @@
     opts = opts || {};
     if (!token()) return Promise.resolve(false);
     if (busy) return Promise.resolve(false);
+    if (!opts.manual && Date.now() < +(LS.get("sync_pause") || 0)) return Promise.resolve(false);
     if (!navigator.onLine){ setStatus("off"); return Promise.resolve(false); }
     busy = true; setStatus("busy");
     var before = canon(readLocal()), gid;
@@ -153,7 +167,7 @@
         return p.then(function(){ return changedHere; });
       })
       .then(function(changedHere){
-        busy = false; LS.set("sync_last", String(Date.now())); setStatus("ok");
+        busy = false; LS.set("sync_last", String(Date.now())); LS.set("sync_pause", "0"); setStatus("ok");
         if (changedHere && opts.applyNow !== false) applyChanges();
         return true;
       })
@@ -162,9 +176,10 @@
         if (e && e.kind === "missing" && LS.get("sync_gist")){ LS.set("sync_gist", ""); try { localStorage.removeItem("sync_gist"); } catch(x){} }
         var msg = !e ? "Something went wrong" :
           e.kind === "auth" ? "GitHub refused the key. Check it or create a new one." :
-          e.kind === "forbidden" ? "The key can’t write gists. It needs the “gist” permission." :
+          e.kind === "rate" ? "GitHub asked to slow down. Sync resumes by itself in about " + e.mins + " min, nothing is lost." :
+          e.kind === "forbidden" ? "GitHub refused to write the gist" + (e.msg ? " (“" + e.msg + "”)" : "") + ". The key probably lacks the “gist” permission: create a new one." :
           e.kind === "net" ? "Couldn’t reach GitHub. It will retry." : "GitHub error " + (e.status || "");
-        setStatus(e && e.kind === "net" ? "off" : "error", msg);
+        setStatus(e && (e.kind === "net" || e.kind === "rate") ? "off" : "error", msg);
         return false;
       });
   }
@@ -180,7 +195,7 @@
   function schedulePush(){
     if (!token()) return;
     clearTimeout(pushTimer);
-    pushTimer = setTimeout(function(){ syncNow({ applyNow: false }); }, 4000);
+    pushTimer = setTimeout(function(){ syncNow({ applyNow: false }); }, 30000);
   }
   /* leaving the app: send what's left right away */
   document.addEventListener("visibilitychange", function(){
@@ -235,7 +250,7 @@
     var on = !!token(), st = btn.getAttribute("data-state") || (on ? "ok" : "none");
     var h = '<div class="sheet-card"><div class="sheet-head"><h2>Sync between devices</h2><button type="button" class="st-icon" data-sync="close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>';
     if (on){
-      h += '<p class="sync-state s-' + st + '">' + (st === "busy" ? "Syncing…" : st === "error" ? esc(lastErr || "Sync error") : st === "off" ? "Offline. Your practice is saved here and will sync later." : "Synced " + ago(+(LS.get("sync_last") || 0))) + '</p>' +
+      h += '<p class="sync-state s-' + st + '">' + (st === "busy" ? "Syncing…" : st === "error" ? esc(lastErr || "Sync error") : st === "off" ? esc(lastErr || "Offline. Your practice is saved here and will sync later.") : "Synced " + ago(+(LS.get("sync_last") || 0))) + '</p>' +
         '<p class="hint">Cards, due dates, streak, favorites, kana stats and Quiz / ro / あa settings are shared through a private gist on your GitHub account.</p>' +
         '<div class="sheet-row"><button type="button" class="fc-start" data-sync="now">Sync now</button></div>' +
         '<button type="button" class="link" data-sync="off">Disconnect this device</button>';
@@ -259,7 +274,7 @@
     var b = e.target.closest("[data-sync]"); if (!b) return;
     switch (b.getAttribute("data-sync")){
       case "close": closeSheet(); break;
-      case "now": syncNow(); break;
+      case "now": LS.set("sync_pause", "0"); syncNow({ manual: true }); break;
       case "connect":
         var v = (document.getElementById("syncTok").value || "").trim();
         if (!/^(ghp_|github_pat_)[A-Za-z0-9_]{20,}$/.test(v)){ toast("That doesn’t look like a GitHub key (ghp_…).", 2600); return; }
