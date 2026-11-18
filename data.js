@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-14",
+  updated: "2026-11-18",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -714,7 +714,8 @@ window.NOTES = {
         ["あした", "Pimsleur shows: 明日", "ashita", "Tomorrow.", "ah-shtah"],
         ["よる", "Pimsleur shows: 夜. Later than ばん (ban): よる (yoru) is the night", "yoru", "Night.", "yoh-roo"],
         ["あしたのよる", "Pimsleur shows: 明日の夜. の (no) links the two: tomorrow’s night", "ashita no yoru", "Tomorrow night.", "ah-shtah noh yoh-roo"],
-        ["じゃあ", "Pimsleur shows: じゃあ. Starts a decision or wraps up: じゃあ、しちじに (jā, shichi ji ni) = OK then, at seven", "jā", "Then / in that case / OK then.", "jah"]
+        ["じゃあ", "Pimsleur shows: じゃあ. Starts a decision or wraps up: じゃあ、しちじに (jā, shichi ji ni) = OK then, at seven", "jā", "Then / in that case / OK then.", "jah"],
+        ["たのしみです", "Kanji: 楽しみです. What you say once a plan is set: あしたのよる？たのしみです (ashita no yoru? tanoshimi desu) = tomorrow night? I’m looking forward to it. Casual: たのしみ！ (tanoshimi!)", "tanoshimi desu", "I’m looking forward to it.", "tah-noh-shee-mee dess"]
       ]
     }
   ]
