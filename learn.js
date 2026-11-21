@@ -185,7 +185,8 @@
       exHTML([c], extra);
   }
   function showIntro(u, pos){
-    var knowBtn = S.view && !u.chars.every(learned) ? '<button type="button" class="wbtn kl-know" data-kl="know">I already know ' + (u.chars.length > 1 ? 'these' : 'it') + '</button>' : '';
+    var knowBtn = !S.view ? '' : !u.chars.every(learned) ? '<button type="button" class="wbtn kl-know" data-kl="know">I already know ' + (u.chars.length > 1 ? 'these' : 'it') + '</button>'
+      : '<button type="button" class="wbtn kl-know" data-kl="unknow">Remove from what I know</button>';
     shell(introHTML(u, pos) + knowBtn + '<button type="button" class="fc-start" data-kl="next">' + (S.view ? 'Close' : 'Got it, next') + '</button>', S.view ? '' : S.title);
     if (u.chars.length === 1){ sizePad(); animate(root.querySelector("#klBox svg")); setTimeout(function(){ say(u.chars[0]); }, 300); }
     else setTimeout(function(){ say(u.chars.join("、")); }, 300);
@@ -342,7 +343,7 @@
     if (!u) return;
     S = { view: true, title: "", newSet: [], unit: u.chars.length > 1 ? u : { chars: [c] } };
     openOverlay();
-    var go = function(){ showIntro(u.chars.length > 1 ? u : { chars: [c] }, learned(c) ? (level(c) === "known" ? "Known" : "Learning") : "Coming up"); };
+    var go = function(){ showIntro(S.unit, learned(c) ? (level(c) === "known" ? "Known" : "Learning") : "Coming up"); };
     window.loadStrokes ? window.loadStrokes(go, go) : go();
   }
 
@@ -359,6 +360,7 @@
       case "reveal": reveal(); break;
       case "wok": answer(true); break;
       case "wmiss": answer(false); break;
+      case "unknow": if (S && S.unit){ S.unit.chars.forEach(function(c){ markKnown(c, false); }); REMOVED = {}; toast("Removed. It will come back as a new character.", 2000); closeOverlay(); } break;
       case "know": if (S && S.unit){ S.unit.chars.forEach(function(c){ markKnown(c, true); }); toast("Added to what you know. It comes back in your reviews.", 2000); closeOverlay(); } break;
     }
   });
@@ -417,11 +419,20 @@
   }
 
   /* marking characters you already know */
-  var MARK = false, DET_OPEN = false, MARKED = {};
+  var MARK = false, DET_OPEN = false, MARKED = {}, REMOVED = {};
   function markKnown(c, on){
-    if (on){ if (!KL[c]){ KL[c] = [2, inDays(3), 1, 0]; MARKED[c] = 1; } }   /* checked again in 3 days */
-    else if (KL[c] && (MARKED[c] || KL[c][2] <= 1)){ delete KL[c]; delete MARKED[c]; }
-    else { toast("Already in your reviews, keeping its history", 1800); return; }
+    if (on){
+      if (KL[c]) return;
+      if (REMOVED[c]){ KL[c] = REMOVED[c]; delete REMOVED[c]; }                /* undo a removal: history comes back */
+      else { KL[c] = [2, inDays(3), 1, 0]; MARKED[c] = 1; }                     /* checked again in 3 days */
+    } else {
+      if (!KL[c]) return;
+      if (!MARKED[c]) REMOVED[c] = KL[c];
+      delete KL[c]; delete MARKED[c];
+      /* learned today by accident: give today’s slot back */
+      var d = J("klday", null);
+      if (d && d.d === today() && d.n > 0 && REMOVED[c] && REMOVED[c][2] <= 1) store.set("klday", JSON.stringify({ d: d.d, n: d.n - (BASE.indexOf(c) > -1 ? 1 : 0) }));
+    }
     save();
   }
 
@@ -468,8 +479,8 @@
       '<div class="kl-pref"><span class="kl-sub">Color the hiragana you know in green, across the whole app' + (L.length ? ' (<span class="kn-demo"><span class="kn">' + esc(L.slice(0, 3).join("")) + '</span></span>)' : '') + '.</span>' +
       '<button type="button" class="toggle" data-knt aria-pressed="' + (KN.on ? "true" : "false") + '">' + (KN.on ? "On" : "Off") + '</button></div>' +
       '<details class="kl-det"' + (!L.length || MARK || DET_OPEN ? ' open' : '') + '><summary>Your path · tap any character</summary>' +
-      '<div class="kl-markbar">' + (MARK ? '<span class="kl-sub"><b>Tap the ones you already know.</b> Tap again to undo. They go straight into your reviews.</span><button type="button" class="toggle" aria-pressed="true" data-klmarkmode>Done</button>'
-        : '<span class="kl-sub">Already know some?</span><button type="button" class="wbtn" data-klmarkmode>Mark the ones I know</button>') + '</div>' + map +
+      '<div class="kl-markbar">' + (MARK ? '<span class="kl-sub"><b>Tap to add or remove.</b> Outlined = in what you know. Added ones go straight into your reviews; removed ones come back as new.</span><button type="button" class="toggle" aria-pressed="true" data-klmarkmode>Done</button>'
+        : '<span class="kl-sub">Add the ones you already know, or remove some.</span><button type="button" class="wbtn" data-klmarkmode>Edit what I know</button>') + '</div>' + map +
       '<p class="kl-legend"><span class="kl-cell new"></span>coming up <span class="kl-cell learning"></span>learning <span class="kl-cell known"></span>known</p></details>';
     badge(d.length, nu.length > 0);
   }
@@ -486,7 +497,7 @@
     if (t.hasAttribute("data-knt")){ KN.on = !KN.on; store.set("kncolor", KN.on ? "1" : "0"); knRefresh(); render(); toast(KN.on ? "Hiragana you know are now green" : "Green highlight off", 1600); return; }
     if (t.hasAttribute("data-klper")){ CFG.per = +t.getAttribute("data-klper"); store.set("klcfg", JSON.stringify(CFG)); render(); return; }
     if (t.hasAttribute("data-klview")){ view(t.getAttribute("data-klview")); return; }
-    if (t.hasAttribute("data-klmarkmode")){ MARK = !MARK; DET_OPEN = true; if (!MARK){ var n = Object.keys(MARKED).length; if (n) toast(n + " added to what you know", 1800); MARKED = {}; knRefresh(); } render(); return; }
+    if (t.hasAttribute("data-klmarkmode")){ MARK = !MARK; DET_OPEN = true; if (!MARK){ var n = Object.keys(MARKED).length, r = Object.keys(REMOVED).length; if (n || r) toast((n ? n + " added" : "") + (n && r ? " · " : "") + (r ? r + " removed" : ""), 1800); MARKED = {}; REMOVED = {}; knRefresh(); } render(); return; }
     if (t.hasAttribute("data-klmark")){ var mc = t.getAttribute("data-klmark"); markKnown(mc, !KL[mc]); DET_OPEN = true; render(); return; }
     var a = t.getAttribute("data-kla"); if (a) start(a);
   });

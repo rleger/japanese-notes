@@ -880,7 +880,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .kl-markbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:4px 0 10px}
 .kl-markbar .kl-sub{flex:1;min-width:200px}
 .kl-cell.marking{opacity:1;border-style:solid}
-.kl-cell.marking.new{background:var(--card);opacity:.7}
+.kl-cell.marking.new{background:var(--card);opacity:.6;border-style:dashed}
 .kl-cell.marking[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ok-line) inset}
 .kl-know{display:block;width:100%;margin-top:18px;min-height:48px}
 .kl-legend{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 6px}
@@ -1934,7 +1934,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "21 Nov 15:35";
+  var APP_VERSION = "21 Nov 15:45";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
