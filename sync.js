@@ -3,8 +3,8 @@
    when both devices were used offline. */
 (function(root){
   var FILE = "jp-notes-progress.json", DESC = "日本語ノート · practice history (synced by the app)";
-  var DATA_KEYS = ["srs", "days", "favlog", "kanastats", "newday"];
-  var PREF_KEYS = ["fc", "kanacfg", "pricecfg", "quiz", "noro", "ruby"];
+  var DATA_KEYS = ["srs", "days", "favlog", "kanastats", "newday", "kl", "klday", "klcheck"];
+  var PREF_KEYS = ["fc", "kanacfg", "pricecfg", "quiz", "noro", "ruby", "klcfg"];
 
   /* ---------- pure merge (also used by the tests) ---------- */
   function mergeSnap(a, b){
@@ -33,6 +33,16 @@
     out.kanastats = ks;
     var na = a.newday, nb = b.newday;
     out.newday = !na ? nb || null : !nb ? na : na.d === nb.d ? { d: na.d, n: Math.max(na.n, nb.n) } : (na.d > nb.d ? na : nb);
+    var la = a.kl || {}, lb = b.kl || {}, l = {};
+    Object.keys(la).concat(Object.keys(lb)).forEach(function(k){
+      var x = la[k], y = lb[k];
+      l[k] = !x ? y : !y ? x : (y[2] > x[2] || (y[2] === x[2] && y[1] > x[1])) ? y : x;
+    });
+    out.kl = l;
+    var da = a.klday, db = b.klday;
+    out.klday = !da ? db || null : !db ? da : da.d === db.d ? { d: da.d, n: Math.max(da.n, db.n) } : (da.d > db.d ? da : db);
+    var ca = a.klcheck, cb = b.klcheck;
+    out.klcheck = !ca ? cb || null : !cb ? ca : (cb.d > ca.d ? cb : ca);
     var pa = a.prefs, pb = b.prefs;
     out.prefs = !pa ? pb || null : !pb ? pa : ((pb.t || 0) > (pa.t || 0) ? pb : pa);
     return out;
@@ -58,7 +68,7 @@
   function readLocal(){
     var p = { t: +(LS.get("prefs_t") || 0) };
     PREF_KEYS.forEach(function(k){ var v = LS.get(k); if (v != null) p[k] = v; });
-    return { v: 1, srs: J("srs", {}), days: J("days", []), favlog: J("favlog", {}), kanastats: J("kanastats", {}), newday: J("newday", null), prefs: p };
+    return { v: 1, srs: J("srs", {}), days: J("days", []), favlog: J("favlog", {}), kanastats: J("kanastats", {}), newday: J("newday", null), kl: J("kl", {}), klday: J("klday", null), klcheck: J("klcheck", null), prefs: p };
   }
   function writeLocal(s){
     LS.set("srs", JSON.stringify(s.srs || {}));
@@ -67,6 +77,9 @@
     LS.set("favs", JSON.stringify(Object.keys(s.favlog || {}).filter(function(k){ return s.favlog[k][0]; })));
     LS.set("kanastats", JSON.stringify(s.kanastats || {}));
     if (s.newday) LS.set("newday", JSON.stringify(s.newday));
+    LS.set("kl", JSON.stringify(s.kl || {}));
+    if (s.klday) LS.set("klday", JSON.stringify(s.klday));
+    if (s.klcheck) LS.set("klcheck", JSON.stringify(s.klcheck));
     if (s.prefs){ PREF_KEYS.forEach(function(k){ if (s.prefs[k] != null) LS.set(k, s.prefs[k]); }); LS.set("prefs_t", String(s.prefs.t || 0)); }
   }
 
@@ -142,7 +155,7 @@
   var busy = false, pushTimer = null, lastErr = null;
   function idle(){
     var st = document.getElementById("study"), play = document.getElementById("fcPlay");
-    return (!st || st.hidden) && (!play || play.hidden) && !document.getElementById("kStop") && !document.getElementById("pStop");
+    return (!st || st.hidden) && (!play || play.hidden) && !document.getElementById("kStop") && !document.getElementById("pStop") && (!document.getElementById("klPlay") || document.getElementById("klPlay").hidden);
   }
   function setStatus(state, msg){
     lastErr = msg || null;
@@ -251,7 +264,7 @@
     var h = '<div class="sheet-card"><div class="sheet-head"><h2>Sync between devices</h2><button type="button" class="st-icon" data-sync="close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>';
     if (on){
       h += '<p class="sync-state s-' + st + '">' + (st === "busy" ? "Syncing…" : st === "error" ? esc(lastErr || "Sync error") : st === "off" ? esc(lastErr || "Offline. Your practice is saved here and will sync later.") : "Synced " + ago(+(LS.get("sync_last") || 0))) + '</p>' +
-        '<p class="hint">Cards, due dates, streak, favorites, kana stats and Quiz / ro / あa settings are shared through a private gist on your GitHub account.</p>' +
+        '<p class="hint">Cards, due dates, streak, favorites, kana stats, your hiragana path and Quiz / ro / あa settings are shared through a private gist on your GitHub account.</p>' +
         '<div class="sheet-row"><button type="button" class="fc-start" data-sync="now">Sync now</button></div>' +
         '<button type="button" class="link" data-sync="off">Disconnect this device</button>';
     } else {

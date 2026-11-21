@@ -1,11 +1,12 @@
 /* Offline support: always try the network first, bypassing the browser cache,
    so updates show up immediately; fall back to the saved copy when offline. */
-const CACHE = "jp-notes-v71";
+const CACHE = "jp-notes-v72";
 const FILES = [
   "./",
   "index.html",
   "data.js",
   "practice.js",
+  "learn.js",
   "strokes.js",
   "sync.js",
   "manifest.webmanifest",

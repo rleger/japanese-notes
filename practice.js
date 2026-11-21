@@ -445,6 +445,7 @@
     return { open: open, close: close };
   })();
   window.KanaModal = KM;
+  window.loadStrokes = loadStrokes;
 
   /* ======================= wiring ======================= */
   var shown = {};
