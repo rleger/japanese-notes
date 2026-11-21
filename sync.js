@@ -4,7 +4,7 @@
 (function(root){
   var FILE = "jp-notes-progress.json", DESC = "日本語ノート · practice history (synced by the app)";
   var DATA_KEYS = ["srs", "days", "favlog", "kanastats", "newday", "kl", "klday", "klcheck"];
-  var PREF_KEYS = ["fc", "kanacfg", "pricecfg", "quiz", "noro", "ruby", "klcfg"];
+  var PREF_KEYS = ["fc", "kanacfg", "pricecfg", "quiz", "noro", "ruby", "klcfg", "kncolor"];
 
   /* ---------- pure merge (also used by the tests) ---------- */
   function mergeSnap(a, b){

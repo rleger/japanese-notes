@@ -933,6 +933,16 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .kl-grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
 .kl-grade button{min-height:52px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer}
 @media (max-width: 480px){ .kl-draw{grid-template-columns:1fr} .kl-draw .kl-box{width:min(100%,240px);margin:0 auto} .kl-big{font-size:84px} .kl-today .fc-start{width:100%} }
+
+/* hiragana you have learned: a quiet green */
+:root{--known:oklch(50.8% 0.118 165.612)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--known:oklch(84.5% 0.143 164.978)} }
+:root[data-theme="dark"]{--known:oklch(84.5% 0.143 164.978)}
+.kn{color:var(--known)}
+.pt .kn,.kl-hit .kn,.jp .kn,.lh-jp .kn,.tip-mark .kn,.lh-num .kn,.st-sl .kn,.kq-opt.right .kn,.kq-opt.wrong .kn,button[aria-pressed="true"] .kn,button[aria-checked="true"] .kn{color:inherit}
+.kl-pref{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.kl-pref .kl-sub{flex:1}
+.kl-pref .kn-demo{font-family:var(--jp)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1416,7 +1426,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     }
     var rb = e.target.closest(".ja-ruby ruby");
     if (rb && window.KanaModal){
-      var base = Array.prototype.filter.call(rb.childNodes, function(n){ return n.nodeType === 3; }).map(function(n){ return n.textContent; }).join("");
+      var base = Array.prototype.filter.call(rb.childNodes, function(n){ return n.nodeType === 3 || (n.nodeType === 1 && !/^(RT|RP)$/.test(n.tagName)); }).map(function(n){ return n.textContent; }).join("");
       e.stopImmediatePropagation(); window.KanaModal.open(base); return;
     }
     var sp = e.target.closest("[data-say]");
@@ -1918,7 +1928,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "21 Nov 15:05";
+  var APP_VERSION = "21 Nov 15:15";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

@@ -154,7 +154,7 @@
   var S = null;   /* session */
 
   function openOverlay(){ root.hidden = false; document.documentElement.classList.add("st-lock"); }
-  function closeOverlay(){ clearT(); root.hidden = true; S = null; document.documentElement.classList.remove("st-lock"); render(); }
+  function closeOverlay(){ clearT(); root.hidden = true; S = null; document.documentElement.classList.remove("st-lock"); render(); knRefresh(); }
 
   function shell(inner, sub){
     var p = S && S.steps ? Math.round(S.i / S.steps.length * 100) : 0;
@@ -363,6 +363,57 @@
   document.addEventListener("keydown", function(e){ if (!root.hidden && e.key === "Escape"){ e.stopPropagation(); closeOverlay(); } }, true);
   window.addEventListener("resize", function(){ if ($("klCanvas")) sizePad(); });
 
+  /* ---------- green for the hiragana you know, everywhere ---------- */
+  var KN = { on: store.get("kncolor") !== "0", re: null, key: "" };
+  var KN_SKIP = "#klPlay,#pmKana,.kl-map,.kl-legend,script,style,svg,textarea,input,select,option,noscript,.kn";
+  function knRegex(){
+    var set = {}; Object.keys(KL).forEach(function(c){ set[c] = 1; var b = baseOf(c); });
+    Object.keys(SMALL).forEach(function(sm){ if (set[SMALL[sm]]) set[sm] = 1; });
+    var chars = Object.keys(set).filter(function(c){ return /[\u3041-\u3096]/.test(c); }).sort().join("");
+    if (chars === KN.key) return KN.re;
+    KN.key = chars; KN.re = chars ? new RegExp("[" + chars + "]+", "g") : null;
+    return KN.re;
+  }
+  function knWrap(root){
+    var re = KN.on && knRegex(); if (!re || !root) return;
+    if (root.nodeType === 3) root = root.parentElement;
+    if (!root || (root.closest && root.closest(KN_SKIP))) return;
+    var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: function(n){
+      if (!/[\u3041-\u3096]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+      var p = n.parentElement; return !p || p.closest(KN_SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+    } });
+    var nodes = []; while (tw.nextNode()) nodes.push(tw.currentNode);
+    nodes.forEach(function(n){
+      var txt = n.nodeValue; re.lastIndex = 0; if (!re.test(txt)) return; re.lastIndex = 0;
+      var frag = document.createDocumentFragment(), last = 0, m;
+      while ((m = re.exec(txt))){
+        if (m.index > last) frag.appendChild(document.createTextNode(txt.slice(last, m.index)));
+        var sp = document.createElement("span"); sp.className = "kn"; sp.textContent = m[0]; frag.appendChild(sp);
+        last = m.index + m[0].length;
+      }
+      if (last < txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
+      n.parentNode.replaceChild(frag, n);
+    });
+  }
+  function knUnwrap(){
+    var parents = [];
+    Array.prototype.forEach.call(document.querySelectorAll("span.kn"), function(sp){ var p = sp.parentNode; if (!p) return; p.replaceChild(document.createTextNode(sp.textContent), sp); if (parents.indexOf(p) < 0) parents.push(p); });
+    parents.forEach(function(p){ p.normalize(); });
+  }
+  var knObs = null;
+  function knRefresh(){
+    if (knObs) knObs.disconnect();
+    knUnwrap(); KN.key = "\u0000"; knWrap(document.body);
+    if (knObs){ knObs.takeRecords(); knObs.observe(document.body, { childList: true, subtree: true }); }
+  }
+  if ("MutationObserver" in window){
+    knObs = new MutationObserver(function(muts){
+      if (!KN.on) return;
+      muts.forEach(function(m){ Array.prototype.forEach.call(m.addedNodes, function(n){ if (n.nodeType === 1 || n.nodeType === 3) knWrap(n); }); });
+      knObs.takeRecords();      /* ignore the changes we just made ourselves */
+    });
+  }
+
   /* ---------- the block at the top of the Kana tab ---------- */
   function render(){
     reload();
@@ -403,6 +454,8 @@
       (L.length >= 4 ? '<div class="kl-row"><button type="button" class="link" data-kla="extra">Extra practice (15 random)</button></div>' : '') +
       '<div class="fc-opt kl-per"><span class="fc-lab" id="klPerLab">New per day</span><div class="seg seg3" role="radiogroup" aria-labelledby="klPerLab">' +
       [3, 4, 5].map(function(n){ return '<button type="button" role="radio" data-klper="' + n + '" aria-checked="' + (CFG.per === n) + '">' + n + '</button>'; }).join("") + '</div></div>' +
+      '<div class="kl-pref"><span class="kl-sub">Color the hiragana you know in green, across the whole app' + (L.length ? ' (<span class="kn-demo"><span class="kn">' + esc(L.slice(0, 3).join("")) + '</span></span>)' : '') + '.</span>' +
+      '<button type="button" class="toggle" data-knt aria-pressed="' + (KN.on ? "true" : "false") + '">' + (KN.on ? "On" : "Off") + '</button></div>' +
       '<details class="kl-det"' + (L.length ? '' : ' open') + '><summary>Your path · tap any character</summary>' + map +
       '<p class="kl-legend"><span class="kl-cell new"></span>coming up <span class="kl-cell learning"></span>learning <span class="kl-cell known"></span>known</p></details>';
     badge(d.length, nu.length > 0);
@@ -416,11 +469,13 @@
   }
   document.addEventListener("click", function(e){
     var t = e.target.closest("#klBlock button"); if (!t) return;
+    if (t.hasAttribute("data-knt")){ KN.on = !KN.on; store.set("kncolor", KN.on ? "1" : "0"); knRefresh(); render(); toast(KN.on ? "Hiragana you know are now green" : "Green highlight off", 1600); return; }
     if (t.hasAttribute("data-klper")){ CFG.per = +t.getAttribute("data-klper"); store.set("klcfg", JSON.stringify(CFG)); render(); return; }
     if (t.hasAttribute("data-klview")){ view(t.getAttribute("data-klview")); return; }
     var a = t.getAttribute("data-kla"); if (a) start(a);
   });
-  window.KanaLearn = { render: render, order: ALL };
+  window.KanaLearn = { render: render, order: ALL, refreshColor: function(){ knRefresh(); } };
   render();
+  knRefresh();
   document.addEventListener("visibilitychange", function(){ if (!document.hidden && root.hidden) render(); });
 })();
