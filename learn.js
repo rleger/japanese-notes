@@ -41,12 +41,13 @@
   function due(){ var now = Date.now(); return Object.keys(KL).filter(function(c){ return KL[c][1] <= now; }); }
   function learnedList(){ return ALL.filter(learned); }
   function level(c){ var s = KL[c]; return !s ? "new" : s[0] >= 4 ? "known" : "learning"; }
-  function nextUnits(){
-    var budget = CFG.per - day(), out = [];
+  /* extra = an extra batch on top of today's (the “Learn more now” button) */
+  function nextUnits(extra){
+    var budget = extra ? CFG.per : CFG.per - day(), out = [];
     for (var i = 0; i < UNITS.length; i++){
       var u = UNITS[i];
       if (u.chars.every(learned)) continue;
-      if (u.chars.length > 1){ if (!out.length && day() === 0) out.push(u); break; }   /* a tick group is a whole day */
+      if (u.chars.length > 1){ if (!out.length && (extra || day() === 0)) out.push(u); break; }   /* a tick group is a whole day */
       if (budget <= 0) break;
       out.push(u); budget--;
     }
@@ -293,7 +294,7 @@
       title = mode === "extra" ? "Extra practice" : "Today";
     }
     if (mode === "today" || mode === "new"){
-      units = nextUnits();
+      units = nextUnits(mode === "new");
       units.forEach(function(u){ newSet = newSet.concat(u.chars); });
       units.forEach(function(u, i){ steps.push({ t: "intro", u: u, pos: "New · " + (i + 1) + " of " + units.length }); });
       var quiz = [];
@@ -380,7 +381,7 @@
     } else {
       var up = UNITS.filter(function(u){ return !u.chars.every(learned); })[0];
       main = '<div class="kl-today done"><div><span class="kl-lab">Today</span><b>Done ✓</b><span class="kl-sub">Tomorrow: ' + (up.chars.length > 1 ? 'the ' + up.chars[0] + ' group' : UNITS.filter(function(u){ return !u.chars.every(learned); }).slice(0, CFG.per).filter(function(u){ return u.chars.length === 1; }).map(function(u){ return u.chars[0]; }).join(" ")) + '</span></div>' +
-        '<button type="button" class="wbtn" data-kla="new">Learn more now</button></div>';
+        '<button type="button" class="wbtn" data-kla="new">' + (up.chars.length > 1 ? 'Learn the ' + up.chars[0] + ' group now' : 'Learn ' + Math.min(CFG.per, BASE.filter(function(c){ return !learned(c); }).length) + ' more now') + '</button></div>';
     }
     var cd = checkDue(), lc = lastCheck();
     var check = L.length < 6 ? '<span class="kl-sub">Weekly checkup unlocks after 6 characters.</span>' :
