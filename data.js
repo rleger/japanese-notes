@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-18",
+  updated: "2026-11-21",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -420,7 +420,7 @@ window.NOTES = {
           { mark: "百", ro: "hyaku", label: "100s", ex: [["さん", "びゃく", "", "sanbyaku", "300"], ["ろっ", "ぴゃく", "", "roppyaku", "600"], ["はっ", "ぴゃく", "", "happyaku", "800"]] },
           { mark: "千", ro: "sen", label: "1,000s", ex: [["さん", "ぜん", "", "sanzen", "3,000"], ["はっ", "せん", "", "hassen", "8,000"], ["いち", "まん", "", "ichi man", "10,000"]] }
         ],
-        foot: "Japanese counts in blocks of 10,000 (まん, man): 20,000 yen = にまんえん (ni man en)." }
+        foot: "Only 3 and 8 change: にせん (ni sen), よんせん (yon sen), ごせん (go sen), ろくせん (roku sen), ななせん (nana sen) stay regular. Japanese counts in blocks of 10,000 (まん, man): 20,000 yen = にまんえん (ni man en)." }
     ]}
   ],
 
@@ -715,7 +715,17 @@ window.NOTES = {
         ["よる", "Pimsleur shows: 夜. Later than ばん (ban): よる (yoru) is the night", "yoru", "Night.", "yoh-roo"],
         ["あしたのよる", "Pimsleur shows: 明日の夜. の (no) links the two: tomorrow’s night", "ashita no yoru", "Tomorrow night.", "ah-shtah noh yoh-roo"],
         ["じゃあ", "Pimsleur shows: じゃあ. Starts a decision or wraps up: じゃあ、しちじに (jā, shichi ji ni) = OK then, at seven", "jā", "Then / in that case / OK then.", "jah"],
-        ["たのしみです", "Kanji: 楽しみです. What you say once a plan is set: あしたのよる？たのしみです (ashita no yoru? tanoshimi desu) = tomorrow night? I’m looking forward to it. Casual: たのしみ！ (tanoshimi!)", "tanoshimi desu", "I’m looking forward to it.", "tah-noh-shee-mee dess"]
+        ["たのしみです", "Kanji: 楽しみです. What you say once a plan is set: あしたのよる？たのしみです (ashita no yoru? tanoshimi desu) = tomorrow night? I’m looking forward to it. Casual: たのしみ！ (tanoshimi!)", "tanoshimi desu", "I’m looking forward to it.", "tah-noh-shee-mee dess"],
+        ["きょうは", "Pimsleur shows: 今日は. は is read wa: “as for today…”. Fun fact: こんにちは (konnichiwa) comes from the same idea, “as for today…”", "kyō wa", "As for today…", "kyoh wah"],
+        ["おさけ", "Pimsleur shows: お酒. お (o) makes it polite. さけ (sake) means alcohol in general, and also Japanese sake. To be precise about rice wine: にほんしゅ (nihonshu, 日本酒)", "osake", "Alcohol / sake (polite).", "oh-sah-keh"],
+        ["いくら", "Pimsleur shows: いくら. To ask a price: いくらですか (ikura desu ka) = how much is it?", "ikura", "How much?", "ee-koo-rah"],
+        ["えん", "Pimsleur shows: 円. Written ¥ on price tags. Price + えん: にせんえん (ni sen en) = 2,000 yen", "en", "Yen.", "en"],
+        ["にせん", "Pimsleur shows: 二千. せん (sen) = thousand", "ni sen", "2,000", "nee sen"],
+        ["さんぜん", "Pimsleur shows: 三千. Sound change: after さん (san), せん becomes ぜん (zen)", "sanzen", "3,000", "sahn-zen"],
+        ["よんせん", "Pimsleur shows: 四千. Here 4 is よん (yon), not よ (yo) as for the hour", "yon sen", "4,000", "yohn sen"],
+        ["ごせん", "Pimsleur shows: 五千", "go sen", "5,000", "goh sen"],
+        ["ろくせん", "Pimsleur shows: 六千", "roku sen", "6,000", "roh-koo sen"],
+        ["ななせん", "Pimsleur shows: 七千. Here 7 is なな (nana), not しち (shichi) as for the hour", "nana sen", "7,000", "nah-nah sen"]
       ]
     }
   ]
