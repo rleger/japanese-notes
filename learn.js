@@ -185,7 +185,8 @@
       exHTML([c], extra);
   }
   function showIntro(u, pos){
-    shell(introHTML(u, pos) + '<button type="button" class="fc-start" data-kl="next">' + (S.view ? 'Close' : 'Got it, next') + '</button>', S.view ? '' : S.title);
+    var knowBtn = S.view && !u.chars.every(learned) ? '<button type="button" class="wbtn kl-know" data-kl="know">I already know ' + (u.chars.length > 1 ? 'these' : 'it') + '</button>' : '';
+    shell(introHTML(u, pos) + knowBtn + '<button type="button" class="fc-start" data-kl="next">' + (S.view ? 'Close' : 'Got it, next') + '</button>', S.view ? '' : S.title);
     if (u.chars.length === 1){ sizePad(); animate(root.querySelector("#klBox svg")); setTimeout(function(){ say(u.chars[0]); }, 300); }
     else setTimeout(function(){ say(u.chars.join("、")); }, 300);
   }
@@ -339,7 +340,7 @@
   function view(c){
     var u = null; UNITS.forEach(function(x){ if (x.chars.indexOf(c) > -1) u = x; });
     if (!u) return;
-    S = { view: true, title: "", newSet: [] };
+    S = { view: true, title: "", newSet: [], unit: u.chars.length > 1 ? u : { chars: [c] } };
     openOverlay();
     var go = function(){ showIntro(u.chars.length > 1 ? u : { chars: [c] }, learned(c) ? (level(c) === "known" ? "Known" : "Learning") : "Coming up"); };
     window.loadStrokes ? window.loadStrokes(go, go) : go();
@@ -358,6 +359,7 @@
       case "reveal": reveal(); break;
       case "wok": answer(true); break;
       case "wmiss": answer(false); break;
+      case "know": if (S && S.unit){ S.unit.chars.forEach(function(c){ markKnown(c, true); }); toast("Added to what you know. It comes back in your reviews.", 2000); closeOverlay(); } break;
     }
   });
   document.addEventListener("keydown", function(e){ if (!root.hidden && e.key === "Escape"){ e.stopPropagation(); closeOverlay(); } }, true);
@@ -414,6 +416,15 @@
     });
   }
 
+  /* marking characters you already know */
+  var MARK = false, DET_OPEN = false, MARKED = {};
+  function markKnown(c, on){
+    if (on){ if (!KL[c]){ KL[c] = [2, inDays(3), 1, 0]; MARKED[c] = 1; } }   /* checked again in 3 days */
+    else if (KL[c] && (MARKED[c] || KL[c][2] <= 1)){ delete KL[c]; delete MARKED[c]; }
+    else { toast("Already in your reviews, keeping its history", 1800); return; }
+    save();
+  }
+
   /* ---------- the block at the top of the Kana tab ---------- */
   function render(){
     reload();
@@ -441,7 +452,7 @@
     var map = '<div class="kl-map">' + UNITS.map(function(u){
       return u.chars.map(function(c, i){
         var lv = level(c);
-        return '<button type="button" class="kl-cell ' + lv + (u.chars.length > 1 && i === 0 ? ' gstart' : '') + '" data-klview="' + c + '" aria-label="' + c + ' ' + esc(RO[c]) + ', ' + lv + '"><span class="k" lang="ja">' + c + '</span><span class="r">' + (lv === "new" ? "" : esc(RO[c])) + '</span></button>';
+        return '<button type="button" class="kl-cell ' + lv + (u.chars.length > 1 && i === 0 ? ' gstart' : '') + (MARK ? ' marking' : '') + '" ' + (MARK ? 'data-klmark' : 'data-klview') + '="' + c + '" aria-pressed="' + (lv !== "new") + '" aria-label="' + c + ' ' + esc(RO[c]) + ', ' + lv + '"><span class="k" lang="ja">' + c + '</span><span class="r">' + (lv === "new" && !MARK ? "" : esc(RO[c])) + '</span></button>';
       }).join("");
     }).join("") + '</div>';
     host.innerHTML = A.secHead("Learn hiragana", "ひらがなを覚える") +
@@ -456,7 +467,9 @@
       [3, 4, 5].map(function(n){ return '<button type="button" role="radio" data-klper="' + n + '" aria-checked="' + (CFG.per === n) + '">' + n + '</button>'; }).join("") + '</div></div>' +
       '<div class="kl-pref"><span class="kl-sub">Color the hiragana you know in green, across the whole app' + (L.length ? ' (<span class="kn-demo"><span class="kn">' + esc(L.slice(0, 3).join("")) + '</span></span>)' : '') + '.</span>' +
       '<button type="button" class="toggle" data-knt aria-pressed="' + (KN.on ? "true" : "false") + '">' + (KN.on ? "On" : "Off") + '</button></div>' +
-      '<details class="kl-det"' + (L.length ? '' : ' open') + '><summary>Your path · tap any character</summary>' + map +
+      '<details class="kl-det"' + (!L.length || MARK || DET_OPEN ? ' open' : '') + '><summary>Your path · tap any character</summary>' +
+      '<div class="kl-markbar">' + (MARK ? '<span class="kl-sub"><b>Tap the ones you already know.</b> Tap again to undo. They go straight into your reviews.</span><button type="button" class="toggle" aria-pressed="true" data-klmarkmode>Done</button>'
+        : '<span class="kl-sub">Already know some?</span><button type="button" class="wbtn" data-klmarkmode>Mark the ones I know</button>') + '</div>' + map +
       '<p class="kl-legend"><span class="kl-cell new"></span>coming up <span class="kl-cell learning"></span>learning <span class="kl-cell known"></span>known</p></details>';
     badge(d.length, nu.length > 0);
   }
@@ -467,11 +480,14 @@
     else if (hasNew){ b.textContent = ""; b.hidden = false; b.classList.add("dot"); }
     else b.hidden = true;
   }
+  document.addEventListener("toggle", function(e){ if (e.target.classList && e.target.classList.contains("kl-det")) DET_OPEN = e.target.open; }, true);
   document.addEventListener("click", function(e){
     var t = e.target.closest("#klBlock button"); if (!t) return;
     if (t.hasAttribute("data-knt")){ KN.on = !KN.on; store.set("kncolor", KN.on ? "1" : "0"); knRefresh(); render(); toast(KN.on ? "Hiragana you know are now green" : "Green highlight off", 1600); return; }
     if (t.hasAttribute("data-klper")){ CFG.per = +t.getAttribute("data-klper"); store.set("klcfg", JSON.stringify(CFG)); render(); return; }
     if (t.hasAttribute("data-klview")){ view(t.getAttribute("data-klview")); return; }
+    if (t.hasAttribute("data-klmarkmode")){ MARK = !MARK; DET_OPEN = true; if (!MARK){ var n = Object.keys(MARKED).length; if (n) toast(n + " added to what you know", 1800); MARKED = {}; knRefresh(); } render(); return; }
+    if (t.hasAttribute("data-klmark")){ var mc = t.getAttribute("data-klmark"); markKnown(mc, !KL[mc]); DET_OPEN = true; render(); return; }
     var a = t.getAttribute("data-kla"); if (a) start(a);
   });
   window.KanaLearn = { render: render, order: ALL, refreshColor: function(){ knRefresh(); } };
