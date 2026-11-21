@@ -725,7 +725,8 @@ window.NOTES = {
         ["よんせん", "Pimsleur shows: 四千. Here 4 is よん (yon), not よ (yo) as for the hour", "yon sen", "4,000", "yohn sen"],
         ["ごせん", "Pimsleur shows: 五千", "go sen", "5,000", "goh sen"],
         ["ろくせん", "Pimsleur shows: 六千", "roku sen", "6,000", "roh-koo sen"],
-        ["ななせん", "Pimsleur shows: 七千. Here 7 is なな (nana), not しち (shichi) as for the hour", "nana sen", "7,000", "nah-nah sen"]
+        ["ななせん", "Pimsleur shows: 七千. Here 7 is なな (nana), not しち (shichi) as for the hour", "nana sen", "7,000", "nah-nah sen"],
+        ["せんえん", "Pimsleur shows: 千円. 1,000 is just せん (sen), no いち (ichi) in front. The ¥1,000 note is the one you’ll use most (konbini, ramen, train tickets)", "sen en", "1,000 yen.", "sen en"]
       ]
     }
   ]
