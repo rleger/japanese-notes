@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>日本語ノート</title>
 <meta name="description" content="Romain's Japanese study notes: hiragana, Pimsleur phrases, lesson by lesson.">
-<meta name="theme-color" content="#F5F5F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#E7E5E4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1c1917" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -981,6 +981,20 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .kl-two .wbtn{min-height:48px}
 .kl-draw.solo .kl-box{width:min(100%,340px)}
 @media (min-width: 700px){ .kl-draw.solo .kl-box{width:400px} .kl-card{max-width:640px} }
+
+/* light look, a touch more contrast: page stone-200 → stone-300, lesson band stone-100 with a stone-300 border */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){--lh-bg:oklch(97% 0.001 106.424);--lh-line:oklch(86.9% 0.005 56.366);--tab-ink:oklch(44.6% 0.03 256.802);--line-strong:oklch(87.2% 0.01 258.338)}
+  :root:not([data-theme="dark"]) body{background:radial-gradient(140% 90% at 50% 0%, oklch(92.3% 0.003 48.717) 0%, oklch(86.9% 0.005 56.366) 100%) fixed}
+  :root:not([data-theme="dark"]) nav.tabs{background:color-mix(in srgb, oklch(92.3% 0.003 48.717) 85%, transparent)}
+  :root:not([data-theme="dark"]) .lesson-head{border:1px solid var(--lh-line);box-shadow:0 1px 2px 0 rgb(0 0 0 / .05)}
+  :root:not([data-theme="dark"]) .card, :root:not([data-theme="dark"]) .tip, :root:not([data-theme="dark"]) .kblock, :root:not([data-theme="dark"]) .pcard{border-color:oklch(86.9% 0.005 56.366)}
+}
+:root[data-theme="light"]{--lh-bg:oklch(97% 0.001 106.424);--lh-line:oklch(86.9% 0.005 56.366);--tab-ink:oklch(44.6% 0.03 256.802);--line-strong:oklch(87.2% 0.01 258.338)}
+:root[data-theme="light"] body{background:radial-gradient(140% 90% at 50% 0%, oklch(92.3% 0.003 48.717) 0%, oklch(86.9% 0.005 56.366) 100%) fixed}
+:root[data-theme="light"] nav.tabs{background:color-mix(in srgb, oklch(92.3% 0.003 48.717) 85%, transparent)}
+:root[data-theme="light"] .lesson-head{border:1px solid var(--lh-line);box-shadow:0 1px 2px 0 rgb(0 0 0 / .05)}
+:root[data-theme="light"] .card, :root[data-theme="light"] .tip, :root[data-theme="light"] .kblock, :root[data-theme="light"] .pcard{border-color:oklch(86.9% 0.005 56.366)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1966,7 +1980,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "22 Nov 17:00";
+  var APP_VERSION = "22 Nov 17:10";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
@@ -1999,7 +2013,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
     themeBtn.innerHTML = ICONS[t];
     themeBtn.setAttribute("aria-label", "Theme: " + LABEL[t] + ". Tap to change.");
     var dark = t === "dark" || (t === "auto" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
-    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#1c1917" : "#F5F5F4"); m.removeAttribute("media"); });
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function(m){ m.setAttribute("content", dark ? "#1c1917" : "#E7E5E4"); m.removeAttribute("media"); });
     store.set("theme", t);
     return t;
   }
