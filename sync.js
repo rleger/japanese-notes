@@ -36,7 +36,7 @@
     var la = a.kl || {}, lb = b.kl || {}, l = {};
     Object.keys(la).concat(Object.keys(lb)).forEach(function(k){
       var x = la[k], y = lb[k];
-      l[k] = !x ? y : !y ? x : (y[2] > x[2] || (y[2] === x[2] && y[1] > x[1])) ? y : x;
+      l[k] = !x ? y : !y ? x : ((y[6] || 0) !== (x[6] || 0) ? (y[6] || 0) > (x[6] || 0) : (y[2] > x[2] || (y[2] === x[2] && y[1] > x[1]))) ? y : x;   /* most recently practised wins */
     });
     out.kl = l;
     var da = a.klday, db = b.klday;

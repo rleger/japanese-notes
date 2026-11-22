@@ -949,6 +949,38 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 .kl-pref{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
 .kl-pref .kl-sub{flex:1}
 .kl-pref .kn-demo{font-family:var(--jp)}
+
+/* hiragana trainer, simpler layout */
+.kl-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+@media (max-width: 640px){ .kl-tiles{grid-template-columns:1fr} }
+.kl-tile{display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:16px;background:var(--track);min-width:0}
+.kl-tile .fc-start{margin-top:12px}
+.kl-big2{font-size:22px;line-height:1.2}
+.kl-tilerow{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.kl-tilerow .fc-start{flex:1;min-width:140px}
+.kl-mini-seg{display:flex;flex-direction:column;gap:2px}
+.kl-mini-seg .seg{min-width:132px}
+.kl-mini-seg .seg button{min-height:40px}
+.kl-opt{display:flex;flex-direction:column;gap:6px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.kl-opt .seg{max-width:420px}
+.kl-chars{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.kl-charhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.kl-charhead .wbtn,.kl-charhead .toggle{min-height:40px}
+.kl-markhelp{margin:4px 0 8px}
+.kl-cell .p{font-size:9.5px;font-weight:700;color:var(--muted);line-height:1}
+.kl-cell.shaky{background:var(--hot-bg);border-color:var(--hot-line)}
+.kl-cell.shaky .k{color:var(--hot-ink)}
+.kl-cell.solid{background:var(--ok-bg);border-color:var(--ok-line)}
+.kl-cell.solid .k{color:var(--ok-ink)}
+.kl-weak{margin-top:12px}
+.kl-weak .kweak-row{display:flex;flex-wrap:wrap;gap:8px}
+.kl-hist{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin:0 0 10px;padding:10px 12px;border-radius:12px;background:var(--track)}
+.kl-hist b{color:var(--ink)}
+.kl-two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.kl-two.one{grid-template-columns:1fr}
+.kl-two .wbtn{min-height:48px}
+.kl-draw.solo .kl-box{width:min(100%,340px)}
+@media (min-width: 700px){ .kl-draw.solo .kl-box{width:400px} .kl-card{max-width:640px} }
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1934,7 +1966,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "21 Nov 15:45";
+  var APP_VERSION = "22 Nov 17:00";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");

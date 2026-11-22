@@ -27,12 +27,13 @@
 
   /* ---------- state (synced) ---------- */
   var KL = J("kl", {});                     /* char -> [box, due, reps, lapses] */
-  var CFG = J("klcfg", { per: 4 });
+  function cfg(){ var c = J("klcfg", {}) || {}; return { per: c.per || 4, mode: c.mode || "choices" }; }
+  var CFG = cfg();
   var INTERVALS = [0, 1, 3, 7, 14, 30, 60], DAY = 864e5;
   function today(){ var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
   function midnight(){ var d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); }
   function inDays(n){ return midnight() + n * DAY; }
-  function reload(){ KL = J("kl", {}); CFG = J("klcfg", { per: 4 }); }
+  function reload(){ KL = J("kl", {}); CFG = cfg(); }
   function save(){ store.set("kl", JSON.stringify(KL)); }
   function day(){ var d = J("klday", null); return d && d.d === today() ? d.n : 0; }
   function addDay(n){ store.set("klday", JSON.stringify({ d: today(), n: day() + n })); }
@@ -40,7 +41,19 @@
   function learned(c){ return !!KL[c]; }
   function due(){ var now = Date.now(); return Object.keys(KL).filter(function(c){ return KL[c][1] <= now; }); }
   function learnedList(){ return ALL.filter(learned); }
-  function level(c){ var s = KL[c]; return !s ? "new" : s[0] >= 4 ? "known" : "learning"; }
+  /* history: [box, due, reps, lapses, right, wrong, lastSeen] */
+  function acc(c){ var s = KL[c]; if (!s) return null; var r = s[4] || 0, w = s[5] || 0; return r + w ? r / (r + w) : null; }
+  function strength(c){
+    var s = KL[c]; if (!s) return "new";
+    var a = acc(c), n = (s[4] || 0) + (s[5] || 0);
+    if (n >= 3 && a < .7) return "shaky";
+    return s[0] >= 4 ? "solid" : "learning";
+  }
+  function level(c){ var s = strength(c); return s === "solid" ? "known" : s; }
+  function stat(c, ok){ var s = KL[c]; if (!s) return; s[4] = (s[4] || 0) + (ok ? 1 : 0); s[5] = (s[5] || 0) + (ok ? 0 : 1); s[6] = Date.now(); save(); }
+  function ago(t){ if (!t) return "never"; var d = Math.floor((midnight() - new Date(t).setHours(0, 0, 0, 0)) / DAY); return d <= 0 ? "today" : d === 1 ? "yesterday" : d + " days ago"; }
+  function until(t){ var d = Math.round((new Date(t).setHours(0, 0, 0, 0) - midnight()) / DAY); return d <= 0 ? "today" : d === 1 ? "tomorrow" : "in " + d + " days"; }
+  function soundKind(){ return CFG.mode === "write" ? "write" : CFG.mode === "mix" ? (Math.random() < .5 ? "write" : "hear") : "hear"; }
   /* extra = an extra batch on top of today's (the “Learn more now” button) */
   function nextUnits(extra){
     var budget = extra ? CFG.per : CFG.per - day(), out = [];
@@ -175,18 +188,20 @@
         '<p class="kl-tip">Same strokes as ' + esc(b) + ' (' + esc(RO[b]) + '), plus the mark top right. Tap one to see it drawn.</p>' +
         exHTML(u.chars, extra);
     }
-    var c = u.chars[0], n = strokes(c);
-    return '<span class="kl-tag">' + (pos || 'New') + '</span>' +
+    var c = u.chars[0], n = strokes(c), sk = KL[c];
+    var hist = S && S.view && sk ? '<div class="kl-hist"><span><b>' + ((sk[4] || 0) + (sk[5] || 0)) + '</b> answers</span><span><b>' + (acc(c) == null ? '–' : Math.round(acc(c) * 100) + '%') + '</b> right</span><span>last seen <b>' + ago(sk[6]) + '</b></span><span>next review <b>' + until(sk[1]) + '</b></span></div>' : '';
+    return '<span class="kl-tag">' + (pos || 'New') + '</span>' + hist +
       '<div class="kl-hero"><span class="kl-big" lang="ja">' + c + '</span><div class="kl-say"><b>' + esc(RO[c]) + '</b>' + (SL[c] ? '<span>sounds like “' + esc(SL[c]) + '”</span>' : '') +
       '<button type="button" class="speak" data-say="' + c + '" aria-label="Play">' + SPK + '</button></div></div>' +
       '<div class="kl-draw"><div class="kl-box" id="klBox">' + strokeSVG(c) + '<canvas id="klCanvas"></canvas></div>' +
-      '<div class="kl-dside"><span class="kl-lab">How to write it</span><p class="kl-tip">' + n + ' stroke' + (n > 1 ? 's' : '') + '. Watch the numbers, then trace it with your finger.</p>' +
+      '<div class="kl-dside"><span class="kl-lab">How to write it</span><p class="kl-tip">' + n + ' stroke' + (n > 1 ? 's' : '') + '. Watch the numbers, then trace it with your finger or Pencil.</p>' +
       '<div class="kl-btns"><button type="button" class="wbtn" data-kl="replay">▶ Replay</button><button type="button" class="wbtn" data-kl="clear">Clear</button></div></div></div>' +
       exHTML([c], extra);
   }
   function showIntro(u, pos){
-    var knowBtn = !S.view ? '' : !u.chars.every(learned) ? '<button type="button" class="wbtn kl-know" data-kl="know">I already know ' + (u.chars.length > 1 ? 'these' : 'it') + '</button>'
-      : '<button type="button" class="wbtn kl-know" data-kl="unknow">Remove from what I know</button>';
+    var knowBtn = !S.view ? '' : !u.chars.every(learned)
+      ? '<div class="kl-two"><button type="button" class="wbtn" data-kl="learnone">Learn ' + (u.chars.length > 1 ? 'these' : 'it') + ' now</button><button type="button" class="wbtn" data-kl="know">I already know ' + (u.chars.length > 1 ? 'these' : 'it') + '</button></div>'
+      : '<div class="kl-two one"><button type="button" class="wbtn" data-kl="unknow">Remove from what I know</button></div>';
     shell(introHTML(u, pos) + knowBtn + '<button type="button" class="fc-start" data-kl="next">' + (S.view ? 'Close' : 'Got it, next') + '</button>', S.view ? '' : S.title);
     if (u.chars.length === 1){ sizePad(); animate(root.querySelector("#klBox svg")); setTimeout(function(){ say(u.chars[0]); }, 300); }
     else setTimeout(function(){ say(u.chars.join("、")); }, 300);
@@ -205,15 +220,17 @@
     return out;
   }
   function showQ(step){
-    var c = step.c, kind = step.kind;
+    var c = step.c;
+    if (step.kind === "write" && !strokes(c)) step.kind = "hear";
+    var kind = step.kind;
     S.answered = false;
-    var head = '<span class="kl-tag">' + (step.isNew ? 'New · quick check' : S.mode === "check" ? 'Checkup' : 'Review') + '</span>';
+    var head = '<span class="kl-tag">' + (step.isNew ? 'New · quick check' : S.title || 'Review') + '</span>';
     if (kind === "write"){
       S.drew = false;
-      shell(head + '<p class="kl-ask">Write <b>' + esc(RO[c]) + '</b> from memory</p>' +
-        '<div class="kl-draw solo"><div class="kl-box blank" id="klBox"><canvas id="klCanvas"></canvas></div></div>' +
+      shell(head + '<p class="kl-ask">Write <b>' + esc(RO[c]) + '</b> from memory, then check</p>' +
+        '<div class="kl-draw solo"><div class="kl-box blank" id="klBox"><svg class="kl-grid" viewBox="0 0 109 109" aria-hidden="true"><g class="wgrid"><line x1="54.5" y1="2" x2="54.5" y2="107"/><line x1="2" y1="54.5" x2="107" y2="54.5"/></g></svg><canvas id="klCanvas"></canvas></div></div>' +
         '<div class="kl-btns center"><button type="button" class="wbtn" data-say="' + c + '">Listen</button><button type="button" class="wbtn" data-kl="clear">Clear</button></div>' +
-        '<button type="button" class="fc-start" data-kl="reveal">Show the answer</button>', S.title);
+        '<button type="button" class="fc-start" data-kl="reveal">Check</button>', S.title);
       sizePad(); setTimeout(function(){ say(c); }, 250);
       return;
     }
@@ -234,7 +251,7 @@
     if (!st){
       if (BASE.indexOf(c) > -1) addDay(1);
       else { var g = GROUPS.filter(function(x){ return x.chars.indexOf(c) > -1; })[0]; if (g && !g.chars.some(learned)) addDay(CFG.per); }
-      KL[c] = [1, inDays(1), 1, ok ? 0 : 1];
+      KL[c] = [1, inDays(1), 1, ok ? 0 : 1, 0, 0, 0];
     }
     else if (S.mode === "check"){ if (!ok){ st[0] = 1; st[1] = inDays(1); st[3]++; } st[2]++; }
     else if (ok){ st[0] = Math.min(st[0] + 1, INTERVALS.length - 1); st[1] = inDays(INTERVALS[st[0]]); st[2]++; }
@@ -247,11 +264,11 @@
     var left = S.steps.length - S.i - 1; if (left < 1) return;
     var lo = Math.min(2, left), hi = Math.min(left, 6);
     var at = S.i + 1 + lo + Math.floor(Math.random() * (hi - lo + 1));
-    S.steps.splice(Math.min(at, S.steps.length), 0, { t: "q", c: step.c, kind: step.kind === "read" ? "hear" : "read", isNew: step.isNew, again: true, need: need });
+    S.steps.splice(Math.min(at, S.steps.length), 0, { t: "q", c: step.c, kind: step.kind === "read" ? soundKind() : "read", isNew: step.isNew, again: true, need: need });
   }
   function answer(ok, picked){
     var step = S.steps[S.i]; if (S.answered) return; S.answered = true;
-    grade(step.c, ok);
+    grade(step.c, ok); stat(step.c, ok);
     if (!step.again && ok) S.right++;
     if (!ok){ S.missed[step.c] = 1; requeue(step, 2); }
     else if (step.again && step.need > 1) requeue(step, step.need - 1);
@@ -271,6 +288,7 @@
   }
   function reveal(){
     var step = S.steps[S.i], c = step.c, box = $("klBox");
+    var g = box.querySelector(".kl-grid"); if (g) g.remove();
     box.insertAdjacentHTML("afterbegin", strokeSVG(c));
     box.classList.add("shown");
     animate(box.querySelector("svg"), 100);
@@ -280,38 +298,37 @@
   }
 
   /* sessions */
-  function qKind(c){ var s = KL[c]; return s && s[0] >= 2 && strokes(c) && Math.random() < .3 ? "write" : (Math.random() < .5 ? "read" : "hear"); }
+  function qKind(){ return Math.random() < .5 ? "read" : soundKind(); }
   function spread(list){            /* avoid the same character twice in a row */
     for (var i = 1; i < list.length; i++){
       if (list[i].c === list[i - 1].c){ for (var j = i + 1; j < list.length; j++){ if (list[j].c !== list[i - 1].c){ var t = list[i]; list[i] = list[j]; list[j] = t; break; } } }
     }
     return list;
   }
-  function start(mode){
+  function weakFirst(list){
+    return list.map(function(c){ var a = acc(c), s = KL[c]; return { c: c, w: (a == null ? .6 : a) + s[0] * .08 + Math.random() * .25 }; })
+      .sort(function(x, y){ return x.w - y.w; }).map(function(x){ return x.c; });
+  }
+  function start(mode, unit){
     reload();
-    var steps = [], title = "", units = [], newSet = [], d = [];
-    if (mode === "today" || mode === "review" || mode === "extra"){
-      d = mode === "extra" ? shuffle(learnedList()).slice(0, 15) : shuffle(due()).slice(0, 40);
-      d.forEach(function(c){ steps.push({ t: "q", c: c, kind: qKind(c) }); });
-      title = mode === "extra" ? "Extra practice" : "Today";
+    var steps = [], title = "", units = [], newSet = [];
+    if (mode === "review"){
+      var d = due(), pick = d.length ? shuffle(d).slice(0, 50) : shuffle(weakFirst(learnedList()).slice(0, 20));
+      pick.forEach(function(c){ steps.push({ t: "q", c: c, kind: qKind() }); });
+      title = d.length ? "Review" : "Practice";
     }
-    if (mode === "today" || mode === "new"){
-      units = nextUnits(mode === "new");
+    if (mode === "new" || mode === "one"){
+      units = unit ? [unit] : nextUnits(true);
       units.forEach(function(u){ newSet = newSet.concat(u.chars); });
       units.forEach(function(u, i){ steps.push({ t: "intro", u: u, pos: "New · " + (i + 1) + " of " + units.length }); });
       var quiz = [];
-      newSet.forEach(function(c){ quiz.push({ t: "q", c: c, kind: "read", isNew: true }); quiz.push({ t: "q", c: c, kind: "hear", isNew: true }); });
-      shuffle(learnedList().filter(function(c){ return d.indexOf(c) < 0; })).slice(0, 3).forEach(function(c){ quiz.push({ t: "q", c: c, kind: "read" }); });
-      if (newSet.length) steps.push({ t: "note", text: "Now a quick check on " + newSet.join(" ") + "." });
+      newSet.forEach(function(c){ quiz.push({ t: "q", c: c, kind: "read", isNew: true }); quiz.push({ t: "q", c: c, kind: soundKind(), isNew: true }); });
+      shuffle(learnedList().filter(function(c){ return newSet.indexOf(c) < 0; })).slice(0, 3).forEach(function(c){ quiz.push({ t: "q", c: c, kind: "read" }); });
+      if (newSet.length) steps.push({ t: "note", text: "Quick check on " + newSet.join(" ") + "." });
       steps = steps.concat(spread(shuffle(quiz)));
-      title = "Today";
+      title = "Learn new";
     }
-    if (mode === "check"){
-      var all = shuffle(learnedList()), writes = all.filter(function(c){ return strokes(c); }).slice(0, Math.min(5, Math.ceil(all.length / 5)));
-      all.forEach(function(c){ steps.push({ t: "q", c: c, kind: writes.indexOf(c) > -1 ? "write" : (Math.random() < .5 ? "read" : "hear") }); });
-      title = "Weekly checkup";
-    }
-    if (!steps.length){ toast("Nothing to do right now", 1600); return; }
+    if (!steps.length){ toast(mode === "review" ? "Learn a few characters first" : "You know them all!", 1800); return; }
     S = { mode: mode, steps: steps, i: -1, right: 0, missed: {}, graded: {}, title: title, newSet: newSet, units: units };
     openOverlay();
     window.loadStrokes ? window.loadStrokes(next, function(){ toast("Couldn’t load the stroke data", 1800); next(); }) : next();
@@ -326,14 +343,11 @@
     showQ(st);
   }
   function finish(){
-    if (S.mode === "check") store.set("klcheck", JSON.stringify({ d: today() }));
     var miss = Object.keys(S.missed), qs = S.steps.filter(function(s){ return s.t === "q" && !s.again; }).length;
-    var nu = nextUnits(), dn = due().length;
     var h = '<span class="kl-tag">' + esc(S.title) + ' · done</span>' +
       '<div class="fc-score"><b>' + S.right + ' / ' + qs + '</b>' + (miss.length ? 'right on the first try' : 'Perfect!') + '</div>' +
-      (S.newSet.length ? '<p class="kl-rule">New today: <span class="ja">' + S.newSet.join(" ") + '</span></p>' : '') +
-      (miss.length ? '<span class="kl-lab">To watch</span><div class="kweak-row center">' + miss.map(function(c){ return '<button type="button" class="kchip" data-say="' + c + '" data-klstroke="' + c + '"><span class="k">' + c + '</span><span class="r">' + esc(RO[c]) + '</span></button>'; }).join("") + '</div><p class="kl-tip">They come back tomorrow.</p>' : '') +
-      '<p class="kl-tip">' + (S.mode === "check" ? 'Next checkup in a week.' : nu.length ? 'Tomorrow: ' + (nu[0].chars.length > 1 ? 'the ' + nu[0].chars[0] + ' group' : nu.map(function(u){ return u.chars[0]; }).join(" ")) + (dn ? ' · ' + dn + ' still due' : '') : learnedList().length >= ALL.length ? 'You know every character. Keep the reviews going.' : 'Come back tomorrow for the next ones.') + '</p>' +
+      (S.newSet.length ? '<p class="kl-rule">Now part of what you know: <span class="ja">' + S.newSet.join(" ") + '</span></p>' : '') +
+      (miss.length ? '<span class="kl-lab">To work on</span><div class="kweak-row center">' + miss.map(function(c){ return '<button type="button" class="kchip" data-say="' + c + '" data-klstroke="' + c + '"><span class="k">' + c + '</span><span class="r">' + esc(RO[c]) + '</span></button>'; }).join("") + '</div><p class="kl-tip">They come back in your next review.</p>' : '') +
       '<button type="button" class="fc-start" data-kl="close">Done</button>';
     S.steps = null;
     shell(h, "");
@@ -343,7 +357,8 @@
     if (!u) return;
     S = { view: true, title: "", newSet: [], unit: u.chars.length > 1 ? u : { chars: [c] } };
     openOverlay();
-    var go = function(){ showIntro(S.unit, learned(c) ? (level(c) === "known" ? "Known" : "Learning") : "Coming up"); };
+    var st = strength(c), lab = { "new": "Not learned yet", shaky: "Shaky", learning: "Learning", solid: "Solid" }[st];
+    var go = function(){ showIntro(S.unit, lab); };
     window.loadStrokes ? window.loadStrokes(go, go) : go();
   }
 
@@ -361,6 +376,7 @@
       case "wok": answer(true); break;
       case "wmiss": answer(false); break;
       case "unknow": if (S && S.unit){ S.unit.chars.forEach(function(c){ markKnown(c, false); }); REMOVED = {}; toast("Removed. It will come back as a new character.", 2000); closeOverlay(); } break;
+      case "learnone": if (S && S.unit){ var uu = S.unit; clearT(); S = null; start("one", uu); } break;
       case "know": if (S && S.unit){ S.unit.chars.forEach(function(c){ markKnown(c, true); }); toast("Added to what you know. It comes back in your reviews.", 2000); closeOverlay(); } break;
     }
   });
@@ -424,7 +440,7 @@
     if (on){
       if (KL[c]) return;
       if (REMOVED[c]){ KL[c] = REMOVED[c]; delete REMOVED[c]; }                /* undo a removal: history comes back */
-      else { KL[c] = [2, inDays(3), 1, 0]; MARKED[c] = 1; }                     /* checked again in 3 days */
+      else { KL[c] = [2, inDays(3), 1, 0, 0, 0, 0]; MARKED[c] = 1; }                     /* checked again in 3 days */
     } else {
       if (!KL[c]) return;
       if (!MARKED[c]) REMOVED[c] = KL[c];
@@ -440,49 +456,42 @@
   function render(){
     reload();
     var host = $("klBlock"); if (!host) return;
-    var L = learnedList(), nb = BASE.filter(learned).length, ng = GROUPS.filter(function(g){ return g.chars.every(learned); }).length;
-    var d = due(), nu = nextUnits(), newChars = []; nu.forEach(function(u){ newChars = newChars.concat(u.chars); });
-    var done = !d.length && !nu.length;
-    var main;
-    if (d.length || nu.length){
-      var parts = []; if (d.length) parts.push(d.length + ' review' + (d.length > 1 ? 's' : '')); if (nu.length) parts.push(newChars.length + ' new');
-      main = '<div class="kl-today"><div><span class="kl-lab">Today</span><b>' + parts.join(' + ') + '</b>' +
-        (newChars.length ? '<span class="kl-next" lang="ja">' + newChars.join(" ") + '</span>' : '') + '</div>' +
-        '<button type="button" class="fc-start" data-kla="today">Start</button></div>';
-    } else if (L.length >= ALL.length){
-      main = '<div class="kl-today done"><div><span class="kl-lab">Today</span><b>All caught up</b><span class="kl-sub">You know all ' + ALL.length + '. Reviews keep them fresh.</span></div></div>';
-    } else {
-      var up = UNITS.filter(function(u){ return !u.chars.every(learned); })[0];
-      main = '<div class="kl-today done"><div><span class="kl-lab">Today</span><b>Done ✓</b><span class="kl-sub">Tomorrow: ' + (up.chars.length > 1 ? 'the ' + up.chars[0] + ' group' : UNITS.filter(function(u){ return !u.chars.every(learned); }).slice(0, CFG.per).filter(function(u){ return u.chars.length === 1; }).map(function(u){ return u.chars[0]; }).join(" ")) + '</span></div>' +
-        '<button type="button" class="wbtn" data-kla="new">' + (up.chars.length > 1 ? 'Learn the ' + up.chars[0] + ' group now' : 'Learn ' + Math.min(CFG.per, BASE.filter(function(c){ return !learned(c); }).length) + ' more now') + '</button></div>';
-    }
-    var cd = checkDue(), lc = lastCheck();
-    var check = L.length < 6 ? '<span class="kl-sub">Weekly checkup unlocks after 6 characters.</span>' :
-      cd ? '<button type="button" class="wbtn hot" data-kla="check">Weekly checkup is due · ' + L.length + ' characters</button>' :
-      '<span class="kl-sub">Next checkup ' + (lc ? 'on ' + new Date(Date.parse(lc) + 7 * DAY).toLocaleDateString(undefined, { weekday: "long" }) : 'in a few days') + '</span> <button type="button" class="link" data-kla="check">Do it now</button>';
-    var map = '<div class="kl-map">' + UNITS.map(function(u){
+    var L = learnedList(), d = due(), nu = nextUnits(true), newChars = [];
+    nu.forEach(function(u){ newChars = newChars.concat(u.chars); });
+    var seg = function(attr, val, opts){ return '<div class="seg seg' + opts.length + '" role="radiogroup">' + opts.map(function(o){ return '<button type="button" role="radio" ' + attr + '="' + o[0] + '" aria-checked="' + (val === o[0]) + '">' + o[1] + '</button>'; }).join("") + '</div>'; };
+    var review = '<div class="kl-tile"><span class="kl-lab">Review what I know</span>' +
+      (L.length ? '<b class="kl-big2">' + (d.length ? d.length + ' due' : 'Up to date') + '</b><span class="kl-sub">' + (d.length ? 'Only characters you already know.' : 'Nothing due. Practice the ones you know, weakest first.') + '</span>' +
+        '<button type="button" class="fc-start" data-kla="review">' + (d.length ? 'Review ' + Math.min(d.length, 50) : 'Practice ' + Math.min(L.length, 20)) + '</button>'
+        : '<b class="kl-big2">Nothing yet</b><span class="kl-sub">Learn a few first, or mark the ones you already know below.</span>') + '</div>';
+    var learn = '<div class="kl-tile"><span class="kl-lab">Learn new</span>' +
+      (nu.length ? '<span class="kl-next" lang="ja">' + newChars.join(" ") + '</span><span class="kl-sub">Most used first. They join what you know.</span>' +
+        '<div class="kl-tilerow"><button type="button" class="fc-start" data-kla="new">Learn ' + (nu[0].chars.length > 1 ? 'the ' + nu[0].chars[0] + ' group' : newChars.length) + '</button>' +
+        '<div class="kl-mini-seg"><span class="kl-sub">at a time</span>' + seg("data-klper", String(CFG.per), [["3", "3"], ["4", "4"], ["5", "5"]]) + '</div></div>'
+        : '<b class="kl-big2">All learned</b><span class="kl-sub">You know every hiragana. Keep reviewing.</span>') + '</div>';
+    var weak = L.filter(function(c){ var s = KL[c]; return (s[4] || 0) + (s[5] || 0) >= 2; }).sort(function(a, b){ return acc(a) - acc(b); }).filter(function(c){ return acc(c) < .9; }).slice(0, 8);
+    var grid = '<div class="kl-map">' + UNITS.map(function(u){
       return u.chars.map(function(c, i){
-        var lv = level(c);
-        return '<button type="button" class="kl-cell ' + lv + (u.chars.length > 1 && i === 0 ? ' gstart' : '') + (MARK ? ' marking' : '') + '" ' + (MARK ? 'data-klmark' : 'data-klview') + '="' + c + '" aria-pressed="' + (lv !== "new") + '" aria-label="' + c + ' ' + esc(RO[c]) + ', ' + lv + '"><span class="k" lang="ja">' + c + '</span><span class="r">' + (lv === "new" && !MARK ? "" : esc(RO[c])) + '</span></button>';
+        var st = strength(c), a = acc(c);
+        return '<button type="button" class="kl-cell ' + st + (u.chars.length > 1 && i === 0 ? ' gstart' : '') + (MARK ? ' marking' : '') + '" ' + (MARK ? 'data-klmark' : 'data-klview') + '="' + c + '" aria-pressed="' + (st !== "new") + '" aria-label="' + c + ' ' + esc(RO[c]) + ', ' + st + '">' +
+          '<span class="k" lang="ja">' + c + '</span><span class="r">' + esc(RO[c]) + '</span>' + (a != null && !MARK ? '<span class="p">' + Math.round(a * 100) + '%</span>' : '') + '</button>';
       }).join("");
     }).join("") + '</div>';
-    host.innerHTML = A.secHead("Learn hiragana", "ひらがなを覚える") +
-      '<p class="hint">A few new characters a day, most used first. Reviews come back just before you forget them.</p>' +
+    host.innerHTML = A.secHead("Hiragana trainer", "ひらがな") +
       '<div class="kl-prog"><div class="kl-pbar"><span style="width:' + Math.round(L.length / ALL.length * 100) + '%"></span></div>' +
-      '<span><b>' + nb + '</b> / ' + BASE.length + ' basic · <b>' + ng + '</b> / ' + GROUPS.length + ' tick groups</span>' +
-      (L.length ? '<span class="kl-sub">You can read ' + readableCount() + ' of your words and phrases</span>' : '') + '</div>' +
-      main +
-      '<div class="kl-row">' + check + '</div>' +
-      (L.length >= 4 ? '<div class="kl-row"><button type="button" class="link" data-kla="extra">Extra practice (15 random)</button></div>' : '') +
-      '<div class="fc-opt kl-per"><span class="fc-lab" id="klPerLab">New per day</span><div class="seg seg3" role="radiogroup" aria-labelledby="klPerLab">' +
-      [3, 4, 5].map(function(n){ return '<button type="button" role="radio" data-klper="' + n + '" aria-checked="' + (CFG.per === n) + '">' + n + '</button>'; }).join("") + '</div></div>' +
-      '<div class="kl-pref"><span class="kl-sub">Color the hiragana you know in green, across the whole app' + (L.length ? ' (<span class="kn-demo"><span class="kn">' + esc(L.slice(0, 3).join("")) + '</span></span>)' : '') + '.</span>' +
-      '<button type="button" class="toggle" data-knt aria-pressed="' + (KN.on ? "true" : "false") + '">' + (KN.on ? "On" : "Off") + '</button></div>' +
-      '<details class="kl-det"' + (!L.length || MARK || DET_OPEN ? ' open' : '') + '><summary>Your path · tap any character</summary>' +
-      '<div class="kl-markbar">' + (MARK ? '<span class="kl-sub"><b>Tap to add or remove.</b> Outlined = in what you know. Added ones go straight into your reviews; removed ones come back as new.</span><button type="button" class="toggle" aria-pressed="true" data-klmarkmode>Done</button>'
-        : '<span class="kl-sub">Add the ones you already know, or remove some.</span><button type="button" class="wbtn" data-klmarkmode>Edit what I know</button>') + '</div>' + map +
-      '<p class="kl-legend"><span class="kl-cell new"></span>coming up <span class="kl-cell learning"></span>learning <span class="kl-cell known"></span>known</p></details>';
-    badge(d.length, nu.length > 0);
+      '<span><b>' + L.length + '</b> / ' + ALL.length + ' known' + (L.length ? ' · you can read ' + readableCount() + ' of your words' : '') + '</span></div>' +
+      '<div class="kl-tiles">' + review + learn + '</div>' +
+      '<div class="kl-opt"><span class="kl-lab">When I must find the character for a sound</span>' +
+      seg("data-klmode", CFG.mode, [["choices", "Choose"], ["write", "Write it"], ["mix", "Mix"]]) +
+      '<span class="kl-sub">' + ({ choices: "Pick it among 4.", write: "Draw it first (finger or Pencil), then check against the real strokes.", mix: "Sometimes choose, sometimes write." })[CFG.mode] + '</span></div>' +
+      '<div class="kl-chars"><div class="kl-charhead"><span class="kl-lab">My characters</span>' +
+      '<button type="button" class="' + (MARK ? 'toggle' : 'wbtn') + '" data-klmarkmode' + (MARK ? ' aria-pressed="true"' : '') + '>' + (MARK ? 'Done' : 'Add / remove') + '</button></div>' +
+      (MARK ? '<p class="kl-sub kl-markhelp">Tap to add a character you already know, or to remove one. Outlined = in what you know.</p>' : '<p class="kl-sub kl-markhelp">Tap a character for its strokes, examples and history.</p>') +
+      grid +
+      '<p class="kl-legend"><span class="kl-cell new"></span>not learned <span class="kl-cell shaky"></span>shaky <span class="kl-cell learning"></span>learning <span class="kl-cell solid"></span>solid</p></div>' +
+      (weak.length ? '<div class="kl-weak"><span class="kl-lab">To work on</span><div class="kweak-row">' + weak.map(function(c){ return '<button type="button" class="kchip" data-klview="' + c + '"><span class="k">' + c + '</span><span class="r">' + esc(RO[c]) + ' · ' + Math.round(acc(c) * 100) + '%</span></button>'; }).join("") + '</div></div>' : '') +
+      '<div class="kl-pref"><span class="kl-sub">Show the hiragana I know in green across the app' + (L.length ? ' (<span class="kn-demo"><span class="kn">' + esc(L.slice(0, 3).join("")) + '</span></span>)' : '') + '</span>' +
+      '<button type="button" class="toggle" data-knt aria-pressed="' + (KN.on ? "true" : "false") + '">' + (KN.on ? "On" : "Off") + '</button></div>';
+    badge(d.length);
   }
   function badge(n, hasNew){
     var tab = $("tab-kana"); if (!tab) return;
@@ -496,9 +505,10 @@
     var t = e.target.closest("#klBlock button"); if (!t) return;
     if (t.hasAttribute("data-knt")){ KN.on = !KN.on; store.set("kncolor", KN.on ? "1" : "0"); knRefresh(); render(); toast(KN.on ? "Hiragana you know are now green" : "Green highlight off", 1600); return; }
     if (t.hasAttribute("data-klper")){ CFG.per = +t.getAttribute("data-klper"); store.set("klcfg", JSON.stringify(CFG)); render(); return; }
+    if (t.hasAttribute("data-klmode")){ CFG.mode = t.getAttribute("data-klmode"); store.set("klcfg", JSON.stringify(CFG)); render(); return; }
     if (t.hasAttribute("data-klview")){ view(t.getAttribute("data-klview")); return; }
-    if (t.hasAttribute("data-klmarkmode")){ MARK = !MARK; DET_OPEN = true; if (!MARK){ var n = Object.keys(MARKED).length, r = Object.keys(REMOVED).length; if (n || r) toast((n ? n + " added" : "") + (n && r ? " · " : "") + (r ? r + " removed" : ""), 1800); MARKED = {}; REMOVED = {}; knRefresh(); } render(); return; }
-    if (t.hasAttribute("data-klmark")){ var mc = t.getAttribute("data-klmark"); markKnown(mc, !KL[mc]); DET_OPEN = true; render(); return; }
+    if (t.hasAttribute("data-klmarkmode")){ MARK = !MARK; if (!MARK){ var n = Object.keys(MARKED).length, r = Object.keys(REMOVED).length; if (n || r) toast((n ? n + " added" : "") + (n && r ? " · " : "") + (r ? r + " removed" : ""), 1800); MARKED = {}; REMOVED = {}; knRefresh(); } render(); return; }
+    if (t.hasAttribute("data-klmark")){ var mc = t.getAttribute("data-klmark"); markKnown(mc, !KL[mc]); render(); return; }
     var a = t.getAttribute("data-kla"); if (a) start(a);
   });
   window.KanaLearn = { render: render, order: ALL, refreshColor: function(){ knRefresh(); } };
