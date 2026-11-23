@@ -459,7 +459,7 @@ window.NOTES = {
           ["B", "はい、すこし。", "hai, sukoshi", "Yes, a little."],
           ["A", "アメリカのかたですか。", "amerika no kata desu ka?", "Are you American?"],
           ["B", "はい。アメリカじんです。えいごがわかりますか。", "hai. amerikajin desu. eigo ga wakarimasu ka?", "Yes, I’m American. Do you understand English?"],
-          ["A", "いいえ、わかりません。", "iie, wakarimasen", "No, I don’t."]
+          ["A", "いいえ、わかりません。", "iie, wakarimasen", "No, I don’t understand."]
         ]}
       ]
     },

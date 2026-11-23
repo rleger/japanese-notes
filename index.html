@@ -995,6 +995,20 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
 :root[data-theme="light"] nav.tabs{background:color-mix(in srgb, oklch(92.3% 0.003 48.717) 85%, transparent)}
 :root[data-theme="light"] .lesson-head{border:1px solid var(--lh-line);box-shadow:0 1px 2px 0 rgb(0 0 0 / .05)}
 :root[data-theme="light"] .card, :root[data-theme="light"] .tip, :root[data-theme="light"] .kblock, :root[data-theme="light"] .pcard{border-color:oklch(86.9% 0.005 56.366)}
+
+/* section bands (Phrases families, Rules sections): inverted, so they read apart from lesson bands */
+:root{--fam-bg:oklch(26.8% 0.007 34.298);--fam-ink:oklch(98.5% 0.001 106.423);--fam-sub:oklch(86.9% 0.005 56.366);--fam-jp:oklch(80.8% 0.114 19.571);--fam-tile:oklch(98.5% 0.001 106.423);--fam-tile-ink:oklch(21.6% 0.006 56.043);--fam-line:oklch(44.4% 0.011 73.639)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--fam-bg:oklch(86.9% 0.005 56.366);--fam-ink:oklch(21.6% 0.006 56.043);--fam-sub:oklch(37.4% 0.01 67.558);--fam-jp:oklch(50.5% 0.213 27.518);--fam-tile:oklch(26.8% 0.007 34.298);--fam-tile-ink:oklch(97% 0.001 106.424);--fam-line:oklch(70.9% 0.01 56.259)} }
+:root[data-theme="dark"]{--fam-bg:oklch(86.9% 0.005 56.366);--fam-ink:oklch(21.6% 0.006 56.043);--fam-sub:oklch(37.4% 0.01 67.558);--fam-jp:oklch(50.5% 0.213 27.518);--fam-tile:oklch(26.8% 0.007 34.298);--fam-tile-ink:oklch(97% 0.001 106.424);--fam-line:oklch(70.9% 0.01 56.259)}
+.lesson-head.fam-head{background:var(--fam-bg);border:1px solid var(--fam-bg);box-shadow:0 1px 3px 0 rgb(0 0 0 / .12),0 1px 2px -1px rgb(0 0 0 / .12)}
+.fam-head .lh-title{color:var(--fam-ink);letter-spacing:.01em}
+.fam-head .lh-sub{color:var(--fam-sub)}
+.fam-head .lh-jp{color:var(--fam-jp)}
+.fam-head .lh-num{background:var(--fam-tile);color:var(--fam-tile-ink)}
+.fam-head .lh-quiz{background:transparent;border-color:var(--fam-line);box-shadow:none}
+.fam-head .lh-ql{color:var(--fam-sub)}
+.fam-head .lh-quiz button{color:var(--fam-ink)}
+.fam-head .lh-quiz button:hover,.fam-head .lh-quiz button:active{background:var(--fam-tile);color:var(--fam-tile-ink)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -1980,7 +1994,7 @@ mark{background:oklch(94.5% 0.129 101.54);color:inherit;border-radius:3px;paddin
   window.APP = { N: N, esc: esc, store: store, toast: toast, say: say, norm: norm, showPm: showPm, secHead: secHead, kanaBreak: kanaBreak };
 
   renderLessons(); renderPhrases(); renderRules(); renderKana();
-  var APP_VERSION = "23 Nov 09:05";
+  var APP_VERSION = "23 Nov 23:20";
   document.getElementById("updated").textContent = "Content " + N.updated;
   document.getElementById("ver").textContent = "App " + APP_VERSION;
   show(store.get("tab") || "lessons");
