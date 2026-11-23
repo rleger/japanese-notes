@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-21",
+  updated: "2026-11-23",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -113,8 +113,8 @@ window.NOTES = {
       ["○○さんは？", "Turn the question back. Example: たなかさんは？ (Tanaka san wa?) は is read wa", "○○ san wa?", "And you?", "… sahn wah?"]
     ]},
     { title: "Essentials: food and out", jp: "食事", items: [
-      ["いただきます", "", "itadakimasu", "Said before eating.", "ee-tah-dah-kee-mahss"],
-      ["ごちそうさまでした", "", "gochisōsama deshita", "Said after the meal: thank you.", "go-chee-soh-sah-mah desh-tah"],
+      ["いただきます", "Kanji: 頂きます. Literally “I humbly receive”. Said just before the first bite, often with hands together. Also when someone offers you food or a drink. After the meal: ごちそうさまでした (gochisōsama deshita)", "itadakimasu", "Said before eating (“thank you for the food”).", "ee-tah-dah-kee-mahss"],
+      ["ごちそうさまでした", "Kanji: ご馳走様でした. Said when you finish, and to the staff as you leave a restaurant. Casual: ごちそうさま (gochisōsama)", "gochisōsama deshita", "Said after the meal: thank you.", "go-chee-soh-sah-mah desh-tah"],
       ["おいしい", "", "oishii", "Delicious.", "oh-ee-shee"],
       ["かんぱい", "", "kanpai", "Cheers!", "kahm-pie"],
       ["いくらですか", "", "ikura desu ka", "How much is it?", "ee-koo-rah dess kah"],
