@@ -4,7 +4,7 @@
   To add a Pimsleur lesson, append an object to NOTES.lessons (newest last).
 */
 window.NOTES = {
-  updated: "2026-11-23",
+  updated: "2026-11-27",
 
   hiragana: [
     ["vowel", [["あ","a","ah"],["い","i","ee"],["う","u","oo"],["え","e","eh"],["お","o","oh"]]],
@@ -333,10 +333,10 @@ window.NOTES = {
         ],
         foot: "Read it backwards in English: A の B (A no B) = B of A." },
       { from: "Lesson 5", title: "で (de): where it happens", jp: "で", keys: "de place location at in language by means",
-        lead: "After a place: where the action happens. After a language: “in”.",
+        lead: "After a place: where the action happens. After a language or a way of paying: “in, by”.",
         cols: [
           { mark: "で", ro: "de", label: "at (a place)", ex: [["ホテルのレストラン", "で", "たべます", "hoteru no resutoran de tabemasu", "I’ll eat at the hotel restaurant"], ["どこ", "で", "たべますか", "doko de tabemasu ka?", "Where shall we eat?"]] },
-          { mark: "で", ro: "de", label: "in (a language)", ex: [["えいご", "で", "はなしてくれませんか", "eigo de hanashite kuremasen ka?", "Could you speak in English?"], ["にほんご", "で", "", "nihongo de", "in Japanese"]] }
+          { mark: "で", ro: "de", label: "in, by (how)", ex: [["えいご", "で", "はなしてくれませんか", "eigo de hanashite kuremasen ka?", "Could you speak in English?"], ["げんきん", "で", "", "genkin de", "in cash"], ["カード", "で", "いいですか", "kādo de ii desu ka?", "Is a card OK?"]] }
         ],
         foot: "No action, no で (de): レストランはどこですか (resutoran wa doko desu ka) only asks where it is." },
       { lesson: 9, title: "に (ni): at a time", jp: "に", keys: "ni at time hour when nanji ni",
@@ -727,6 +727,34 @@ window.NOTES = {
         ["ろくせん", "Pimsleur shows: 六千", "roku sen", "6,000", "roh-koo sen"],
         ["ななせん", "Pimsleur shows: 七千. Here 7 is なな (nana), not しち (shichi) as for the hour", "nana sen", "7,000", "nah-nah sen"],
         ["せんえん", "Pimsleur shows: 千円. 1,000 is just せん (sen), no いち (ichi) in front. The ¥1,000 note is the one you’ll use most (konbini, ramen, train tickets)", "sen en", "1,000 yen.", "sen en"]
+      ]
+    },
+    { number: 13, jp: "第13課",
+      words: [
+        ["はい、どうぞ。", "Pimsleur shows: はい、どうぞ. What you say when you hand something over (money, a card, a menu). どうぞ (dōzo) alone = please, go ahead", "hai, dōzo", "Here you are.", "hye, doh-zoh"],
+        ["ください", "Pimsleur shows: 下さい. Goes after the thing: ビールをください (bīru o kudasai) = a beer, please. Close to おねがいします (onegai shimasu), which sounds a little softer", "kudasai", "Please give me…", "koo-dah-sye"],
+        ["げんきん", "Pimsleur shows: 現金. Many small restaurants, temples and shops still take only cash", "genkin", "Cash.", "ghen-keen"],
+        ["クレジットカード", "Katakana (from “credit card”). Often just カード (kādo)", "kurejitto kādo", "Credit card.", "koo-reh-jeet-toh kah-doh"],
+        ["ドル", "Katakana (from “dollar”)", "doru", "Dollars.", "doh-roo"],
+        ["ドルで", "で (de) = with, by means of: how you pay", "doru de", "In dollars.", "doh-roo deh"],
+        ["えんで", "Pimsleur shows: 円で. Same で (de): げんきんで (genkin de) = in cash, カードで (kādo de) = by card", "en de", "In yen.", "en deh"],
+        ["じゅうろく", "Pimsleur shows: 十六. 10 + 6", "jū roku", "16", "joo roh-koo"],
+        ["やきとり、よんほん", "Pimsleur shows: 焼き鳥、四本. やきとり (yakitori) = grilled chicken skewers. 本 (hon) counts long thin things: skewers, bottles, pens. Sound changes: いっぽん (ippon) 1, さんぼん (sanbon) 3, ろっぽん (roppon) 6", "yakitori, yon hon", "Four yakitori (skewers).", "yah-kee-toh-ree, yohn hohn"]
+      ],
+      sentences: [
+        ["もしもし、ケリーさん？たなかです。", "もしもし (moshi moshi) = hello, only on the phone. On the phone you give your name with です (desu)", "moshi moshi, Kerī san? Tanaka desu", "Hello? Kerry? It’s Tanaka.", "moh-shee moh-shee, keh-ree sahn? tah-nah-kah dess"],
+        ["じゃあ、またあした。", "Pimsleur shows: じゃあ、また明日。 また (mata) = again. Without あした: じゃあ、また (jā, mata) = see you", "jā, mata ashita", "See you tomorrow, then.", "jah, mah-tah ah-shtah"]
+      ],
+      dialogues: [
+        { title: "Speak Easy · dinner tomorrow at seven", note: "Pimsleur dialogue, lesson 13. A phone call to set up a dinner.", lines: [
+          ["A", "もしもし、ケリーさん？たなかです。", "moshi moshi, Kerī san? Tanaka desu", "Hello? Kerry? It’s Tanaka."],
+          ["B", "たなかさん、こんにちは。", "Tanaka san, konnichiwa", "Hello, Mr. / Ms. Tanaka."],
+          ["A", "こんにちは。ケリーさん、あしたのよる、いっしょにばんごはんをたべませんか。", "konnichiwa. Kerī san, ashita no yoru issho ni bangohan o tabemasen ka?", "Hello. Kerry, would you like to have dinner together tomorrow night?"],
+          ["B", "いいですね。どこで、なんじにたべますか。", "ii desu ne. doko de, nan ji ni tabemasu ka?", "Sounds good. Where, and at what time shall we eat?"],
+          ["A", "ホテルのレストランで、しちじはどうですか。", "hoteru no resutoran de, shichi ji wa dō desu ka?", "At the hotel restaurant, how about seven o’clock?"],
+          ["B", "ええ、だいじょうぶです。じゃあ、あしたのよるしちじに。たのしみです。", "ee, daijōbu desu. jā, ashita no yoru shichi ji ni. tanoshimi desu", "Yes, that’s fine. Then tomorrow night at seven. I’m looking forward to it."],
+          ["A", "わたしもたのしみです。じゃあ、またあした。", "watashi mo tanoshimi desu. jā, mata ashita", "I’m looking forward to it too. See you tomorrow, then."]
+        ]}
       ]
     }
   ]
